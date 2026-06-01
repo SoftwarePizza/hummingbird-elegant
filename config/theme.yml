@@ -53,19 +53,15 @@ global_settings:
         - blockreassurance
         # Keep existing hooks and append them after
         - ~
-      displayNav1:
+      displayNav1: []
+      displayNav2: []
+      displayNavFullWidth:
+        - blockreassurance
         - ps_contactinfo
-        # Keep existing hooks and append them after
-        - ~
-      displayNav2:
         - ps_languageselector
         - ps_currencyselector
         - ps_customersignin
         - ps_shoppingcart
-        # Keep existing hooks and append them after
-        - ~
-      displayNavFullWidth:
-        - blockreassurance
         # Keep existing hooks and append them after
         - ~
       displayTop:
