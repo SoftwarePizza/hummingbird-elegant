@@ -3,7 +3,7 @@
  * LICENSE.md file that was distributed with this source code.
  *}
 
-<div id="_desktop_ps_currencyselector">
+<div id="_desktop_ps_currencyselector" class="order-5">
   <div class="ps-currencyselector">
     <select class="form-select js-currency-selector" aria-label="{l s='Change currency' d='Shop.Theme.Global'}">
       {foreach from=$currencies item=currency}

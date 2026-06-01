@@ -17,30 +17,12 @@
   {/if}
 {/block}
 
-{capture name="header_nav_1"}{hook h='displayNav1'}{/capture}
-{capture name="header_nav_2"}{hook h='displayNav2'}{/capture}
-{block name='header_nav'}
-  {if !empty($smarty.capture.header_nav_1) || !empty($smarty.capture.header_nav_2)}
-    <div class="{$headerTop} d-none d-md-block">
-      <div class="container-md">
-        <div class="row">
-          <div class="{$headerTop}__left col-md-4">
-            {$smarty.capture.header_nav_1 nofilter}
-          </div>
 
-          <div class="{$headerTop}__right col-md-8">
-            {$smarty.capture.header_nav_2 nofilter}
-          </div>
-        </div>
-      </div>
-    </div>
-  {/if}
-{/block}
 
 {block name='header_bottom'}
   <div class="{$headerBottom}">
     <div class="{$headerBottom}__container container-md">
-      <div class="{$headerBottom}__row row gx-2 gx-md-4 align-items-stretch">
+      <div class="{$headerBottom}__row  gx-2 gx-md-4 align-items-center d-flex">
         <div class="{$headerBottom}__logo d-flex align-items-center col-auto me-auto me-md-0">
           {if $shop.logo_details}
             {if $page.page_name == 'index'}<h1 class="{$headerBottom}__h1 mb-0">{/if}

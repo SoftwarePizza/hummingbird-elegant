@@ -10,6 +10,7 @@ $component-name: ps-mainmenu;
   // Desktop Menu
   &:is(.#{$component-name}--desktop) {
     display: flex;
+    justify-content: center;
 
     .#{$component-name} {
       // Menu Mobile Toggler
@@ -42,6 +43,7 @@ $component-name: ps-mainmenu;
         flex-wrap: wrap;
         gap: 0.5rem;
         align-items: stretch;
+        justify-content: center;
         margin: 0;
 
         > li {
@@ -82,34 +84,8 @@ $component-name: ps-mainmenu;
           }
 
           .#{$component-name}__tree-dropdown-toggle {
-            display: flex;
-            align-items: center;
-            align-self: stretch;
-            justify-content: center;
-            padding: 1.25rem 0.125rem;
-            color: var(--bs-secondary-color);
-            cursor: pointer;
-            background: none;
-            border: none;
-
-            &::after {
-              transition: var(--bs-transition-default);
-            }
-
-            &:hover {
-              color: var(--bs-link-hover-color);
-            }
-
-            &:focus {
-              color: var(--bs-link-hover-color);
-              border-radius: var(--bs-border-radius);
-              outline: 0.125rem solid var(--bs-link-color);
-              outline-offset: 0.125rem;
-            }
-
-            &[aria-expanded="true"]::after {
-              transform: rotate(-0.5turn);
-            }
+            // Hidden visually; kept in DOM so JS hover binding still works
+            display: none;
           }
 
           .submenu {

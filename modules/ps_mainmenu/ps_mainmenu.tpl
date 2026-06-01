@@ -114,7 +114,7 @@
             </a>
             {if $menuItem.children|count}
               <button
-                class="ps-mainmenu__tree-dropdown-toggle dropdown-toggle"
+                class="ps-mainmenu__tree-dropdown-toggle"
                 type="button"
                 aria-haspopup="menu"
                 aria-expanded="false"

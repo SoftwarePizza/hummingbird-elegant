@@ -84,7 +84,9 @@
     "webpack-sources": "^3.2.3"
   },
   "dependencies": {
+    "@fontsource/geist-sans": "^5.2.5",
     "@fontsource/inter": "^5.1.0",
+    "@fontsource/lora": "^5.2.8",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "5.3.3",
     "events": "^3.3.0",

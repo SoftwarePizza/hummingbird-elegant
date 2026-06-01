@@ -12,8 +12,4 @@
 {/block}
 
 {block name='module_products_footer'}
-  <a class="btn btn-outline-primary" href="{$allSpecialProductsLink}">
-    {l s='All discounts' d='Shop.Theme.Catalog'}
-    <i class="material-icons" aria-hidden="true">&#xE315;</i>
-  </a>
 {/block}

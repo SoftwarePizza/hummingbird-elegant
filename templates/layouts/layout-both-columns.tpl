@@ -29,6 +29,10 @@
       {include file='catalog/_partials/product-activation.tpl'}
     {/block}
 
+    {include file='_partials/header-contact.tpl'}
+
+    <div id="search-page-dimmer" class="search-page-dimmer" aria-hidden="true"></div>
+
     <header id="header" class="header js-sticky-header">
       {block name='header'}
         {include file='_partials/header.tpl'}

@@ -21,7 +21,7 @@
   {assign var="append" value=["button"=>"increment", "icon"=>$increment_icon, "confirm_icon"=>$submit_icon]}
 {/if}
 
-<div class="quantity-button__group input-group">
+{*<div class="quantity-button__group input-group">
   <button aria-label="{$decrement_label}" class="btn {$prepend.button} btn-square-icon js-{$prepend.button}-button" type="button" id="decrement_button_{$product.id_product}">
     <i class="material-icons" aria-hidden="true">&#x{$prepend.icon};</i>
     <i class="material-icons confirmation d-none" aria-hidden="true">&#x{$prepend.confirm_icon};</i>
@@ -49,3 +49,4 @@
     <div class="spinner-border spinner-border-sm align-middle d-none" role="status"></div>
   </button>
 </div>
+*}

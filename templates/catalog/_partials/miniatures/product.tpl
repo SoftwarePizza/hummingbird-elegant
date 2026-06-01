@@ -48,6 +48,7 @@
                     {else}
                       {$product.price}
                     {/if}
+                    <span class="{$componentName}__price-tax">{l s='brutto' d='Shop.Theme.Catalog'}</span>
                   </div>
 
                   {hook h='displayProductPriceBlock' product=$product type='unit_price'}
@@ -96,13 +97,13 @@
   
                   <button 
                     data-button-action="add-to-cart" 
-                    class="product-miniature__add btn btn-primary btn-square-icon"
+                    class="product-miniature__add btn btn-primary "
                     aria-label="{l s='Add to cart %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Actions'}"
                     title="{l s='Add to cart %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Actions'}"
                     data-ps-ref="add-to-cart"
                   >
-                    <i class="material-icons" aria-hidden="true">&#xe854;</i>
-                    <span class="product-miniature__add-text">{l s='Add to cart' d='Shop.Theme.Actions'}</span>
+                    
+                    <span class="product-miniature__add-text-display">{l s='Add to cart' d='Shop.Theme.Actions'}</span>
                   </button>
                 </form>
               {else}

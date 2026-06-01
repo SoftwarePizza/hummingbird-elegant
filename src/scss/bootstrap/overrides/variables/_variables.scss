@@ -12,10 +12,11 @@ $grid-breakpoints: (
 );
 
 // Colors
+$black: #242424;
 $blue: #0b69f6;
 $green: #188251;
 $red: #ff4657;
-$primary: $blue;
+$primary: $black;
 $primary-text-emphasis: $primary;
 $danger: $red;
 $body-tertiary-color: rgba(#212529, 0.65);

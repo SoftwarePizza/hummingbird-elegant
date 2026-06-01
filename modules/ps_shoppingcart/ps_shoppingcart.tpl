@@ -3,7 +3,7 @@
  * LICENSE.md file that was distributed with this source code.
  *}
 
-<div id="_desktop_ps_shoppingcart">
+<div id="_desktop_ps_shoppingcart" class="order-4">
   <div class="ps-shoppingcart">
     <div class="header-block d-flex align-items-center blockcart cart-preview {if $cart.products_count> 0}header-block--active{else}inactive{/if}" data-refresh-url="{$refresh_url}">
       {if $cart.products_count> 0}
@@ -13,7 +13,6 @@
       {/if}
 
       <i class="material-icons header-block__icon" aria-hidden="true">&#xE8CC;</i>
-      <span class="d-none d-md-flex header-block__title">{l s='Cart' d='Shop.Theme.Checkout'}</span>
       <span class="header-block__badge">{$cart.products_count}</span>
 
       {if $cart.products_count> 0}
