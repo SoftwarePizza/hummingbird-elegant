@@ -37,7 +37,7 @@
           {* JUST PLACEHOLDER FOR RESPONSIVE COMPONENT TO LOAD REAL ONE *}
           <div class="header-block">
             <a href="{$urls.pages.my_account}" class="header-block__action-btn">
-              <i class="material-icons header-block__icon" aria-hidden="true">&#xE853;</i>
+              <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></svg>
             </a>
           </div>
           {* JUST PLACEHOLDER FOR RESPONSIVE COMPONENT TO LOAD REAL ONE *}
@@ -48,7 +48,7 @@
             {* JUST PLACEHOLDER FOR RESPONSIVE COMPONENT TO LOAD REAL ONE *}
             <div class="header-block">
               <a href="{$urls.pages.cart}" class="header-block__action-btn">
-                <i class="material-icons header-block__icon" aria-hidden="true">&#xE8CC;</i>
+                <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2.2l2.6 11.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L21.5 8H6.2"/></svg>
                 <span class="header-block__badge">{$cart.products_count}</span>
               </a>
             </div>

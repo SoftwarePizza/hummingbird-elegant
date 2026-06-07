@@ -6,11 +6,12 @@
 {* Desktop: icon only by default, expands to full-width overlay on click *}
 <div id="_desktop_ps_searchbar" class="order-2 col-auto d-none d-md-flex align-items-center">
   {* Collapsed: just the icon *}
-  <button class="header-block__action-btn btn-search-open border-0 bg-transparent p-0"
+  <button class="header-block__action-btn btn-search-open border-0 bg-transparent p-0 d-inline-flex align-items-center"
           aria-label="{l s='Open search' d='Shop.Theme.Catalog'}"
           aria-expanded="false"
           aria-controls="ps-search-overlay">
-    <i class="material-icons header-block__icon" aria-hidden="true">&#xE8B6;</i>
+    <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span class="header-block__label ms-2">{l s='Search' d='Shop.Theme.Catalog'}</span>
   </button>
 </div>
 
@@ -55,7 +56,7 @@
 <div class="ps-searchbar--mobile d-md-none d-flex col-auto">
   <div class="header-block d-flex align-items-center">
     <a class="header-block__action-btn" href="#" role="button" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas" aria-controls="searchCanvas" aria-label="{l s='Show search bar' d='Shop.Theme.Global'}">
-      <span class="material-icons header-block__icon" aria-hidden="true">&#xE8B6;</span>
+      <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     </a>
   </div>
 

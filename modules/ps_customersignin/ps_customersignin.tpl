@@ -15,7 +15,7 @@
           aria-expanded="false"
           aria-label="{l s='View my account (%customerName%)' sprintf=['%customerName%' => $customerName] d='Shop.Theme.Customeraccount'}"
         >
-          <i class="material-icons header-block__icon" aria-hidden="true">&#xE853;</i>
+          <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></svg>
 
         </button>
 
@@ -132,7 +132,7 @@
           rel="nofollow"
           aria-label="{l s='Sign in' d='Shop.Theme.Actions'}"
         >
-          <i class="material-icons header-block__icon" aria-hidden="true">&#xE853;</i>
+          <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></svg>
         </a>
       </div>
     {/if}
