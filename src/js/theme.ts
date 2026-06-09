@@ -38,9 +38,20 @@ import parseData from '@helpers/parseData';
 
 initEmitter();
 
+const wrapHeaderIcons = () => {
+  const ids = ['_desktop_ps_searchbar', '_desktop_ps_customersignin', '_desktop_blockwishlist', '_desktop_ps_shoppingcart'];
+  const elements = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+  if (!elements.length) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'header-bottom__icons';
+  elements[0].parentElement!.insertBefore(wrapper, elements[0]);
+  elements.forEach(el => wrapper.appendChild(el));
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const {prestashop, Theme: {events}} = window;
 
+  wrapHeaderIcons();
   initProductBehavior();
   initQuickview();
   initCheckout();

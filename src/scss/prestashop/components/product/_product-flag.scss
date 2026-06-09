@@ -18,15 +18,21 @@ $component-name: product-flags;
   margin: 0;
 
   .badge {
-    &:not(.discount) {
-      @extend .text-bg-primary;
-      border: 1px solid var(--bs-primary);
-    }
-
-    &.discount {
-      color: var(--bs-primary);
-      background-color: var(--bs-white);
-      border: 1px solid var(--bs-primary);
-    }
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    height: 20px;
+    padding: 2px 8px;
+    font-family: "Geist", "Geist Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(76, 85, 209, 1);
+    border: 0;
+    border-radius: 60px;
   }
 }

@@ -63,8 +63,9 @@ $component-name: ps-mainmenu;
 
           .#{$component-name}__tree-link {
             padding: 1.25rem 0.5rem;
-            color: var(--bs-secondary-color);
+            color: var(--bs-primary);
             text-decoration: none;
+            text-transform: uppercase;
 
             &:hover {
               color: var(--bs-link-hover-color);
@@ -191,9 +192,24 @@ $component-name: ps-mainmenu;
             &__group--child,
             &__group--nochild {
               .menu-item__group-main-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
                 margin-bottom: 0.5rem;
-                font-size: 1.25rem;
-                font-weight: 600;
+                font-family: 'Geist Sans', sans-serif;
+                font-size: 0.75rem;
+                font-weight: 500;
+                line-height: 1;
+                letter-spacing: 0;
+                text-decoration: none;
+
+                .menu-item__group-main-image {
+                  display: block;
+                  width: 100%;
+                  aspect-ratio: 1 / 1;
+                  object-fit: cover;
+                  border-radius: var(--bs-border-radius);
+                }
               }
             }
 

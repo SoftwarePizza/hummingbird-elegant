@@ -13,6 +13,10 @@
     <div class="{$componentName}__inner">
       {block name='product_miniature_top'}
         <div class="{$componentName}__top">
+          {* Wishlist button is injected here by the blockwishlist module JS
+             (.thumbnail-container) and restyled with the custom heart icon
+             in src/scss/prestashop/modules/_blockwishlist.scss. *}
+
           {include file='catalog/_partials/product-flags.tpl'}
 
           {include file='catalog/_partials/miniatures/product-image.tpl'}
@@ -48,7 +52,7 @@
                     {else}
                       {$product.price}
                     {/if}
-                    <span class="{$componentName}__price-tax">{l s='brutto' d='Shop.Theme.Catalog'}</span>
+                    <span class="{$componentName}__price-tax">({l s='brutto' d='Shop.Theme.Catalog'})</span>
                   </div>
 
                   {hook h='displayProductPriceBlock' product=$product type='unit_price'}

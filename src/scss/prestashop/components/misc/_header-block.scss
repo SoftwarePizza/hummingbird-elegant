@@ -34,32 +34,37 @@ $component-name: header-block;
     font-size: 1.25rem;
   }
 
+  &__label {
+    padding: 0.25rem 0.625rem;
+    font-family: 'Geist Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+    color: rgba(36, 36, 36, 1);
+    text-transform: uppercase;
+    border-radius: 50rem;
+  }
+
   &__badge {
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: absolute !important;
+    top: 10px;
+    left: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 1rem;
-    height: 1rem;
-    padding: 0 0.25rem;
-    font-size: 0.625rem;
-    font-weight: 600;
+    min-width: 13px;
+    height: 13px;
+    padding: 0 2px;
+    font-family: 'Geist Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
     line-height: 1;
-    color: var(--bs-light);
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 1);
     text-align: center;
-    background: var(--bs-primary);
+    background: #242424;
     border-radius: 50rem;
-
-    @include media-breakpoint-up(md) {
-      position: static;
-      min-width: 1.5rem;
-      height: 1.5rem;
-      font-size: 1rem;
-      color: inherit;
-      background: var(--bs-tertiary-bg);
-    }
   }
 
   /* When active, on desktop everything is primary */

@@ -32,7 +32,10 @@ $border-radius: 0.5rem;
 $link-decoration: none;
 
 // Typography
-$font-family-base: "Inter", sans-serif;
+$font-family-base: "Geist Sans", sans-serif;
+$font-size-base: 0.75rem; // 12px
+$font-weight-base: 400;
+$line-height-base: 1; // 100%
 
 $h1-font-size: calc(var(--bs-body-font-size) * 2);
 $h2-font-size: calc(var(--bs-body-font-size) * 1.5);

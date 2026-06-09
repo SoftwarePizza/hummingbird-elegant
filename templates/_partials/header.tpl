@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div class="header-bottom__icons d-flex align-items-center d-md-none ms-auto">
+        <div class="header-bottom__icons order-2 d-flex align-items-center d-md-none ms-auto">
           <div id="_mobile_ps_customersignin">
             {* JUST PLACEHOLDER FOR RESPONSIVE COMPONENT TO LOAD REAL ONE *}
             <div class="header-block">

@@ -10,9 +10,18 @@ $component-name: breadcrumb;
   gap: 0.5rem;
   overflow-x: scroll;
   scrollbar-width: none;
+  font-family: $font-family-base; // Geist
+  font-weight: $breadcrumb-font-weight;
+  line-height: $breadcrumb-line-height;
+  letter-spacing: $breadcrumb-letter-spacing;
+  color: $breadcrumb-color;
 
   &[data-depth="1"] {
     display: none;
+  }
+
+  &-link {
+    color: $breadcrumb-color;
   }
 
   &-item {
@@ -21,8 +30,16 @@ $component-name: breadcrumb;
 
     + .#{$component-name}-item {
       &::before {
+        // Override Bootstrap's slanted "/" glyph with a real vertical line
+        content: "";
+        display: inline-block;
         float: none;
-        padding-inline-end: 0.25rem;
+        inline-size: 1px;
+        block-size: 0.75em;
+        padding: 0;
+        margin-inline-end: 0.25rem;
+        vertical-align: middle;
+        background-color: $breadcrumb-divider-color;
       }
     }
   }
