@@ -10,8 +10,8 @@
           aria-label="{l s='Open search' d='Shop.Theme.Catalog'}"
           aria-expanded="false"
           aria-controls="ps-search-overlay">
-    <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <span class="header-block__label ms-2">{l s='Search' d='Shop.Theme.Catalog'}</span>
+    <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 17 17" fill="none" stroke="rgba(36,36,36,1)" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5974 12.5976L16.4998 16.5M7.57984 0.5C9.53504 0.5 11.3054 1.292 12.5862 2.5736C13.7445 3.73182 14.4653 5.25581 14.6259 6.88591C14.7865 8.51602 14.3769 10.1514 13.4669 11.5133C12.5569 12.8753 11.2028 13.8796 9.63536 14.3551C8.0679 14.8306 6.38407 14.7479 4.87074 14.1211C3.35742 13.4943 2.10825 12.3622 1.33608 10.9176C0.563904 9.47306 0.3165 7.80544 0.636021 6.19891C0.955542 4.59239 1.82222 3.14635 3.08838 2.10719C4.35454 1.06803 5.94185 0.500039 7.57984 0.5Z"/></svg>
+    <span class="header-block__label">{l s='Search' d='Shop.Theme.Catalog'}</span>
   </button>
 </div>
 
@@ -56,7 +56,7 @@
 <div class="ps-searchbar--mobile d-md-none d-flex col-auto">
   <div class="header-block d-flex align-items-center">
     <a class="header-block__action-btn" href="#" role="button" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas" aria-controls="searchCanvas" aria-label="{l s='Show search bar' d='Shop.Theme.Global'}">
-      <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 17 17" fill="none" stroke="rgba(36,36,36,1)" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5974 12.5976L16.4998 16.5M7.57984 0.5C9.53504 0.5 11.3054 1.292 12.5862 2.5736C13.7445 3.73182 14.4653 5.25581 14.6259 6.88591C14.7865 8.51602 14.3769 10.1514 13.4669 11.5133C12.5569 12.8753 11.2028 13.8796 9.63536 14.3551C8.0679 14.8306 6.38407 14.7479 4.87074 14.1211C3.35742 13.4943 2.10825 12.3622 1.33608 10.9176C0.563904 9.47306 0.3165 7.80544 0.636021 6.19891C0.955542 4.59239 1.82222 3.14635 3.08838 2.10719C4.35454 1.06803 5.94185 0.500039 7.57984 0.5Z"/></svg>
     </a>
   </div>
 

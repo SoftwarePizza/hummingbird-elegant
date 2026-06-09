@@ -15,7 +15,7 @@
           aria-expanded="false"
           aria-label="{l s='View my account (%customerName%)' sprintf=['%customerName%' => $customerName] d='Shop.Theme.Customeraccount'}"
         >
-          <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+          <svg class="header-block__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="9.5" stroke="#242424"/><g transform="translate(2.37, 3.8) scale(1.1)"><path d="M0.5 10.7883C0.5 10.7883 2.3575 8.41667 6.94083 8.41667C11.5242 8.41667 13.3825 10.7883 13.3825 10.7883" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.94083 5.5C7.60387 5.5 8.23976 5.23661 8.7086 4.76777C9.17744 4.29893 9.44083 3.66304 9.44083 3C9.44083 2.33696 9.17744 1.70107 8.7086 1.23223C8.23976 0.763392 7.60387 0.5 6.94083 0.5C6.27779 0.5 5.64191 0.763392 5.17307 1.23223C4.70423 1.70107 4.44083 2.33696 4.44083 3C4.44083 3.66304 4.70423 4.29893 5.17307 4.76777C5.64191 5.23661 6.27779 5.5 6.94083 5.5Z" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
 
         </button>
 
@@ -132,7 +132,7 @@
           rel="nofollow"
           aria-label="{l s='Sign in' d='Shop.Theme.Actions'}"
         >
-          <svg class="header-block__icon header-block__icon--outline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(36,36,36,1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+          <svg class="header-block__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="9.5" stroke="#242424"/><g transform="translate(2.37, 3.8) scale(1.1)"><path d="M0.5 10.7883C0.5 10.7883 2.3575 8.41667 6.94083 8.41667C11.5242 8.41667 13.3825 10.7883 13.3825 10.7883" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.94083 5.5C7.60387 5.5 8.23976 5.23661 8.7086 4.76777C9.17744 4.29893 9.44083 3.66304 9.44083 3C9.44083 2.33696 9.17744 1.70107 8.7086 1.23223C8.23976 0.763392 7.60387 0.5 6.94083 0.5C6.27779 0.5 5.64191 0.763392 5.17307 1.23223C4.70423 1.70107 4.44083 2.33696 4.44083 3C4.44083 3.66304 4.70423 4.29893 5.17307 4.76777C5.64191 5.23661 6.27779 5.5 6.94083 5.5Z" stroke="#242424" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
         </a>
       </div>
     {/if}

@@ -16,6 +16,17 @@
           data-depth="{$link.depth}"
           {if $link.open_in_new_window}target="_blank"{/if}
         >
+          {if $link.depth === 3 && $link.image_urls|count}
+            <img
+              class="{$class}__group-main-image"
+              src="{$link.image_urls[0]|escape:'html':'UTF-8'}"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+              width="160"
+              height="160"
+            >
+          {/if}
           {$link.label}
         </a>
       </li>

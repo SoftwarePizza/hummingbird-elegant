@@ -3,6 +3,24 @@
  * LICENSE.md file that was distributed with this source code.
  *}
 
+{if isset($hbe_cart_modal_enabled) && $hbe_cart_modal_enabled}
+  {* Cart preview modal (Figma design) shown instead of the standard "Added to your cart" modal *}
+  <div id="blockcart-modal" class="blockcart-modal blockcart-modal--preview modal fade" tabindex="-1" role="dialog" aria-labelledby="blockcart-modal-title" aria-hidden="true" data-ps-ref="blockcart-modal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="visually-hidden" id="blockcart-modal-title">{l s='Twój koszyk' d='Shop.Theme.Checkout'}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}"></button>
+          {* For screen readers *}
+          <p class="visually-hidden" aria-live="polite" role="status" data-ps-target="blockcart-modal-status" data-ps-data="{l s='%product_name% has been added to your cart.' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Checkout'}"></p>
+        </div>
+        <div class="modal-body">
+          {include file='module:ps_shoppingcart/cart-preview.tpl'}
+        </div>
+      </div>
+    </div>
+  </div>
+{else}
 <div id="blockcart-modal" class="blockcart-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="blockcart-modal-title" aria-hidden="true" data-ps-ref="blockcart-modal">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
@@ -116,3 +134,4 @@
     </div>
   </div>
 </div>
+{/if}
