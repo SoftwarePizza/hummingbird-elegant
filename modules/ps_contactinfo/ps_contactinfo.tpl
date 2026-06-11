@@ -1,6 +1,10 @@
 {**
  * For the full copyright and license information, please view the
  * LICENSE.md file that was distributed with this source code.
+ *
+ * KONTAKT — bespoke Rosenthal footer column (design from Figma).
+ * Content is store-specific and edited here in the fork. Social URLs are
+ * placeholders (href="#") — replace with the real Instagram / Facebook links.
  *}
 <section
   class="ps-contactinfo footer-block col-md-6 col-lg-3"
@@ -10,7 +14,7 @@
     id="footer_contactinfo_title"
     class="footer-block__title footer-block__title--toggle"
   >
-    {l s='Store information' d='Shop.Theme.Global'}
+    {l s='Kontakt' d='Shop.Theme.Global'}
     <button
       class="stretched-link collapsed d-md-none"
       type="button"
@@ -19,50 +23,34 @@
       aria-expanded="false"
       aria-controls="footer_contactinfo"
     >
-      <span class="visually-hidden">
-        {l s='Toggle store information' d='Shop.Theme.Global'}
-      </span>
+      <span class="visually-hidden">{l s='Toggle contact information' d='Shop.Theme.Global'}</span>
       <i class="material-icons" aria-hidden="true">&#xE313;</i>
     </button>
   </p>
 
   <div class="footer-block__content collapse" id="footer_contactinfo">
+    <p class="ps-contactinfo__line">
+      {l s='Infolinia' d='Shop.Theme.Global'}: <a href="tel:+48613072080">61 307 20 80</a>
+    </p>
 
-    {if $contact_infos.address.formatted}
-      <address class="ps-contactinfo__infos">
-        {$contact_infos.address.formatted nofilter}
-      </address>
-    {/if}
+    <p class="ps-contactinfo__line">
+      <strong>{l s='Online shop (7:30-15:30)' d='Shop.Theme.Global'}</strong><br>
+      {l s='Telefon' d='Shop.Theme.Global'}: <a href="tel:+48730900116">730 900 116</a><br>
+      Email: <a href="mailto:sklep@rosenthal.pl">sklep@rosenthal.pl</a>
+    </p>
 
-    {if $contact_infos.phone}
-      <div class="ps-contactinfo__phone">
-        <i class="material-icons" aria-hidden="true">&#xE0CD;</i>
-        <a href="tel:{$contact_infos.phone}"
-           aria-label="{l s='Call us at: %phone%' sprintf=['%phone%' => $contact_infos.phone] d='Shop.Theme.Global'}">
-          {$contact_infos.phone}
-        </a>
-      </div>
-    {/if}
+    <p class="ps-contactinfo__line">
+      <strong>{l s='Rosenthal Polska - biuro' d='Shop.Theme.Global'}</strong><br>
+      Email: <a href="mailto:office@rosenthal.pl">office@rosenthal.pl</a>
+    </p>
 
-    {if $contact_infos.fax}
-      <div class="ps-contactinfo__fax">
-        <i class="material-icons" aria-hidden="true">&#xE8AD;</i>
-        <a href="tel:{$contact_infos.fax}"
-           aria-label="{l s='Send us a fax to: %fax%' sprintf=['%fax%' => $contact_infos.fax] d='Shop.Theme.Global'}">
-          {$contact_infos.fax}
-        </a>
-      </div>
-    {/if}
-
-    {if $contact_infos.email && $display_email}
-      <div class="ps-contactinfo__email">
-        <i class="material-icons" aria-hidden="true">&#xE158;</i>
-        <a href="mailto:{$contact_infos.email}"
-           aria-label="{l s='Send us an email to: %email%' sprintf=['%email%' => $contact_infos.email] d='Shop.Theme.Global'}">
-          {$contact_infos.email}
-        </a>
-      </div>
-    {/if}
-
+    <div class="footer__social">
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h2V5h-2c-2 0-3 1-3 3v2H9v3h2v6h3v-6h2l1-3h-3V8c0-.6.4-1 1-1z"/></svg>
+      </a>
+    </div>
   </div>
 </section>

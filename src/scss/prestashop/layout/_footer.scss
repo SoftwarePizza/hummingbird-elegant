@@ -30,6 +30,8 @@ $sub-component-name: "footer-block";
     font-size: 1rem;
     font-weight: 600;
     color: var(--bs-white);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 
     a {
       color: var(--bs-white);
@@ -89,5 +91,161 @@ $sub-component-name: "footer-block";
         display: block;
       }
     }
+  }
+}
+
+// ── Rosenthal footer (PNG design) ─────────────────────────────────────────
+// Columns as a CSS grid (independent of Bootstrap col-* classes, so any module
+// output — incl. ps_customtext without col-* — lines up as an equal column).
+.#{$component-name}__main-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  // neutralize Bootstrap gutter padding left over from col-* classes
+  > * {
+    padding-inline: 0;
+  }
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+// KONTAKT column built from a ps_customtext block: strip the full-width
+// container so it behaves like the other footer columns.
+.#{$component-name} .ps-customtext {
+  margin-block-end: 2.5rem;
+
+  .container {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// KONTAKT lines (Infolinia / Online shop / biuro)
+.ps-contactinfo__line {
+  margin-block-end: 1rem;
+  line-height: 1.5;
+}
+
+// Social icons (placed inside the KONTAKT block) — circular bordered buttons
+.#{$component-name}__social {
+  display: flex;
+  gap: 0.75rem;
+  margin-block-start: 1.25rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--bs-gray-300);
+    border: 1px solid rgba(var(--bs-white-rgb), 0.35);
+    border-radius: 50%;
+    transition: var(--bs-transition-default);
+
+    &:hover {
+      color: var(--bs-white);
+      border-color: var(--bs-white);
+    }
+  }
+}
+
+// Newsletter moved into the 4th column: intro + inline input/arrow + fine print
+.ps-emailsubscription--column {
+  &__intro,
+  .ps-emailsubscription__intro {
+    margin-block-end: 1rem;
+    line-height: 1.5;
+    color: var(--bs-gray-300);
+  }
+
+  .ps-emailsubscription__field {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid rgba(var(--bs-white-rgb), 0.35);
+    border-radius: var(--bs-border-radius);
+  }
+
+  .ps-emailsubscription__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.65rem 0.9rem;
+    color: var(--bs-white);
+    background: transparent;
+    border: 0;
+
+    &::placeholder {
+      color: var(--bs-gray-400);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .ps-emailsubscription__submit {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    padding: 0;
+    color: var(--bs-white);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    transition: var(--bs-transition-default);
+
+    &:hover {
+      color: var(--bs-gray-300);
+    }
+  }
+
+  .ps-emailsubscription__fineprint {
+    margin-block: 0.75rem 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--bs-gray-500);
+  }
+}
+
+// Bottom bar: legal links above, copyright below, separated by a divider
+.#{$component-name}__bottom {
+  padding-block-start: 1.5rem;
+  margin-block-start: 0.5rem;
+  border-top: 1px solid rgba(var(--bs-white-rgb), 0.12);
+
+  &-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding: 0;
+    margin: 0 0 1rem;
+    list-style: none;
+
+    a {
+      color: var(--bs-gray-300);
+
+      &:hover {
+        color: var(--bs-white);
+      }
+    }
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--bs-gray-500);
   }
 }
