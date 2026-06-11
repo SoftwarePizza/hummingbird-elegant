@@ -91,8 +91,12 @@ $component-name: product;
     }
 
     &__price {
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-family: "Geist", "Geist Sans", sans-serif;
+      font-size: 1rem; // 16px
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0;
+      color: rgba(36, 36, 36, 1);
     }
 
     &__unit-price {
