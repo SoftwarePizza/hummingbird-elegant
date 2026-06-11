@@ -2,7 +2,7 @@
  * For the full copyright and license information, please view the
  * LICENSE.md file that was distributed with this source code.
  *}
-<section class="ps-emailsubscription ps-emailsubscription--column footer-block col-md-6 col-lg-3" id="emailsubscription_anchor_{$hookName}">
+<section class="ps-emailsubscription ps-emailsubscription--column footer-block" id="emailsubscription_anchor_{$hookName}">
   <p class="footer-block__title">{l s='Newsletter' d='Shop.Theme.Global'}</p>
 
   <div class="footer-block__content">

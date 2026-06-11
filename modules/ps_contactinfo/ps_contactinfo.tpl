@@ -7,7 +7,7 @@
  * placeholders (href="#") — replace with the real Instagram / Facebook links.
  *}
 <section
-  class="ps-contactinfo footer-block col-md-6 col-lg-3"
+  class="ps-contactinfo footer-block"
   aria-labelledby="footer_contactinfo_title"
 >
   <p

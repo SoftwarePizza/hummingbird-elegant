@@ -5,7 +5,7 @@
 {if !empty($linkBlocks)}
   {foreach $linkBlocks as $linkBlock}
     <nav
-      class="ps-linklist footer-block col-md-6 col-lg-3"
+      class="ps-linklist footer-block"
       aria-labelledby="footer_title_{$linkBlock.id}"
     >
       <p

@@ -6,7 +6,7 @@
  * The module uses this default template on every hook except
  * displayLeftColumn, so this is what shows inside displayFooter.
  *}
-<section class="ps-emailsubscription ps-emailsubscription--column footer-block col-md-6 col-lg-3" id="emailsubscription_anchor_{$hookName}">
+<section class="ps-emailsubscription ps-emailsubscription--column footer-block" id="emailsubscription_anchor_{$hookName}">
   <p class="footer-block__title">{l s='Newsletter' d='Shop.Theme.Global'}</p>
 
   <div class="footer-block__content">
