@@ -42,3 +42,19 @@ $component-name: header-bottom;
     }
   }
 }
+
+// ── Moved from hummingbird_editor front.css (avoid module-CSS FOUC) ──
+
+/* ── Header icons group (search + account + cart) ───────────────────────── */
+.header-bottom__icons {
+  display: flex;
+  align-items: center;
+  order: 2;
+}
+
+/* ── Header badge (cart counter) ─────────────────────────────────────────── */
+.header-block__icon-wrap {
+  position: relative;
+  display: inline-flex;
+}
+

@@ -7,3 +7,19 @@ $component-name: section-title;
 .#{$component-name} {
   margin-block-end: 1.25rem;
 }
+
+// ── Moved from hummingbird_editor front.css (avoid module-CSS FOUC) ──
+
+/* ── Section titles (Bestsellers / Nowości / etc.) ─────────────────────── */
+.section-title,
+h2.section-title {
+  margin: 0 0 1.25rem;
+  font-family: Lora, Georgia, serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  color: rgba(36, 36, 36, 1);
+  letter-spacing: 0;
+}
+
