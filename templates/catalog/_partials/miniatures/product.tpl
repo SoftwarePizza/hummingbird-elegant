@@ -89,15 +89,9 @@
                   {/if}
                   <input type="hidden" name="token" value="{$static_token}">
   
-                  <div class="quantity-button js-quantity-button">
-                    {include file='components/qty-input.tpl'
-                      attributes=[
-                        "id" => "quantity_wanted_{$product.id_product}",
-                        "value" => "{$product.quantity_wanted}",
-                        "min" => "{$product.quantity_required}"
-                      ]
-                    }
-                  </div>
+                  {* Quantity stepper intentionally hidden on listings — kept only in the cart and on the product page.
+                     Hidden input preserves the wanted/min quantity so add-to-cart still posts the right value. *}
+                  <input type="hidden" name="qty" value="{$product.quantity_wanted|default:$product.quantity_required|default:1}">
   
                   <button 
                     data-button-action="add-to-cart" 
