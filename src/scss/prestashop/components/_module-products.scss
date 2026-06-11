@@ -27,7 +27,7 @@ body {
 /* ── Carousel section: subtitle text & configurable link ───────────────── */
 .hbe-section-text {
   margin: -0.25rem 0 1rem;
-  font-size: 0.95rem;
+  font-size: var(--fs-body-m);
   line-height: 1.5;
   color: var(--bs-secondary-color, #6c757d);
 }
@@ -38,12 +38,12 @@ a.btn.btn-primary.hbe-section-link {
   display: inline-block;
   padding: 0;
   margin-left: 0;
-  font-family: "Geist Sans", sans-serif;
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body-s);
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
-  color: #242424;
+  color: var(--c-black);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-style: solid;
@@ -60,7 +60,7 @@ a.btn.btn-primary.hbe-section-link {
 a.btn.btn-primary.hbe-section-link:hover,
 .hbe-section-link:focus,
 a.btn.btn-primary.hbe-section-link:focus {
-  color: #242424;
+  color: var(--c-black);
   text-decoration: underline;
   background: transparent;
 }

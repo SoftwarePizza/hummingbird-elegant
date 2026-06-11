@@ -25,13 +25,13 @@ $component-name: product-flags;
     min-width: 62px;
     height: 20px;
     padding: 2px 8px;
-    font-family: "Geist", "Geist Sans", sans-serif;
-    font-size: 12px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body-xs);
     font-weight: 500;
     line-height: 1;
-    letter-spacing: 0;
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(76, 85, 209, 1);
+    letter-spacing: 0;
+    background-color: var(--c-blue);
     border: 0;
     border-radius: 60px;
   }

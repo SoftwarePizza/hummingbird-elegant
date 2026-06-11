@@ -5,6 +5,7 @@
 @import "fonts";
 
 @layer ps-base {
+  @import "design-tokens";
   @import "global";
 }
 
