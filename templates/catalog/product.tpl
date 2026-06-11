@@ -39,12 +39,7 @@
 
     <div class="product__right" data-ps-ref="product-right" tabindex="-1">
       {block name='product_header'}
-        <h1 class="product__name h2 {if !empty($product_manufacturer->name) && !empty($product_brand_url)}mb-1{/if}">
-          {block name='page_title'}{$product.name}{/block}
-        </h1>
-      {/block}
-
-      {block name='product_manufacturer'}
+        {block name='product_manufacturer'}
         {if !empty($product_manufacturer->name) && !empty($product_manufacturer->url)}
           <div class="product__manufacturer">
             <a href="{$product_manufacturer->url}" aria-label="{l s='Product brand: %brand_name%' sprintf=['%brand_name%' => $product_manufacturer->name] d='Shop.Theme.Catalog'}">
@@ -53,6 +48,12 @@
           </div>
         {/if}
       {/block}
+        <h1 class="product__name h2 {if !empty($product_manufacturer->name) && !empty($product_brand_url)}mb-1{/if}">
+          {block name='page_title'}{$product.name}{/block}
+        </h1>
+      {/block}
+
+      
 
       {block name='product_prices'}
         {include file='catalog/_partials/product-prices.tpl'}
@@ -104,6 +105,10 @@
           </form>
         {/block}
       </div>
+
+      {block name='product_buttons'}
+        {hook h='displayProductButtons' product=$product}
+      {/block}
     </div>
   </div>
   {* END OF FIRST PART *}
