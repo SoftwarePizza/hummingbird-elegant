@@ -113,100 +113,65 @@
   </div>
   {* END OF FIRST PART *}
 
-  {* SECOND PART - REASSURANCE, TABS *}
-  <div class="product__bottom">
-    <div class="product__bottom-left">
-      {block name='product_tabs'}
-        <div class="product__accordion accordion accordion-flush" id="product_accordion">
+  {* SECOND PART - DESCRIPTION & DETAILS (Figma: Details) *}
+  <section class="product__bottom">
+    {block name='product_tabs'}
+      <h2 class="product__bottom-title">{l s='Opis produktu' d='Shop.Theme.Catalog'}</h2>
+
+      <div class="product__bottom-grid">
+        <div class="product__bottom-left">
           {block name='product_description'}
             {if $product.description}
-              <div class="accordion-item" id="product_description">
-                <h2 class="accordion-header" id="product_description_heading">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#product_description_collapse" aria-expanded="true" aria-controls="product_description_collapse">
-                    {l s='Description' d='Shop.Theme.Catalog'}
-                  </button>
-                </h2>
-
-                <div id="product_description_collapse" class="accordion-collapse collapse show" aria-labelledby="product_description_heading">
-                  <div class="accordion-body">
-                    <div class="product__description rich-text">
-                      {$product.description nofilter}
-                    </div>
-                  </div>
-                </div>
+              <div class="product__description rich-text" id="product_description">
+                {$product.description nofilter}
               </div>
             {/if}
-          {/block}
-
-          {block name='product_details'}
-            {include file='catalog/_partials/product-details.tpl'}
           {/block}
 
           {block name='product_attachments'}
             {if $product.attachments}
-              <div class="info accordion-item" id="product_attachments">
-                <h2 class="accordion-header" id="product_attachments_heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#product_attachments_collapse" aria-expanded="false" aria-controls="product_attachments_collapse">
-                    {l s='Download' d='Shop.Theme.Actions'}
-                  </button>
-                </h2>
+              <div class="product__attachments" id="product_attachments">
+                {foreach from=$product.attachments item=attachment}
+                  <div class="attachment">
+                    <p class="attachment__name">
+                      {$attachment.name}
+                    </p>
 
-                <div id="product_attachments_collapse" class="accordion-collapse collapse" aria-labelledby="product_attachments_heading">
-                  <div class="accordion-body">
-                    <div class="product__attachments">
-                      {foreach from=$product.attachments item=attachment}
-                        <div class="attachment">
-                          <p class="attachment__name">
-                            {$attachment.name}
-                          </p>
+                    {if $attachment.description}
+                      <p class="attachment__description">
+                        {$attachment.description}
+                      </p>
+                    {/if}
 
-                          {if $attachment.description}
-                            <p class="attachment__description">
-                              {$attachment.description}
-                            </p>
-                          {/if}
-
-                          <a class="attachment__link stretched-link"
-                            href="{url entity='attachment' params=['id_attachment' => $attachment.id_attachment]}"
-                            aria-label="{l s='Download %attachment_name%' sprintf=['%attachment_name%' => $attachment.name] d='Shop.Theme.Actions'}"
-                          >
-                            <i class="material-icons" aria-hidden="true">&#xE2C4;</i> {l s='Download' d='Shop.Theme.Actions'} ({$attachment.file_size_formatted})
-                          </a>
-                        </div>
-                      {/foreach}
-                    </div>
+                    <a class="attachment__link stretched-link"
+                      href="{url entity='attachment' params=['id_attachment' => $attachment.id_attachment]}"
+                      aria-label="{l s='Download %attachment_name%' sprintf=['%attachment_name%' => $attachment.name] d='Shop.Theme.Actions'}"
+                    >
+                      <i class="material-icons" aria-hidden="true">&#xE2C4;</i> {l s='Download' d='Shop.Theme.Actions'} ({$attachment.file_size_formatted})
+                    </a>
                   </div>
-                </div>
+                {/foreach}
               </div>
             {/if}
           {/block}
 
-          {* New collapses for module hooked content *}
+          {* Module hooked content, rendered flat below the description *}
           {foreach from=$product.extraContent item=extra key=extraKey}
-            <div class="accordion-item" id="extra_{$extraKey}" {foreach $extra.attr as $key => $val} {$key}="{$val}"{/foreach}>
-              <h2 class="accordion-header" id="product_extra_{$extraKey}_heading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#product_extra_{$extraKey}_collapse" aria-expanded="false" aria-controls="product_extra_{$extraKey}_collapse">
-                  {$extra.title}
-                </button>
-              </h2>
-
-              <div id="product_extra_{$extraKey}_collapse" class="accordion-collapse collapse" data-bs-parent="#product_accordion" aria-labelledby="product_extra_{$extraKey}_heading">
-                <div class="accordion-body">
-                  {$extra.content nofilter}
-                </div>
-              </div>
+            <div class="product__extra" id="extra_{$extraKey}" {foreach $extra.attr as $key => $val} {$key}="{$val}"{/foreach}>
+              <h3 class="product__extra-title">{$extra.title}</h3>
+              {$extra.content nofilter}
             </div>
           {/foreach}
         </div>
-      {/block}
-    </div>
 
-    <div class="product__bottom-right">
-      {block name='hook_display_reassurance'}
-        {hook h='displayReassurance'}
-      {/block}
-    </div>
-  </div>
+        <div class="product__bottom-specs">
+          {block name='product_details'}
+            {include file='catalog/_partials/product-details.tpl'}
+          {/block}
+        </div>
+      </div>
+    {/block}
+  </section>
   {* END OF SECOND PART *}
 
   {block name='product_accessories'}

@@ -182,14 +182,37 @@ $component-name: product;
       gap: 1.25rem;
     }
 
-    // Bottom section
+    // Bottom section (Figma: Details — title + description | specs table)
     &__bottom {
+      margin-block-start: 2.5rem;
+
+      &-title {
+        margin-block-end: 1.5rem;
+        font-family: "Lora", Georgia, serif;
+        font-size: 1.75rem;
+        font-weight: 400;
+        line-height: 1.15;
+        color: rgba(36, 36, 36, 1);
+      }
+
+      &-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
       &-left {
         margin-block-end: 2rem;
       }
+    }
 
-      &-right {
-        margin-block-end: 2rem;
+    &__extra {
+      margin-block-start: 1.5rem;
+
+      &-title {
+        margin-block-end: 0.75rem;
+        font-size: 1rem;
+        font-weight: 500;
       }
     }
 
@@ -264,11 +287,9 @@ $component-name: product;
         gap: 1.5rem;
       }
 
-      &__bottom {
-        display: grid;
-        grid-template-columns: 55% minmax(0, 1fr);
-        gap: 2rem;
-        margin-block-start: 1.5rem;
+      &__bottom-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: 3rem;
       }
     }
   }
@@ -293,10 +314,6 @@ $component-name: product;
       // Bottom section
       &__bottom {
         &-left {
-          margin-block-end: 3rem;
-        }
-
-        &-right {
           margin-block-end: 3rem;
         }
       }
@@ -396,6 +413,65 @@ $component-name: product;
           }
         }
       }
+    }
+  }
+}
+
+// Specs table (right column of product__bottom — Figma: Details)
+.product-specs {
+  &__tabs {
+    display: flex;
+    gap: 1.5rem;
+    margin-block-end: 0.5rem;
+  }
+
+  &__tab {
+    font-family: "Geist", "Geist Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(90, 90, 90, 1);
+
+    &--active {
+      font-weight: 500;
+      color: rgba(36, 36, 36, 1);
+      text-decoration: underline;
+      text-underline-offset: 0.4em;
+    }
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid #ececec;
+  }
+
+  &__label {
+    flex-shrink: 0;
+    font-family: "Geist", "Geist Sans", sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgba(36, 36, 36, 1);
+  }
+
+  &__value {
+    font-family: "Geist", "Geist Sans", sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: rgba(36, 36, 36, 1);
+    text-align: right;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
     }
   }
 }
