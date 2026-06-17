@@ -229,6 +229,7 @@
   aria-labelledby="mobileMenuLabel"
 >
   <div class="offcanvas-header">
+    <span class="ps-mainmenu__root-title">{l s='Menu' d='Shop.Theme.Menu'}</span>
     <div class="ps-mainmenu__back-button">
       <button class="btn btn-link btn-sm d-none js-back-button" type="button" aria-label="{l s='Go back to main menu' d='Shop.Theme.Menu'}">
         <span class="material-icons rtl-flip" aria-hidden="true">&#xE5CB;</span>
@@ -242,11 +243,39 @@
     {mobileMenu nodes=$menu.children}
   </div>
 
-  <div class="ps-mainmenu__additionnals offcanvas-body d-flex flex-wrap align-items-center gap-3">
-    <div class="ps-mainmenu__selects d-flex gap-2 me-auto">
+  <div class="ps-mainmenu__additionnals offcanvas-body">
+    {* Customer account *}
+    <a href="{$urls.pages.my_account}" class="ps-mainmenu__foot-link" rel="nofollow">
+      <svg class="ps-mainmenu__foot-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-3.6 3.6-6 8-6s8 2.4 8 6"/>
+      </svg>
+      <span>{l s='My account' d='Shop.Theme.Customeraccount'}</span>
+    </a>
+
+    {* Contact information *}
+    <div class="ps-mainmenu__foot-contact">
+      <p class="ps-mainmenu__foot-contact-line">
+        {l s='Infolinia' d='Shop.Theme.Global'}: <a href="tel:+48613072080">61 307 20 80</a>
+      </p>
+      <p class="ps-mainmenu__foot-contact-line">
+        Email: <a href="mailto:sklep@rosenthal.pl">sklep@rosenthal.pl</a>
+      </p>
+    </div>
+
+    {* Contact form *}
+    <a href="{$urls.pages.contact}" class="ps-mainmenu__foot-link" rel="nofollow">
+      <svg class="ps-mainmenu__foot-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3.5 7.5l8.5 5.5 8.5-5.5"/>
+      </svg>
+      <span>{l s='Contact us' d='Shop.Theme.Global'}</span>
+    </a>
+
+    {* Currency / language (filled by the responsive desktop→mobile swap) *}
+    <div class="ps-mainmenu__selects">
       <div id="_mobile_ps_currencyselector" class="col-auto"></div>
       <div id="_mobile_ps_languageselector" class="col-auto"></div>
     </div>
-    <div id="_mobile_ps_contactinfo"></div>
   </div>
 </div>

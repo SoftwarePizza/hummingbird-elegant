@@ -262,40 +262,76 @@ $component-name: ps-mainmenu;
       padding: 0 1rem;
       transition: var(--bs-transition-default);
 
+      // Figma: a thin divider between every row
+      &__list {
+        margin: 0;
+
+        > li {
+          border-bottom: 1px solid var(--c-grey-2);
+        }
+      }
+
       a {
         display: block;
-        padding-block: 0.5rem;
-        color: var(--bs-secondary-color);
+        padding-block: 0.95rem;
+        font-family: var(--font-body);
+        font-size: var(--fs-body-m);
+        color: var(--c-black);
+        text-decoration: none;
 
         &:hover {
           color: var(--bs-link-hover-color);
         }
       }
 
-      &__title {
-        padding: 0;
-        margin-bottom: 0.75rem;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--bs-body-color);
+      // Top-level items → serif Lora, larger (Figma level 1)
+      &[data-depth="0"] .menu__link {
+        font-family: var(--font-heading);
+        font-size: var(--fs-h4);
+        font-weight: 400;
       }
 
-      &__list {
-        margin: 0;
+      // divider above the first top-level row (Figma)
+      &[data-depth="0"] .menu__list {
+        border-top: 1px solid var(--c-grey-2);
+      }
+
+      // Parent label shown at the top of a drilled-in submenu
+      &__title {
+        padding: 0.85rem 0;
+        font-family: var(--font-heading);
+        font-size: var(--fs-h4);
+        font-weight: 400;
+        color: var(--c-black);
+        border-bottom: 1px solid var(--c-grey-2);
       }
 
       &__link {
+        flex: 1 1 auto;
+
         &:active {
           color: var(--bs-link-color);
         }
       }
 
+      // Circular chevron button (Figma): bordered circle, caret points right
       &__toggle-child {
-        padding: 0.25rem;
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        color: var(--c-black);
+        border: 1px solid var(--c-grey-2);
+        border-radius: 50%;
 
-        > span {
+        .material-icons {
           display: block;
-          line-height: 0;
+          font-size: 1.25rem;
+          line-height: 1;
+          transform: rotate(-90deg);
         }
       }
 
@@ -318,6 +354,7 @@ $component-name: ps-mainmenu;
         opacity: 0;
       }
 
+      // Row with children: label left, circular chevron right
       &--childrens {
         display: flex;
         align-items: center;
@@ -337,15 +374,90 @@ $component-name: ps-mainmenu;
         }
       }
 
+      // "Menu" header label (Figma) — sits left of the close button
+      &__root-title {
+        margin-right: auto;
+        padding-left: 1rem;
+        font-family: var(--font-heading);
+        font-size: var(--fs-h4);
+        font-weight: 400;
+        line-height: 1;
+        color: var(--c-black);
+      }
+
       &__tree {
         display: flex;
         align-items: center;
         margin-bottom: 0;
       }
 
+      // Account + contact block at the bottom of the mobile menu
       &__additionnals {
         flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding-inline: 1rem;
+        margin-top: 0.5rem;
+        border-top: 1px solid var(--c-grey-2);
       }
+
+      &__foot-link {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        padding-block: 0.9rem;
+        font-family: var(--font-body);
+        font-size: var(--fs-body-m);
+        color: var(--c-black);
+        text-decoration: none;
+        border-bottom: 1px solid var(--c-grey-2);
+
+        &:hover,
+        &:focus {
+          color: var(--bs-link-hover-color);
+        }
+      }
+
+      &__foot-icon {
+        flex-shrink: 0;
+      }
+
+      &__foot-contact {
+        padding-block: 0.9rem;
+        border-bottom: 1px solid var(--c-grey-2);
+      }
+
+      &__foot-contact-line {
+        margin: 0 0 0.35rem;
+        font-family: var(--font-body);
+        font-size: var(--fs-body-s);
+        line-height: 1.5;
+        color: var(--c-grey-5);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          display: inline;
+          padding: 0;
+          color: var(--c-black);
+          text-decoration: underline;
+        }
+      }
+
+      &__selects {
+        display: flex;
+        gap: 0.5rem;
+        padding-block: 0.9rem;
+      }
+    }
+
+    // Once drilled into a submenu the back-button appears — hide the root title
+    .offcanvas-header:has(.js-back-button:not(.d-none)) .#{$component-name}__root-title {
+      display: none;
     }
   }
 

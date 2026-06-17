@@ -43,6 +43,28 @@ $component-name: header-bottom;
   }
 }
 
+// ── Mobile header (Figma): hamburger left · centred script logo · icons right ──
+@include media-breakpoint-down(md) {
+  .#{$component-name}__row {
+    position: relative;
+    min-height: 3rem;
+  }
+
+  // Centre the logo regardless of the hamburger/icon widths around it.
+  // (absolute → ignores the `me-auto` utility on the logo column)
+  .#{$component-name}__logo {
+    position: absolute;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+  }
+
+  // Figma shows only wishlist + cart on the right; account lives in the menu.
+  #_mobile_ps_customersignin {
+    display: none;
+  }
+}
+
 // ── Moved from hummingbird_editor front.css (avoid module-CSS FOUC) ──
 
 /* ── Header icons group (search + account + cart) ───────────────────────── */

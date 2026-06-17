@@ -179,10 +179,12 @@ $sub-component-name: "footer-block";
     color: var(--bs-gray-300);
   }
 
+  // Figma: solid white input box with dark text + dark arrow
   .ps-emailsubscription__field {
     display: flex;
     align-items: stretch;
-    border: 1px solid rgba(var(--bs-white-rgb), 0.35);
+    background: var(--bs-white);
+    border: 1px solid var(--bs-white);
     border-radius: var(--bs-border-radius);
   }
 
@@ -190,12 +192,12 @@ $sub-component-name: "footer-block";
     flex: 1 1 auto;
     min-width: 0;
     padding: 0.65rem 0.9rem;
-    color: var(--bs-white);
+    color: var(--c-black);
     background: transparent;
     border: 0;
 
     &::placeholder {
-      color: var(--bs-gray-400);
+      color: var(--bs-gray-500);
     }
 
     &:focus {
@@ -211,14 +213,14 @@ $sub-component-name: "footer-block";
     justify-content: center;
     width: 2.75rem;
     padding: 0;
-    color: var(--bs-white);
+    color: var(--c-black);
     cursor: pointer;
     background: transparent;
     border: 0;
     transition: var(--bs-transition-default);
 
     &:hover {
-      color: var(--bs-gray-300);
+      color: var(--c-grey-5);
     }
   }
 
@@ -234,7 +236,8 @@ $sub-component-name: "footer-block";
 .#{$component-name}__bottom {
   padding-block: 1.5rem;
   margin-block-start: 0.5rem;
-  background: var(--c-grey-5);
+  // Figma: same dark as the rest of the footer, separated only by a hairline
+  background: transparent;
   border-top: 1px solid rgba(var(--bs-white-rgb), 0.12);
 
   &-links {
@@ -262,5 +265,37 @@ $sub-component-name: "footer-block";
     line-height: 1;
     letter-spacing: 0;
     color: var(--bs-gray-300);
+  }
+}
+
+// ── Mobile (Figma): footer columns expanded, no accordion ──────────────────
+// The design shows KONTAKT / ZAKUPY ONLINE / ROSENTHAL fully open with all links
+// visible and no chevrons, instead of the default collapsible mobile accordion.
+@include media-breakpoint-down(md) {
+  .footer-block__content.collapse {
+    display: block !important;
+  }
+
+  .footer-block__title--toggle .stretched-link {
+    display: none !important;
+  }
+}
+
+// Social icons (IG / FB) live inside the KONTAKT column (.footer__social, set in
+// ps_contactinfo.tpl), matching the Figma footer. The duplicate ps_socialfollow band
+// that used to render in displayFooterBefore was unhooked in the DB.
+
+// ── Newsletter GDPR consent — breathing room (was cramped under the input) ──
+.#{$component-name} .ps-emailsubscription__gdpr {
+  display: flex;
+  gap: 0.5rem;
+  margin-block-start: 0.85rem;
+  font-size: var(--fs-body-xs);
+  line-height: 1.45;
+  color: var(--bs-gray-400);
+
+  input[type="checkbox"] {
+    flex-shrink: 0;
+    margin-block-start: 0.15rem;
   }
 }
