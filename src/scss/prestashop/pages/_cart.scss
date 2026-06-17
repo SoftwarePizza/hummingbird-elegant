@@ -13,6 +13,27 @@ $component-name: cart-grid;
     margin-block-end: 1rem;
   }
 
+  // Figma: order summary as a clean, light card — sharp corners, tidy spacing.
+  &__aside-wrapper {
+    padding: 1.5rem;
+    background: var(--c-grey-1);
+    border-radius: 0;
+
+    > h2 {
+      margin-block-end: 1.25rem;
+      font-family: var(--font-heading);
+      font-size: var(--fs-h4);
+      font-weight: 400;
+    }
+
+    hr {
+      margin-block: 1.25rem;
+      border: 0;
+      border-top: 1px solid var(--c-grey-2);
+      opacity: 1;
+    }
+  }
+
   @include media-breakpoint-up(md) {
     &__content {
       margin-block-end: 4rem;
