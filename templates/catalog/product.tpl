@@ -106,8 +106,12 @@
         {/block}
       </div>
 
+      {* Custom hummingbird_editor hook (FAQ + related carousel). Do NOT call
+         displayProductButtons here: it is an alias of
+         displayProductAdditionalInfo, already executed in
+         _partials/product-additional-info.tpl, so modules would render twice. *}
       {block name='product_buttons'}
-        {hook h='displayProductButtons' product=$product}
+        {hook h='displayProductSections' product=$product}
       {/block}
     </div>
   </div>
