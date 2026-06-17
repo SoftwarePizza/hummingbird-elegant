@@ -238,6 +238,10 @@ $product-miniature-container-query-width: 13.5rem;
   position: relative;
 }
 
+/* The blockwishlist module styles .wishlist-button-add with !important on every
+   property, so the miniature's circular design has to override it with
+   !important too (higher specificity alone isn't enough against !important). */
+/* stylelint-disable declaration-no-important */
 .product-miniature__top .wishlist-button-add {
   position: absolute;
   top: 0.5rem;
@@ -246,28 +250,26 @@ $product-miniature-container-query-width: 13.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 36px !important;
+  height: 36px !important;
   margin: auto;
   font-size: var(--fs-body-m);
-  /* stylelint-disable-next-line declaration-no-important */
   font-weight: 300 !important;
-  /* stylelint-disable-next-line declaration-no-important */
-  color: var(--hbe-white) !important;
+  color: var(--c-white) !important;
   text-align: center;
-  background: var(--hbe-black);
-  border: 1px solid var(--hbe-black);
-  border-radius: 360px;
+  background: var(--c-black) !important;
+  border: 1px solid var(--c-black) !important;
+  border-radius: 360px !important;
   transition: opacity 0.15s;
 }
 
 .product-miniature__top .wishlist-button-add:hover,
 .product-miniature__top .wishlist-button-add:focus {
-  /* stylelint-disable-next-line declaration-no-important */
-  color: var(--hbe-white) !important;
-  background: var(--hbe-black);
+  color: var(--c-white) !important;
+  background: var(--c-black) !important;
   opacity: 0.85;
 }
+/* stylelint-enable declaration-no-important */
 
 /* ── Product miniature image & title ───────────────────────────────────── */
 img.product-miniature__image {

@@ -12,7 +12,9 @@
   >
     <div class="{$componentName}__inner">
       {block name='product_miniature_top'}
-        <div class="{$componentName}__top">
+        {* `thumbnail-container` is the hook blockwishlist's list JS looks for to
+           append the wishlist (heart) button — keep it alongside the BEM class. *}
+        <div class="{$componentName}__top thumbnail-container">
           {* Wishlist button is injected here by the blockwishlist module JS
              (.thumbnail-container) and restyled with the custom heart icon
              in src/scss/prestashop/modules/_blockwishlist.scss. *}
