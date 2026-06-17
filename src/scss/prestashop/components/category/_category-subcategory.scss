@@ -23,23 +23,77 @@ $component-name: subcategory;
       background-color: var(--bs-tertiary-bg);
     }
 
+    // Figma: large image card — photo on top, name + circular arrow below.
     &--with-image {
       display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      padding: 0.5rem;
-      font-size: 0.875rem;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      font-size: 1rem;
       white-space: normal;
-      border-radius: var(--bs-border-radius);
+      color: var(--c-black);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+
+      &:hover {
+        color: var(--c-black);
+        background: transparent;
+
+        .#{$component-name}__thumbnail {
+          transform: scale(1.03);
+        }
+
+        .#{$component-name}__arrow {
+          color: var(--bs-primary);
+          transform: translateX(2px);
+        }
+      }
     }
+  }
+
+  // Image box — clips the hover zoom, sharp corners, grey placeholder.
+  &__media {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background: var(--c-grey-1);
   }
 
   &__thumbnail {
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: var(--bs-border-radius);
+    border-radius: 0;
+    transition: transform 0.35s ease;
+  }
+
+  // Name (left) + circular arrow (right) under the image.
+  &__caption {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-block-start: 1rem;
+  }
+
+  &__name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h4);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  &__arrow {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-grey-5);
+    transition: color 0.15s, transform 0.15s;
   }
 
   &__list {
@@ -54,7 +108,9 @@ $component-name: subcategory;
     &--with-images {
       display: grid;
       grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1.5rem;
       align-items: stretch;
+      padding-inline: 0;
       overflow-x: visible;
     }
   }
@@ -75,11 +131,6 @@ $component-name: subcategory;
       white-space: normal;
     }
 
-    &__thumbnail {
-      width: 3rem;
-      height: 3rem;
-    }
-
     &__list {
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -88,18 +139,15 @@ $component-name: subcategory;
       margin-block: 0 1.5rem;
       margin-inline: 0;
       overflow-x: visible;
+
+      &--with-images {
+        gap: 1.5rem;
+        margin-block: 0 2rem;
+      }
     }
   }
 
   @include media-breakpoint-up(lg) {
-    &__link {
-      &--with-image {
-        gap: 1rem;
-        padding: 0.75rem;
-        font-size: 1rem;
-      }
-    }
-
     &__list {
       &--with-images {
         grid-template-columns: repeat(3, minmax(0, 1fr));

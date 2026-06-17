@@ -22,38 +22,50 @@
       {foreach from=$subcategories item=subcategory}
         <a class="{$componentName}__link{if $displaySubcategoryImages} {$componentName}__link--with-image{/if}" href="{$subcategory.url}" title="{$subcategory.name|escape:'html':'UTF-8'}">
           {if $displaySubcategoryImages}
-            {if isset($subcategory.thumbnail.bySize.category_default.url) && !empty($subcategory.thumbnail.bySize.category_default.url)}
-              <picture>
-                {if isset($subcategory.thumbnail.bySize.category_default.sources.avif)}
-                  <source srcset="{$subcategory.thumbnail.bySize.category_default.sources.avif}" type="image/avif">
-                {/if}
+            <span class="{$componentName}__media">
+              {if isset($subcategory.thumbnail.bySize.category_default.url) && !empty($subcategory.thumbnail.bySize.category_default.url)}
+                <picture>
+                  {if isset($subcategory.thumbnail.bySize.category_default.sources.avif)}
+                    <source srcset="{$subcategory.thumbnail.bySize.category_default.sources.avif}" type="image/avif">
+                  {/if}
 
-                {if isset($subcategory.thumbnail.bySize.category_default.sources.webp)}
-                  <source srcset="{$subcategory.thumbnail.bySize.category_default.sources.webp}" type="image/webp">
-                {/if}
+                  {if isset($subcategory.thumbnail.bySize.category_default.sources.webp)}
+                    <source srcset="{$subcategory.thumbnail.bySize.category_default.sources.webp}" type="image/webp">
+                  {/if}
 
+                  <img
+                    class="{$componentName}__thumbnail img-fluid"
+                    src="{$subcategory.thumbnail.bySize.category_default.url}"
+                    width="{$subcategory.thumbnail.bySize.category_default.width}"
+                    height="{$subcategory.thumbnail.bySize.category_default.height}"
+                    alt="{$subcategory.name|escape:'html':'UTF-8'}"
+                    loading="lazy"
+                  >
+                </picture>
+              {else}
                 <img
                   class="{$componentName}__thumbnail img-fluid"
-                  src="{$subcategory.thumbnail.bySize.category_default.url}"
-                  width="{$subcategory.thumbnail.bySize.category_default.width}"
-                  height="{$subcategory.thumbnail.bySize.category_default.height}"
+                  src="{$urls.no_picture_image.bySize.small_default.url}"
+                  width="{$urls.no_picture_image.bySize.small_default.width}"
+                  height="{$urls.no_picture_image.bySize.small_default.height}"
                   alt="{$subcategory.name|escape:'html':'UTF-8'}"
                   loading="lazy"
                 >
-              </picture>
-            {else}
-              <img
-                class="{$componentName}__thumbnail img-fluid"
-                src="{$urls.no_picture_image.bySize.small_default.url}"
-                width="{$urls.no_picture_image.bySize.small_default.width}"
-                height="{$urls.no_picture_image.bySize.small_default.height}"
-                alt="{$subcategory.name|escape:'html':'UTF-8'}"
-                loading="lazy"
-              >
-            {/if}
+              {/if}
+            </span>
+            <span class="{$componentName}__caption">
+              <span class="{$componentName}__name">{$subcategory.name|escape:'html':'UTF-8'}</span>
+              <span class="{$componentName}__arrow" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 8 16 12 12 16"></polyline>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+              </span>
+            </span>
+          {else}
+            <span class="{$componentName}__name">{$subcategory.name|escape:'html':'UTF-8'}</span>
           {/if}
-
-          <span class="{$componentName}__name">{$subcategory.name|escape:'html':'UTF-8'}</span>
         </a>
       {/foreach}
     </div>
