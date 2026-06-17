@@ -101,18 +101,47 @@ $step-name: (
   &__list {
     margin-block-end: 1.5rem;
 
+    // Figma: sharp-cornered, clean rows (DPD / DHL …) — was pill-rounded.
     > .delivery-option__item {
       &:first-child {
-        border-start-start-radius: 0.5rem;
-        border-start-end-radius: 0.5rem;
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
       }
 
       &:last-child {
         border-block-end: 0;
-        border-end-start-radius: 0.5rem;
-        border-end-end-radius: 0.5rem;
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
       }
     }
+  }
+}
+
+/* ── One-page feel ─────────────────────────────────────────────────────────
+ * Figma shows the whole checkout on a single page (no click-through). The
+ * native PrestaShop flow renders each step as a Bootstrap `.collapse` panel and
+ * only the *current* step carries `.show`. We reveal every reachable/complete
+ * step as well, so the user sees the completed steps (summaries) stacked above
+ * the current form instead of a single open accordion panel.
+ *
+ * NOTE: steps that are not yet reachable still render PrestaShop's server-side
+ * "unreachable" placeholder — turning those into live, simultaneously-editable
+ * forms is controller logic (out of the theme's presentation-only scope) and
+ * would need a dedicated one-page-checkout module or a core change.
+ * Specificity (3 classes) intentionally beats Bootstrap's `.collapse:not(.show)`. */
+.step.step--reachable.collapse,
+.step.step--complete.collapse {
+  display: block;
+}
+
+.step {
+  margin-block-end: 2rem;
+
+  &__title hr {
+    margin-block: 0.75rem 1.5rem;
+    border: 0;
+    border-top: 1px solid var(--c-grey-2);
+    opacity: 1;
   }
 }
 
