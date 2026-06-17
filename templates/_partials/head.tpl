@@ -13,6 +13,12 @@
 {block name='head_seo'}
   {block name='head_preload'}
     {include file='_partials/preload.tpl'}
+    {* Preload the above-the-fold web fonts (Lora = headings, Geist = body/buttons)
+       so text paints in its final font instead of flashing from the fallback (FOUT).
+       Hashes are content-stable; update them only if the @fontsource files change. *}
+    <link rel="preload" href="{$urls.theme_assets}fonts/lora-latin-400-normal-68bde7ec05b4d942f07f.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{$urls.theme_assets}fonts/geist-sans-latin-400-normal-32c502ac52226b7f181e.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{$urls.theme_assets}fonts/geist-sans-latin-500-normal-2e03668b3b5a378f2799.woff2" as="font" type="font/woff2" crossorigin>
   {/block}
 
   <title>{block name='head_seo_title'}{$page.meta.title}{/block}</title>
