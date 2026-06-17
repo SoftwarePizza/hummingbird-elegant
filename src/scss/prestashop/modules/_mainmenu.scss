@@ -56,6 +56,15 @@ $component-name: ps-mainmenu;
             }
           }
 
+          // Hover highlight on the whole item — keeps PRODUKTY *and* KOLEKCJE
+          // (and any link type) consistent when the cursor is anywhere on the
+          // item, not only over the text glyphs.
+          &:hover {
+            .#{$component-name}__tree-link {
+              color: var(--bs-link-hover-color);
+            }
+          }
+
           .#{$component-name}__tree-item-wrapper {
             display: flex;
             align-items: center;
@@ -76,7 +85,10 @@ $component-name: ps-mainmenu;
               color: var(--bs-link-hover-color);
             }
 
-            &:focus {
+            // Keyboard-only focus ring. Using :focus-visible (not :focus) so a
+            // mouse click no longer leaves a boxy outline ("ramka") on the
+            // current/clicked item, while keyboard navigation stays accessible.
+            &:focus-visible {
               color: var(--bs-link-hover-color);
               border-radius: var(--bs-border-radius);
               outline: 0.125rem solid var(--bs-link-color);
@@ -208,7 +220,8 @@ $component-name: ps-mainmenu;
                   width: 100%;
                   aspect-ratio: 1 / 1;
                   object-fit: cover;
-                  border-radius: var(--bs-border-radius);
+                  // Figma: mega-menu product photos are square, no rounding.
+                  border-radius: 0;
                 }
               }
             }
