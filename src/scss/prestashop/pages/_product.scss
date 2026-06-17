@@ -183,8 +183,10 @@ $component-name: product;
     }
 
     // Bottom section (Figma: Details — title + description | specs table)
+    // Figma refinement: a bit more separation from the buy box for a tidier
+    // rhythm between the description blocks.
     &__bottom {
-      margin-block-start: 2.5rem;
+      margin-block-start: 3rem;
 
       &-title {
         margin-block-end: 1.5rem;
