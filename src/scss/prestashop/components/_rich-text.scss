@@ -3,7 +3,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 .rich-text {
-  line-height: 1.5;
+  // Body copy defaults to the 12px base; Figma reads long-form text at 16px.
+  font-size: var(--fs-body-m);
+  line-height: 1.6;
 
   table {
     @extend .table;

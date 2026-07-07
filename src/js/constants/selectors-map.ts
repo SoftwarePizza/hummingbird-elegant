@@ -226,6 +226,11 @@ const selectorsMap = {
     activeThumbail: (id: number): string => `.js-thumb-container:nth-child(${id + 1})`,
     productAvailability: '[data-ps-ref="product-availability"]',
     rightSection: '[data-ps-ref="product-right"]',
+    summary: '[data-ps-ref="product-summary"]',
+    summaryText: '[data-ps-ref="product-summary-text"]',
+    summaryToggle: '[data-ps-action="toggle-product-summary"]',
+    specs: '[data-ps-ref="product-specs"]',
+    specsTab: '[data-ps-action="switch-product-specs-tab"]',
   },
   order: {
     returnForm: '.js-order-return-form',

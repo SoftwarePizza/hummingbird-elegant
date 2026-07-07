@@ -80,4 +80,95 @@ export default () => {
 
   // Call the function to start listening for quantity changes
   detectQuantityChange();
+
+  // Summary "zobacz pełny opis" toggle: the short description is clamped to a
+  // couple of lines and the button reveals the hidden remainder inline.
+  const EXPANDED_CLASS = 'product__description-short--expanded';
+
+  const initSummaryToggle = () => {
+    const summary = document.querySelector<HTMLElement>(SelectorsMap.product.summary);
+    const text = summary?.querySelector<HTMLElement>(SelectorsMap.product.summaryText);
+    const toggle = summary?.querySelector<HTMLButtonElement>(SelectorsMap.product.summaryToggle);
+
+    if (!text || !toggle) {
+      return;
+    }
+
+    // Whether the clamped text is taller than its visible box.
+    const isOverflowing = (): boolean => text.scrollHeight - text.clientHeight > 1;
+
+    // Offer the toggle only when the clamped summary is actually truncated.
+    // Skip while expanded, since the clamp is off and nothing overflows then.
+    const syncToggleVisibility = async (): Promise<void> => {
+      if (text.classList.contains(EXPANDED_CLASS)) {
+        return;
+      }
+
+      toggle.hidden = !isOverflowing();
+    };
+
+    toggle.addEventListener('click', () => {
+      const expanded = text.classList.toggle(EXPANDED_CLASS);
+      toggle.setAttribute('aria-expanded', String(expanded));
+    });
+
+    syncToggleVisibility();
+    window.addEventListener('resize', debounce(syncToggleVisibility, 150));
+  };
+
+  initSummaryToggle();
+
+  // Specs tabs (Figma: "Ogólne parametry" / "Dane techniczne") — W3C tabs
+  // pattern: click or arrow keys move activation, inactive tabs leave the
+  // tab order, panels are toggled through the [hidden] attribute.
+  const ACTIVE_TAB_CLASS = 'product-specs__tab--active';
+
+  const initSpecsTabs = () => {
+    const specs = document.querySelector<HTMLElement>(SelectorsMap.product.specs);
+    const tabs = specs
+      ? Array.from(specs.querySelectorAll<HTMLButtonElement>(SelectorsMap.product.specsTab))
+      : [];
+
+    if (tabs.length < 2) {
+      return;
+    }
+
+    const activateTab = (tab: HTMLButtonElement, focus: boolean): void => {
+      tabs.forEach((other) => {
+        const selected = other === tab;
+        other.classList.toggle(ACTIVE_TAB_CLASS, selected);
+        other.setAttribute('aria-selected', String(selected));
+        other.tabIndex = selected ? 0 : -1;
+
+        const panelId = other.getAttribute('aria-controls');
+        const panel = panelId ? document.getElementById(panelId) : null;
+
+        if (panel) {
+          panel.hidden = !selected;
+        }
+      });
+
+      if (focus) {
+        tab.focus();
+      }
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab, false));
+
+      tab.addEventListener('keydown', (event: KeyboardEvent) => {
+        const offset = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+
+        if (offset === 0) {
+          return;
+        }
+
+        event.preventDefault();
+        const next = tabs[(index + offset + tabs.length) % tabs.length];
+        activateTab(next, true);
+      });
+    });
+  };
+
+  initSpecsTabs();
 };

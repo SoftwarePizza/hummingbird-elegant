@@ -21,4 +21,5 @@
 
 {block name='continue_shopping'}{/block}
 {block name='cart_voucher'}{/block}
+{block name='hook_cart_gift_wrapping'}{/block}
 {block name='display_reassurance'}{/block}

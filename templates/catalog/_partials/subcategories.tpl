@@ -17,7 +17,7 @@
     {/if}
   {/foreach}
 
-  <div class="{$componentName}">
+  <div class="{$componentName}{if $displaySubcategoryImages} {$componentName}--with-images{/if}">
     <div class="{$componentName}__list{if $displaySubcategoryImages} {$componentName}__list--with-images{/if}">
       {foreach from=$subcategories item=subcategory}
         <a class="{$componentName}__link{if $displaySubcategoryImages} {$componentName}__link--with-image{/if}" href="{$subcategory.url}" title="{$subcategory.name|escape:'html':'UTF-8'}">

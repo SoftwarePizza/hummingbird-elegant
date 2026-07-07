@@ -6,6 +6,8 @@ $component-name: accordion;
 
 .#{$component-name} {
   &-item {
+    // Remove Bootstrap's --bs-accordion-bg fill; only the divider border stays.
+    background-color: transparent;
     border-block-end: 1px solid var(--bs-border-color);
   }
 

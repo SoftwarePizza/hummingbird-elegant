@@ -255,19 +255,32 @@ $product-miniature-container-query-width: 13.5rem;
   margin: auto;
   font-size: var(--fs-body-m);
   font-weight: 300 !important;
-  color: var(--c-white) !important;
+  /* Heart is always grey. The module swaps the glyph by wishlist state:
+     `favorite_border` (grey outline) when not added, `favorite` (grey fill)
+     when added — so the heart only *fills* once the product is in the list,
+     never just on hover. */
+  color: #5A5A5A !important;
   text-align: center;
-  background: var(--c-black) !important;
-  border: 1px solid var(--c-black) !important;
+  background: transparent !important;
+  border: 1px solid #EEEEEE !important;
   border-radius: 360px !important;
-  transition: opacity 0.15s;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+/* Suppress the module's custom ::before heart inside the miniature so we don't
+   stack it on top of the material-icons glyph (that doubling read as a "fill"
+   on hover). The glyph alone carries the outline/filled state. */
+.product-miniature__top .wishlist-button-add::before {
+  display: none !important;
 }
 
 .product-miniature__top .wishlist-button-add:hover,
 .product-miniature__top .wishlist-button-add:focus {
-  color: var(--c-white) !important;
-  background: var(--c-black) !important;
-  opacity: 0.85;
+  /* Don't touch the heart on hover — the grey fill is reserved for the
+     "already in wishlist" state. Hovering just highlights the circle. */
+  color: #5A5A5A !important;
+  background: #F5F5F5 !important;
+  border-color: #5A5A5A !important;
 }
 /* stylelint-enable declaration-no-important */
 

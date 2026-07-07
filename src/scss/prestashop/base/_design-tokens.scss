@@ -30,6 +30,7 @@
   --c-white: #fff;
   --c-beige: #f5f1ea;
   --c-blue: #4c55d1;
+  --c-sale: #c0392b; // promo / discount badge (Figma "-20%")
 }
 
 @include media-breakpoint-up(md) {

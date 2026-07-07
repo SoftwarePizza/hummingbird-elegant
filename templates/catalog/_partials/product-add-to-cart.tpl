@@ -78,15 +78,10 @@
             aria-label="{l s='Add to cart %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Actions'}"
             title="{l s='Add to cart %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Actions'}"
           >
-            <i class="material-icons" aria-hidden="true">&#xE547;</i>
             {l s='Add to cart' d='Shop.Theme.Actions'}
           </button>
         </div>
-
-        {capture name='product_actions'}{hook h='displayProductActions' product=$product}{/capture}
-        {if $smarty.capture.product_actions}
-          {$smarty.capture.product_actions nofilter}
-        {/if}
+        {* displayProductActions (wishlist) moved to the product header — see product.tpl *}
       </div>
     {/block}
 

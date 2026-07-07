@@ -6,7 +6,7 @@ $component-name: product-line;
 
 .#{$component-name} {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: flex-start;
 
   &__image {
@@ -14,30 +14,36 @@ $component-name: product-line;
   }
 
   &__img {
-    width: 6rem;
-    border-radius: var(--bs-border-radius);
+    width: 4.5rem;
+    border-radius: 0;
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    gap: 0.75rem;
 
     &-left {
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      margin-block-end: 0.5rem;
     }
 
     &-right {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-block-end: 1rem;
+      align-items: center;
+      gap: 1rem;
     }
   }
 
+  // Product name — regular weight, single line of body type (Figma).
   &__title {
-    font-weight: 600;
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-body-m);
+    font-weight: 400;
+    line-height: 1.4;
     color: var(--bs-body-color);
 
     &:hover {
@@ -55,27 +61,30 @@ $component-name: product-line;
       display: inline-flex;
       gap: 0.25rem;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: var(--fs-body-xs);
     }
 
+    // Unit price under the name — quiet grey, like the mockup.
     &-price {
       width: 100%;
-      font-weight: 600;
+      font-size: var(--fs-body-s);
+      font-weight: 400;
+      color: var(--c-grey-5);
     }
 
     &-unit-price {
-      font-size: 0.875rem;
+      font-size: var(--fs-body-xs);
       color: var(--bs-secondary-color);
     }
 
     &-regular-price {
-      font-size: 0.875rem;
+      font-size: var(--fs-body-xs);
       color: var(--bs-tertiary-color);
       text-decoration: line-through;
     }
 
     &-discount {
-      font-size: 0.875rem;
+      font-size: var(--fs-body-xs);
     }
 
     &-price-block {
@@ -87,10 +96,11 @@ $component-name: product-line;
       flex-wrap: wrap;
       gap: 0.25rem;
       align-items: center;
+      font-size: var(--fs-body-s);
     }
 
     &--small-info {
-      font-size: 0.75rem;
+      font-size: var(--fs-body-xs);
       color: var(--bs-tertiary-color);
     }
 
@@ -121,8 +131,11 @@ $component-name: product-line;
     max-width: initial;
   }
 
+  // Line total — the emphasised figure on the right.
   &__price {
+    font-size: var(--fs-body-m);
     font-weight: 600;
+    white-space: nowrap;
   }
 
   &__gift {
@@ -136,38 +149,46 @@ $component-name: product-line;
     }
   }
 
+  // "usuń" — small underlined link.
   &__actions {
     display: flex;
-    grid-column: 1 / -1;
-  }
 
-  @include media-breakpoint-up(sm) {
-    &__content {
-      display: grid;
-      flex-grow: 1;
-      grid-template-columns: minmax(0, 1fr) 9rem;
-      gap: 1.5rem;
+    a {
+      font-size: var(--fs-body-s);
+      color: var(--bs-secondary-color);
+      text-decoration: underline;
+      text-transform: lowercase;
 
-      &-right,
-      &-left {
-        margin-block-end: 0;
+      &:hover {
+        color: var(--bs-body-color);
       }
     }
-
-    &__quantity-button {
-      max-width: 100%;
-    }
   }
 
+  // Desktop: one centered row — image | name+price | usuń | qty | total.
   @include media-breakpoint-up(md) {
-    &__img {
-      width: 7rem;
-    }
-  }
+    gap: 1.5rem;
+    align-items: center;
 
-  @include media-breakpoint-up(lg) {
-    &__img {
-      width: 8rem;
+    &__content {
+      flex-direction: row;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    &__content-left {
+      flex: 1 1 auto;
+      order: 0;
+    }
+
+    &__actions {
+      order: 1;
+      align-self: center;
+    }
+
+    &__content-right {
+      order: 2;
+      gap: 1.5rem;
     }
   }
 }

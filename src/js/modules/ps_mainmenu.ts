@@ -256,6 +256,16 @@ class SubMenuManager {
       AccessibilityManager.setTabPanelVisibility(rightTab, false);
     });
 
+    // Flat submenu (no left tab column): there are no tabs to drive visibility,
+    // so reveal its single right panel directly.
+    if (leftLinks.length === 0) {
+      if (rightTabs.length > 0) {
+        AccessibilityManager.setTabPanelVisibility(rightTabs[0], true);
+      }
+
+      return;
+    }
+
     leftLinks.forEach((leftLink, index) => {
       AccessibilityManager.setTabSelection(leftLink, index === 0);
 

@@ -6,27 +6,8 @@
   <div class="product__prices js-product-prices">
     {block name='product_price'}
       <div class="product__prices-block">
-        {if $product.has_discount}
-          <div class="product__discount-price product__prices-inline product__prices-inline--small-gap">
-            {hook h='displayProductPriceBlock' product=$product type="old_price"}
-
-            <span class="product__regular-price">
-              <span class="visually-hidden">{l s='Regular price: ' d='Shop.Theme.Catalog'}</span>
-              {$product.regular_price}
-            </span>
-
-            {if $product.discount_type === 'percentage'}
-              <span class="product__discount-percentage text-primary-emphasis">
-                ({l s='Save %percentage%' d='Shop.Theme.Catalog' sprintf=['%percentage%' => $product.discount_percentage_absolute]})
-              </span>
-            {else}
-              <span class="product__discount-amount text-primary-emphasis">
-                ({l s='Save %amount%' d='Shop.Theme.Catalog' sprintf=['%amount%' => $product.discount_to_display]})
-              </span>
-            {/if}
-          </div>
-        {/if}
-        
+        {* Figma: current price + tax label + (when discounted) struck regular
+           price and a "-XX%" pill, all on one line. *}
         <div class="product__prices-inline product__prices-inline--small-gap">
           <div class="product__price">
             {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='product_sheet'}{/capture}
@@ -38,6 +19,17 @@
             {/if}
           </div>
 
+          <span class="product__tax-label">
+            {if !$configuration.taxes_enabled}
+              {l s='No tax' d='Shop.Theme.Catalog'}
+            {elseif $configuration.display_taxes_label}
+              {$product.labels.tax_long}
+            {/if}
+
+            {hook h='displayProductPriceBlock' product=$product type="price"}
+            {hook h='displayProductPriceBlock' product=$product type="after_price"}
+          </span>
+
           {block name='product_unit_price'}
             {if $displayUnitPrice}
               <span class="product__unit-price">
@@ -45,7 +37,32 @@
               </span>
             {/if}
           {/block}
+
+          {if $product.has_discount}
+            {hook h='displayProductPriceBlock' product=$product type="old_price"}
+
+            <span class="product__regular-price">
+              <span class="visually-hidden">{l s='Regular price: ' d='Shop.Theme.Catalog'}</span>
+              {$product.regular_price}
+            </span>
+
+            {if $product.discount_type === 'percentage'}
+              <span class="product__discount-badge">-{$product.discount_percentage_absolute}</span>
+            {else}
+              <span class="product__discount-badge">-{$product.discount_to_display}</span>
+            {/if}
+          {/if}
         </div>
+
+        {* Omnibus (EU): lowest price in the last 30 days, shown when discounted.
+           Uses the regular price as the reference; when the Core "Display the
+           lowest price" setting is enabled it exposes the real 30-day figure via
+           displayProductPriceBlock, which will render inside this block. *}
+        {if $product.has_discount}
+          <div class="product__lowest-price">
+            {l s='Najniższa cena z ostatnich 30 dni:' d='Shop.Theme.Catalog'} {$product.regular_price}
+          </div>
+        {/if}
 
         {block name='product_pack_price'}
           {if $displayPackPrice}
@@ -55,32 +72,18 @@
           {/if}
         {/block}
 
-        <div class="product__tax-infos">
-          <span class="product__tax-label">
-            {if !$configuration.taxes_enabled}
-              {l s='No tax' d='Shop.Theme.Catalog'}
-            {elseif $configuration.display_taxes_label}
-              {$product.labels.tax_long}
-            {/if}
-            
-            {hook h='displayProductPriceBlock' product=$product type="price"}
-            {hook h='displayProductPriceBlock' product=$product type="after_price"}
-          </span>
-
-          {* Separator *}
-          {if $configuration.display_taxes_label && $product.ecotax.amount > 0}<span class="product__price-separator"> - </span>{/if}
-
-          {block name='product_ecotax'}
-            {if $product.ecotax.amount> 0}
+        {block name='product_ecotax'}
+          {if $product.ecotax.amount > 0}
+            <div class="product__tax-infos">
               <span class="product__ecotax-price">
                 {l s='Including %amount% for ecotax' d='Shop.Theme.Catalog' sprintf=['%amount%' => $product.ecotax.value]}
                 {if $product.has_discount}
                   {l s='(not impacted by the discount)' d='Shop.Theme.Catalog'}
                 {/if}
               </span>
-            {/if}
-          {/block}
-        </div>
+            </div>
+          {/if}
+        {/block}
 
         {block name='product_without_taxes'}
           {if $priceDisplay == 2}

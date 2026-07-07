@@ -7,15 +7,12 @@
     <div class="category__header">
       {include file='components/page-title-section.tpl' title=$category.name}
 
-      {* Figma: subcategory image-tiles on top, the description(s) below them. *}
+      {* Figma: subcategory image-tiles on top; the category description is moved to the page footer. *}
       {if isset($subcategories) && $subcategories|@count > 0}
         {include file='catalog/_partials/subcategories.tpl' subcategories=$subcategories}
       {/if}
 
-      {if $category.description}
-        <div class="category__description rich-text">{$category.description nofilter}</div>
-      {/if}
-
+      {* Category cover image hidden — only the subcategory tiles are shown.
       {if !empty($category.cover.bySize.category_cover.url)}
         <div class="category__cover">
           <picture>
@@ -38,6 +35,7 @@
           </picture>
         </div>
       {/if}
+      *}
     </div>
   {/if}
 </div>

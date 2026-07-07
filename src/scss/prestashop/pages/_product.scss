@@ -7,6 +7,149 @@ $component-name: product;
 
 .#{$page-name} {
   .#{$component-name} {
+    // Header: manufacturer + name on the left, wishlist pinned top-right
+    // (Figma: circular outline heart level with the product name).
+    &__header {
+      position: relative;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-block-end: 1rem;
+    }
+
+    &__header-titles {
+      min-width: 0;
+    }
+
+    &__manufacturer {
+      margin-block-end: 0.25rem;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-s);
+      line-height: 1.2;
+      color: var(--c-grey-5);
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &__header-actions {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      // blockwishlist forces its styles with !important, so overrides need it
+      // too. Turn the module button into a circular outline pinned to the
+      // header's top-right corner.
+      .wishlist-button-add {
+        top: 0 !important;
+        right: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        padding: 0 !important;
+        color: var(--c-black) !important;
+        background-color: transparent !important;
+        border: 1px solid rgba(36, 36, 36, 0.25) !important;
+        border-radius: 50% !important;
+
+        &:hover,
+        &:focus {
+          color: var(--c-black) !important;
+          background-color: transparent !important;
+          border-color: var(--c-black) !important;
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    // Product summary: clamps the description to three lines; the toggle
+    // reveals the rest inline.
+    &__summary .#{$component-name}__description-short {
+      // stylelint-disable-next-line value-no-vendor-prefix
+      display: -webkit-box;
+      margin-block-end: 0;
+      overflow: hidden;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+
+      &--expanded {
+        display: block;
+        overflow: visible;
+        -webkit-line-clamp: none;
+      }
+    }
+
+    // "zobacz pełny opis" — reveals the hidden part of the summary.
+    &__see-full {
+      display: inline-block;
+      padding: 0;
+      margin-block-start: 0.25rem;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-s);
+      color: var(--c-black);
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+      cursor: pointer;
+      background: none;
+      border: 0;
+
+      // Swap the label based on the expanded state.
+      &[aria-expanded="true"] [data-summary-more],
+      &[aria-expanded="false"] [data-summary-less] {
+        display: none;
+      }
+    }
+
+    // Shipping perk + product enquiry under the buy box.
+    &__shipping-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      padding: 0;
+      margin-block: 1.25rem 0;
+      list-style: none;
+    }
+
+    &__shipping-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-s);
+      color: var(--c-black);
+
+      .material-icons {
+        font-size: 1.25rem;
+        color: var(--c-grey-5);
+      }
+    }
+
+    &__ask {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      color: var(--c-black);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    // Product code line at the bottom of the buy column.
+    &__reference {
+      margin-block: 1.25rem 0;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-xs);
+      color: var(--c-grey-5);
+    }
+
     // Top section
     &__thumbnails {
       margin-block-start: 1rem;
@@ -70,7 +213,7 @@ $component-name: product;
 
     &__prices {
       font-size: var(--fs-h4);
-      line-height: 1;
+      line-height: normal;
     }
 
     &__prices-inline {
@@ -92,11 +235,17 @@ $component-name: product;
 
     &__price {
       font-family: var(--font-body);
-      font-size: var(--fs-body-m); // 16px
-      font-weight: 400;
-      line-height: 1;
+      font-size: var(--fs-body-l); // 18px — Figma emphasis over the tax label
+      font-weight: 500;
+      line-height: normal;
       color: var(--c-black);
       letter-spacing: 0;
+    }
+
+    &__tax-label {
+      font-size: var(--fs-body-s);
+      line-height: 1.2;
+      color: var(--c-grey-5);
     }
 
     &__unit-price {
@@ -109,13 +258,37 @@ $component-name: product;
       color: var(--bs-secondary-color);
     }
 
+    // "-XX%" pill (Figma).
+    &__discount-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.125rem 0.5rem;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-xs);
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--c-white);
+      background-color: var(--c-sale);
+      border-radius: 60px;
+    }
+
     &__discount-percentage,
     &__discount-amount {
       font-size: var(--fs-body-s);
     }
 
     &__regular-price {
+      font-size: var(--fs-body-m);
+      color: var(--c-grey-5);
       text-decoration: line-through;
+    }
+
+    // Omnibus lowest-price line.
+    &__lowest-price {
+      margin-block-start: 0.5rem;
+      font-size: var(--fs-body-xs);
+      line-height: 1.3;
+      color: var(--c-grey-5);
     }
 
     &__pack-price {
@@ -138,6 +311,7 @@ $component-name: product;
       display: flex;
       gap: 0.5rem;
       align-items: center;
+      font-size: var(--fs-body-s);
       line-height: 1.2;
     }
 
@@ -183,15 +357,17 @@ $component-name: product;
     }
 
     // Bottom section (Figma: Details — title + description | specs table)
-    // Figma refinement: a bit more separation from the buy box for a tidier
-    // rhythm between the description blocks.
+    // Figma: sits on a beige band that separates it from the buy box.
     &__bottom {
       margin-block-start: 3rem;
+      padding-block: 2.5rem;
+      padding-inline: clamp(1rem, 4vw, 3rem);
+      background-color: var(--c-beige);
 
       &-title {
         margin-block-end: 1.5rem;
         font-family: var(--font-heading);
-        font-size: var(--fs-h3);
+        font-size: var(--fs-h2); // Figma: large section heading, matches "Inne produkty"
         font-weight: 400;
         line-height: 1.15;
         color: var(--c-black);
@@ -227,9 +403,9 @@ $component-name: product;
 
     &__name {
       font-family: var(--font-heading);
-      font-size: var(--fs-h3); // 26px
+      font-size: var(--fs-h2); // 32px desktop / 26px mobile — Figma prominence
       font-weight: 400;
-      line-height: 1;
+      line-height: 1.2; // was 1 — cramped on the 2-line name
       color: var(--c-black);
       letter-spacing: 0;
     }
@@ -238,7 +414,7 @@ $component-name: product;
     &__name,
     &__manufacturer,
     &__prices,
-    &__description-short,
+    &__summary,
     &__actions,
     &__variants,
     &__availability,
@@ -324,7 +500,7 @@ $component-name: product;
       &__name,
       &__manufacturer,
       &__prices,
-      &__description-short,
+      &__summary,
       &__actions,
       &__variants,
       &__availability,
@@ -428,10 +604,23 @@ $component-name: product;
   }
 
   &__tab {
+    // Rendered as a <button> when the module tab is present, as a plain
+    // <span> otherwise — the reset keeps both variants identical.
+    padding: 0;
     font-family: var(--font-body);
     font-size: var(--fs-body-m);
     font-weight: 400;
     color: var(--c-grey-5);
+    background: none;
+    border: 0;
+
+    &:is(button) {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--c-black);
+      }
+    }
 
     &--active {
       font-weight: 500;
@@ -445,6 +634,8 @@ $component-name: product;
     padding: 0;
     margin: 0;
     list-style: none;
+    // Figma: open table — thin separating lines only, no filled cells.
+    border-top: 1px solid var(--c-grey-2);
   }
 
   &__row {
@@ -460,7 +651,7 @@ $component-name: product;
     flex-shrink: 0;
     font-family: var(--font-body);
     font-size: var(--fs-body-m);
-    font-weight: 500;
+    font-weight: 400;
     color: var(--c-black);
   }
 

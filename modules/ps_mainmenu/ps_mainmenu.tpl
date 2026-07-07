@@ -2,21 +2,23 @@
  * For the full copyright and license information, please view the
  * LICENSE.md file that was distributed with this source code.
  *}
-{function name="generateLinks" links=[] class="menu-item" parent=null}
+{function name="generateLinks" links=[] class="menu-item" parent=null tileDepth=3}
 {* GENERATE LINKS *}
+{* $tileDepth = the depth rendered as an image tile: 3 for the default tabbed submenu, 2 for the flat (no-tabs) submenu. *}
   {if $parent.depth === 1}
     {foreach from=$links item=link}
-      {if $link.depth === 3}
-        <ul class="{$class}__group--{($link.children|count) ? 'child' : 'nochild'}">
+      {if $link.depth === $tileDepth}
+        {* Mega menu shows only category tiles (with images); deeper children are not rendered. *}
+        <ul class="{$class}__group--nochild">
       {/if}
       <li>
         <a
-          class="{$class} {if $link.depth === 3}{$class}__group-main-item{/if}"
+          class="{$class} {if $link.depth === $tileDepth}{$class}__group-main-item{/if}"
           href="{$link.url}"
           data-depth="{$link.depth}"
           {if $link.open_in_new_window}target="_blank"{/if}
         >
-          {if $link.depth === 3 && $link.image_urls|count}
+          {if $link.depth === $tileDepth && $link.image_urls|count}
             <img
               class="{$class}__group-main-image"
               src="{$link.image_urls[0]|escape:'html':'UTF-8'}"
@@ -31,9 +33,7 @@
         </a>
       </li>
 
-      {call name=generateLinks links=$link.children parent=$parent}
-
-      {if $link.depth === 3}
+      {if $link.depth === $tileDepth}
         </ul>
       {/if}
     {/foreach}
@@ -44,12 +44,12 @@
 {function name="desktopSubMenu" nodes=[] depth=0 parent=null}
   {if $nodes|count}
     {if $depth === 1}
-      <div class="js-sub-menu submenu" role="menu" aria-label="{l s='%s submenu' sprintf=[$parent.label] d='Shop.Theme.Menu'}" id="submenu-{$parent.page_identifier}" data-ps-ref="desktop-submenu">
+      <div class="js-sub-menu submenu{if $parent.flat_desktop} submenu--flat{/if}" role="menu" aria-label="{l s='%s submenu' sprintf=[$parent.label] d='Shop.Theme.Menu'}" id="submenu-{$parent.page_identifier}" data-ps-ref="desktop-submenu">
         <div class="container">
           <div class="submenu__row row gx-5">
     {/if}
 
-    {if $depth === 1 }
+    {if $depth === 1 && !$parent.flat_desktop}
       <div class="submenu__left col-sm-3" role="tablist" aria-label="{l s='%s submenu tabs' sprintf=[$parent.label] d='Shop.Theme.Menu'}" data-ps-ref="desktop-submenu-left">
         {foreach from=$nodes item=node}
           <a
@@ -74,7 +74,14 @@
       </div>
     {/if}
 
-    {if $depth === 1 }
+    {if $depth === 1 && $parent.flat_desktop}
+      {* Flat layout: no left tabs — render this item's sub-categories directly as image tiles. *}
+      <div class="submenu__right submenu__right--flat col-12" data-ps-ref="desktop-submenu-right">
+        <div class="submenu__right-items active" role="tabpanel" data-ps-ref="desktop-submenu-right-items">
+          {generateLinks links=$nodes parent=$parent tileDepth=2}
+        </div>
+      </div>
+    {elseif $depth === 1}
       <div class="submenu__right col-sm-9" data-ps-ref="desktop-submenu-right">
         {foreach from=$nodes item=node}
           <div
@@ -153,11 +160,31 @@
   {$children = []}
   {if $nodes|count}
     <nav
-      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}"
+      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}{if $parent.flat_mobile} menu--flat{/if}"
       {if $depth === 0}id="menu-mobile"{else}data-parent-title="{$parent.label}"{/if}
       {if $depth > 1}data-back-title="{$backTitle}" data-id="{$expandId}"{/if}
       data-depth="{$depth}"
     >
+      {if $parent.flat_mobile}
+        {* Flat mobile: show this item's sub-categories directly as image tiles, no deeper drill-down. *}
+        {if $depth >= 1}
+          <ul class="menu__list">
+            <li class="menu__title">{$parent.label}</li>
+          </ul>
+        {/if}
+        <ul class="menu__flat-grid">
+          {foreach from=$nodes item=node}
+            <li>
+              <a class="menu__flat-tile" href="{$node.url}"{if $node.open_in_new_window} target="_blank"{/if}>
+                {if $node.image_urls|count}
+                  <img class="menu__flat-tile-image" src="{$node.image_urls[0]|escape:'html':'UTF-8'}" alt="" loading="lazy" aria-hidden="true" width="160" height="160">
+                {/if}
+                <span class="menu__flat-tile-label">{$node.label}</span>
+              </a>
+            </li>
+          {/foreach}
+        </ul>
+      {else}
       <ul class="menu__list">
         {if $depth >= 1}
           <li class="menu__title">{$parent.label}</li>
@@ -190,6 +217,7 @@
           {/if}
         {/foreach}
       </ul>
+      {/if}
     </nav>
     {foreach from=$children item=child}
       {mobileMenu

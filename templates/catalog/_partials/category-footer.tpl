@@ -5,6 +5,10 @@
 <div id="js-product-list-footer">
   {if $listing.pagination.items_shown_from == 1}
     <div class="category__footer">
+      {if $category.description}
+        <div class="category__description rich-text">{$category.description nofilter}</div>
+      {/if}
+
       {if !empty($category.additional_description) && $listing.pagination.items_shown_from == 1}
         <div class="category__additional-description rich-text">
           {$category.additional_description nofilter}

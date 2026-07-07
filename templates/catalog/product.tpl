@@ -39,28 +39,63 @@
 
     <div class="product__right" data-ps-ref="product-right" tabindex="-1">
       {block name='product_header'}
-        {block name='product_manufacturer'}
-        {if !empty($product_manufacturer->name) && !empty($product_manufacturer->url)}
-          <div class="product__manufacturer">
-            <a href="{$product_manufacturer->url}" aria-label="{l s='Product brand: %brand_name%' sprintf=['%brand_name%' => $product_manufacturer->name] d='Shop.Theme.Catalog'}">
-              {$product_manufacturer->name}
-            </a>
+        <div class="product__header">
+          <div class="product__header-titles">
+            {block name='product_manufacturer'}
+            {if !empty($product_manufacturer->name) && !empty($product_manufacturer->url)}
+              <div class="product__manufacturer">
+                <a href="{$product_manufacturer->url}" aria-label="{l s='Product brand: %brand_name%' sprintf=['%brand_name%' => $product_manufacturer->name] d='Shop.Theme.Catalog'}">
+                  {$product_manufacturer->name}
+                </a>
+              </div>
+            {/if}
+            {/block}
+            <h1 class="product__name h2 {if !empty($product_manufacturer->name) && !empty($product_brand_url)}mb-1{/if}">
+              {block name='page_title'}{$product.name}{/block}
+            </h1>
           </div>
-        {/if}
-      {/block}
-        <h1 class="product__name h2 {if !empty($product_manufacturer->name) && !empty($product_brand_url)}mb-1{/if}">
-          {block name='page_title'}{$product.name}{/block}
-        </h1>
-      {/block}
 
-      
+          {* Figma: circular wishlist button pinned top-right of the info block.
+             The blockwishlist markup (displayProductActions) is moved here from
+             the add-to-cart row. *}
+          <div class="product__header-actions js-product-header-actions">
+            {hook h='displayProductActions' product=$product}
+          </div>
+        </div>
+      {/block}
 
       {block name='product_prices'}
         {include file='catalog/_partials/product-prices.tpl'}
       {/block}
 
+      {* Product summary under the price. Clamped to three lines; the toggle
+         below reveals the rest inline. The full description stays in the
+         "Opis produktu" section further down the page.
+         Source is configurable in hummingbird_editor → Karta produktu
+         ($hbe_product_summary_source: '' = standard/short, 'short', 'full'
+         — 'full' falls back to the short description when empty). *}
       {block name='product_description_short'}
-        <div class="product__description-short rich-text">{$product.description_short nofilter}</div>
+        {if isset($hbe_product_summary_source) && $hbe_product_summary_source === 'full' && $product.description}
+          {assign var=hbeSummaryHtml value=$product.description}
+        {else}
+          {assign var=hbeSummaryHtml value=$product.description_short}
+        {/if}
+        {if $hbeSummaryHtml}
+          <div class="product__summary" data-ps-ref="product-summary">
+            <div class="product__description-short rich-text" data-ps-ref="product-summary-text">{$hbeSummaryHtml nofilter}</div>
+            {* Revealed by JS only when the summary actually overflows. *}
+            <button
+              type="button"
+              class="product__see-full"
+              data-ps-action="toggle-product-summary"
+              aria-expanded="false"
+              hidden
+            >
+              <span class="product__see-full-label" data-summary-more>{l s='zobacz pełny opis' d='Shop.Theme.Catalog'}</span>
+              <span class="product__see-full-label" data-summary-less>{l s='zwiń opis' d='Shop.Theme.Catalog'}</span>
+            </button>
+          </div>
+        {/if}
       {/block}
 
       {block name='product_customization'}
@@ -106,12 +141,37 @@
         {/block}
       </div>
 
+      {* Figma: shipping perk + product enquiry under the buy box. *}
+      {block name='product_shipping_info'}
+        <ul class="product__shipping-info">
+          <li class="product__shipping-item">
+            <i class="material-icons" aria-hidden="true">&#xE558;</i>
+            <span>{l s='Darmowa dostawa od 250 zł' d='Shop.Theme.Catalog'}</span>
+          </li>
+          <li class="product__shipping-item">
+            <a class="product__ask" href="{if isset($urls.pages.contact)}{$urls.pages.contact}{else}#{/if}">
+              <i class="material-icons" aria-hidden="true">&#xE8FD;</i>
+              <span>{l s='Zapytaj o produkt' d='Shop.Theme.Catalog'}</span>
+            </a>
+          </li>
+        </ul>
+      {/block}
+
       {* Custom hummingbird_editor hook (FAQ + related carousel). Do NOT call
          displayProductButtons here: it is an alias of
          displayProductAdditionalInfo, already executed in
          _partials/product-additional-info.tpl, so modules would render twice. *}
       {block name='product_buttons'}
         {hook h='displayProductSections' product=$product}
+      {/block}
+
+      {* Figma: product code line at the bottom of the buy column. *}
+      {block name='product_reference_code'}
+        {if !empty($product.reference_to_display)}
+          <p class="product__reference">
+            {l s='Kod produktu:' d='Shop.Theme.Catalog'} <span>{$product.reference_to_display}</span>
+          </p>
+        {/if}
       {/block}
     </div>
   </div>
