@@ -141,13 +141,17 @@
         {/block}
       </div>
 
-      {* Figma: shipping perk + product enquiry under the buy box. *}
+      {* Figma: shipping perk + product enquiry under the buy box.
+         The amount comes from hummingbird_editor (BO → Hummingbird → Koszyk), the
+         same source as the cart's free-shipping bar — never hardcode it here. *}
       {block name='product_shipping_info'}
         <ul class="product__shipping-info">
-          <li class="product__shipping-item">
-            <i class="material-icons" aria-hidden="true">&#xE558;</i>
-            <span>{l s='Darmowa dostawa od 250 zł' d='Shop.Theme.Catalog'}</span>
-          </li>
+          {if !empty($hbe_free_shipping_threshold)}
+            <li class="product__shipping-item">
+              <i class="material-icons" aria-hidden="true">&#xE558;</i>
+              <span>{l s='Darmowa dostawa od %amount%' sprintf=['%amount%' => $hbe_free_shipping_threshold] d='Shop.Theme.Catalog'}</span>
+            </li>
+          {/if}
           <li class="product__shipping-item">
             <a class="product__ask" href="{if isset($urls.pages.contact)}{$urls.pages.contact}{else}#{/if}">
               <i class="material-icons" aria-hidden="true">&#xE8FD;</i>
