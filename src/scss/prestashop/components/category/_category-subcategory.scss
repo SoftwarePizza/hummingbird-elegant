@@ -58,13 +58,16 @@ $component-name: subcategory;
     }
   }
 
-  // Image box — clips the hover zoom, sharp corners, grey placeholder.
+  // Image box — clips the hover zoom, sharp corners.
+  // Background must stay white: PrestaShop pads category thumbnails smaller than
+  // category_default (540px) onto a transparent canvas, so any tinted background
+  // shows through that padding as a frame around the photo.
   &__media {
     display: block;
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    background: var(--c-grey-1);
+    background: var(--c-white);
   }
 
   &__thumbnail {
