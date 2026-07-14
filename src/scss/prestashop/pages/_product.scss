@@ -640,19 +640,30 @@ $component-name: product;
 
   &__row {
     display: flex;
-    gap: 1.5rem;
-    align-items: baseline;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.25rem;
     padding-block: 0.875rem;
     border-bottom: 1px solid var(--c-grey-2);
+
+    // Label and value share a line only once there is room for both; below that
+    // they stack, otherwise long feature labels push the row past the viewport.
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      gap: 1.5rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
   }
 
   &__label {
-    flex-shrink: 0;
     font-family: var(--font-body);
     font-size: var(--fs-body-m);
     font-weight: 400;
     color: var(--c-black);
+
+    @include media-breakpoint-up(md) {
+      flex-shrink: 0;
+    }
   }
 
   &__value {
@@ -660,7 +671,11 @@ $component-name: product;
     font-size: var(--fs-body-m);
     font-weight: 400;
     color: var(--c-black);
-    text-align: right;
+    overflow-wrap: anywhere;
+
+    @include media-breakpoint-up(md) {
+      text-align: right;
+    }
 
     a {
       color: inherit;

@@ -35,24 +35,26 @@
   {/foreach}
 
   {if empty($product.is_gift)}
-    <div class="cart-preview-product__qty" role="group" aria-label="{l s='Change quantity' d='Shop.Theme.Actions'}">
+    <div class="cart-preview-product__qty" role="group" aria-label="{l s='Change quantity' d='Shop.Theme.Actions'}" data-ps-ref="cart-preview-qty">
       <a
         class="cart-preview-product__qty-btn"
         href="{$product.down_quantity_url}"
         rel="nofollow"
         data-ps-action="cart-preview-update"
+        data-ps-qty-op="down"
         data-id-product="{$product.id_product|escape:'javascript'}"
         data-id-product-attribute="{$product.id_product_attribute|escape:'javascript'}"
         data-id-customization="{$product.id_customization|escape:'javascript'}"
         data-link-action="update-quantity-in-cart"
         aria-label="{l s='Decrease quantity' d='Shop.Theme.Actions'}"
       >&minus;</a>
-      <span class="cart-preview-product__qty-value">{$product.quantity}</span>
+      <span class="cart-preview-product__qty-value" data-ps-target="cart-preview-qty-value" aria-live="polite">{$product.quantity}</span>
       <a
         class="cart-preview-product__qty-btn"
         href="{$product.up_quantity_url}"
         rel="nofollow"
         data-ps-action="cart-preview-update"
+        data-ps-qty-op="up"
         data-id-product="{$product.id_product|escape:'javascript'}"
         data-id-product-attribute="{$product.id_product_attribute|escape:'javascript'}"
         data-id-customization="{$product.id_customization|escape:'javascript'}"

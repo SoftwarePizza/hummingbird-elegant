@@ -7,7 +7,18 @@ vendor/
 # ==========================================
 # Build Outputs & Compiled Assets
 # ==========================================
-assets/
+# Upstream ignores assets/ entirely and builds on deploy. Our servers have no
+# node toolchain and are updated by `git push`, so the shipped bundles (and the
+# assets the CSS references) are tracked; source maps and caches are not.
+assets/*
+!assets/css/
+assets/css/*
+!assets/css/*.css
+!assets/js/
+assets/js/*
+!assets/js/*.js
+!assets/fonts/
+!assets/img-dist/
 storybook-static/
 
 # ==========================================

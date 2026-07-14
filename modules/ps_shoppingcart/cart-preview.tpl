@@ -9,7 +9,11 @@
  * Expected variables: $cart, $cart_url, $hbe_cart_free_shipping
  *}
 
-<div class="cart-preview" data-ps-ref="cart-preview">
+<div
+  class="cart-preview"
+  data-ps-ref="cart-preview"
+  {if isset($hbe_cart_preview_url)}data-ps-data='{ldelim}"refreshUrl":"{$hbe_cart_preview_url|escape:'javascript':'UTF-8'}"{rdelim}'{/if}
+>
   <p class="cart-preview__title">
     {l s='Twój koszyk' d='Shop.Theme.Checkout'} ({$cart.products_count})
   </p>
