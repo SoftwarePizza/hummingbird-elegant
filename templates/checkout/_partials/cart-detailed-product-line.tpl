@@ -10,7 +10,7 @@
       {if $product.default_image}
         <picture>
           {if isset($product.default_image.bySize.default_xs.sources.avif)}
-            <source 
+            <source
               srcset="
                 {$product.default_image.bySize.default_xs.sources.avif},
                 {$product.default_image.bySize.default_md.sources.avif} 2x"
@@ -19,7 +19,7 @@
           {/if}
 
           {if isset($product.default_image.bySize.default_xs.sources.webp)}
-            <source 
+            <source
               srcset="
                 {$product.default_image.bySize.default_xs.sources.webp},
                 {$product.default_image.bySize.default_md.sources.webp} 2x"
@@ -42,7 +42,7 @@
       {else}
         <picture>
           {if isset($urls.no_picture_image.bySize.default_xs.sources.avif)}
-            <source 
+            <source
               srcset="
                 {$urls.no_picture_image.bySize.default_xs.sources.avif},
                 {$urls.no_picture_image.bySize.default_md.sources.avif} 2x"
@@ -51,7 +51,7 @@
           {/if}
 
           {if isset($urls.no_picture_image.bySize.default_xs.sources.webp)}
-            <source 
+            <source
               srcset="
                 {$urls.no_picture_image.bySize.default_xs.sources.webp},
                 {$urls.no_picture_image.bySize.default_md.sources.webp} 2x"
@@ -152,7 +152,7 @@
     </div>
 
     <div class="product-line__content-right">
-      <div class="product-line__quantity-button quantity-button js-quantity-button">
+      <div class="product-line__quantity-button quantity-button js-quantity-button" style='position:relative'>
         {if !empty($product.is_gift)}
           <span class="product-line__gift">
             <i class="product-line__gift-icon material-icons" aria-hidden="true">&#xE8B1;</i>{$product.quantity} {l s='Gift(s)' d='Shop.Theme.Checkout'}
@@ -169,6 +169,7 @@
             ]
           }
         {/if}
+        <div id='cac_sd_{$product.id_product}' style='position:absolute;bottom:-20px;left:0;width:200px;'>&nbsp;</div>
       </div>
 
       {if empty($product.is_gift)}
@@ -195,6 +196,7 @@
       {block name='hook_cart_extra_product_actions'}
         {hook h='displayCartExtraProductActions' product=$product}
       {/block}
+
     </div>
   </div>
 </div>
