@@ -79,6 +79,37 @@
         {/if}
       {/block}
 
+      {block name='product_dimensions'}
+        {* Wymiary i waga pochodzą z dedykowanych pól produktu, a nie z cech, więc ta
+           sama informacja nie jest utrzymywana w dwóch miejscach. Jednostka długości
+           jest literałem: core nie wstrzykuje PS_DIMENSION_UNIT do szablonu, a sięganie
+           po konfigurację z motywu łamałoby granicę prezentacji. *}
+        {if $product.width > 0}
+          <li class="product-specs__row">
+            <span class="product-specs__label">{l s='Szerokość' d='Shop.Theme.Catalog'}</span>
+            <span class="product-specs__value">{$product.width|string_format:"%g"|replace:'.':','|escape:'html':'UTF-8'} {l s='cm' d='Shop.Theme.Catalog'}</span>
+          </li>
+        {/if}
+        {if $product.height > 0}
+          <li class="product-specs__row">
+            <span class="product-specs__label">{l s='Wysokość' d='Shop.Theme.Catalog'}</span>
+            <span class="product-specs__value">{$product.height|string_format:"%g"|replace:'.':','|escape:'html':'UTF-8'} {l s='cm' d='Shop.Theme.Catalog'}</span>
+          </li>
+        {/if}
+        {if $product.depth > 0}
+          <li class="product-specs__row">
+            <span class="product-specs__label">{l s='Długość' d='Shop.Theme.Catalog'}</span>
+            <span class="product-specs__value">{$product.depth|string_format:"%g"|replace:'.':','|escape:'html':'UTF-8'} {l s='cm' d='Shop.Theme.Catalog'}</span>
+          </li>
+        {/if}
+        {if $product.weight > 0}
+          <li class="product-specs__row">
+            <span class="product-specs__label">{l s='Waga' d='Shop.Theme.Catalog'}</span>
+            <span class="product-specs__value">{$product.weight|string_format:"%g"|replace:'.':','|escape:'html':'UTF-8'} {$product.weight_unit|escape:'html':'UTF-8'}</span>
+          </li>
+        {/if}
+      {/block}
+
       {block name='product_manufacturer'}
         {if isset($product_manufacturer->id)}
           <li class="product-specs__row">
