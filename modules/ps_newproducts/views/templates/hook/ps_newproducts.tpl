@@ -42,9 +42,16 @@
         </div>
 
         <div class="module-products__carousel">
-          {if $products}
+          {* hummingbird_editor: carousel-source override — show a chosen category's
+             products instead of the native "new products" when configured. *}
+          {if isset($hbe_np_override_products)}
+            {assign var=hbe_np_list value=$hbe_np_override_products}
+          {else}
+            {assign var=hbe_np_list value=$products}
+          {/if}
+          {if $hbe_np_list}
             <div class="module-products__list">
-              {include file='catalog/_partials/productlist.tpl' products=$products}
+              {include file='catalog/_partials/productlist.tpl' products=$hbe_np_list}
             </div>
           {/if}
         </div>
