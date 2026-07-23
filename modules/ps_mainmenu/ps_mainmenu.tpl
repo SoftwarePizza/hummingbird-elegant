@@ -278,7 +278,7 @@
         <circle cx="12" cy="8" r="4"/>
         <path d="M4 20c0-3.6 3.6-6 8-6s8 2.4 8 6"/>
       </svg>
-      <span>{l s='My account' d='Shop.Theme.Customeraccount'}</span>
+      <span>{l s='My Account' d='Shop.Theme.Customeraccount'}</span>
     </a>
 
     {* Contact information *}

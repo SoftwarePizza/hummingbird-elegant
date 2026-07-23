@@ -26,7 +26,7 @@
         type="text"
         name="s"
         value="{$search_string}"
-        placeholder="{l s='Search products...' d='Shop.Theme.Catalog'}"
+        placeholder="{l s='Search our catalog' d='Shop.Theme.Catalog'}"
         id="ps_searchbar_input"
         autocomplete="off"
         role="combobox"
