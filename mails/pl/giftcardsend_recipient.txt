@@ -1,0 +1,1 @@
+Cześć {giftcard_lastname}, Świetna wiadomość! Właśnie otrzymałeś/aś kartę podarunkową o wartości {giftcard_price} od {giftcard_from}. Kod Twojej karty podarunkowej: {giftcard_code} W załączniku znajdziesz również wersję PDF, którą możesz zachować lub wydrukować. Udanych zakupów w {shop_name}!

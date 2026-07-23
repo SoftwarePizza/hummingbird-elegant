@@ -1,0 +1,1 @@
+Hi {firstname}, Here is your gift card worth {giftcard_price}! You will find attached a PDF file that you can easily print and offer to the recipient. Thank you for choosing us. We wish you and your loved ones a great shopping experience at {shop_name}!

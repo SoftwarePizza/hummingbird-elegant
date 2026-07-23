@@ -1,0 +1,1 @@
+Hi {firstname}, Your gift card of {giftcard_price} has been successfully sent to {giftcard_to_mail}. For your records, we have attached a PDF summary that you can keep or print if you wish. Thank you for your purchase and your trust. We hope this gift brings joy and great shopping moments at {shop_name}!

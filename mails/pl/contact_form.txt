@@ -1,0 +1,14 @@
+ 
+
+{shop_url}
+
+Witaj {firstname} {lastname},
+
+Twoja wiadomość została wysłana pomyślnie, dziękuję za poświęcenie czasu na jej napisanie!
+Numer zamówienia:  {order_name}
+Produkt:  {product_name}
+Załączony plik: {attached_file}
+
+Odpowiemy tak szybko, jak to możliwe.
+
+[{shop_name}]({shop_url})

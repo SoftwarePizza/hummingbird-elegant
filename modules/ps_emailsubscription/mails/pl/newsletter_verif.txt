@@ -1,0 +1,10 @@
+ 
+
+{shop_url}
+
+Witaj,
+
+Dziękujemy za subskrypcję naszego newslettera. Kliknij poniższy link, aby potwierdzić zapytanie:
+{verif_url}
+
+[{shop_name}]({shop_url})

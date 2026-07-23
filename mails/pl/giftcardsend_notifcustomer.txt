@@ -1,0 +1,1 @@
+Cześć {firstname}, Twoja karta podarunkowa o wartości {giftcard_price} została pomyślnie wysłana do {giftcard_to_mail}. Do wiadomości załączamy podsumowanie w formacie PDF, które możesz zachować lub wydrukować. Dziękujemy za zakup i zaufanie. Mamy nadzieję, że ten prezent przyniesie radość i wspaniałe chwile zakupów w {shop_name}!

@@ -1,0 +1,9 @@
+ 
+
+{shop_url}
+
+Witaj,
+
+Dziękujemy za zapisanie się do naszego newslettera
+
+[{shop_name}]({shop_url})

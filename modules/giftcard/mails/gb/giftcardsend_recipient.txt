@@ -1,0 +1,1 @@
+Hi {giftcard_lastname}, Good news! You have just received a gift card worth {giftcard_price}, offered by {giftcard_from}. Your gift card code is: {giftcard_code} You will also find attached a PDF version that you can keep or print at your convenience. Enjoy your shopping experience at {shop_name}!

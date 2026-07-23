@@ -1,0 +1,15 @@
+ 
+
+{shop_url}
+
+Witaj {firstname} {lastname},
+
+Wiadomość od {shop_name}
+
+Otrzymałeś nową wiadomość od {shop_name} dotyczącą zamówienia {order_name}.
+
+Wiadomość:
+
+{message}
+
+[{shop_name}]({shop_url})

@@ -1,0 +1,1 @@
+Cześć {firstname}, Oto Twoja karta podarunkowa o wartości {giftcard_price}! W załączniku znajdziesz plik PDF, który możesz łatwo wydrukować i wręczyć obdarowanej osobie. Dziękujemy za wybór naszego sklepu. Życzymy Tobie i Twoim bliskim udanych zakupów w {shop_name}!
