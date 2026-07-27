@@ -283,12 +283,16 @@
 
     {* Contact information *}
     <div class="ps-mainmenu__foot-contact">
-      <p class="ps-mainmenu__foot-contact-line">
-        {l s='Infolinia' d='Shop.Theme.Global'}: <a href="tel:+48613072080">61 307 20 80</a>
-      </p>
-      <p class="ps-mainmenu__foot-contact-line">
-        Email: <a href="mailto:sklep@rosenthal.pl">sklep@rosenthal.pl</a>
-      </p>
+      {if $shop.phone}
+        <p class="ps-mainmenu__foot-contact-line">
+          {l s='Telefon' d='Shop.Theme.Global'}: <a href="tel:{$shop.phone|escape:'html':'UTF-8'|replace:' ':''|replace:'-':''}">{$shop.phone}</a>
+        </p>
+      {/if}
+      {if $shop.email}
+        <p class="ps-mainmenu__foot-contact-line">
+          Email: <a href="mailto:{$shop.email|escape:'html':'UTF-8'}">{$shop.email}</a>
+        </p>
+      {/if}
     </div>
 
     {* Contact form *}
