@@ -30,20 +30,17 @@
   </p>
 
   <div class="footer-block__content collapse" id="footer_contactinfo">
-    <p class="ps-contactinfo__line">
-      {l s='Infolinia' d='Shop.Theme.Global'}: <a href="tel:+48613072080">61 307 20 80</a>
-    </p>
+    {if $contact_infos.phone}
+      <p class="ps-contactinfo__line">
+        {l s='Telefon' d='Shop.Theme.Global'}: <a href="tel:{$contact_infos.phone|escape:'html':'UTF-8'|replace:' ':''|replace:'-':''}">{$contact_infos.phone}</a>
+      </p>
+    {/if}
 
-    <p class="ps-contactinfo__line">
-      <strong>{l s='Online shop (7:30-15:30)' d='Shop.Theme.Global'}</strong><br>
-      {l s='Telefon' d='Shop.Theme.Global'}: <a href="tel:+48730900116">730 900 116</a><br>
-      Email: <a href="mailto:sklep@rosenthal.pl">sklep@rosenthal.pl</a>
-    </p>
-
-    <p class="ps-contactinfo__line">
-      <strong>{l s='Rosenthal Polska - biuro' d='Shop.Theme.Global'}</strong><br>
-      Email: <a href="mailto:office@rosenthal.pl">office@rosenthal.pl</a>
-    </p>
+    {if $contact_infos.email}
+      <p class="ps-contactinfo__line">
+        Email: <a href="mailto:{$contact_infos.email|escape:'html':'UTF-8'}">{$contact_infos.email}</a>
+      </p>
+    {/if}
 
     {if !empty($hbe_social_links)}
       <div class="footer__social">
