@@ -17,6 +17,17 @@
     {/if}
   {/foreach}
 
+  {**
+   * Fallback image for subcategories without a thumbnail. The tile stretches it
+   * to the full column width, so small_default (98px) shows up badly pixelated —
+   * take the largest "no picture" size the shop generates instead.
+   *}
+  {if isset($urls.no_picture_image.bySize.default_lg.url)}
+    {assign var=noPictureImage value=$urls.no_picture_image.bySize.default_lg}
+  {else}
+    {assign var=noPictureImage value=$urls.no_picture_image.bySize.small_default}
+  {/if}
+
   <div class="{$componentName}{if $displaySubcategoryImages} {$componentName}--with-images{/if}">
     <div class="{$componentName}__list{if $displaySubcategoryImages} {$componentName}__list--with-images{/if}">
       {foreach from=$subcategories item=subcategory}
@@ -45,9 +56,9 @@
               {else}
                 <img
                   class="{$componentName}__thumbnail img-fluid"
-                  src="{$urls.no_picture_image.bySize.small_default.url}"
-                  width="{$urls.no_picture_image.bySize.small_default.width}"
-                  height="{$urls.no_picture_image.bySize.small_default.height}"
+                  src="{$noPictureImage.url}"
+                  width="{$noPictureImage.width}"
+                  height="{$noPictureImage.height}"
                   alt="{$subcategory.name|escape:'html':'UTF-8'}"
                   loading="lazy"
                 >
