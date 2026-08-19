@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="templates/_partials/copyright.tpl" source-language="pl" target-language="hu" datatype="plaintext">
+  <file original="templates/_partials/copyright.tpl" source-language="en" target-language="hu" datatype="plaintext">
     <body>
-      <trans-unit id="cd87889151c3ce84bcd6556159ff371a" approved="yes">
-        <source>© %year% %shop_name%. Wszelkie prawa zastrzeżone.</source>
+      <trans-unit id="64a6c84383039d171631147f30c51811" approved="yes">
+        <source>© %year% %shop_name%. All rights reserved.</source>
         <target state="final">© %year% %shop_name%. Minden jog fenntartva.</target>
       </trans-unit>
-      <trans-unit id="b5fb063471a6364990fd4f9ac386eeb8" approved="yes">
-        <source>Sklep wykonał</source>
+      <trans-unit id="d52022a2b954a1e3cc71a6f3f8db5e46" approved="yes">
+        <source>Store by</source>
         <target state="final">Áruház készítette</target>
       </trans-unit>
     </body>

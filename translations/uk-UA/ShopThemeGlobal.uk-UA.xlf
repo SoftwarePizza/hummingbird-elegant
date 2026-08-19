@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="templates/_partials/copyright.tpl" source-language="en" target-language="et" datatype="plaintext">
+  <file original="templates/_partials/copyright.tpl" source-language="en" target-language="uk" datatype="plaintext">
     <body>
       <trans-unit id="64a6c84383039d171631147f30c51811" approved="yes">
         <source>© %year% %shop_name%. All rights reserved.</source>
-        <target state="final">© %year% %shop_name%. Kõik õigused kaitstud.</target>
+        <target state="final">© %year% %shop_name%. Усі права захищено.</target>
       </trans-unit>
       <trans-unit id="d52022a2b954a1e3cc71a6f3f8db5e46" approved="yes">
         <source>Store by</source>
-        <target state="final">Poe loonud</target>
+        <target state="final">Магазин створено</target>
       </trans-unit>
     </body>
   </file>
