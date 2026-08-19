@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="templates/_partials/copyright.tpl" source-language="pl" target-language="lt" datatype="plaintext">
+    <body>
+      <trans-unit id="cd87889151c3ce84bcd6556159ff371a" approved="yes">
+        <source>© %year% %shop_name%. Wszelkie prawa zastrzeżone.</source>
+        <target state="final">© %year% %shop_name%. Visos teisės saugomos.</target>
+      </trans-unit>
+      <trans-unit id="b5fb063471a6364990fd4f9ac386eeb8" approved="yes">
+        <source>Sklep wykonał</source>
+        <target state="final">Parduotuvę sukūrė</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
