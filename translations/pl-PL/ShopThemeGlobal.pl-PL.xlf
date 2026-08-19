@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="templates/_partials/copyright.tpl" source-language="en" target-language="pl" datatype="plaintext">
+  <file original="Shop.Theme.Global.xlf" source-language="en" target-language="pl" datatype="plaintext">
     <body>
-      <trans-unit id="64a6c84383039d171631147f30c51811" approved="yes">
-        <source>© %year% %shop_name%. All rights reserved.</source>
-        <target state="final">© %year% %shop_name%. Wszelkie prawa zastrzeżone.</target>
+      <trans-unit id="9c97ef2b1f51cc9900c2aa020bcf29d7" approved="yes">
+        <source>Change sort order</source>
+        <target state="final">Zmień sposób sortowania</target>
+      </trans-unit>
+      <trans-unit id="d54d0d430d4b7a5ee44490337c932138" approved="yes">
+        <source>Delivery option: %carrier_name%</source>
+        <target state="final">Sposób dostawy: %carrier_name%</target>
+      </trans-unit>
+      <trans-unit id="558ed0bec0befaf5f5f31cc79a3b9a36" approved="yes">
+        <source>Next image</source>
+        <target state="final">Następne zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="0ec8d0a0ae4663ca13cfe54bff0a271d" approved="yes">
+        <source>No delivery service</source>
+        <target state="final">Bez dostawy</target>
+      </trans-unit>
+      <trans-unit id="ea4b4d72aad3912d7ccbb175fd77c77c" approved="yes">
+        <source>Open zoomed product image gallery</source>
+        <target state="final">Otwórz powiększoną galerię zdjęć produktu</target>
+      </trans-unit>
+      <trans-unit id="ee34f6ba47ba8c232e7ef7fc9d4855a2" approved="yes">
+        <source>Previous image</source>
+        <target state="final">Poprzednie zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="ea379dd90c33c1345f40aa0afa6688d8" approved="yes">
+        <source>Product availability:</source>
+        <target state="final">Dostępność produktu:</target>
+      </trans-unit>
+      <trans-unit id="cc367b544fab23df0ddaf982fb1445b5" approved="yes">
+        <source>Skip to main content</source>
+        <target state="final">Przejdź do treści głównej</target>
+      </trans-unit>
+      <trans-unit id="fc1411d65b5a53ff3edca2efb08d4e4c" approved="yes">
+        <source>Sort products by: %sort_order%</source>
+        <target state="final">Sortuj produkty według: %sort_order%</target>
       </trans-unit>
       <trans-unit id="d52022a2b954a1e3cc71a6f3f8db5e46" approved="yes">
         <source>Store by</source>
         <target state="final">Sklep wykonał</target>
+      </trans-unit>
+      <trans-unit id="712451d946548eed9b7145b6270fdb91" approved="yes">
+        <source>View schedules for %store_name%</source>
+        <target state="final">Zobacz godziny otwarcia: %store_name%</target>
+      </trans-unit>
+      <trans-unit id="c9b70fb5570b33cc835a0057b7a184c1" approved="yes">
+        <source>Virtual product(s)</source>
+        <target state="final">Produkt(y) wirtualny(e)</target>
+      </trans-unit>
+      <trans-unit id="a55071978a2065773874af402627f86b" approved="yes">
+        <source>Virtual product(s): No delivery service</source>
+        <target state="final">Produkt(y) wirtualny(e): bez dostawy</target>
+      </trans-unit>
+      <trans-unit id="64a6c84383039d171631147f30c51811" approved="yes">
+        <source>© %year% %shop_name%. All rights reserved.</source>
+        <target state="final">© %year% %shop_name%. Wszelkie prawa zastrzeżone.</target>
       </trans-unit>
     </body>
   </file>

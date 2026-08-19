@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Shop.Theme.Checkout.xlf" source-language="en" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="5c0842430b003844dc9dd4cfee7148d3" approved="yes">
+        <source>%product_count% order items</source>
+        <target state="final">Pozycje w zamówieniu: %product_count%</target>
+      </trans-unit>
+      <trans-unit id="bc485a3f1c114bcc21e5c207d50b4cb3" approved="yes">
+        <source>%product_name% quick view.</source>
+        <target state="final">%product_name% – szybki podgląd.</target>
+      </trans-unit>
+      <trans-unit id="be2624ee0707257c14aed8452f443e85" approved="yes">
+        <source>Added vouchers</source>
+        <target state="final">Dodane kupony</target>
+      </trans-unit>
+      <trans-unit id="1b67f24ea45fdf2e11ad8f6e777e8c8b" approved="yes">
+        <source>Delivery Information</source>
+        <target state="final">Informacje o dostawie</target>
+      </trans-unit>
+      <trans-unit id="808009eaf02a0fd7444c2ac7646e9981" approved="yes">
+        <source>Delivery Option</source>
+        <target state="final">Sposób dostawy</target>
+      </trans-unit>
+      <trans-unit id="2e176a7afa371c3446da38e102af7553" approved="yes">
+        <source>Fill %voucherCode% code into the voucher field</source>
+        <target state="final">Wstaw kod %voucherCode% w pole kuponu</target>
+      </trans-unit>
+      <trans-unit id="8e702a8aa0c6b063894e3347e0352e0b" approved="yes">
+        <source>Gift(s)</source>
+        <target state="final">Prezent(y)</target>
+      </trans-unit>
+      <trans-unit id="09f2a4f30a36a31991bc2926e1e8d561" approved="yes">
+        <source>Next: %step_name%</source>
+        <target state="final">Dalej: %step_name%</target>
+      </trans-unit>
+      <trans-unit id="a128f329c5aeea633ced6bb9d7c56c74" approved="yes">
+        <source>Place Order</source>
+        <target state="final">Złóż zamówienie</target>
+      </trans-unit>
+      <trans-unit id="0ed87ff7fd033d1121932b52dd2910a6" approved="yes">
+        <source>Please make sure you've chosen a [1]payment method[/1] and accepted the required condition(s).</source>
+        <target state="final">Upewnij się, że wybrano [1]metodę płatności[/1] i zaakceptowano wymagane warunki.</target>
+      </trans-unit>
+      <trans-unit id="6cca837b5d9d6181309ab24ac1e008a7" approved="yes">
+        <source>Please make sure you've chosen a [1]payment method[/1].</source>
+        <target state="final">Upewnij się, że wybrano [1]metodę płatności[/1].</target>
+      </trans-unit>
+      <trans-unit id="827f841b53cd7847c66891e252165e6d" approved="yes">
+        <source>Products in cart</source>
+        <target state="final">Produkty w koszyku</target>
+      </trans-unit>
+      <trans-unit id="d4da09d07e0911986f8a742aeeb6f6d3" approved="yes">
+        <source>Remove %productName% from cart</source>
+        <target state="final">Usuń %productName% z koszyka</target>
+      </trans-unit>
+      <trans-unit id="fc1ff8b6c1b51932e1fdd04959ce2cd2" approved="yes">
+        <source>Remove voucher: %voucherName%</source>
+        <target state="final">Usuń kupon: %voucherName%</target>
+      </trans-unit>
+      <trans-unit id="829f96defc7c51f96edf84b190ab864a" approved="yes">
+        <source>Terms and conditions</source>
+        <target state="final">Regulamin</target>
+      </trans-unit>
+      <trans-unit id="921cc6412ce8194872efd44dbf232119" approved="yes">
+        <source>View my customization</source>
+        <target state="final">Zobacz moją personalizację</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

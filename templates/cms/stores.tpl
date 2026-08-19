@@ -12,6 +12,16 @@
 {block name='page_content_container'}
   <section id="content" class="page-content page-content--stores">
     {block name='page_content'}
+      {**
+       * w3bstorelocator overrides StoresController and deliberately hands the
+       * template an empty $stores, because it renders its own map and search
+       * through AJAX. Its installer patches the active theme's stores.tpl, but
+       * that only runs at install time — the module was installed under the
+       * previous theme, so this file never got the widget and /sklepy came out
+       * blank. Fall back to the widget whenever the core listing has nothing to
+       * show; {widget} is a no-op when the module is not installed.
+       *}
+      {if $stores}
       <div class="store__list">
         {foreach $stores as $store}
           <article id="store-{$store.id}" class="store">
@@ -125,6 +135,9 @@
           </article>
         {/foreach}
       </div>
+      {else}
+        {widget name="w3bstorelocator"}
+      {/if}
     {/block}
   </section>
 {/block}

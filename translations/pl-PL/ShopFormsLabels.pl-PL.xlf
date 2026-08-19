@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Shop.Forms.Labels.xlf" source-language="en" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="e4d334912a865fca8ba6a4b76ca0fecc" approved="yes">
+        <source>-- choose a product --</source>
+        <target state="final">-- wybierz produkt --</target>
+      </trans-unit>
+      <trans-unit id="1c536a0e7f5216f230b92bf92c37d895" approved="yes">
+        <source>Return notes</source>
+        <target state="final">Uwagi do zwrotu</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
