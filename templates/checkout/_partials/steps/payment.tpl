@@ -87,6 +87,13 @@
     {/foreach}
   </div>
 
+  {* Zgody: ta sama treść, tylko wyprowadzona do zmiennej, bo hummingbird_editor
+     („Kasa” → zgody nad przyciskiem) pozwala pokazać ją nie tu, pod listą metod
+     płatności, lecz na dole — tuż nad „Złóż zamówienie”, czyli w miejscu, gdzie
+     klient tę zgodę faktycznie zatwierdza. Wyprowadzenie do zmiennej trzyma
+     jedno źródło znaczników dla obu wariantów, a atrybuty (id, klasy js-*)
+     zostają nietknięte — pilnuje ich walidacja z core.js. *}
+  {capture name='checkout_conditions_to_approve'}
   {if $conditions_to_approve|count}
     <p class="ps-hidden-by-js">
       {* At the moment, we're not showing the checkboxes when JS is disabled
@@ -113,6 +120,11 @@
         </div>
       {/foreach}
     </form>
+  {/if}
+  {/capture}
+
+  {if empty($hbe_checkout_terms_bottom)}
+    {$smarty.capture.checkout_conditions_to_approve nofilter}
   {/if}
 
   {hook h='displayCheckoutBeforeConfirmation'}
@@ -153,6 +165,10 @@
         }
       {/if}
     </article>
+  {/if}
+
+  {if !empty($hbe_checkout_terms_bottom)}
+    {$smarty.capture.checkout_conditions_to_approve nofilter}
   {/if}
 
   <div class="buttons-wrapper buttons-wrapper--split buttons-wrapper--invert-mobile mt-3">

@@ -19,7 +19,11 @@
 
   <div class="columns-container container">
     <div id="center-column" class="center-column page page--full-width">
-      <div class="checkout-grid row">
+      {* Klasy modyfikujące dokłada hummingbird_editor (zakładka „Kasa”):
+         --skin    = nowy wygląd kroków „Przesyłka”/„Płatność” i podsumowania,
+         --onepage = ukończone kroki zostają widoczne pod bieżącym.
+         Bez modułu obie są puste i kasa wygląda jak w czystym Hummingbirdzie. *}
+      <div class="checkout-grid row{if !empty($hbe_checkout_skin)} checkout-grid--skin{/if}{if !empty($hbe_checkout_onepage)} checkout-grid--onepage{/if}">
         <div class="checkout-grid__content col-lg-8">
           <div class="tab-content">
             {block name='checkout_process'}
