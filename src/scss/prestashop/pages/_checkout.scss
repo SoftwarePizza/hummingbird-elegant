@@ -118,20 +118,28 @@ $step-name: (
 }
 
 /* ── One-page feel ─────────────────────────────────────────────────────────
- * Figma shows the whole checkout on a single page (no click-through). The
+ * Figma showed the whole checkout on a single page (no click-through). The
  * native PrestaShop flow renders each step as a Bootstrap `.collapse` panel and
- * only the *current* step carries `.show`. We reveal every reachable/complete
- * step as well, so the user sees the completed steps (summaries) stacked above
- * the current form instead of a single open accordion panel.
+ * only the *current* step carries `.show`; revealing every reachable/complete
+ * step as well stacks the completed summaries above the current form.
+ *
+ * This used to be unconditional, which was wrong for every shop running the
+ * ordinary step-by-step checkout — they got "Personal information", "Addresses"
+ * and "Shipping" all open at once. It is now opt-in: hummingbird_editor puts
+ * `checkout-grid--onepage` on the wrapper (see checkout.tpl) when the shop
+ * turns it on, and its views/css/checkout.css carries the matching guard for
+ * builds that still have the old unconditional rule compiled in.
  *
  * NOTE: steps that are not yet reachable still render PrestaShop's server-side
  * "unreachable" placeholder — turning those into live, simultaneously-editable
  * forms is controller logic (out of the theme's presentation-only scope) and
  * would need a dedicated one-page-checkout module or a core change.
- * Specificity (3 classes) intentionally beats Bootstrap's `.collapse:not(.show)`. */
-.step.step--reachable.collapse,
-.step.step--complete.collapse {
-  display: block;
+ * Specificity (4 classes) intentionally beats Bootstrap's `.collapse:not(.show)`. */
+.checkout-grid--onepage {
+  .step.step--reachable.collapse,
+  .step.step--complete.collapse {
+    display: block;
+  }
 }
 
 .step {
