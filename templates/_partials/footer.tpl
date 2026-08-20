@@ -35,14 +35,15 @@
       {block name='footer_bottom'}
         <div class="footer__bottom">
           {block name='footer_legal'}
-            <ul class="footer__bottom-links">
-              <li><a href="/content/2-polityka-prywatnosci">{l s='Polityka prywatności' d='Shop.Theme.Global'}</a></li>
-              <li><a href="/content/3-regulamin">{l s='Regulamin' d='Shop.Theme.Global'}</a></li>
-              <li><a href="/content/14-informacje-o-rodo">{l s='Informacje o RODO' d='Shop.Theme.Global'}</a></li>
-              {* TODO: brak dedykowanych stron CMS — placeholdery do podmiany *}
-              <li><a href="#">{l s='Programy i karty' d='Shop.Theme.Global'}</a></li>
-              <li><a href="#">{l s='Informacje GPSR' d='Shop.Theme.Global'}</a></li>
-            </ul>
+            {* Content comes from hummingbird_editor (BO: Hummingbird Editor >
+               Stopka > Linki na dole stopki); the theme only owns the markup. *}
+            {if !empty($hbe_footer_links)}
+              <ul class="footer__bottom-links">
+                {foreach from=$hbe_footer_links item='hbe_footer_link'}
+                  <li><a href="{$hbe_footer_link.url|escape:'html':'UTF-8'}">{$hbe_footer_link.label|escape:'html':'UTF-8'}</a></li>
+                {/foreach}
+              </ul>
+            {/if}
           {/block}
 
           {include file='_partials/copyright.tpl'}
