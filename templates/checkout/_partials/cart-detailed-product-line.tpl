@@ -169,20 +169,36 @@
             <i class="product-line__gift-icon material-icons" aria-hidden="true">&#xE8B1;</i>{$product.quantity} {l s='Gift(s)' d='Shop.Theme.Checkout'}
           </span>
         {else}
-          {include file='components/qty-input.tpl'
-            attributes=[
-              "class"=>"js-cart-line-product-quantity form-control mw-100",
-              "name"=>"product-quantity-spin",
-              "data-update-url"=>"{$product.update_quantity_url}",
-              "data-product-id"=>"{$product.id_product}",
-              "value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
-              "data-value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
-              "min"=>"{if isset($product.pp_settings.minimum_quantity) && $product.pp_settings.minimum_quantity > 0}{$product.pp_settings.minimum_quantity}{else}{$product.minimal_quantity}{/if}",
-              "step"=>"{if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}{$product.pp_settings.qty_step}{else}1{/if}",
-              "inputmode"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}decimal{else}numeric{/if}",
-              "pattern"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}[0-9]*[.,]?[0-9]*{else}[0-9]+{/if}"
-            ]
-          }
+          {* Software Pizza: `max` = stan magazynowy (z pproperties ułamkowy,
+             np. 6,2), gdy produkt nie może iść ponad stan. custom.js (sekcja 6)
+             przycina do niego wpis i kliknięcia, pokazując dymek z
+             data-max-message; serwer i tak przytnie sam (override
+             CartController), to tylko natychmiastowa reakcja w przeglądarce.
+             Jednostka z pp_settings trafia do etykiet przycisków komponentu. *}
+          {assign var=qty_unit value=''}
+          {if isset($product.pp_settings.qty_text)}{assign var=qty_unit value=$product.pp_settings.qty_text|strip_tags}{/if}
+          {assign var=qty_attrs value=[
+            "class"=>"js-cart-line-product-quantity form-control mw-100",
+            "name"=>"product-quantity-spin",
+            "data-update-url"=>"{$product.update_quantity_url}",
+            "data-product-id"=>"{$product.id_product}",
+            "value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
+            "data-value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
+            "min"=>"{if isset($product.pp_settings.minimum_quantity) && $product.pp_settings.minimum_quantity > 0}{$product.pp_settings.minimum_quantity}{else}{$product.minimal_quantity}{/if}",
+            "step"=>"{if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}{$product.pp_settings.qty_step}{else}1{/if}",
+            "inputmode"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}decimal{else}numeric{/if}",
+            "pattern"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}[0-9]*[.,]?[0-9]*{else}[0-9]+{/if}",
+            "data-qty-unit"=>$qty_unit
+          ]}
+          {if empty($product.allow_oosp) && isset($product.stock_quantity) && $product.stock_quantity > 0}
+            {assign var=qty_max_text value=$product.stock_quantity|formatQty}
+            {if $qty_unit}{assign var=qty_max_text value=$qty_max_text|cat:' '|cat:$qty_unit}{/if}
+            {assign var=qty_attrs value=$qty_attrs|array_merge:[
+              "max"=>"{$product.stock_quantity}",
+              "data-max-message"=>"{l s='We only have %quantity% in stock' d='Shop.Theme.Catalog' sprintf=['%quantity%' => $qty_max_text]}"
+            ]}
+          {/if}
+          {include file='components/qty-input.tpl' attributes=$qty_attrs}
         {/if}
         <div id='cac_sd_{$product.id_product}' style='position:absolute;bottom:-20px;left:0;width:200px;'>&nbsp;</div>
       </div>
