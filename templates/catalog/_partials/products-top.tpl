@@ -8,13 +8,12 @@
 <div id="js-product-list-top" class="listing-bar">
   <div class="products__selection">
     {* Przycisk szuflady filtrów — patrz layouts/layout-left-column.tpl. Renderowany
-       z serwera, żeby nie wskakiwał dopiero z JS-em; do tego czasu stoi schowany
-       inline, a custom.css pokazuje go razem z klasą `has-filters-drawer`.
-       Skrypt przejmuje ten węzeł (zdejmuje styl, podpina stan). Przy odświeżeniu
-       listingu ajaxem ten szablon leci bez layoutu, więc $spFiltersDrawer nie ma
-       i przycisku nie ma — skrypt wstawia wtedy swój węzeł z powrotem. *}
+       z serwera, żeby nie wskakiwał dopiero z JS-em; custom.js przejmuje ten
+       węzeł (podpina stan). Przy odświeżeniu listingu ajaxem ten szablon leci
+       bez layoutu, więc $spFiltersDrawer nie ma i przycisku nie ma — skrypt
+       wstawia wtedy swój węzeł z powrotem. *}
     {if !empty($spFiltersDrawer)}
-      <button type="button" class="filters-toggle btn btn-outline-tertiary" style="display:none" data-bs-toggle="offcanvas" data-bs-target="#filtersDrawer" aria-controls="filtersDrawer">
+      <button type="button" class="filters-toggle btn btn-outline-tertiary" data-bs-toggle="offcanvas" data-bs-target="#filtersDrawer" aria-controls="filtersDrawer">
         <i class="material-icons" aria-hidden="true">&#xE152;</i>
         <span>{l s='Filters' d='Shop.Theme.Catalog'}</span>
       </button>

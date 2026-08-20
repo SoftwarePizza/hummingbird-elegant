@@ -327,10 +327,10 @@
     var t = labels();
     var filtersLabel = t.filters;
 
-    /* Przycisk „Filtry" renderuje już szablon (products-top.tpl), schowany
-       inline do chwili, aż custom.css zobaczy klasę na <body>. Przejmujemy
+    /* Przycisk „Filtry" renderuje już szablon (products-top.tpl). Przejmujemy
        ten węzeł zamiast tworzyć drugi — a jego napis jest tłumaczeniem
-       z motywu, więc tytuł szuflady bierze ten sam tekst. */
+       z motywu, więc tytuł szuflady bierze ten sam tekst. (style.display
+       czyścimy na wypadek starszego szablonu, który chował go inline.) */
     var button = listTop.querySelector('.filters-toggle');
     if (button) {
       button.style.display = '';

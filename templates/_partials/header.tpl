@@ -13,10 +13,9 @@
  * #_desktop_ps_shoppingcart) stoi od razu w <div class="header-bottom__icons">
  * — stąd displayTop jest wołany dwa razy: raz bez tych modułów (excl), raz
  * po jednym (mod). Wcześniej składał ją dopiero wrapHeaderIcons() z
- * assets/js/theme.js po DOMContentLoaded i ikony widocznie się przestawiały.
- * Ta funkcja nadal działa i wkłada do naszego kontenera drugi, własny
- * (nie da się jej wyłączyć bez przebudowy theme.js) — custom.css robi mu
- * display: contents, więc na układ nie wpływa. Pole wyszukiwania celowo NIE
+ * assets/js/theme.js po DOMContentLoaded i ikony widocznie się przestawiały;
+ * teraz ta funkcja (src/js/theme.ts) widzi gotowy kontener i nic nie robi.
+ * Pole wyszukiwania celowo NIE
  * nazywa się _desktop_ps_searchbar — inaczej ta sama funkcja wciągnęłaby je
  * do kubełka z ikonami zamiast zostawić szerokie.
  *

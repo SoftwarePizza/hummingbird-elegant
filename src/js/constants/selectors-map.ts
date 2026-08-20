@@ -44,7 +44,12 @@ export const cart = {
   voucherAccordion: '.js-voucher-accordion',
   productQuantity: '.js-cart-list .js-quantity-button',
   productItem: '.js-cart-item',
-  productItemQuantityInput: '.js-cart-line-product-quantity',
+  // [izpol] Selektor celowo „zepsuty" przyrostkiem -disabled-by-pp: obsługę
+  // ilości w koszyku (ułamki, kroki 0,1 m) przejmuje moduł pproperties, a jego
+  // patcher (modules/pproperties/setup/ppsetup.php) nakładał tę samą zmianę na
+  // zbudowany theme.js. W źródle, żeby przebudowa bundla jej nie gubiła;
+  // patcher widzi wpis i nic nie robi (`when: not found '-disabled-by-pp'`).
+  productItemQuantityInput: '.js-cart-line-product-quantity-disabled-by-pp',
   removeFromCart: '.js-remove-from-cart',
   alertPlaceholder: '.js-cart-update-alert',
   deleteLinkAction: 'delete-from-cart',

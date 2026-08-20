@@ -20,9 +20,7 @@
            więc klasę nadajemy już tutaj — zanim kolumny trafią do DOM — inaczej
            przeglądarka zdąży namalować lewą kolumnę i listing skacze. Warunek
            jest ten sam, co w skrypcie; gdy szuflady nie da się zbudować, skrypt
-           klasę zdejmuje. Bez własnego CSS-a klasa nic nie robi, a przycisk
-           w products-top.tpl zostaje schowany, więc na innych sklepach z tym
-           motywem fragment jest obojętny. *}
+           klasę zdejmuje. *}
         {if isset($listing) && $smarty.capture.leftColumn|strpos:'PM_ASBlockOutput' !== false}
           {$spFiltersDrawer = true}
           <script>document.body.classList.add('has-filters-drawer');</script>

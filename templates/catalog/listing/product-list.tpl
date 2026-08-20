@@ -22,11 +22,10 @@
       {block name='product_list_top'}
         {* Kopia licznika nad paskiem (na telefonie pasek ma przez to jeden
            wiersz) — tę samą robi custom.js (blok 7, syncCount), ale żeby nic
-           nie skakało, stoi tu od razu. Schowana inline: pokazuje ją dopiero
-           custom.css (.listing-count) razem z resztą pływającego paska, więc
-           na motywie bez tych styli jej nie widać. Celowo tutaj, a nie
+           nie skakało, stoi tu od razu; o widoczności decyduje custom.css
+           (.listing-count, tylko poniżej 768 px). Celowo tutaj, a nie
            w products-top.tpl — ten leci też z ajaxa i byłaby dublowana. *}
-        <p class="listing-count" style="display:none">
+        <p class="listing-count">
           {if $listing.pagination.total_items > 1}
             {l s='There are %product_count% products.' d='Shop.Theme.Catalog' sprintf=['%product_count%' => $listing.pagination.total_items]}
           {elseif $listing.pagination.total_items > 0}

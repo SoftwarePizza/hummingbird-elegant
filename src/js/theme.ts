@@ -42,6 +42,10 @@ const wrapHeaderIcons = () => {
   const ids = ['_desktop_ps_searchbar', '_desktop_ps_customersignin', '_desktop_blockwishlist', '_desktop_ps_shoppingcart'];
   const elements = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
   if (!elements.length) return;
+  // [izpol] Szablon (_partials/header.tpl) renderuje grupę ikon już w
+  // .header-bottom__icons, żeby nagłówek nie przestawiał się po DOMContentLoaded.
+  // Wtedy nie ma czego pakować — drugi, zagnieżdżony kontener psułby odstępy.
+  if (elements[0].parentElement?.classList.contains('header-bottom__icons')) return;
   const wrapper = document.createElement('div');
   wrapper.className = 'header-bottom__icons';
   elements[0].parentElement!.insertBefore(wrapper, elements[0]);
