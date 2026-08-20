@@ -40,16 +40,71 @@
   {/if}
 {/function}
 
+{* KASKADA — panele wychodzące z samego zagnieżdżenia drzewa.
+   Każdy poziom to jeden .cascade__pane; panele są RODZEŃSTWEM w jednym rzędzie
+   flex, a nie zagnieżdżonymi divami, więc żaden nie jest przycięty przez
+   rodzica i wszystkie stoją równo obok siebie. Emisja jest w głąb (pane, potem
+   jego dzieci), dzięki czemu widoczny łańcuch rodzic → dziecko → wnuk zawsze
+   wypada w DOM-ie w kolejności lewo → prawo. Widocznością steruje
+   assets/js/custom.js; bez JS-u otwarty zostaje sam pierwszy panel.
+
+   Panel to JEDNA kolumna, wymieszane gałęzie i pojedyncze kategorie, po
+   alfabecie (sortuje hummingbird_editor — patrz sortMenuNodes). Kolejność
+   z drzewa jest po `position`, nie po nazwie, więc bez tego lista wygląda na
+   przypadkową.
+
+   Jedna kolumna to nie kosmetyka: droga kursora w prawo, do panelu potomka,
+   przy dwóch kolumnach prowadzi przez sąsiednią — kursor wchodzi po drodze na
+   obce pozycje i zamyka to, do czego zmierza. Dwie kolumny wolno dać tylko
+   panelowi, z którego nie ma dokąd iść dalej, czyli takiemu, gdzie każda
+   pozycja to liść. *}
+{function name="cascadePanes" nodes=[] rootId="" level=1 paneId=""}
+  {assign var=paneParents value=0}
+  {foreach from=$nodes item=node}
+    {if $node.children|count}{assign var=paneParents value=$paneParents+1}{/if}
+  {/foreach}
+
+  <div
+    class="cascade__pane{if $paneParents == 0 && $nodes|count > 10} cascade__pane--2col{/if}{if $level == 1} is-open{/if}"
+    data-level="{$level}"
+    {if $paneId}id="{$paneId}"{/if}
+  >
+    <ul class="cascade__list">
+      {foreach from=$nodes item=node}
+        <li>
+          <a
+            class="cascade__item{if $node.children|count} cascade__item--parent{/if}{if $node.menu_featured} cascade__item--featured{/if}"
+            href="{$node.url}"
+            data-depth="{$node.depth}"
+            {if $node.children|count}data-cascade-open="casc-{$rootId}-{$node.page_identifier}" aria-expanded="false"{/if}
+            {if $node.open_in_new_window}target="_blank" rel="noopener noreferrer"{/if}
+          >{$node.label}</a>
+        </li>
+      {/foreach}
+    </ul>
+  </div>
+
+  {foreach from=$nodes item=node}
+    {if $node.children|count}
+      {cascadePanes
+        nodes=$node.children
+        rootId=$rootId
+        level=$level+1
+        paneId="casc-`$rootId`-`$node.page_identifier`"}
+    {/if}
+  {/foreach}
+{/function}
+
 {* GENERATE SUBMENU *}
 {function name="desktopSubMenu" nodes=[] depth=0 parent=null}
   {if $nodes|count}
     {if $depth === 1}
-      <div class="js-sub-menu submenu{if $parent.flat_desktop} submenu--flat{/if}" role="menu" aria-label="{l s='%s submenu' sprintf=[$parent.label] d='Shop.Theme.Menu'}" id="submenu-{$parent.page_identifier}" data-ps-ref="desktop-submenu">
+      <div class="js-sub-menu submenu{if $parent.flat_desktop} submenu--flat{/if}{if $parent.menu_cascade} submenu--cascade{/if}" role="menu" aria-label="{l s='%s submenu' sprintf=[$parent.label] d='Shop.Theme.Menu'}" id="submenu-{$parent.page_identifier}" data-ps-ref="desktop-submenu">
         <div class="container">
           <div class="submenu__row row gx-5">
     {/if}
 
-    {if $depth === 1 && !$parent.flat_desktop}
+    {if $depth === 1 && !$parent.flat_desktop && !$parent.menu_columns && !$parent.menu_cascade}
       <div class="submenu__left col-sm-3" role="tablist" aria-label="{l s='%s submenu tabs' sprintf=[$parent.label] d='Shop.Theme.Menu'}" data-ps-ref="desktop-submenu-left">
         {foreach from=$nodes item=node}
           <a
@@ -74,7 +129,63 @@
       </div>
     {/if}
 
-    {if $depth === 1 && $parent.flat_desktop}
+    {if $depth === 1 && $parent.menu_cascade}
+      <div class="submenu__right submenu__right--cascade col-12" data-ps-ref="desktop-submenu-right">
+        <div class="cascade cascade--feat-{$parent.featured_style|default:'dot'|escape:'html':'UTF-8'}" data-ps-ref="cascade">
+          {cascadePanes nodes=$nodes rootId=$parent.page_identifier level=1}
+        </div>
+      </div>
+    {elseif $depth === 1 && $parent.menu_columns}
+      {* Układ kolumnowy: gałęzie szerokie i płytkie (np. „Wszystkie tkaniny" —
+         28 dzieci, z czego 20 bez własnych podkategorii). Układ zakładkowy
+         zostawiałby dla nich pusty panel po prawej, więc zamiast zakładek
+         renderujemy jedną listę w kolumnach: najpierw węzły, które prowadzą
+         dalej, potem liście pod wspólnym nagłówkiem. *}
+      <div class="submenu__right submenu__right--columns col-12" data-ps-ref="desktop-submenu-right">
+        <div class="submenu__right-items active" data-ps-ref="desktop-submenu-right-items">
+          <div class="submenu__columns">
+            {foreach from=$nodes item=node}
+              {if $node.children|count}
+                <div class="submenu__column-group">
+                  <a class="submenu__column-title" href="{$node.url}" data-depth="{$node.depth}"{if $node.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{$node.label}</a>
+                  <ul class="submenu__column-list">
+                    {foreach from=$node.children item=child}
+                      <li>
+                        <a class="submenu__column-link" href="{$child.url}" data-depth="{$child.depth}"{if $child.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{$child.label}</a>
+                      </li>
+                    {/foreach}
+                  </ul>
+                </div>
+              {/if}
+            {/foreach}
+
+            {$leafNodes = []}
+            {foreach from=$nodes item=node}
+              {if !$node.children|count}{$leafNodes[] = $node}{/if}
+            {/foreach}
+
+            {* Nagłówek „Pozostałe rodzaje" ma sens tylko wtedy, gdy jest od CZEGO
+               odróżnić te pozycje. Gałąź złożona z samych liści (np. „Sposób
+               utkania" — osiem kategorii bez podkategorii) dostawała go nad
+               całą swoją zawartością, czyli nad niczym innym. *}
+            {if $leafNodes|count}
+              <div class="submenu__column-group submenu__column-group--rest">
+                {if $leafNodes|count < $nodes|count}
+                  <span class="submenu__column-title submenu__column-title--plain">{$parent.rest_label}</span>
+                {/if}
+                <ul class="submenu__column-list">
+                  {foreach from=$leafNodes item=leaf}
+                    <li>
+                      <a class="submenu__column-link" href="{$leaf.url}" data-depth="{$leaf.depth}"{if $leaf.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{$leaf.label}</a>
+                    </li>
+                  {/foreach}
+                </ul>
+              </div>
+            {/if}
+          </div>
+        </div>
+      </div>
+    {elseif $depth === 1 && $parent.flat_desktop}
       {* Flat layout: no left tabs — render this item's sub-categories directly as image tiles. *}
       <div class="submenu__right submenu__right--flat col-12" data-ps-ref="desktop-submenu-right">
         <div class="submenu__right-items active" role="tabpanel" data-ps-ref="desktop-submenu-right-items">
@@ -99,11 +210,15 @@
       </div>
     {/if}
 
-    {foreach from=$nodes item=node}
-      {if $node.children|count}
-        {desktopSubMenu nodes=$node.children depth=$node.depth parent=$node}
-      {/if}
-    {/foreach}
+    {* Układ kolumnowy rysuje podkategorie u siebie, więc nie schodzimy głębiej —
+       inaczej powstałyby dodatkowe, niewidoczne kontenery .js-sub-menu. *}
+    {if !($depth === 1 && ($parent.menu_columns || $parent.menu_cascade))}
+      {foreach from=$nodes item=node}
+        {if $node.children|count}
+          {desktopSubMenu nodes=$node.children depth=$node.depth parent=$node}
+        {/if}
+      {/foreach}
+    {/if}
 
     {if $depth === 1}
           </div>
@@ -128,7 +243,10 @@
               {if $menuItem.current}aria-current="page"{/if}
               {if $menuItem.open_in_new_window}target="_blank" rel="noopener noreferrer"{/if}
             >
-              {$menuItem.label}
+              {* Etykieta w <span>, żeby kreska pod pozycją trzymała szerokość
+                 tekstu — samo <a> jest teraz rozciągane flexem do szerokości
+                 kontenera (custom.css, sekcja 14). *}
+              <span class="ps-mainmenu__tree-label">{$menuItem.label}</span>
             </a>
             {if $menuItem.children|count}
               <button
@@ -158,14 +276,18 @@
 {* GENERATE MOBILE MENU *}
 {function name="mobileMenu" nodes=[] depth=0 parent=null}
   {$children = []}
+  {* Na poziomie 0 $parent jest nullem, a głębiej flagę i tak wstawia
+     hummingbird_editor. Odczyt przez zmienną pomocniczą zamiast wprost, bo
+     $parent.flat_mobile na nullu sypało notice'em w każdą stronę. *}
+  {$parentIsFlat = (is_array($parent) && !empty($parent.flat_mobile))}
   {if $nodes|count}
     <nav
-      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}{if $parent.flat_mobile} menu--flat{/if}"
+      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}{if $parentIsFlat} menu--flat{/if} menu--feat-{$nodes[0].featured_style|default:'dot'|escape:'html':'UTF-8'}"
       {if $depth === 0}id="menu-mobile"{else}data-parent-title="{$parent.label}"{/if}
       {if $depth > 1}data-back-title="{$backTitle}" data-id="{$expandId}"{/if}
       data-depth="{$depth}"
     >
-      {if $parent.flat_mobile}
+      {if $parentIsFlat}
         {* Flat mobile: show this item's sub-categories directly as image tiles, no deeper drill-down. *}
         {if $depth >= 1}
           <ul class="menu__list">
@@ -195,7 +317,7 @@
             id="{$node.page_identifier}"
           >
             <a
-              class="{if $depth>= 0}menu__link{/if}"
+              class="{if $depth>= 0}menu__link{/if}{if $node.menu_featured} menu__link--featured{/if}"
               href="{$node.url}"
               data-depth="{$depth}"
               {if $node.open_in_new_window}target="_blank"{/if}
@@ -267,6 +389,10 @@
     <button type="button" class="btn-close btn text-reset" data-bs-dismiss="offcanvas" aria-label="{l s='Close' d='Shop.Theme.Global'}"></button>
   </div>
 
+  {* Jeden obszar przewijania na listę I sekcję konta — patrz custom.css, sekcja 20.
+     Bez tego opakowania szuflada ma dwa niezależne obszary i „Moje konto"
+     zabiera stałe miejsce na dole, zamiast jechać pod listą. *}
+  <div class="ps-mainmenu__scroll">
   <div class="ps-mainmenu__mobile">
     {mobileMenu nodes=$menu.children}
   </div>
@@ -310,4 +436,5 @@
       <div id="_mobile_ps_languageselector" class="col-auto"></div>
     </div>
   </div>
+  </div>{* /.ps-mainmenu__scroll *}
 </div>

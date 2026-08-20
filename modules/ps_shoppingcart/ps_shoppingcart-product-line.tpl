@@ -2,9 +2,9 @@
  * For the full copyright and license information, please view the
  * LICENSE.md file that was distributed with this source code.
  *}
-<span class="product-quantity">{$product.quantity}</span>
+<span class="product-quantity">{if isset($product.cart_quantity_to_display_full)}{$product.cart_quantity_to_display_full nofilter}{else}{$product.cart_quantity}{/if}</span>
 <span class="product-name">{$product.name}</span>
-<span class="product-price">{$product.price}</span>
+<span class="product-price">{if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price }{/if}</span>
 <a  class="remove-from-cart"
     rel="nofollow"
     href="{$product.remove_from_cart_url}"

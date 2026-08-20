@@ -3,7 +3,7 @@
  * LICENSE.md file that was distributed with this source code.
  *}
 
-<div class="product-line">
+<div {if isset($product.id_cart_product)}data-icp="{$product.id_cart_product}" {/if}{if isset($product.pp_settings)}data-pp-settings="{$product.pp_settings|json_encode|pp_safeoutput:htmlspecialchars nofilter}" {/if}class="product-line">
   <div class="product-line__image">
     <a class="product-line__title product-line__item" href="{$product.url}"
       data-id_customization="{$product.id_customization|intval}">
@@ -80,7 +80,8 @@
         {$product.name}
       </a>
 
-      {if is_array($product.customizations) && $product.customizations|count}
+      {hook h="displayProductPproperties" product=$product type="product-name-addional-info"}
+    {if is_array($product.customizations) && $product.customizations|count}
         {include file='catalog/_partials/product-customization-modal.tpl' product=$product}
       {/if}
 
@@ -123,9 +124,9 @@
       {hook h='displayCartExtraProductInfo' product=$product}
 
       <div class="product-line__item product-line__item--prices">
-        <span class="product-line__item-price">{$product.price}</span>
+        <span class="product-line__item-price">{if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price}{/if}</span>
         {if $product.unit_price_full}
-          <span class="product-line__item-unit-price">{$product.unit_price_full}</span>
+          <span class="product-line__item-unit-price">{$product.unit_price_full nofilter}</span>
         {/if}
 
         {if $product.has_discount}
@@ -137,7 +138,7 @@
             </span>
           {else}
             <span class="product-line__item-discount product-line__item-discount--amount badge bg-primary">
-              -{$product.discount_to_display}
+              -{$product.discount_to_display nofilter}
             </span>
           {/if}
         {/if}
@@ -149,6 +150,16 @@
           </div>
         {/if}
       </div>
+
+      {* Rabat za zabranie całego zapasu. Flagę dokłada hummingbird_editor
+         w actionPresentCart tym samym warunkiem, którym liczy cenę, więc
+         plakietka nie może pokazać się przy pozycji bez obniżki. *}
+      {if !empty($product.hbe_allstock_discount)}
+        <div class="product-line__item product-line__allstock">
+          <i class="product-line__allstock-icon material-icons rtl-no-flip" aria-hidden="true">&#xE54E;</i>
+          <span>{l s='%discount% off for taking the whole stock' d='Shop.Theme.Checkout' sprintf=['%discount%' => $product.hbe_allstock_discount]}</span>
+        </div>
+      {/if}
     </div>
 
     <div class="product-line__content-right">
@@ -164,8 +175,12 @@
               "name"=>"product-quantity-spin",
               "data-update-url"=>"{$product.update_quantity_url}",
               "data-product-id"=>"{$product.id_product}",
-              "value"=>"{$product.quantity}",
-              "min"=>"{$product.minimal_quantity}"
+              "value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
+              "data-value"=>"{if isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}",
+              "min"=>"{if isset($product.pp_settings.minimum_quantity) && $product.pp_settings.minimum_quantity > 0}{$product.pp_settings.minimum_quantity}{else}{$product.minimal_quantity}{/if}",
+              "step"=>"{if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}{$product.pp_settings.qty_step}{else}1{/if}",
+              "inputmode"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}decimal{else}numeric{/if}",
+              "pattern"=>"{if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}[0-9]*[.,]?[0-9]*{else}[0-9]+{/if}"
             ]
           }
         {/if}
@@ -173,7 +188,7 @@
       </div>
 
       {if empty($product.is_gift)}
-        <div class="product-line__price">{$product.total}</div>
+        <div class="product-line__price">{if isset($product.total_to_display)}{$product.total_to_display nofilter}{else}{$product.total }{/if}</div>
       {/if}
     </div>
 

@@ -3,7 +3,11 @@
  * LICENSE.md file that was distributed with this source code.
  *}
 <nav
-  class="ps-customeraccountlinks footer-block col-md-6 col-lg-3"
+  {* Bez `col-md-6 col-lg-3` z oryginału: stopka to CSS grid, a te klasy
+     ustawiają `width: 25%` NA KOMÓRCE siatki — kolumna „Twoje konto” miała
+     ćwiartkę swojego tracka (jakieś 87 px), przez co łamał się nawet sam
+     nagłówek. Szerokość ma wyznaczać wyłącznie siatka. *}
+  class="ps-customeraccountlinks footer-block"
   role="navigation"
   aria-labelledby="footer_customeraccount_title">
   <p

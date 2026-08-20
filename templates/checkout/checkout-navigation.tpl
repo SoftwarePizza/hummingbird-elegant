@@ -4,11 +4,15 @@
  *}
 {$componentName = 'checkout-steps'}
 
-{if !isset($notifications)}
+{if isset($notifications)}
   {$hasNotifications = $notifications.warning|@count > 0 || $notifications.error|@count > 0 || $notifications.success|@count > 0 || $notifications.info|@count > 0}
 {/if}
 
 {block name='checkout_steps'}
+  {if !isset($checkout_steps)}
+    {$checkout_steps = []}
+  {/if}
+
   <div class="{$componentName} {if isset($notifications) && isset($hasNotifications) && $hasNotifications} {$componentName}--has-notifications{/if}">
     <div class="{$componentName}__desktop">
       <ul class="{$componentName}__list" role="tablist">

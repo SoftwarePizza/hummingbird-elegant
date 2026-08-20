@@ -10,6 +10,26 @@
         <source>Store by</source>
         <target state="final">Boutique réalisée par</target>
       </trans-unit>
+      <trans-unit id="c6e5a0e7fc15a47a781be2c72e43639e" approved="yes">
+        <source>Our store</source>
+        <target state="final">Notre magasin</target>
+      </trans-unit>
+      <trans-unit id="5f25a2229ae483c2db82bc1a65e284fa" approved="yes">
+        <source>Mon–Fri</source>
+        <target state="final">Lun–Ven</target>
+      </trans-unit>
+      <trans-unit id="13c7d2d737f81f7bf89aed9fbcd0ad55" approved="yes">
+        <source>Sat</source>
+        <target state="final">Sam</target>
+      </trans-unit>
+      <trans-unit id="5c77ef52ad19b7c4735c679ca97c0fbf" approved="yes">
+        <source>Show on Google Maps</source>
+        <target state="final">Voir sur Google Maps</target>
+      </trans-unit>
+      <trans-unit id="68e05a95037802db0b58d16ddb39cfc3" approved="yes">
+        <source>Call us</source>
+        <target state="final">Appelez-nous</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

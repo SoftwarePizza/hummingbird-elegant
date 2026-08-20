@@ -30,9 +30,33 @@
   </p>
 
   <div class="footer-block__content collapse" id="footer_contactinfo">
+    {* Sklep stacjonarny: adres z konfiguracji sklepu (Preferencje > Kontakt),
+       godziny otwarcia i link do Google Maps wpisane tu na sztywno. Klucze
+       fraz są angielskie, tłumaczenia (w tym polskie) leżą w
+       themes/hummingbird/translations/<locale>/ShopThemeGlobal.<locale>.xlf *}
+    <div class="ps-contactinfo__store">
+      <p class="ps-contactinfo__store-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        {l s='Our store' d='Shop.Theme.Global'}
+      </p>
+      <address class="ps-contactinfo__address">
+        {if $contact_infos.address.address1}{$contact_infos.address.address1}<br>{/if}
+        {if $contact_infos.address.address2}{$contact_infos.address.address2}<br>{/if}
+        {$contact_infos.address.postcode} {$contact_infos.address.city}{if $contact_infos.address.country}, {$contact_infos.address.country}{/if}
+      </address>
+      <p class="ps-contactinfo__hours">
+        <span class="ps-contactinfo__hours-row"><span class="ps-contactinfo__hours-day">{l s='Mon–Fri' d='Shop.Theme.Global'}</span> 9:00–17:00</span>
+        <span class="ps-contactinfo__hours-row"><span class="ps-contactinfo__hours-day">{l s='Sat' d='Shop.Theme.Global'}</span> 9:00–14:00</span>
+      </p>
+      <a class="ps-contactinfo__map" href="https://maps.app.goo.gl/AD5qVMWZEVgGCXZt8" target="_blank" rel="noopener">
+        {l s='Show on Google Maps' d='Shop.Theme.Global'}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+
     {if $contact_infos.phone}
       <p class="ps-contactinfo__line">
-        {l s='Telefon' d='Shop.Theme.Global'}: <a href="tel:{$contact_infos.phone|escape:'html':'UTF-8'|replace:' ':''|replace:'-':''}">{$contact_infos.phone}</a>
+        {l s='Call us' d='Shop.Theme.Global'}: <a href="tel:{$contact_infos.phone|escape:'html':'UTF-8'|replace:' ':''|replace:'-':''}">{$contact_infos.phone}</a>
       </p>
     {/if}
 

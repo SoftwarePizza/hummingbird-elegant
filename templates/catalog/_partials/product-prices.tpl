@@ -15,7 +15,7 @@
               {$smarty.capture.custom_price nofilter}
             {else}
               <span class="visually-hidden">{l s='Price: ' d='Shop.Theme.Catalog'}</span>
-              {$product.price}
+              {if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price}{/if}
             {/if}
           </div>
 
@@ -43,7 +43,7 @@
 
             <span class="product__regular-price">
               <span class="visually-hidden">{l s='Regular price: ' d='Shop.Theme.Catalog'}</span>
-              {$product.regular_price}
+              {if isset($product.regular_price_to_display)}{$product.regular_price_to_display nofilter}{else}{$product.regular_price}{/if}
             </span>
 
             {if $product.discount_type === 'percentage'}
@@ -60,7 +60,12 @@
            displayProductPriceBlock, which will render inside this block. *}
         {if $product.has_discount}
           <div class="product__lowest-price">
-            {l s='Najniższa cena z ostatnich 30 dni:' d='Shop.Theme.Catalog'} {$product.regular_price}
+            {* Fraza jest ta sama co w starym szablonie („…w ciągu 30 dni przed
+               obniżką:”) — ten klucz ma w ps_translation komplet 17 języków.
+               Kwota pogrubiona, bo w starym sklepie tak wyglądała i o nią
+               w tym komunikacie chodzi. *}
+            {l s='Lowest price in the last 30 days before discount: ' d='Shop.Theme.Catalog'}
+            <span class="product__lowest-price-value">{if isset($product.regular_price_to_display)}{$product.regular_price_to_display nofilter}{else}{$product.regular_price}{/if}</span>
           </div>
         {/if}
 

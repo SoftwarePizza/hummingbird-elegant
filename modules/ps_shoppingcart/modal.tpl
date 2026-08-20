@@ -56,15 +56,15 @@
 
               <div class="col-xs-8 col-lg-7">
                 <div class="blockcart-modal__name">{$product.name}</div>
-                <div class="blockcart-modal__price d-none d-lg-block">{$product.price}</div>
+                <div class="blockcart-modal__price d-none d-lg-block">{if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price }{/if}</div>
                 {hook h='displayProductPriceBlock' product=$product type="unit_price"}
                 {foreach from=$product.attributes item="property_value" key="property"}
                   <div class="blockcart-modal__property {$property|lower}">
                     {l s='%label%:' sprintf=['%label%' => $property] d='Shop.Theme.Global'}&nbsp;{$property_value}
                   </div>
                 {/foreach}
-                <div class="blockcart-modal__quantity d-none d-lg-block">{l s='Quantity:' d='Shop.Theme.Checkout'}&nbsp;{$product.cart_quantity}</div>
-                <div class="blockcart-modal__price d-block d-lg-none">{$product.price}</div>
+                <div class="blockcart-modal__quantity d-none d-lg-block">{l s='Quantity:' d='Shop.Theme.Checkout'}&nbsp;{if isset($product.cart_quantity_to_display_full)}{$product.cart_quantity_to_display_full nofilter}{else}{$product.cart_quantity}{/if}</div>{hook h="displayProductPproperties" product=$product type="modules/ps_shoppingcart/modal"}
+                <div class="blockcart-modal__price d-block d-lg-none">{if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price }{/if}</div>
               </div>
             </div>
           </div>

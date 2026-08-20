@@ -6,7 +6,7 @@
 
 {block name='product_miniature_item'}
   <article
-    class="{$componentName} js-{$componentName}"
+    class="{$componentName} js-{$componentName}{if isset($product.pp_css) && !empty($product.pp_css)} {$product.pp_css}{/if}{if isset($product.id_pp_template)} id_pp_template_{$product.id_pp_template}{/if}"
     data-id-product="{$product.id_product}"
     data-id-product-attribute="{$product.id_product_attribute}"
   >
@@ -52,7 +52,7 @@
                     {if '' !== $smarty.capture.custom_price}
                       {$smarty.capture.custom_price nofilter}
                     {else}
-                      {$product.price}
+                      {if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price}{/if}
                     {/if}
                     <span class="{$componentName}__price-tax">({l s='brutto' d='Shop.Theme.Catalog'})</span>
                   </div>
@@ -68,7 +68,7 @@
                       {if $product.has_discount}
                         {hook h='displayProductPriceBlock' product=$product type="old_price"}
 
-                        <span class="{$componentName}__regular-price" aria-label="{l s='Regular price' d='Shop.Theme.Catalog'}">{$product.regular_price}</span>
+                        <span class="{$componentName}__regular-price" aria-label="{l s='Regular price' d='Shop.Theme.Catalog'}">{if isset($product.regular_price_to_display)}{$product.regular_price_to_display nofilter}{else}{$product.regular_price}{/if}</span>
                       {/if}
                     </div>
                   {/if}

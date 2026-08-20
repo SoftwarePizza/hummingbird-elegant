@@ -24,9 +24,26 @@
           {/if}
 
           <div class="module-products__buttons module-products__buttons--intro">
-            {if !empty($hbe_np_link_text) && !empty($hbe_np_link_url)}
-              <a class="btn btn-primary hbe-section-link" href="{$hbe_np_link_url|escape:'html':'UTF-8'}">
-                {$hbe_np_link_text|escape:'html':'UTF-8'}
+            {* izpol: przycisk jest zawsze, jak w karuzelach edytora. Domyslnie
+               "Wiecej tkanin" (tlumaczenie 'All products' z motywu, 17 jezykow)
+               prowadzi na strone "Nowe produkty" biezacej domeny/jezyka —
+               $urls.pages.new_products przechodzi przez override Link, wiec
+               na izpol.de to izpol.de/neue-produkte. Pola "Tekst linku" i
+               "URL linku" w zakladce Strona glowna edytora nadpisuja kazde
+               z osobna. *}
+            {if !empty($hbe_np_link_text)}
+              {assign var=hbe_np_btn_text value=$hbe_np_link_text}
+            {else}
+              {assign var=hbe_np_btn_text value={l s='All products' d='Shop.Theme.Catalog'}}
+            {/if}
+            {if !empty($hbe_np_link_url)}
+              {assign var=hbe_np_btn_url value=$hbe_np_link_url}
+            {else}
+              {assign var=hbe_np_btn_url value=$urls.pages.new_products}
+            {/if}
+            {if !empty($hbe_np_btn_text) && !empty($hbe_np_btn_url)}
+              <a class="btn btn-primary hbe-section-link" href="{$hbe_np_btn_url|escape:'html':'UTF-8'}">
+                {$hbe_np_btn_text|escape:'html':'UTF-8'}
               </a>
             {/if}
           </div>

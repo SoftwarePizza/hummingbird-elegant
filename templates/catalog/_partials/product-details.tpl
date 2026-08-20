@@ -134,7 +134,7 @@
         {if $product.show_quantities}
           <li class="product-specs__row">
             <span class="product-specs__label">{l s='In stock' d='Shop.Theme.Catalog'}</span>
-            <span class="product-specs__value" data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity} {$product.quantity_label}</span>
+            <span class="product-specs__value" data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{if isset($product.quantity_to_display)}{$product.quantity_to_display nofilter}{else}{$product.quantity} {$product.quantity_label}{/if}</span>
           </li>
         {/if}
       {/block}

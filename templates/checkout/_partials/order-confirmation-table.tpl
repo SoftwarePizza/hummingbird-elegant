@@ -76,7 +76,7 @@
           {/if}
 
           {if !empty($product.quantity) && $product.quantity > 1}
-            <p class="{$componentName}__product-quantity">{l s='x%quantity%' sprintf=['%quantity%' => $product.quantity] d='Shop.Theme.Global'}</p>
+            <p class="{$componentName}__product-quantity">{if isset($product.cart_quantity_to_display)}{assign var='ppQuantityToDisplay' value=$product.cart_quantity_to_display}{else}{assign var='ppQuantityToDisplay' value=$product.quantity}{/if}{l s='x%quantity%' sprintf=['%quantity%' => $ppQuantityToDisplay] d='Shop.Theme.Global'}</p>
           {/if}
         </div>
 
@@ -107,10 +107,11 @@
 
             {if $product.price}
               <div class="{$componentName}__product-price">
-                {$product.price}
+                {if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price}{/if}
               </div>
             {/if}
 
+            {hook h="displayProductPproperties" product=$product type="_partials/order-confirmation-table"}
             {if is_array($product.customizations) && $product.customizations|count}
               {include file='catalog/_partials/product-customization-modal.tpl' product=$product}
             {/if}

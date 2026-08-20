@@ -19,6 +19,11 @@
     <link rel="preload" href="{$urls.theme_assets}fonts/lora-latin-400-normal-68bde7ec05b4d942f07f.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{$urls.theme_assets}fonts/geist-sans-latin-400-normal-32c502ac52226b7f181e.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{$urls.theme_assets}fonts/geist-sans-latin-500-normal-2e03668b3b5a378f2799.woff2" as="font" type="font/woff2" crossorigin>
+
+    {* eTrusted (Trusted Shops) — skrypt startowy widgetów opinii. Tak samo jak
+       w starym szablonie ładuje się na każdej stronie: sam nic nie rysuje,
+       dopiero podnosi znaczniki <etrusted-widget> (karta produktu). *}
+    <script src="https://integrations.etrusted.com/applications/widget.js/v2" defer async></script>
   {/block}
 
   <title>{block name='head_seo_title'}{$page.meta.title}{/block}</title>

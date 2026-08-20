@@ -89,7 +89,8 @@
                   {$product.name}
                 </a>
 
-                {if $product.product_reference}
+                {hook h="displayProductPproperties" product=$product type="product-name-addional-info"}
+            {if $product.product_reference}
                   <small class="text-secondary">
                     {l s='Reference: %reference%' sprintf=['%reference%' => $product.product_reference] d='Shop.Theme.Catalog'}
                   </small>
@@ -121,15 +122,15 @@
           </span>
 
           <span class="grid-table__cell grid-table__cell--center" role="cell" data-ps-label="{l s='Quantity' d='Shop.Theme.Catalog'}">
-            {$product.quantity}
+            {if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{else}{$product.quantity }{/if}
           </span>
 
           <span class="grid-table__cell grid-table__cell--center" role="cell" data-ps-label="{l s='Unit price' d='Shop.Theme.Catalog'}">
-            {$product.price}
+            {if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price }{/if}
           </span>
 
           <span class="grid-table__cell grid-table__cell--right" role="cell" data-ps-label="{l s='Total price' d='Shop.Theme.Catalog'}">
-            {$product.total}
+            {if isset($product.total_to_display)}{$product.total_to_display nofilter}{else}{$product.total }{/if}
           </span>
         </div>
       {/foreach}

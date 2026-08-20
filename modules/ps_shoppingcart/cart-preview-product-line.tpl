@@ -38,7 +38,7 @@
     <div class="cart-preview-product__qty" role="group" aria-label="{l s='Change quantity' d='Shop.Theme.Actions'}" data-ps-ref="cart-preview-qty">
       <a
         class="cart-preview-product__qty-btn"
-        href="{$product.down_quantity_url}"
+        href="{$product.down_quantity_url}{if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}&amp;qty={$product.pp_settings.qty_step}{/if}"
         rel="nofollow"
         data-ps-action="cart-preview-update"
         data-ps-qty-op="down"
@@ -48,10 +48,10 @@
         data-link-action="update-quantity-in-cart"
         aria-label="{l s='Decrease quantity' d='Shop.Theme.Actions'}"
       >&minus;</a>
-      <span class="cart-preview-product__qty-value" data-ps-target="cart-preview-qty-value" aria-live="polite">{$product.quantity}</span>
+      <span class="cart-preview-product__qty-value" data-ps-target="cart-preview-qty-value" aria-live="polite">{if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{elseif isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}</span>
       <a
         class="cart-preview-product__qty-btn"
-        href="{$product.up_quantity_url}"
+        href="{$product.up_quantity_url}{if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}&amp;qty={$product.pp_settings.qty_step}{/if}"
         rel="nofollow"
         data-ps-action="cart-preview-update"
         data-ps-qty-op="up"

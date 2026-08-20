@@ -107,7 +107,8 @@
                     {$product.name}
                   </a>
 
-                  {if $product.product_reference}
+                  {hook h="displayProductPproperties" product=$product type="product-name-addional-info"}
+            {if $product.product_reference}
                     <small class="text-secondary">
                       {l s='Reference: %reference%' sprintf=['%reference%' => $product.product_reference] d='Shop.Theme.Catalog'}
                     </small>
@@ -136,7 +137,7 @@
               <span class="grid-table__cell-group grid-table__cell-group--sm grid-table__cell-group--inline">
                 <span class="current">
                   <span class="visually-hidden">{l s='Available quantity to return:' d='Shop.Theme.Catalog'}</span>
-                  {$product.quantity}
+                  {if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{else}{$product.quantity }{/if}
                 </span>
                 {if $product.quantity > $product.qty_returned}
                   <span class="select" id="_desktop_return_qty_{$product.id_order_detail}">
@@ -152,9 +153,9 @@
 
             <span class="grid-table__cell grid-table__cell--center" role="cell" data-ps-label="{l s='Returned' d='Shop.Theme.Catalog'}">{$product.qty_returned}</span>
 
-            <span class="grid-table__cell grid-table__cell--center" role="cell" data-ps-label="{l s='Unit price' d='Shop.Theme.Catalog'}">{$product.price}</span>
+            <span class="grid-table__cell grid-table__cell--center" role="cell" data-ps-label="{l s='Unit price' d='Shop.Theme.Catalog'}">{if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price }{/if}</span>
 
-            <span class="grid-table__cell grid-table__cell--right" role="cell" data-ps-label="{l s='Total price' d='Shop.Theme.Catalog'}">{$product.total}</span>
+            <span class="grid-table__cell grid-table__cell--right" role="cell" data-ps-label="{l s='Total price' d='Shop.Theme.Catalog'}">{if isset($product.total_to_display)}{$product.total_to_display nofilter}{else}{$product.total }{/if}</span>
           </div>
         {/foreach}
       </div>

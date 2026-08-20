@@ -8,12 +8,28 @@
   <div class="{block name="container_class"}columns-container container{/block}">
     <div class="row">
       {block name="left_column"}
+        {if $page.page_name == 'product'}
+          {capture name=leftColumn}{hook h='displayLeftColumnProduct'}{/capture}
+        {else}
+          {capture name=leftColumn}{hook h='displayLeftColumn'}{/capture}
+        {/if}
+
+        {* Szuflada filtrów (assets/js/custom.js, blok 2): na listingu z blokiem
+           pm_advancedsearch4 skrypt przenosi lewą kolumnę do offcanvasu i włącza
+           układ klasą `has-filters-drawer` na <body>. Skrypt leci z końca strony,
+           więc klasę nadajemy już tutaj — zanim kolumny trafią do DOM — inaczej
+           przeglądarka zdąży namalować lewą kolumnę i listing skacze. Warunek
+           jest ten sam, co w skrypcie; gdy szuflady nie da się zbudować, skrypt
+           klasę zdejmuje. Bez własnego CSS-a klasa nic nie robi, a przycisk
+           w products-top.tpl zostaje schowany, więc na innych sklepach z tym
+           motywem fragment jest obojętny. *}
+        {if isset($listing) && $smarty.capture.leftColumn|strpos:'PM_ASBlockOutput' !== false}
+          {$spFiltersDrawer = true}
+          <script>document.body.classList.add('has-filters-drawer');</script>
+        {/if}
+
         <div id="left-column" class="left-column col-md-4 col-lg-3">
-          {if $page.page_name == 'product'}
-            {hook h='displayLeftColumnProduct'}
-          {else}
-            {hook h='displayLeftColumn'}
-          {/if}
+          {$smarty.capture.leftColumn nofilter}
         </div>
       {/block}
 

@@ -14,7 +14,7 @@
               <source 
                 srcset="
                   {$product.default_image.bySize.default_xs.sources.avif},
-                  {$product.default_image.bySize.default_sm.sources.avif} 2x"
+                  {$product.default_image.bySize.default_md.sources.avif} 2x"
                 type="image/avif"
               >
             {/if}
@@ -23,7 +23,7 @@
               <source 
                 srcset="
                   {$product.default_image.bySize.default_xs.sources.webp},
-                  {$product.default_image.bySize.default_sm.sources.webp} 2x"
+                  {$product.default_image.bySize.default_md.sources.webp} 2x"
                 type="image/webp"
               >
             {/if}
@@ -32,7 +32,7 @@
               class="{$componentName}__img img-fluid"
               srcset="
                 {$product.default_image.bySize.default_xs.url},
-                {$product.default_image.bySize.default_sm.url} 2x"
+                {$product.default_image.bySize.default_md.url} 2x"
               width="{$product.default_image.bySize.default_xs.width}"
               height="{$product.default_image.bySize.default_xs.height}"
               loading="lazy"
@@ -46,7 +46,7 @@
               <source 
                 srcset="
                   {$urls.no_picture_image.bySize.default_xs.sources.avif},
-                  {$urls.no_picture_image.bySize.default_sm.sources.avif} 2x"
+                  {$urls.no_picture_image.bySize.default_md.sources.avif} 2x"
                 type="image/avif"
               >
             {/if}
@@ -55,7 +55,7 @@
               <source 
                 srcset="
                   {$urls.no_picture_image.bySize.default_xs.sources.webp},
-                  {$urls.no_picture_image.bySize.default_sm.sources.webp} 2x"
+                  {$urls.no_picture_image.bySize.default_md.sources.webp} 2x"
                 type="image/webp"
               >
             {/if}
@@ -64,7 +64,7 @@
               class="{$componentName}__img img-fluid"
               srcset="
                 {$urls.no_picture_image.bySize.default_xs.url},
-                {$urls.no_picture_image.bySize.default_sm.url} 2x"
+                {$urls.no_picture_image.bySize.default_md.url} 2x"
               width="{$urls.no_picture_image.bySize.default_xs.width}"
               height="{$urls.no_picture_image.bySize.default_xs.height}"
               loading="lazy"
@@ -92,7 +92,7 @@
         {/if}
 
         <div class="{$componentName}__price">
-          <span class="label">{$product.price}</span>
+          <span class="label">{$product.total}</span>
           {if $product.has_discount}
             <span class="value">{$product.regular_price}</span>
           {/if}
@@ -106,7 +106,7 @@
 
         <div class="{$componentName}__quantity">
           <span class="label">{l s='Quantity:' d='Shop.Theme.Checkout'}</span>
-          <span class="value">x{$product.quantity}</span>
+          <span class="value">{if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{else}x{$product.quantity}{/if}</span>
         </div>
 
         <div class="{$componentName}__gift">
