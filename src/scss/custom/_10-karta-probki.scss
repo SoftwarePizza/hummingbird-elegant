@@ -1,0 +1,216 @@
+/* --------------------------------------------------------------------------
+   10. KARTA PRÓBKI NA STRONIE PRODUKTU (moduł wksampleproduct)
+   Blok „Cena próbki / Zamów próbkę” wisi na displayProductAdditionalInfo
+   i pokazuje się tylko na produktach, które mają przypisaną próbkę.
+   Szablon Webkula był pisany pod Classic: `control-label`, gołe <p>, a przycisk
+   dostawał kolor inline z konfiguracji modułu (#2fb5d2 !important) — czyli
+   turkusowy klocek tuż pod czarnym „Dodaj do koszyka”. Inline `!important`
+   jest nie do przebicia arkuszem, więc szablon jest nadpisany w motywie:
+   themes/hummingbird/modules/wksampleproduct/views/templates/hook/productadditionalinfo.tpl
+   (tam też lista ID i klas, których nie wolno ruszać — trzyma je JS modułu).
+
+   Tutaj sam wygląd, złożony z języka wizualnego karty produktu: kafel na
+   `--c-grey-1` z białym polem na ikonę (jak `.hbe-related__card`), tytuł w Lorze,
+   opis w `--fs-body-s`/1.55, CTA jako obrys 1px (jak `.hbe-imgtext__cta`).
+   Przycisk jest celowo drugorzędny wobec „Dodaj do koszyka” — to alternatywa
+   dla zakupu, nie druga akcja główna.
+
+   UWAGA na jQuery: moduł pokazuje i chowa te elementy przez hide()/show()
+   i fadeIn(), a jQuery przy pokazywaniu potrafi wpisać elementowi własny
+   `display` (block/inline-block). Dlatego układ ikona+tekst w komunikatach
+   i w dopiskach stoi na `vertical-align`, a nie na flexie — flex jest tylko
+   tam, gdzie nadpisanie displayu i tak nic nie psuje.
+   -------------------------------------------------------------------------- */
+.sample-offer__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1rem;
+  background: var(--c-grey-1);
+}
+
+@media (min-width: 576px) {
+  .sample-offer__card {
+    padding: 1.25rem;
+  }
+}
+
+.sample-offer__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Białe pole na ikonę — ten sam zabieg co w kaflu „Inni kupili również”. */
+.sample-offer__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+.sample-offer__icon .material-icons {
+  font-size: 1.25rem;
+}
+
+.sample-offer__title {
+  margin-inline-end: auto;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--c-black);
+}
+
+/* Cena jako plakietka — kształt wzięty z flag produktu (`.product-flags .badge`),
+   kolor czarny zamiast niebieskiego, żeby kafel został monochromatyczny.
+   Kwota to zwykła informacja, więc dostaje sam obrys; „Bezpłatna” jest
+   argumentem za kliknięciem i dlatego jedyna świeci wypełnieniem. */
+.sample-offer__price {
+  flex: 0 0 auto;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--fs-body-xs);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--c-black);
+  white-space: nowrap;
+  background: var(--c-white);
+  border: 1px solid var(--c-grey-2);
+  border-radius: 60px;
+}
+
+.sample-offer__price--free {
+  color: var(--c-white);
+  background: var(--c-black);
+  border-color: var(--c-black);
+}
+
+.sample-offer__tax {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.sample-offer__desc {
+  font-size: var(--fs-body-s);
+  line-height: 1.55;
+  color: var(--c-grey-5);
+}
+
+/* Opis przychodzi z bazy jako gotowy HTML (zwykle jeden <p>), a oryginalny
+   szablon pakował go jeszcze w swoje <p> — przeglądarka rozbijała to na dwa
+   akapity z przypadkowymi odstępami. Tu <p> zostaje tylko ten z treści. */
+.sample-offer__desc p {
+  margin-bottom: 0.5rem;
+}
+
+.sample-offer__desc > :last-child {
+  margin-bottom: 0;
+}
+
+/* 741 z 93 501 opisów próbek przyjechało ze starego sklepu wklejką z WYSIWYG-a
+   i ma inline'owy `style`: Roboto, #212529, 16 px i `background-color: #ffffff`.
+   Na szarym kaflu widać było biały prostokąt pod tekstem, w obcym kroju
+   i o stopień za dużym. Inline bez `!important` przegrywa z `!important`
+   z arkusza, więc kasujemy to w miejscu wyświetlania, zamiast ruszać dane —
+   opisy bywają nadpisywane importem, a poprawka w bazie nie objęłaby kolejnych
+   wklejek. Zostają deklaracje, które coś znaczą (wyrównanie, pogrubienie). */
+.sample-offer__desc [style] {
+  background: none !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.sample-offer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sample-offer__btn {
+  --bs-btn-padding-y: 0.75rem;
+  --bs-btn-padding-x: 1.5rem;
+  --bs-btn-font-size: var(--fs-body-s);
+  --bs-btn-border-width: 1px;
+  --bs-btn-color: var(--c-black);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--c-black);
+  --bs-btn-hover-color: var(--c-white);
+  --bs-btn-hover-bg: var(--c-black);
+  --bs-btn-hover-border-color: var(--c-black);
+  --bs-btn-active-color: var(--c-white);
+  --bs-btn-active-bg: var(--c-black);
+  --bs-btn-active-border-color: var(--c-black);
+  --bs-btn-disabled-color: var(--c-grey-5);
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: var(--c-grey-2);
+  --bs-btn-disabled-opacity: 1;
+}
+
+/* Pole ilości pokazuje się tylko przy WK_SAMPLE_QUANTITY_SPIN = 1 (na izpolu
+   wyłączone, bo limit to jedna próbka). Wygląd bierze z `.quantity-button__group`
+   motywu, więc wystarczy zdjąć wysokość narzuconą przez CSS modułu. */
+.sample-offer__qty {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+}
+
+.sample-offer__qty .form-control {
+  width: 3.5rem;
+  text-align: center;
+}
+
+/* Dopiski pod przyciskiem: limit próbek i brak w magazynie. CSS modułu daje im
+   bold, margines i pomarańczową ikonę — to była stylistyka Classica. */
+.sample-offer__note {
+  margin-top: 0;
+  font-size: var(--fs-body-xs);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--c-grey-5);
+}
+
+.sample-offer__note .material-icons {
+  margin-inline-end: 0.25rem;
+  font-size: 1rem;
+  color: var(--c-grey-5);
+  vertical-align: -0.2em;
+}
+
+/* Komunikaty modułu (produkt standardowy w koszyku, błąd ajaxa) — w karcie,
+   dokładnie tam, gdzie JS chowa przycisk. Zostają z klasą `alert`, bo moduł
+   czyści je zbiorczym $('div.alert').hide(), ale bez `alert-danger`: czerwone
+   pudło Bootstrapa w tej kolumnie krzyczy. Odstęp daje `gap` kafla, nie margines
+   — ukryty alert nie może zostawiać po sobie dziury. */
+.sample-offer__alert {
+  --bs-alert-padding-x: 0.875rem;
+  --bs-alert-padding-y: 0.75rem;
+  --bs-alert-margin-bottom: 0;
+  font-size: var(--fs-body-s);
+  line-height: 1.45;
+  color: var(--c-black);
+  background: var(--c-white);
+  border: 1px solid var(--c-grey-2);
+  border-inline-start: 3px solid var(--c-sale);
+}
+
+.sample-offer__alert .material-icons {
+  margin-inline-end: 0.375rem;
+  font-size: 1.125rem;
+  color: var(--c-sale);
+  vertical-align: -0.2em;
+}
+
+/* Telefon: CTA na całą szerokość kafla, dopisek ląduje pod nim. */
+@media (max-width: 575.98px) {
+  .sample-offer__btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,49 @@
+/* --------------------------------------------------------------------------
+   21. „NAJCZĘŚCIEJ SZUKANE" TAKŻE W MENU MOBILNYM
+
+   Sekcja 19 wyróżniała pozycje tylko w kaskadzie na desktopie — mobilne menu
+   ma zupełnie inny szablon (`.menu__link`, nie `.cascade__item`), więc te same
+   pozycje pod telefonem wyglądały jak wszystkie inne. Ta sama informacja
+   powinna wyglądać tak samo na obu urządzeniach, a wariant jest wspólny:
+   klasa `menu--feat-*` idzie na KAŻDY <nav> menu mobilnego, bo wyróżnione
+   pozycje siedzą zwykle na drugim poziomie, czyli w podmenu, a nie w korzeniu.
+
+   Kropka wisi na `left: -0.75rem` względem linku, czyli w 16-pikselowym
+   marginesie listy. Dzięki temu etykiety NIE przesuwają się względem
+   niewyróżnionych — ten sam problem, który na desktopie rozwiązał osobny rowek
+   (sekcja 19), tu rozwiązuje się sam, bo lista i tak jest odsunięta od krawędzi.
+   -------------------------------------------------------------------------- */
+
+#mobileMenu .menu__link--featured {
+  position: relative;
+  color: #242424;
+}
+
+.menu--feat-bold .menu__link--featured {
+  font-weight: 600;
+}
+
+.menu--feat-dot .menu__link--featured {
+  font-weight: 500;
+}
+
+.menu--feat-dot .menu__link--featured::before {
+  content: "";
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-top: -0.1875rem;
+  border-radius: 50%;
+  background: #d6428c;
+}
+
+.menu--feat-highlight .menu__link--featured {
+  font-weight: 500;
+  display: inline-block;
+  margin-inline: -0.4rem;
+  padding-inline: 0.4rem;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, #d6428c 14%, transparent);
+}

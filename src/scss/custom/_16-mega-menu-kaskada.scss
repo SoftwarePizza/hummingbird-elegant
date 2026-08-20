@@ -1,0 +1,152 @@
+/* --------------------------------------------------------------------------
+   15. MEGA MENU — UKŁAD KASKADOWY (.submenu--cascade)
+
+   Wybierany per pozycja w edytorze (zakładka „Menu"), obok zakładek, kafelków
+   i kolumn. Panele rysuje `cascadePanes` z ps_mainmenu.tpl — jeden .cascade__pane
+   na poziom drzewa, wszystkie jako RODZEŃSTWO w jednym rzędzie flex. Widoczny
+   jest tylko łańcuch od korzenia do pozycji pod kursorem; resztę chowa
+   `display: none`, więc panele nie rezerwują miejsca i rząd nie skacze.
+
+   Rząd nie jest przewijany: głębokie drzewo zwyczajnie dokłada kolejną kolumnę
+   w prawo, a kartę i tak ogranicza szerokość kontenera (sekcja 14).
+   -------------------------------------------------------------------------- */
+
+/* Kaskada nie wypełnia karty na całą szerokość kontenera — otwarty łańcuch to
+   dwie, czasem trzy kolumny. Rozciągnięta na 1320 px wyglądałaby na zepsutą,
+   więc TU karta zwęża się do treści, a `left` ustawia custom.js pod pozycją
+   menu (z dociśnięciem do krawędzi kontenera, żeby nie wystawała).
+   To jedyny układ, który tak robi — zakładki, kafelki i kolumny wypełniają
+   kartę same z siebie i zostają na regule z sekcji 14. */
+.ps-mainmenu--desktop .submenu--cascade {
+  width: max-content;
+  max-width: 1140px;
+  right: auto;
+  margin-inline: 0;
+}
+
+@media (min-width: 1400px) {
+  .ps-mainmenu--desktop .submenu--cascade {
+    max-width: 1320px;
+  }
+}
+
+.submenu__right--cascade {
+  padding-block: 0.75rem 1rem;
+}
+
+.cascade {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Jedna kolumna znaczy tyle wierszy, ile pozycji, a „Tkaniny" mają ich 23 —
+   karta wychodziła 767 px wysokości i na laptopie 224 px listy lądowało pod
+   krawędzią okna, poza zasięgiem (zjechanie myszą w dół zamyka menu, więc te
+   pozycje były po prostu nieosiągalne). Panel dostaje więc sufit liczony od
+   dołu okna i przewija się w środku. 14rem to wysokość nagłówka z paskiem
+   (≈177 px) plus wyściółka karty i trochę oddechu na dole.
+
+   Przewijanie działa TYLKO dlatego, że panele są rodzeństwem, a nie zagnieżdżone
+   jedne w drugich: przewija się sam przepełniony poziom, a panele potomków —
+   stojące obok — zostają na miejscu i nic ich nie przycina. */
+.cascade__pane {
+  display: none;
+  flex: 0 0 auto;
+  min-width: 14rem;
+  max-width: 22rem;
+  max-height: calc(100vh - 14rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: 1.25rem;
+  border-left: 1px solid var(--bs-border-color, #e6e2e5);
+  scrollbar-width: thin;
+}
+
+.cascade__pane::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cascade__pane::-webkit-scrollbar-thumb {
+  background: #d8d4d7;
+  border-radius: 3px;
+}
+
+/* Pierwszy panel zaczyna się w osi loga — bez wcięcia i bez kreski z lewej. */
+.cascade__pane[data-level="1"] {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.cascade__pane.is-open {
+  display: block;
+}
+
+/* Poziom z długą listą (np. „Wszystkie tkaniny" — 28 pozycji) łamie się na dwie
+   kolumny zamiast rosnąć w dół albo dostawać pasek przewijania. */
+.cascade__pane--2col .cascade__list {
+  columns: 2;
+  column-gap: 1.75rem;
+}
+
+.cascade__pane--2col {
+  max-width: 34rem;
+}
+
+.cascade__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cascade__list > li {
+  break-inside: avoid;
+}
+
+.cascade__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.25rem 0.3rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #6c757d;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+/* Strzałka mówi „tu jest kolejny poziom" i wyrównuje się do prawej krawędzi
+   panelu, więc wszystkie znaczniki stoją w jednej linii. Rysowana maską, a nie
+   fontem ikon — Hummingbird ładuje Material Icons, ale w liście linków
+   ligatura potrafi mignąć tekstem, zanim font dojedzie. */
+.cascade__item--parent::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: auto;
+  background: currentColor;
+  opacity: 0.55;
+  -webkit-mask: var(--izpol-chevron) center / contain no-repeat;
+  mask: var(--izpol-chevron) center / contain no-repeat;
+}
+
+.cascade {
+  --izpol-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M1.5 1L6.5 6L1.5 11' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.cascade__item:hover,
+.cascade__item:focus-visible,
+.cascade__item.is-active {
+  color: #242424;
+}
+
+.cascade__item.is-active::after {
+  opacity: 1;
+}
+
+/* Pozycja, której panel jest otwarty, ma zostać widoczna także po zjechaniu
+   kursorem w prawo — inaczej użytkownik traci ślad, gdzie jest w drzewie. */
+.cascade__item.is-active {
+  font-weight: 500;
+}

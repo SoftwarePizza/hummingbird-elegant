@@ -1,0 +1,84 @@
+/* --------------------------------------------------------------------------
+   13. KARTA PRODUKTU — elementy przeniesione ze starego szablonu
+   Trzy rzeczy, których po zmianie motywu zabrakło (porównanie ze sklepem
+   1.7.8.5 pod dev.izpol.pl, motyw fashion):
+
+   1. „Nr produktu” pod tytułem. Hummingbird trzymał numer na samym dole
+      kolumny zakupowej jako „Kod produktu” — pod tytułem klient znajduje go
+      od razu, a przy telefonicznym zamówieniu to pierwsza rzecz, o którą pyta
+      obsługa. Dolna linijka została usunięta z szablonu, żeby numer nie
+      powtarzał się dwa razy w tej samej kolumnie (trzeci raz jest
+      w specyfikacji pod opisem — tam był też w starym sklepie).
+   2. Najniższa cena z 30 dni: motyw dawał ją w --c-grey-5 i --fs-body-xs,
+      czyli szarym drobiazgiem, przez co ginęła obok przekreślonej ceny.
+      Zostaje przy tym rozmiarze (to informacja prawna, nie hasło sprzedażowe),
+      ale w kolorze tekstu i z pogrubioną kwotą — jak w starym sklepie.
+   3. Termin wysyłki („Zamów dzisiaj — wyślemy jutro!”) —
+      templates/components/estimate-delivery.tpl. Zielony akcent jest jedynym
+      w tym motywie: paleta nie ma zieleni, ale ten komunikat cały czas ją
+      miał i to on odpowiada za „zdążę dziś”. Kolor jest przygaszony
+      (#2f7d55 zamiast dawnego #4caf50), żeby nie bił po oczach obok czerni.
+   -------------------------------------------------------------------------- */
+
+/* -------- 13.1 Nr produktu pod tytułem -------- */
+
+/* Motyw ustawia .product__reference na margin-block: 1.25rem 0 — tam była
+   ostatnim elementem kolumny, tutaj jest wciśnięta między tytuł a cenę. */
+.product__reference--top {
+  margin-block: 0 0.75rem;
+  color: var(--c-black);
+  font-size: var(--fs-body-s);
+}
+
+.product__reference--top span {
+  font-weight: 600;
+}
+
+/* -------- 13.2 Najniższa cena z 30 dni -------- */
+
+.product__lowest-price {
+  color: var(--c-black);
+}
+
+.product__lowest-price-value {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* -------- 13.3 Termin wysyłki -------- */
+
+/* Układ jak w .product__shipping-item (ikona 1.25rem + tekst), ale ikona musi
+   trzymać się pierwszej linijki — komunikat o minutach potrafi się zawinąć,
+   a align-items:center zepchnęłoby wtedy ciężarówkę na środek bloku. */
+.product__delivery {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-block: 1rem 0;
+  color: var(--c-black);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-s);
+  line-height: 1.45;
+}
+
+.product__delivery .material-icons {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: #2f7d55;
+}
+
+.product__delivery-accent {
+  font-weight: 600;
+  color: #2f7d55;
+}
+
+/* -------- 13.4 Widget opinii eTrusted -------- */
+
+/* Widget ładuje się asynchronicznie i do tego czasu jest pustym elementem
+   inline — bez display:block potrafił się skleić z sekcją opisu. Marginesy
+   oddzielają go od bloku zakupowego nad nim i od „Opis produktu” pod nim. */
+etrusted-widget {
+  display: block;
+  margin-block: 2rem;
+}

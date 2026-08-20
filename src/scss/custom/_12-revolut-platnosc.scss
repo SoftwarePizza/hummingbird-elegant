@@ -1,0 +1,66 @@
+/* --------------------------------------------------------------------------
+   12. REVOLUT — DEDYKOWANA STRONA PŁATNOŚCI KARTĄ
+   /module/revolutpayment/payment (typ widgetu 2). Szablon nadpisany w motywie:
+   themes/hummingbird/modules/revolutpayment/views/templates/front/version17/
+   payment_page.tpl. W oryginale przycisk „Zapłać" wisiał pod polem karty
+   w osobnej kolumnie Bootstrapa — tutaj stoi z nim w jednym wierszu i jest
+   wyraźnie większy. Wysokość pola karty ustala iframe Revoluta, więc wiersz
+   tylko centruje elementy w pionie — nic nie wymuszamy na iframie.
+   -------------------------------------------------------------------------- */
+
+.revolut-payment {
+  max-width: 46rem;
+}
+
+.revolut-payment__description {
+  margin-bottom: 1rem;
+}
+
+.revolut-payment__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Pole karty bierze całą wolną szerokość, min-width:0 pozwala mu się zwężać. */
+.revolut-payment__field {
+  display: flex;
+  flex: 1 1 20rem;
+  align-items: center;
+  min-width: 0;
+  min-height: 3.25rem;
+}
+
+.revolut-payment__field > #revolut_card {
+  width: 100%;
+}
+
+/* Przycisk zostaje przy swojej szerokości i równa wysokością do pola karty. */
+.revolut-payment__btn {
+  flex: 0 0 auto;
+  min-height: 3.25rem;
+  padding-inline: 2.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.revolut-payment .revolutPaymentPageErrors {
+  margin-top: 0.75rem;
+}
+
+/* Telefon: przycisk przeskakuje pod pole i bierze całą szerokość. */
+@media (max-width: 575.98px) {
+  .revolut-payment__btn {
+    width: 100%;
+  }
+}
+
+/* Strona zamiast błędu 500, gdy klient wraca na link płatności
+   (payment_finished.tpl w module). */
+.revolut-finished__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}

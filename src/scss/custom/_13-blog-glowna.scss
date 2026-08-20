@@ -1,0 +1,28 @@
+/* --------------------------------------------------------------------------
+   13. BLOG NA STRONIE GŁÓWNEJ (moduł phblogrecentposts)
+
+   Nagłówek sekcji to jeden <h3 class="h1"> z tytułem bloga i linkiem
+   „Zobacz wszystkie artykuły" w środku. Moduł ustawia ten link na
+   `position:absolute; right:0; bottom:0` (ph_simpleblog-17.css, ~w. 301) —
+   na desktopie tytuł mieści się w jednej linii i link ląduje obok, ale na
+   telefonie tytuł łamie się na dwie linijki i link wjeżdża na tekst.
+
+   Poniżej `lg` link wraca do normalnego przepływu i staje pod tytułem.
+   Desktop zostaje bez zmian.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 991.98px) {
+  #phblogrecentposts .h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #phblogrecentposts .h1 a {
+    position: static;
+    float: none;
+    bottom: auto;
+    right: auto;
+  }
+}

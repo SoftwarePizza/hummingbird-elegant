@@ -1,0 +1,36 @@
+/* --------------------------------------------------------------------------
+   17. LORA W CAŁYM MENU, NIE TYLKO NA PASKU
+
+   Sekcja 2 przestawiła na Lorę sam pasek i przez chwilę było gorzej niż przed:
+   pasek szeryfowy, rozwijany panel bezszeryfowy, a menu mobilne — które motyw
+   od zawsze składa Lorą (24 px) — jeszcze inaczej. Trzy kroje w jednym
+   elemencie nawigacji. Teraz całe menu jedzie jedną rodziną.
+
+   Przy okazji to ta sama odpowiedź na drobne polskie znaki co w sekcji 3:
+   Lora jest TrueType z tabelą `gasp`, Geist to CFF bez hintingu, więc kreski
+   nad „ś" i „ż" mają się przy 13–14 px o co oprzeć.
+   -------------------------------------------------------------------------- */
+
+.cascade__item,
+.submenu__column-title,
+.submenu__column-link,
+.ps-mainmenu--desktop .submenu__left-item,
+.ps-mainmenu--desktop .submenu .menu-item {
+  font-family: Lora, Georgia, "Times New Roman", serif;
+}
+
+/* Szeryfy przy tej samej wielkości czytają się drobniej niż Geist, więc listy
+   w panelu dostają pół stopnia więcej i odrobinę luzu między wierszami. */
+.cascade__item {
+  font-size: 0.9375rem;
+  padding-block: 0.22rem;
+}
+
+.submenu__column-link {
+  font-size: 0.9375rem;
+}
+
+.submenu__column-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}

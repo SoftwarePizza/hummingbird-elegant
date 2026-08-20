@@ -1,0 +1,77 @@
+/* --------------------------------------------------------------------------
+   19. „NAJCZĘŚCIEJ SZUKANE" W PANELU MENU — trzy warianty do wyboru
+
+   Które pozycje są wyróżnione, ustawia się w edytorze (zakładka „Menu",
+   kolumna „Wyróżnij"), a wariant wyglądu osobnym przełącznikiem — dlatego
+   klasa wariantu siedzi na .cascade, a nie na pojedynczej pozycji. Zmiana
+   wariantu nie wymaga przeklikiwania listy od nowa.
+
+   Czerwień odpada: `--bs-danger` znaczy w tym sklepie „promocja" i zajmują ją
+   Nowości z Wyprzedażą na pasku (sekcja 16). Wyróżnienie w menu to inna
+   informacja — „tego szukają najczęściej" — więc dostaje róż z logo, nie kolor
+   komunikatów.
+
+   KAŻDA pozycja ma rowek na znacznik po lewej, nie tylko wyróżniona. Pierwsze
+   podejście wstawiało kropkę jako element flex z ujemnym marginesem i lista
+   się schodkowała — wyróżnione etykiety stały 12 px dalej niż reszta. Teraz
+   znacznik jest pozycjonowany absolutnie w rowku, więc nie bierze udziału
+   w układzie i etykiety trzymają jedną oś niezależnie od wariantu.
+   Rowek odbija się w pozycjonowaniu karty (custom.js liczy go do przesunięcia),
+   żeby pierwsza kolumna dalej stała w osi etykiety na pasku.
+   -------------------------------------------------------------------------- */
+
+.cascade {
+  --izpol-feat: #d6428c;
+  --izpol-feat-gutter: 0.75rem;
+}
+
+.cascade__item {
+  position: relative;
+  padding-left: var(--izpol-feat-gutter);
+}
+
+/* Wspólne dla wszystkich wariantów: wyróżniona pozycja przestaje być szara. */
+.cascade__item--featured {
+  color: #242424;
+}
+
+/* WARIANT „bold" — najcichszy. Tylko waga i kolor tekstu, zero ozdobników.
+   Dobry, gdy wyróżnionych jest dużo: nie robi z listy choinki. */
+.cascade--feat-bold .cascade__item--featured {
+  font-weight: 600;
+}
+
+/* WARIANT „dot" — kropka w rowku. Sygnał czytelny przy skanowaniu listy
+   wzrokiem w pionie, a sama etykieta zostaje nietknięta. */
+.cascade--feat-dot .cascade__item--featured {
+  font-weight: 500;
+}
+
+.cascade--feat-dot .cascade__item--featured::before {
+  content: "";
+  position: absolute;
+  left: 0.125rem;
+  top: 50%;
+  width: 0.3125rem;
+  height: 0.3125rem;
+  margin-top: -0.15625rem;
+  border-radius: 50%;
+  background: var(--izpol-feat);
+}
+
+/* WARIANT „highlight" — miękkie tło pod nazwą, jak zakreślacz. Najbardziej
+   rzuca się w oczy, więc ma sens przy kilku pozycjach. Tło idzie na <a>, więc
+   kończy się na tekście i nie rozlewa na całą szerokość panelu. */
+.cascade--feat-highlight .cascade__item--featured {
+  font-weight: 500;
+  background: color-mix(in srgb, var(--izpol-feat) 14%, transparent);
+  border-radius: 0.25rem;
+  width: fit-content;
+  min-width: 100%;
+  padding-right: 0.4rem;
+}
+
+.cascade--feat-highlight .cascade__item--featured:hover,
+.cascade--feat-highlight .cascade__item--featured.is-active {
+  background: color-mix(in srgb, var(--izpol-feat) 22%, transparent);
+}

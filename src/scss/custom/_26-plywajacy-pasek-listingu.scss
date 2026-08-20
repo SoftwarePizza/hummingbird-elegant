@@ -1,0 +1,134 @@
+/* --------------------------------------------------------------------------
+   24. PŁYWAJĄCY PASEK FILTRÓW I SORTOWANIA NA LISTINGU
+
+   #js-product-list-top (przycisk „Filtry", licznik, sortowanie) dostaje
+   `position: sticky` i jedzie razem z przewijaniem przez cały listing.
+   Klasę .listing-bar oraz stan .is-stuck dokłada custom.js (blok 7) — bez
+   JS-a pasek zostaje zwykłym wierszem nad produktami jak dotąd.
+
+   Dwa stany:
+   - w spoczynku: przezroczysty, wygląda dokładnie tak jak przed zmianą;
+   - przyklejony (.is-stuck): biała karta z cieniem przylegająca do górnej
+     krawędzi okna, zaokrąglone tylko dolne rogi (2026-08-20 wieczorem: wersja
+     z odstępem 0.5rem od góry odrzucona — ma przylegać).
+
+   Szerokość karty = kolumna + jej własny padding (połowa --bs-gutter-x
+   z .row), więc treść paska stoi dokładnie w linii z kaflami, a karta
+   wystaje poza nie o tyle, ile wynosi odstęp siatki. Na telefonie zostaje
+   12 px marginesu od krawędzi ekranu — tyle, co kontener.
+
+   Przyklejanie kończy się razem z <section id="products"> — nad stopką
+   pasek nie wisi.
+
+   Nagłówek sklepu NIE jest przyklejony (hummingbird_editor/front.css daje
+   #header position: relative pod overlay wyszukiwarki), więc `top` liczy się
+   od krawędzi okna, nie od spodu nagłówka.
+   -------------------------------------------------------------------------- */
+#js-product-list-top.listing-bar {
+  position: sticky;
+  top: 0;
+  /* Nad kaflami i ich etykietami, pod nagłówkiem (1021), szufladami (1045)
+     i modalami. Własny kontekst z-index trzyma też menu sortowania nad
+     listingiem. */
+  z-index: 1019;
+  margin-inline: calc(var(--bs-gutter-x, 1.5rem) * -0.5);
+  margin-block-end: 1.5rem;
+  padding: 0.5rem calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+  border-radius: 0 0 var(--bs-border-radius-lg, 0.75rem) var(--bs-border-radius-lg, 0.75rem);
+  background: transparent;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Margines dolny wiersza leżał w środku sticky boxa i podnosił go o 1.5rem
+   pustki — przechodzi na sam pasek (wyżej). */
+#js-product-list-top.listing-bar .products__selection {
+  margin-block-end: 0;
+}
+
+#js-product-list-top.listing-bar.is-stuck {
+  background: var(--bs-body-bg, #fff);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 12px 32px -14px rgba(0, 0, 0, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #js-product-list-top.listing-bar {
+    transition: none;
+  }
+}
+
+/* Przyciski paska: „Filtry" i sortowanie na jednej wysokości, także wtedy,
+   gdy motyw da im różne paddingi. */
+.listing-bar .filters-toggle,
+.listing-bar .products__sort-dropdown-button {
+  min-height: 2.5rem;
+}
+
+/* -------- telefon: jeden wiersz, dwa równe przyciski -------- */
+
+/* Licznik („Jest 136 produktów.") zjeżdża nad pasek — kopiuje go tam
+   custom.js jako .listing-count — żeby przyklejony pasek miał jeden wiersz
+   i ~60 px, a nie dwa. */
+.listing-count {
+  display: none;
+  margin: -0.5rem 0 1rem;
+  color: var(--bs-secondary-color);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 767.98px) {
+  .listing-count {
+    display: block;
+  }
+
+  /* Na telefonie karta i tak sięga obu krawędzi ekranu (ujemny margines
+     znosi padding kontenera), więc zamiast karty jest pełna belka bez
+     zaokrągleń. */
+  #js-product-list-top.listing-bar {
+    border-radius: 0;
+  }
+
+  #js-product-list-top.listing-bar .products__count {
+    display: none;
+  }
+
+  #js-product-list-top.listing-bar .products__selection {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  /* Motyw daje sortowaniu order:-1, żeby na telefonie stało przed
+     licznikiem; „Filtry" ma stać jeszcze przed nim — tak jak na desktopie,
+     z lewej. */
+  #js-product-list-top.listing-bar .filters-toggle {
+    order: -2;
+    flex: 1 1 0;
+    justify-content: center;
+    min-height: 2.75rem;
+  }
+
+  #js-product-list-top.listing-bar .products__sort {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  #js-product-list-top.listing-bar .products__sort-dropdown {
+    min-width: 0;
+  }
+
+  #js-product-list-top.listing-bar .products__sort-dropdown-button {
+    min-height: 2.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Menu sortowania nie ma co wystawać poza wąski ekran — rozciąga się
+     na szerokość przycisku. */
+  #js-product-list-top.listing-bar .products__sort .dropdown-menu {
+    min-width: 100%;
+  }
+}

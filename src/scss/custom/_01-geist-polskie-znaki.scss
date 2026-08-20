@@ -1,0 +1,27 @@
+/* --------------------------------------------------------------------------
+   1. POLSKIE ZNAKI W GEIŚCIE — sekcja usunięta 2026-08-19
+   Stały tu @font-face'y dokładające „Geist Sans" z pakietu npm `geist`
+   z `unicode-range: U+0100-024F, …`, w przekonaniu, że motyw wgrywa wyłącznie
+   subset „latin" i polskie znaki spadają na font systemowy.
+
+   Tak nie jest. Pliki motywu (`assets/fonts/geist-sans-latin-*-normal.woff2`,
+   fontsource) mają w cmapie komplet: ą ć ę ł ń ó ś ź ż, a poza tym ř ů ő ű
+   ș ț ų ė å ø æ ß ñ ç ğ ı œ — czyli wszystkie języki tego sklepu. Deklaracje
+   w theme.css nie mają `unicode-range`, więc obsługują cały tekst.
+
+   Efekt dokładania drugiego pliku był odwrotny do zamierzonego: to były DWA
+   RÓŻNE WYDANIA Geista dla tej samej rodziny i wagi —
+     motyw:      Version 1.002 (Glyphs 3.1.2), ascender 920, descender -220
+     dokładany:  Version 1.800 (ttfautohint 1.8.4), ascender 1005, descender -295
+   Przy takim samym `font-family` i wadze o wyborze pliku dla znaku decyduje
+   `unicode-range`, więc ą ć ę ł ń ś ź ż jechały z wydania 1.800, a reszta
+   liter z 1.002. W jednym wyrazie mieszały się dwa kroje o innym hintingu
+   i metrykach — najbardziej widać to w drobnym tekście (tytuły podkategorii
+   w mega menu mają 13 px), gdzie „ś" wyglądało na mniejsze i inaczej
+   zbudowane niż sąsiednie „s".
+
+   Pliki geist-sans-latin-ext-*.woff2 zostają na dysku (nic ich już nie
+   wczytuje) — gdyby kiedyś doszedł język spoza pokrycia motywu, wystarczy
+   wrócić do tych deklaracji, ale z zakresem zawężonym DOKŁADNIE do brakujących
+   znaków (w Latin Extended-A brakuje tylko wietnamskich Ơ ơ Ư ư).
+   -------------------------------------------------------------------------- */

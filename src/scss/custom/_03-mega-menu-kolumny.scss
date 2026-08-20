@@ -1,0 +1,97 @@
+/* --------------------------------------------------------------------------
+   3. MEGA MENU — układ kolumnowy
+   Włączany per pozycja przez HBE_MENU_COLUMNS_ITEMS; szablon renderuje
+   .submenu__columns z grupami, a na końcu blok z kategoriami bez dzieci.
+   -------------------------------------------------------------------------- */
+.submenu__right--columns {
+  width: 100%;
+  padding-block: 0.5rem 1.25rem;
+}
+
+/* Motyw robi z .submenu__right-items siatkę repeat(3,1fr) — a od 1400 px
+   repeat(4,1fr) — pod kafelki układu zakładkowego. Nasz kontener kolumn wpadał
+   tam jako POJEDYNCZY element siatki, więc dostawał jedną trzecią szerokości
+   i cała treść ściskała się w lewej części panelu. W trybie kolumnowym siatka
+   jest zbędna. Selektor musi przebić
+   `.ps-mainmenu:is(.ps-mainmenu--desktop) .submenu__right-items.active`. */
+.ps-mainmenu.ps-mainmenu--desktop .submenu__right--columns .submenu__right-items,
+.ps-mainmenu.ps-mainmenu--desktop .submenu__right--columns .submenu__right-items.active {
+  display: block;
+  width: 100%;
+}
+
+.submenu__columns {
+  columns: 4;
+  column-gap: 2.5rem;
+}
+
+.submenu__column-group {
+  break-inside: avoid;
+  margin-bottom: 1.125rem;
+}
+
+/* Lista „pozostałych" bywa dłuższa niż kolumna — niech się przelewa,
+   inaczej wymusiłaby wysokość całego panelu. */
+.submenu__column-group--rest {
+  break-inside: auto;
+}
+
+/* Rozmiary podniesione 20.08.2026. Sprawdziłem najpierw, czy nie wrócił
+   problem z fontem z sekcji 1: motyw ładuje DOKŁADNIE jedno wydanie Geista
+   (5 krojów 300–700, wszystkie „Version 1.002;Glyphs 3.1.2", ascender 920 /
+   descender -220), a w cmapie każdego z nich siedzi komplet ą ć ę ł ń ó ś ź ż
+   — żadnego glifu nie brakuje i nic się nie miesza. Powód, dla którego „ś"
+   i „ż" wyglądały na rozmyte, jest inny: to font CFF/PostScript BEZ tabel
+   hintingu (`fpgm`, `prep`, `cvt `, `gasp` nie istnieją), a przy 11 px
+   wersalikami i 13 px tekstem kreska nad literą schodzi poniżej piksela.
+   Najtańsze i odwracalne lekarstwo to nie zmiana fontu, tylko oddanie
+   diakrytykom pikseli: 13 px -> 14 px, 11 px -> 12 px. */
+.submenu__column-title {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #242424;
+  text-decoration: none;
+}
+
+a.submenu__column-title:hover,
+a.submenu__column-title:focus-visible {
+  text-decoration: underline;
+}
+
+.submenu__column-title--plain {
+  color: #6c757d;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.submenu__column-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.submenu__column-link {
+  display: block;
+  padding: 0.12rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.submenu__column-link:hover,
+.submenu__column-link:focus-visible {
+  color: #242424;
+  text-decoration: underline;
+}
+
+@media (max-width: 1399.98px) {
+  .submenu__columns {
+    columns: 3;
+  }
+}

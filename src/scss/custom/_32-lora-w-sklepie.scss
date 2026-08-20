@@ -1,0 +1,143 @@
+/* --------------------------------------------------------------------------
+   27. LORA W CAŁYM SKLEPIE — JEDNA RODZINA PISMA
+
+   2026-08-21. Do tej pory motyw mieszał dwa kroje: Geist Sans na treści
+   (`--font-body`, `--bs-body-font-family`) i Lorę na nagłówkach oraz — od
+   sekcji 2 i 17 — na całym menu. Teraz WSZYSTKO jedzie Lorą. Zmienia się
+   wyłącznie rodzina; wagi, rozmiary, interlinie i odstępy zostają takie, jakie
+   ustawił motyw i poszczególne sekcje wyżej.
+
+   Trzy rzeczy, bez których ta zmiana byłaby tylko pozornie prosta:
+
+   1. PLIKI. Motyw wgrywał Lorę TYLKO w wadze 400 normal (bo używał jej
+      wyłącznie na nagłówkach o tej wadze). Tekst ma jednak mnóstwo 500/600/700
+      (ceny, przyciski, etykiety, tytuły kafli) i trochę kursywy — bez
+      prawdziwych plików przeglądarka dorabiałaby pogrubienie i pochylenie
+      sztucznie (faux bold/italic), rozmazane i szersze niż oryginał.
+      Dlatego _00-fonty-lora.scss importuje z @fontsource/lora (ta sama
+      paczka i wydanie, z którego motyw bierze wagę 400 w base/_fonts.scss)
+      wagi 500/600/700 normal i 400–700 italic, z `unicode-range` per subset.
+      Webpack kopiuje pliki do assets/fonts z hashem w nazwie, tak samo jak
+      dla motywu — więc metryki się zgadzają i nie powtórzy się historia
+      z dwoma Geistami (sekcja 1). Każdy plik ładuje się dopiero, gdy na
+      stronie pojawi się znak z jego zakresu i dana waga.
+
+   2. ZMIENNE zamiast pojedynczych selektorów. theme.css i CSS edytora
+      (hummingbird_editor) sięgają po `var(--font-body)` / `var(--font-heading)`
+      w ~60 miejscach, Bootstrap po `--bs-body-font-family` i
+      `--bs-font-sans-serif`. Nadpisanie czterech zmiennych na :root załatwia
+      to hurtem — :root z custom.css jest poza warstwami, więc bije wartości
+      z warstwy `bs-base`.
+
+   3. SZTYWNE DEKLARACJE, które zmienne omijają:
+      - theme.css: .popover, .tooltip, .breadcrumb, .header-block__badge/.label,
+        .menu-item__group-main-item (wpisane „Geist Sans" na twardo);
+      - jQuery UI (autocomplete wyszukiwarki): .ui-widget → Verdana;
+      - socialloginizer: przyciski logowania społecznościowego → Source Sans Pro;
+      - seigicookie: baner zgody .cc_div → stos systemowy; arkusz ładuje się
+        NA KOŃCU <body>, czyli po naszym bundlu, więc potrzebna wyższa
+        specyficzność (`body .cc_div`), sama kolejność nie wystarczy;
+      - treść z bazy: opisy produktów (10 tys. wierszy), CMS, kategorie, wpisy
+        bloga niosą inline `style="font-family: Calibri/Arial/…"` wklejone
+        z Worda. Atrybut style bije każdą regułę — poza regułą z !important.
+        Stąd `[style*="font-family"]{font-family:inherit!important}` — jedna
+        reguła zamiast czyszczenia bazy. `inherit` idzie w górę aż do body,
+        więc zagnieżdżone spany też trafiają na Lorę.
+
+   Nieruszone celowo: fonty ikonowe (Material Icons, FontAwesome), `pre`/`code`
+   (monospace) i widżety w iframe'ach (InPost, Revolut, PayPal) — do tych CSS
+   sklepu i tak nie sięga.
+   -------------------------------------------------------------------------- */
+
+:root,
+[data-bs-theme="light"] {
+  --izpol-font: Lora, Georgia, "Times New Roman", serif;
+  --font-body: var(--izpol-font);
+  --font-heading: var(--izpol-font);
+  --bs-body-font-family: var(--izpol-font);
+  --bs-font-sans-serif: var(--izpol-font);
+}
+
+body {
+  font-family: var(--izpol-font);
+}
+
+/* Sztywne „Geist Sans" z theme.css */
+.popover,
+.tooltip,
+.breadcrumb,
+.header-block__badge,
+.header-block__label,
+.menu-item__group-main-item {
+  font-family: var(--izpol-font);
+}
+
+/* jQuery UI — podpowiedzi wyszukiwarki */
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: var(--izpol-font);
+}
+
+/* socialloginizer — przyciski logowania przez serwisy społecznościowe */
+a.azm-social,
+a.azm-social:hover,
+a.azm-social:focus,
+.kbsocial-icons a,
+.kbsocial-icons a:hover,
+.kbsocial-icons a:focus {
+  font-family: var(--izpol-font);
+}
+
+/* seigicookie — baner zgody na ciasteczka (arkusz ładowany po bundlu) */
+body .cc_div {
+  font-family: var(--izpol-font);
+}
+
+/* Treść z bazy z inline font-family (Word, stary edytor) */
+[style*="font-family"] {
+  font-family: inherit !important;
+}
+
+/* Trusted Shops — odznaka i jej karta. Skrypt wstawia ją do zwykłego DOM-u
+   (nie do shadow root), w kontener #trustbadge-container-<hash>, a style
+   dopisuje przez CSSOM już po naszym arkuszu, z hashowanymi klasami
+   (`._3pfk8a` itp.), których nie ma sensu wymieniać. Stąd selektor po
+   prefiksie id i !important. Ich reguły TEŻ mają !important (`._3pfk8a
+   {font-family:inherit!important}` i stos systemowy na przodku), a wstawione
+   przez CSSOM są późniejsze — przy równej specyficzności wygrywałyby. Stąd
+   powtórzony `[id][id]`: (0,3,0) zamiast (0,1,0), ponad ich pojedyncze klasy. */
+[id^="trustbadge-container"][id][id],
+[id^="trustbadge-container"][id][id] * {
+  font-family: var(--izpol-font) !important;
+}
+
+/* Pliki Lory poza wagą 400 normal (tę wgrywa theme.css) ładuje partial
+   _00-fonty-lora.scss — te same arkusze @fontsource/lora, z których korzysta
+   motyw, więc metryki i wydanie plików zgadzają się co do bajta. */
+
+/* -------- 23.1 Rabat za zabranie całości — plakietka w koszyku -------- */
+
+/* Flagę `hbe_allstock_discount` dokłada hummingbird_editor w actionPresentCart,
+   tym samym warunkiem, którym liczy cenę pozycji. Zieleń jest tu ta sama, co
+   przy terminie wysyłki (sekcja 13.3): w koszyku to jedyny komunikat „na plus",
+   więc nie ma z czym konkurować, a odróżnia się od czerwonej plakietki
+   przeceny obok. */
+.product-line__allstock {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  margin-block-start: 0.25rem;
+  color: #2f7d55;
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product-line__allstock-icon {
+  flex: 0 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}

@@ -1,0 +1,48 @@
+/* ==========================================================================
+   custom.scss → assets/css/custom.css — izpolowe dostosowania motywu.
+
+   Rdzeń (classes/controller/FrontController.php, setMedia) rejestruje
+   zbudowany plik jako 'theme-custom' z priorytetem 1000, czyli jako OSTATNI
+   arkusz motywu. Plik celowo NIE jest częścią theme.css: tamten siedzi
+   w @layer, a ten poza warstwami — dzięki temu wygrywa każdą zwykłą regułę
+   motywu bez podbijania specyficzności (przegrywa tylko z !important
+   z @layer utilities Bootstrapa).
+
+   Partiale w custom/ to zwykły CSS podzielony po sekcjach (numeracja
+   historyczna, stąd powtórki i dziury). Sass tylko skleja; cssnano
+   z webpacka minifikuje i wycina komentarze — dokumentacja żyje tutaj.
+   ========================================================================== */
+
+@use 'custom/00-fonty-lora' as *;
+@use 'custom/01-geist-polskie-znaki' as *;
+@use 'custom/02-naglowek-katalogowy' as *;
+@use 'custom/03-mega-menu-kolumny' as *;
+@use 'custom/04-mobile-wyszukiwarka-logo' as *;
+@use 'custom/05-banery-karuzela' as *;
+@use 'custom/06-listing-zdjecia' as *;
+@use 'custom/07-filtry-szuflada' as *;
+@use 'custom/08-koszyk-wiersz' as *;
+@use 'custom/09-stopka-newsletter' as *;
+@use 'custom/10-karta-probki' as *;
+@use 'custom/11-karuzele-produktowe' as *;
+@use 'custom/12-revolut-platnosc' as *;
+@use 'custom/13-blog-glowna' as *;
+@use 'custom/14-karta-produktu-ze-starego' as *;
+@use 'custom/15-menu-rowno-z-kontenerem' as *;
+@use 'custom/16-mega-menu-kaskada' as *;
+@use 'custom/17-nowosci-wyprzedaz-pasek' as *;
+@use 'custom/18-lora-w-menu' as *;
+@use 'custom/19-nowosci-wyprzedaz-mobile' as *;
+@use 'custom/20-najczesciej-szukane-panel' as *;
+@use 'custom/21-menu-mobilne-przewijanie' as *;
+@use 'custom/22-najczesciej-szukane-mobile' as *;
+@use 'custom/23-cechy-produktu' as *;
+@use 'custom/24-stan-magazynowy' as *;
+@use 'custom/25-karta-produktu-zakladki' as *;
+@use 'custom/26-plywajacy-pasek-listingu' as *;
+@use 'custom/27-wroc-na-gore' as *;
+@use 'custom/28-naglowek-mobile-ikony' as *;
+@use 'custom/29-lista-zyczen' as *;
+@use 'custom/30-naglowek-mobile-logo' as *;
+@use 'custom/31-wyszukiwanie-grupy' as *;
+@use 'custom/32-lora-w-sklepie' as *;

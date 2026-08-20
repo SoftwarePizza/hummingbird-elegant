@@ -1,0 +1,35 @@
+/* --------------------------------------------------------------------------
+   16. „NOWOŚCI" I „WYPRZEDAŻ" JAKO GRUPA PROMOCYJNA NA KOŃCU PASKA
+
+   Kolejność pozycji ustawia MOD_BLOCKTOPMENU_ITEMS (ps_mainmenu) — te dwie
+   siedzą na końcu. Tutaj tylko odcinamy je wzrokowo od nawigacji po asortymencie.
+
+   Trzy decyzje:
+   - `flex: 0 0 auto` — nie rosną razem z resztą, więc cały luz kontenera idzie
+     do pozycji katalogowych, a para promocyjna zbiera się przy prawej krawędzi
+     jako zwarta grupa. Bez tego rozjechałyby się po pasku jak wszystkie inne.
+   - kreska zamiast odstępu — `gap` między pozycjami to martwa strefa, po której
+     mega menu miga (patrz sekcja 2). Pełnowysoka `border-left` daje ten sam
+     podział, a pozycje dalej się stykają.
+   - `--bs-danger` (#ff4657) to kolor, którym motyw oznacza promocje; nie
+     wymyślam nowego akcentu.
+   -------------------------------------------------------------------------- */
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(-n + 2) {
+  flex: 0 0 auto;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(2) .ps-mainmenu__tree-link {
+  border-left: 1px solid var(--bs-border-color, #e6e2e5);
+  padding-left: calc(var(--izpol-menu-pad) + 0.5rem);
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(-n + 2) .ps-mainmenu__tree-link {
+  color: var(--bs-danger, #ff4657);
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(-n + 2):hover .ps-mainmenu__tree-link,
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(-n + 2):focus-within .ps-mainmenu__tree-link,
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:nth-last-child(-n + 2).current .ps-mainmenu__tree-link {
+  color: var(--bs-danger, #ff4657);
+}

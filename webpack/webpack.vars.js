@@ -21,6 +21,17 @@ const entriesArray = {
   theme_rtl: ['scss'],
   error_rtl: ['scss'],
   rtl: ['scss'],
+  // [izpol] Dodatki sklepu: src/scss/custom.scss + src/js/custom.js →
+  // assets/css/custom.css i assets/js/custom.js. Rdzeń rejestruje oba
+  // w FrontController::setMedia() ('theme-custom', priorytet 1000).
+  custom: ['scss', 'js'],
+};
+
+// [izpol] output.library wystawia każde wejście jako window.Theme — drugie
+// wejście JS nadpisałoby eksporty motywu. Wejścia z tej listy dostają
+// własną nazwę (moduł nic nie eksportuje, więc ląduje tam pusty obiekt).
+const entryLibraries = {
+  custom: { name: 'ThemeCustom', type: 'window' },
 };
 
 exports.webpackVars = {
@@ -46,7 +57,9 @@ exports.webpackVars = {
         files.push(path.resolve(themeDev, `./${extension === 'ts' ? 'js' : extension}/${entry}.${extension}`));
       }
 
-      resultEntries[entry] = files;
+      resultEntries[entry] = entryLibraries[entry]
+        ? { import: files, library: entryLibraries[entry] }
+        : files;
     }
 
     return resultEntries;

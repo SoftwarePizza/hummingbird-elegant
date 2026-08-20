@@ -1,0 +1,44 @@
+/* --------------------------------------------------------------------------
+   22. CECHY PRODUKTU — ETYKIETA ODDZIELONA OD WARTOŚCI
+   Obie linijki wiersza (.product-specs__label i .product-specs__value) szły
+   z motywu tym samym krojem: --fs-body-m, waga 400, kolor --c-black.
+   Na desktopie ratował je układ dwukolumnowy (etykieta z lewej, wartość
+   dobita do prawej), ale poniżej 768 px wiersz przechodzi na
+   `flex-direction: column` i „Wzór / Tkaniny gładkie” czyta się jak dwie
+   równorzędne linijki jednej listy — nie widać, gdzie kończy się jedna cecha,
+   a zaczyna następna.
+
+   Etykieta dostaje więc rolę podpisu: drobniejsza (--fs-body-xs), szara
+   (--c-grey-5), wersaliki z rozstrzeloną literą. Wartość zostaje czarna
+   i w --fs-body-m, ale w wadze 500 — to ona jest treścią, którą się czyta.
+   Rozróżnienie robi rozmiar i kolor, nie dodatkowe kreski: lista ma już
+   `border-bottom` na każdym wierszu.
+
+   Dotyczy obu zakładek — „Ogólne parametry” (moduł productinformation,
+   szablon nadpisany w motywie) i „Dane techniczne” (product-details.tpl)
+   składają wiersze tymi samymi klasami.
+   -------------------------------------------------------------------------- */
+.product-specs__label {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.product-specs__value {
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* Układ kolumnowy: motywowy `gap: .25rem` był policzony dla dwóch linijek tej
+   samej wielkości. Po zmniejszeniu etykiety odstęp trzeba ściągnąć, żeby para
+   trzymała się razem — wiersze i tak dzieli padding-block 0.875rem, więc
+   przy równych odstępach etykieta wisiałaby w połowie drogi między swoją
+   wartością a wartością wiersza wyżej. */
+@media (max-width: 767.98px) {
+  .product-specs__row {
+    gap: 0.125rem;
+  }
+}

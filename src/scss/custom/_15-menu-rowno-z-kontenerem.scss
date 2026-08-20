@@ -1,0 +1,147 @@
+/* --------------------------------------------------------------------------
+   14. MENU RÓWNO Z KONTENEREM
+
+   Dwie rzeczy nie trzymały osi reszty strony:
+
+   1. Pasek pozycji miał z motywu `justify-content: center`, więc sześć
+      etykiet stało wyśrodkowaną kupką w środku kontenera — „Nowości" nie
+      zaczynało się pod logo, „Tkaniny w stałej ofercie" nie kończyło się pod
+      ikoną koszyka.
+   2. Panel mega menu jest `position:absolute; left:0; right:0` względem
+      `.header-nav-full-width` (sekcja 2), czyli szedł od krawędzi do krawędzi
+      okna — biała płyta bez związku z szerokością treści.
+
+   Rozciągam pozycje `flex-grow`, a NIE przez `space-between` ani `gap`:
+   sąsiednie <li> muszą się dalej stykać bokami, bo panel zamyka się na
+   `mouseleave` bez opóźnienia i każda szczelina to mignięcie (patrz sekcja 2).
+   Przy `flex: 1 1 auto` wolne miejsce wchodzi w POLE KLIKALNE linków, więc
+   nie powstaje ani jeden piksel martwej strefy.
+   -------------------------------------------------------------------------- */
+
+/* Pasek NIE zawija się na drugi rząd — gdy się nie mieści, przewija się w bok.
+   Po polsku mieści się z zapasem, ale po niemiecku („Stoffe im permanenten
+   Angebot", „Die Art des Webens") dziewięć pozycji przekracza kontener i motyw
+   przerzucał „Neue Produkte" z „Ausverkauf" do drugiego rzędu: nagłówek rósł,
+   a para promocyjna lądowała POD resztą zamiast obok niej.
+
+   Panel mega menu nie jest przycinany przez to przewijanie: jego kontekstem
+   pozycjonowania jest `.header-nav-full-width`, czyli PRZODEK tej listy, a nie
+   ona sama — `overflow` przycina tylko tych potomków, których blok zawierający
+   leży wewnątrz przewijanego elementu. */
+.ps-mainmenu--desktop .ps-mainmenu__tree {
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #d8d4d7 transparent;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree::-webkit-scrollbar-thumb {
+  background: #d8d4d7;
+  border-radius: 2px;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Chwyt i przeciągnięcie — klasy nadaje custom.js (sekcja 6) i TYLKO wtedy,
+   gdy jest co przewijać. Przy polskich nazwach pasek mieści się w całości,
+   więc kursor nie zmienia się bez powodu. */
+.ps-mainmenu--desktop .ps-mainmenu__tree.is-draggable {
+  cursor: grab;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* W trakcie przeciągania kursor ma zostać „łapką" także nad etykietami —
+   bez tego nad linkiem wracałby do wskaźnika i gest wyglądałby na przerwany. */
+.ps-mainmenu--desktop .ps-mainmenu__tree.is-dragging .ps-mainmenu__tree-link {
+  cursor: grabbing;
+}
+
+/* Samo `justify-content` na liście nie wystarczyło i to była pierwsza pomyłka
+   przy tej zmianie: centrowanie siedzi PIĘTRO WYŻEJ. `.ps-mainmenu` jest
+   `display:flex; justify-content:center`, więc <nav> w środku był elementem
+   flex o szerokości treści (1026 z 1296 px) i stał na środku — lista dostawała
+   do podziału tylko tyle, ile sama zajmowała, i nie miała czego rozciągać.
+   Dopiero gdy <nav> rośnie, `flex-grow` na <li> ma sens. */
+.header-nav-full-width .ps-mainmenu--desktop .ps-mainmenu__desktop {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Sedno jest w `shrink: 0`, nie w samym `nowrap`:
+   - `grow: 1` — gdy miejsca starczy, pozycje rozciągają się do szerokości
+     kontenera, czyli zostaje wszystko, co robi ta sekcja;
+   - `shrink: 0` — gdy nie starczy, NIE ściskają się poniżej swojej treści.
+     Przy domyślnym `shrink: 1` i `nowrap` etykiety zachodziłyby na siebie
+     (mają `white-space: nowrap`) zamiast wypchnąć pasek do przewijania. */
+.ps-mainmenu--desktop .ps-mainmenu__tree > li {
+  flex: 1 0 auto;
+  min-width: 0;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li .ps-mainmenu__tree-item-wrapper {
+  width: 100%;
+}
+
+/* `align-items: stretch` (domyślne) daje etykiecie pełną wysokość pola
+   klikalnego — dzięki temu kreska z sekcji 2 wie, gdzie jest dolna krawędź
+   paska. Wyśrodkowanie tekstu w pionie robi sam <span>. */
+.ps-mainmenu--desktop .ps-mainmenu__tree-link {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Skrajne etykiety równo z krawędzią kontenera: pierwsza w osi loga, ostatnia
+   w osi ikony koszyka. Padding znika tylko od strony krawędzi — od strony
+   sąsiada zostaje, więc pozycje nadal się stykają. */
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:first-child .ps-mainmenu__tree-link {
+  justify-content: flex-start;
+  padding-left: 0;
+}
+
+.ps-mainmenu--desktop .ps-mainmenu__tree > li:last-child .ps-mainmenu__tree-link {
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+/* Panel jako karta o szerokości kontenera. Kontekstem pozycjonowania zostaje
+   pasek (sekcja 2 — tego NIE ruszam, bo `positionSubMenu` w theme.js liczy
+   `top` względem niego), więc kartę środkuję regułą CSS 2.1 §10.3.7: przy
+   `left:0; right:0` i podanej szerokości automatyczne marginesy wychodzą
+   równe. To ta sama arytmetyka, którą środkuje się `.container`, więc panel
+   siada w piksel na tej samej osi co logo i wyszukiwarka.
+   Szerokości są sztywne, bo `container-md` i tak skacze progami, a menu
+   pokazuje się dopiero od xl. */
+.ps-mainmenu--desktop .submenu {
+  width: 1140px;
+  margin-inline: auto;
+  border-right: 1px solid var(--bs-border-color, #e6e2e5);
+  border-bottom: 1px solid var(--bs-border-color, #e6e2e5);
+  border-left: 1px solid var(--bs-border-color, #e6e2e5);
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+@media (min-width: 1400px) {
+  .ps-mainmenu--desktop .submenu {
+    width: 1320px;
+  }
+}
+
+/* Wewnętrzny `.container` panelu ma teraz dokładnie szerokość karty, więc jego
+   gutter jest tym samym gutterem co w rzędzie z logo — treść wypada w osi.
+   Zostaje tylko oddech od zaokrąglonego dołu. */
+.ps-mainmenu--desktop .submenu__row {
+  padding-bottom: 0.25rem;
+}

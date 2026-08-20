@@ -1,0 +1,147 @@
+/* --------------------------------------------------------------------------
+   7. FILTRY W SZUFLADZIE Z PRAWEJ
+   Blok pm_advancedsearch4 (#PM_ASBlockOutput_1) razem z resztą lewej kolumny
+   przenosi custom.js do offcanvasu Bootstrapa (.filters-drawer w <body>),
+   a nad listingiem zostaje przycisk „Filtry". Offcanvas jest ten sam, co menu
+   mobilne motywu, więc backdrop, Esc, blokada scrolla i pułapka focusa
+   przychodzą z Bootstrapa za darmo.
+
+   Uwaga przy zmianach: moduł po każdym filtrowaniu robi
+   `$('#PM_ASBlockOutput_1').replaceWith(...)`, czyli PODMIENIA swój blok na
+   nowy węzeł. Wszystko, co ma przetrwać filtrowanie, musi więc wisieć na
+   kontenerze szuflady, a nie na samym bloku — stąd selektory zaczynają się od
+   .filters-drawer.
+   -------------------------------------------------------------------------- */
+.filters-drawer {
+  /* Tyle, co podgląd koszyka — szuflady w sklepie mają jedną szerokość. */
+  --bs-offcanvas-width: 420px;
+}
+
+.filters-drawer .offcanvas-header {
+  border-bottom: 1px solid var(--bs-border-color, #e6e2e5);
+}
+
+.filters-drawer .offcanvas-title {
+  font-weight: 600;
+}
+
+/* Na mobile moduł dokłada .PM_ASMobileMode i zwija .card-block do rozwijanego
+   akordeonu. W szufladzie filtry mają być od razu widoczne — po to się ją
+   otwiera. */
+.filters-drawer .PM_ASBlockOutput.PM_ASMobileMode .card-block {
+  display: block;
+}
+
+/* Nagłówek karty modułu („Filtry (2822 Produktów)") dubluje tytuł szuflady,
+   a na mobile jest jeszcze przełącznikiem zwijania. */
+.filters-drawer .PM_ASBlockOutput .card-header {
+  display: none;
+}
+
+/* Moduł i motyw dają blokom lewej kolumny ramki i cienie, które w wąskiej
+   szufladzie tylko zjadają miejsce. */
+.filters-drawer .PM_ASBlockOutput .card,
+.filters-drawer .block.account {
+  border: 0;
+  box-shadow: none;
+  background: none;
+}
+
+.filters-drawer .PM_ASBlockOutput .card-block {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Modułowy „Szukaj" siedzi w środku formularza, między kryteriami — w wąskiej
+   szufladzie trafia się na niego przypadkiem, w połowie listy filtrów. Jego rolę
+   przejmuje przycisk w stopce, ale sam oryginał musi ZOSTAĆ w formularzu: moduł
+   ma na nim delegowany handler i wysyła `$(this).parents('form')`. Zamiast go
+   przenosić, custom.js go klika, a tutaj tylko znika z oczu. */
+.filters-drawer .PM_ASSubmitSearch,
+.filters-drawer p:has(> .PM_ASSubmitSearch) {
+  display: none;
+}
+
+/* Stopka z przyciskiem „Szukaj" — kciuk trafia w nią bez przewijania listy
+   filtrów z powrotem do góry. */
+.filters-drawer__foot {
+  border-top: 1px solid var(--bs-border-color, #e6e2e5);
+  padding: 0.75rem 1rem;
+  background: var(--bs-body-bg, #fff);
+}
+
+/* Szukanie kończy się przejściem na stronę wyników, więc między kliknięciem
+   a zmianą ekranu mija chwila — bez tego przycisk wygląda na zepsuty. */
+.filters-drawer__foot .btn.is-busy {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.filters-drawer__foot .btn.is-busy::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: -0.575rem 0 0 -0.575rem;
+  border: 2px solid var(--bs-btn-color, #fff);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: filters-drawer-spin 0.7s linear infinite;
+}
+
+@keyframes filters-drawer-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filters-drawer__foot .btn.is-busy::after {
+    animation-duration: 2.4s;
+  }
+}
+
+/* -------- przycisk „Filtry" nad listingiem -------- */
+
+/* Motyw układa .products__selection w siatkę 1–2 kolumn; z przyciskiem
+   wygodniej na flexie — licznik zostaje przy filtrach, sortowanie odjeżdża
+   do prawej, a na wąskim ekranie wszystko zawija się samo. */
+.has-filters-drawer #js-product-list-top .products__selection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.has-filters-drawer #js-product-list-top .products__sort {
+  margin-left: auto;
+}
+
+.filters-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  position: relative;
+}
+
+.filters-toggle .material-icons {
+  font-size: 20px;
+}
+
+/* Kropka zamiast liczby: na stronie kategorii moduł zawsze trzyma jedno
+   „aktywne" kryterium (samą kategorię), więc licznik pokazywałby 1 przy
+   nietkniętych filtrach. Sygnałem jest widoczność modułowego „Usuń filtry",
+   czyli to samo, czym moduł sam mierzy, że użytkownik coś zaznaczył. */
+.filters-toggle--active::after {
+  content: "";
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d3155b;
+}

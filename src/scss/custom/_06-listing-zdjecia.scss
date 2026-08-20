@@ -1,0 +1,60 @@
+/* --------------------------------------------------------------------------
+   6. LISTING PRODUKTÓW — większe zdjęcia
+   Zdjęcia na listingu były małe z trzech niezależnych powodów:
+
+   1. `img.product-miniature__image { padding: 40px }` z theme.css — przy
+      box-sizing: border-box zdjęcie traciło 80 px szerokości wewnątrz kafla,
+      czyli jakąś jedną trzecią.
+   2. Kafel był wąski, bo listing dzielił szerokość z lewą kolumną i schodził
+      do 3 kolumn dopiero od 1200 px. Po przeniesieniu filtrów do szuflady
+      (sekcja 7) kolumna znika i listing bierze całą szerokość — to zostaje tutaj.
+   3. srcset kłamał: PrestaShop deklaruje szerokość RAMKI typu obrazka, a pliki
+      są pionowe 2:3, więc „400w" to plik szeroki na 267 px. Poprawione
+      w themes/hummingbird/templates/catalog/_partials/miniatures/product-image.tpl
+      — doszły medium_default i product_main, a `sizes` ma korektę ×1,5.
+
+   2026-08-19: punkty 1 i 3 nie mają już swojego CSS-a w tym pliku. Wygląd
+   samego kafla (margines zdjęcia, kadr, zaokrąglenie, przerwy między kaflami,
+   kafle karuzeli) przeszedł do hummingbird_editor, zakładka **Miniatury** —
+   obowiązuje każdą miniaturę w sklepie i jest do przeklikania z panelu.
+   Sklep ma tam ustawiony zestaw „Pełne zdjęcie" i to on daje ten sam efekt,
+   który wcześniej stał w sekcjach 6 i 11. Arkusz modułu leci za <body>, czyli
+   po tym pliku — jeśli trzeba coś nadpisać stąd, potrzebna jest wyższa
+   specyficzność, a nie kolejność.
+
+   Siatka listingu niżej wisi na .has-filters-drawer. Nadaje ją inline skrypt
+   z layouts/layout-left-column.tpl (zanim kolumny trafią do DOM, żeby nic nie
+   mrugnęło), a custom.js ją zdejmuje, gdy nie ma z czego zbudować szuflady.
+   Bez JS-a strona wygląda jak przed zmianą, z lewą kolumną i starą siatką.
+   Liczba kolumn celowo została tutaj, a w panelu stoi „Z motywu": ma znikać
+   razem z lewą kolumną, a o tym wie tylko ten plik.
+   -------------------------------------------------------------------------- */
+
+/* -------- siatka na pełnej szerokości (gdy działa szuflada filtrów) -------- */
+.has-filters-drawer #left-column {
+  display: none;
+}
+
+.has-filters-drawer #center-column {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Motyw daje .layout-left-column .products 2 kafle od 360 px i 3 od 1200 px.
+   Przy pełnej szerokości mieści się więcej i każdy jest większy. */
+.has-filters-drawer #js-product-list .products {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .has-filters-drawer #js-product-list .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1400px) {
+  .has-filters-drawer #js-product-list .products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,97 @@
+/* --------------------------------------------------------------------------
+   20. MENU MOBILNE — PRZEWIJANIE LISTY I WIELKOŚĆ PRZYCISKÓW NAWIGACJI
+
+   Problem 1: „Tkaniny" nie dawały się przewinąć do końca.
+   Offcanvas był kolumną flex: nagłówek, lista, stopka z kontaktem. Motyw dał
+   liście `flex: 0 1 auto; overflow: visible`, a stopce `flex: 1 0 auto` —
+   czyli to STOPKA rosła, a lista się kurczyła. Przy krótkim menu nikt tego nie
+   zauważył, ale „Tkaniny" mają 23 pozycje: lista miała 1092 px treści w 465 px
+   ramki, reszta wychodziła poza `overflow: hidden` samego offcanvasu i nie było
+   jak do niej dojechać — ani przewinięciem listy (bo `visible`), ani okna (bo
+   offcanvas jest `position: fixed` na pełną wysokość).
+
+   Rozwiązanie: koniec z dzieleniem szuflady na dwa niezależne obszary. Cały
+   offcanvas jest JEDNYM obszarem przewijania — lista i sekcja „Moje konto"
+   jadą razem, jedna pod drugą, tak jak stoją w DOM-ie. Stopka przestaje
+   zabierać stałe miejsce na dole i zasłaniać menu.
+
+   Nagłówek zostaje przyklejony na górze (`position: sticky`), bo powrót
+   i zamknięcie muszą być pod ręką niezależnie od tego, jak daleko ktoś zjechał.
+   Potrzebuje własnego tła — bez niego przewijana treść prześwitywałaby pod nim.
+
+   Problem 2: „< Jedwab" miało 85×26 px, a krzyżyk 36×36 px pola dotyku, przy
+   zalecanych 44×44. Powrót i zamknięcie to dwie najczęściej klikane rzeczy
+   w tym menu, a były najmniejsze.
+   -------------------------------------------------------------------------- */
+
+/* Szuflada zostaje przy modelu Bootstrapa: `position: fixed`, kolumna flex,
+   `overflow: hidden`. Próba zrobienia z NIEJ SAMEJ obszaru przewijania
+   (`display: block; overflow-y: auto`) wyglądała dobrze w pomiarach — kontener
+   raportował poprawny `scrollHeight` i dawał się przewinąć z konsoli — ale na
+   telefonie pod palcem nie ruszał się wcale. Przewijanie samego elementu
+   `position: fixed` bywa zawodne; przewijanie JEGO DZIECKA jest tym, co robi
+   Bootstrap i co działa wszędzie.
+
+   Stąd `.ps-mainmenu__scroll` z szablonu: jedno opakowanie na listę i sekcję
+   konta. Nagłówek zostaje poza nim jako zwykły element flex, więc trzyma się
+   góry bez `position: sticky` i bez własnego tła. */
+#mobileMenu .ps-mainmenu__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Wysokość MUSI zejść na auto: motyw daje temu kontenerowi wysokość równą
+   szufladzie, więc lista dłuższa niż ekran wystawała poza własny kontener,
+   a sekcja „Moje konto" startowała tam, gdzie kończyła się ta sztywna
+   wysokość — czyli DRUKOWAŁA SIĘ NA liście. */
+#mobileMenu .ps-mainmenu__mobile {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* Motyw nadaje stopce własne `overflow-y: auto` (ma klasę `offcanvas-body`),
+   co robiłoby drugi, zagnieżdżony obszar przewijania w środku pierwszego. */
+#mobileMenu .ps-mainmenu__additionnals {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+/* -------- powrót i zamknięcie: pełnowymiarowe pola dotyku -------- */
+
+#mobileMenu .ps-mainmenu__back-button .js-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.25rem;
+  font-size: 1rem;
+  color: #242424;
+  text-decoration: none;
+}
+
+#mobileMenu .ps-mainmenu__back-button .js-back-button .material-icons {
+  font-size: 1.5rem;
+}
+
+#mobileMenu .btn-close {
+  width: 2.75rem;
+  height: 2.75rem;
+  background-size: 1rem;
+  opacity: 0.75;
+}
+
+#mobileMenu .btn-close:hover,
+#mobileMenu .btn-close:focus-visible {
+  opacity: 1;
+}
+
+/* Nagłówek musi zmieścić wyższe przyciski, nie ściskając ich z powrotem. */
+#mobileMenu .offcanvas-header {
+  align-items: center;
+  min-height: 3.5rem;
+  padding-block: 0.25rem;
+}

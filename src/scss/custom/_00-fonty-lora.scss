@@ -1,0 +1,18 @@
+/* --------------------------------------------------------------------------
+   0. PLIKI FONTU LORA — wagi, których motyw nie wgrywa
+
+   Motyw (prestashop/base/_fonts.scss) ładuje Lorę tylko w wadze 400 normal.
+   Sekcja 32 przestawia cały sklep na Lorę, więc potrzebne są prawdziwe pliki
+   dla 500/600/700 i kursywy — inaczej przeglądarka dorabia pogrubienie
+   i pochylenie sztucznie. Importy idą przez webpack (css-loader + reguła
+   fontów w webpack.parts.js): pliki woff2/woff lądują w assets/fonts
+   z hashem, a @font-face dostaje właściwe ścieżki. Partial musi być pierwszy
+   w custom.scss, bo zwykłe @import CSS-u muszą poprzedzać resztę arkusza.
+   -------------------------------------------------------------------------- */
+@import "~@fontsource/lora/400-italic.css";
+@import "~@fontsource/lora/500.css";
+@import "~@fontsource/lora/500-italic.css";
+@import "~@fontsource/lora/600.css";
+@import "~@fontsource/lora/600-italic.css";
+@import "~@fontsource/lora/700.css";
+@import "~@fontsource/lora/700-italic.css";

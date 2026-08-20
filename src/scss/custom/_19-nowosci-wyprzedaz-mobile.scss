@@ -1,0 +1,38 @@
+/* --------------------------------------------------------------------------
+   18. „NOWOŚCI" I „WYPRZEDAŻ" TAKŻE W MENU MOBILNYM
+
+   Sekcja 16 odcinała je tylko na desktopie — na telefonie stały w jednym
+   ciągu z resztą, więc podział istniał na jednym urządzeniu, a na drugim nie.
+   W offcanvasie nie ma miejsca na pionową kreskę, więc rolę separatora bierze
+   grubsza kreska nad pierwszą z tych dwóch pozycji.
+   -------------------------------------------------------------------------- */
+
+/* Selektor MUSI być zaczepiony o #menu-mobile, czyli korzeń. Klasę
+   `menu--current` dostaje ten poziom, który jest akurat na wierzchu, więc
+   `.menu--current > li:nth-last-child(-n+2)` malowało na czerwono dwie ostatnie
+   pozycje KAŻDEGO podmenu — po wejściu w „Tkaniny" czerwone robiły się Żakard
+   i Inne tkaniny. Id nadaje szablon tylko na poziomie 0.
+
+   Na telefonie ta para idzie na GÓRĘ, odwrotnie niż na pasku. Na desktopie
+   pasek czyta się od lewej i promocje domykają rząd; w pionowej liście
+   otwieranej kciukiem najbliżej są pozycje u góry, więc tam mają największą
+   szansę na kliknięcie. Kolejność robi `order`, a nie osobna konfiguracja —
+   MOD_BLOCKTOPMENU_ITEMS jest jedno dla obu widoków. */
+#menu-mobile > .menu__list {
+  display: flex;
+  flex-direction: column;
+}
+
+#menu-mobile > .menu__list > li:nth-last-child(-n + 2) {
+  order: -1;
+}
+
+#menu-mobile > .menu__list > li:nth-last-child(-n + 2) > .menu__link {
+  color: var(--bs-danger, #ff4657);
+}
+
+/* Kreska pod parą, czyli pod ostatnim <li> w DOM-ie (Wyprzedaż), bo po
+   przestawieniu `order` to on stoi na dole grupy. */
+#menu-mobile > .menu__list > li:last-child {
+  border-bottom: 2px solid var(--bs-border-color, #e6e2e5);
+}

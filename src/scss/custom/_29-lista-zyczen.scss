@@ -1,0 +1,331 @@
+/* --------------------------------------------------------------------------
+   26. LISTA ŻYCZEŃ (blockwishlist) — strona listy wygląda jak listing
+
+   Produkty na /module/blockwishlist/view renderuje aplikacja Vue modułu
+   (public/productslist.bundle.js) i to ONA wstrzykuje swój CSS do <head>
+   w trakcie działania — czyli ZA tym plikiem. Kolejność nie pomoże, dlatego
+   każdy selektor niżej zaczyna się od #wrapper: id bije klasy modułu
+   niezależnie od tego, kto był później. Markup jest zaszyty w bundlu, więc
+   nie da się podstawić klas .product-miniature__* z motywu — kafel odtwarza
+   je tutaj z tych samych wartości, które zakładka „Miniatury" edytora daje
+   listingowi (proporcja 2/3, cover, promień 8 px, przerwa 24 px, zoom).
+
+   Sortowanie: moduł rysuje przycisk Bootstrapa 4 (data-toggle="dropdown"),
+   którego Bootstrap 5 z motywu nie zna — menu nigdy się nie otwierało.
+   Atrybut data-bs-toggle i klasy .btn.btn-outline-tertiary.dropdown-toggle
+   (wygląd jak „Sortuj po:" na listingu) dokłada custom.js, blok 9; tutaj
+   zostaje tylko to, czego klasy nie załatwią.
+   -------------------------------------------------------------------------- */
+
+/* -------- nagłówek: tytuł + sortowanie w jednym wierszu -------- */
+#wrapper .wishlist-products-container-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#wrapper .wishlist-products-container-header h1 {
+  margin: 0;
+}
+
+#wrapper .wishlist-products-count {
+  font-size: 0.5em;
+  color: var(--bs-secondary-color);
+}
+
+#wrapper .wishlist-products-container .sort-by-row {
+  flex: none;
+  width: auto;
+  min-width: 0;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+/* Klasy col-sm-3 / col-sm-9 z markupu to siatka BS4 — tu tylko przeszkadzają. */
+#wrapper .wishlist-products-container .sort-by,
+#wrapper .wishlist-products-container .products-sort-order {
+  flex: none;
+  width: auto;
+  padding: 0;
+}
+
+#wrapper .wishlist-products-container .sort-by {
+  white-space: nowrap;
+  font-size: 0.875rem;
+}
+
+#wrapper .wishlist-products-container .products-sort-order {
+  position: relative;
+}
+
+#wrapper .wishlist-products-container .select-title {
+  min-width: 12rem;
+  min-height: 2.5rem;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Własną strzałkę modułu chowa — .dropdown-toggle::after daje tę z motywu. */
+#wrapper .wishlist-products-container .select-title .material-icons {
+  display: none;
+}
+
+#wrapper .wishlist-products-container .dropdown-menu {
+  min-width: 100%;
+}
+
+#wrapper .wishlist-products-container .select-list {
+  cursor: pointer;
+}
+
+/* -------- siatka jak na listingu (2 / 3 / 4 kolumny) -------- */
+#wrapper .wishlist-products-container .page-content.card {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#wrapper .wishlist-products-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  justify-content: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  #wrapper .wishlist-products-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1400px) {
+  #wrapper .wishlist-products-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+#wrapper .wishlist-products-item {
+  width: auto;
+  min-width: 0;
+  margin: 0;
+}
+
+/* -------- kafel -------- */
+#wrapper .wishlist-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+
+#wrapper .wishlist-product-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+#wrapper .wishlist-product-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#wrapper .wishlist-product-image img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  transform: none;
+  transition: var(--bs-transition-default);
+}
+
+#wrapper .wishlist-product-link:hover img {
+  transform: scale(1.1);
+}
+
+#wrapper .wishlist-product-unavailable {
+  opacity: 0.5;
+}
+
+/* Komunikat dostępności tylko gdy coś mówi (ikona = „ostatnie sztuki"
+   albo „niedostępny"); pusty <p> moduł renderuje zawsze. */
+#wrapper .wishlist-product-availability {
+  display: none;
+}
+
+#wrapper .wishlist-product-image .wishlist-product-availability:has(i) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: absolute;
+  left: 0.5rem;
+  right: auto;
+  bottom: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  transform: none;
+  border-radius: 50rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--bs-body-color);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+#wrapper .wishlist-product-image .wishlist-product-availability i {
+  margin: 0;
+  font-size: 1rem;
+}
+
+#wrapper .wishlist-product-right {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem 0;
+}
+
+#wrapper .wishlist-product-title {
+  margin: 0;
+  color: var(--bs-body-color);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  min-height: 2.8em;
+}
+
+#wrapper .wishlist-product-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--c-grey-5, var(--bs-body-color));
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Moduł stawia starą cenę PRZED nową; listing ma odwrotnie. */
+#wrapper .wishlist-product-price-promo {
+  order: 2;
+  margin: 0;
+  color: var(--bs-tertiary-color);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+#wrapper .wishlist-product-combinations {
+  align-items: center;
+  min-height: 0;
+}
+
+#wrapper .wishlist-product-combinations-text {
+  min-height: 0;
+  margin: 0;
+  color: var(--bs-secondary-color);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+#wrapper .wishlist-product-combinations a {
+  display: inline-flex;
+  color: var(--bs-secondary-color);
+}
+
+#wrapper .wishlist-product-combinations a .material-icons {
+  font-size: 1.125rem;
+}
+
+/* -------- dół kafla: koszyk + usuń -------- */
+#wrapper .wishlist-product-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0 0.5rem;
+}
+
+#wrapper .wishlist-product-addtocart {
+  flex: 1 1 auto;
+  width: auto;
+  min-height: 2.5rem;
+}
+
+#wrapper .wishlist-product-addtocart .shopping-cart {
+  display: none;
+}
+
+/* Kosz: okrągły przycisk jak serce na kaflu listingu. Motyw dokleja każdemu
+   .wishlist-button-add serduszko w ::before (stąd „serce + kosz" w jednym
+   przycisku) i pozycjonuje go absolutnie z !important — stąd !important tutaj. */
+#wrapper .wishlist-product-bottom .wishlist-button-add {
+  position: static !important;
+  flex: none;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem !important;
+  min-width: 2.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid rgba(36, 36, 36, 0.25) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--bs-body-color) !important;
+  transform: none;
+  transition: var(--bs-transition-default);
+}
+
+#wrapper .wishlist-product-bottom .wishlist-button-add::before {
+  display: none !important;
+}
+
+#wrapper .wishlist-product-bottom .wishlist-button-add:hover,
+#wrapper .wishlist-product-bottom .wishlist-button-add:focus-visible {
+  border-color: var(--bs-body-color) !important;
+  opacity: 1 !important;
+}
+
+#wrapper .wishlist-product-bottom .wishlist-button-add i {
+  margin: 0;
+  color: inherit;
+  font-size: 1.25rem;
+}
+
+/* -------- linki pod listą -------- */
+#wrapper .wishlist-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin: 2rem 0 3rem;
+}
+
+#wrapper .wishlist-footer-links > a {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  color: var(--bs-body-color);
+}

@@ -1,0 +1,322 @@
+/* --------------------------------------------------------------------------
+   5. BANERY KATEGORII JAKO KARUZELA („rolki") — mobile i desktop
+   Moduł bonbanner (sekcja #bonbanners na stronie głównej) daje 11 kafli
+   col-xs-12/col-sm-4, czyli siatkę 3×4 na desktopie i pionową kolumnę
+   11 zdjęć na telefonie. Zamiast tego jeden pas przewijany w bok na obu
+   szerokościach: ten sam styl kafla, podpisu, strzałek i kropek, tylko inne
+   proporcje i liczba kafli na ekran.
+
+   Przewijanie: palcem (natywny scroll-snap), myszą przez przeciąganie albo
+   klikiem w strzałki; klik w środek kafla idzie w link kategorii.
+   Strzałki, kropki i klasę `bb-ready` wstrzykuje
+   themes/hummingbird/assets/js/custom.js. Bez JS-a zostaje sam pas
+   przewijany palcem — dlatego animacja podpisu wisi na `.bb-ready`,
+   żeby przy wyłączonym JS podpisy nie zostały niewidoczne.
+
+   Strzałki noszą klasę `hbe-carousel-nav__btn` z motywu (44 px, białe koło,
+   obwódka #222, inwersja na hoverze, `opacity:.35` gdy nieaktywne) — ten sam
+   przycisk co w karuzelach produktowych niżej. Tutaj dochodzi tylko pozycja
+   i rozmiar; wygląd zmieniać w theme.css, nie tu.
+
+   Pokrętła są w zmiennych na #bonbanners — poniżej wartości desktopowe,
+   nadpisania dla tabletu i telefonu na końcu bloku:
+   --bb-ratio proporcja kafla (szerokość/wysokość); mniejsza = wyższy kafel
+   --bb-card  szerokość kafla w % szerokości pasa; 28 % to 3 kafle i podglądany
+              brzeg czwartego, czyli sygnał „da się przewinąć"
+   --bb-edge  wcięcie pasa po bokach (na telefonie robi margines kafla)
+   --bb-snap  do czego dociąga snap: `start` przy kilku kaflach na ekran,
+              `center` gdy kafel jest jeden
+   --bb-below pas pod zdjęciami na kropki
+
+   UWAGA o zdjęciach: banery są poziome (3:2), więc pionowy kafel bierze
+   z nich tylko środek — przy 3/4 połowę szerokości, przy 9/16 tylko 37 %.
+   Kadry wychodzą dobrze (to zdjęcia tkanin, bez wpisanego tekstu), ale dwa
+   najmniejsze pliki (750×500: „TKANINY NA SUKIENKI", „PASMANTERIA") są przy
+   mobilnym 9/16 rozciągane ~3× i będą miękkie. Lekarstwo to wgranie wyższych
+   obrazków w BO, nie CSS.
+   -------------------------------------------------------------------------- */
+#bonbanners {
+  --bb-ratio: 3 / 4;
+  --bb-card: 28%;
+  --bb-gap: 0.75rem;
+  --bb-edge: 0rem;
+  --bb-snap: start;
+  --bb-radius: 14px;
+  --bb-below: 2.25rem;
+  --bb-label: 1.125rem;
+  --bb-nav: 2.75rem;
+
+  margin: 0 0 2.5rem;
+  /* Moduł ma tu overflow:hidden, a przewijaniem zajmuje się <ul> — sekcja nie
+     może nic przycinać, bo obcięłaby strzałki i kropki. */
+  overflow: visible;
+  position: relative;
+  padding: 0 0 var(--bb-below);
+}
+
+#bonbanners ul.row {
+  display: flex;
+  flex-wrap: nowrap;
+  /* Bez tego flex rozciąga wszystkie kafle do wysokości najwyższego
+     i aspect-ratio przestaje decydować o wysokości. */
+  align-items: flex-start;
+  gap: var(--bb-gap);
+  margin: 0;
+  padding: 0 var(--bb-edge);
+  overflow-x: auto;
+  /* Bez tego poziomy swipe na końcu listy uruchamia gest „wstecz". */
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--bb-edge);
+  scrollbar-width: none;
+}
+
+#bonbanners ul.row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Przy przeciąganiu myszą snap musi zniknąć — inaczej przy każdym ruchu
+   ściąga pas z powrotem na najbliższy kafel. Klasę zdejmuje JS dopiero po
+   dociągnięciu (goTo), więc na końcu nie ma szarpnięcia. */
+#bonbanners ul.row.is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* [class*="col-"] tylko po to, by przebić modułowe
+   `#bonbanners .col-sm-4:first-child { padding-left: 15px }`. */
+#bonbanners ul.row > li[class*="col-"] {
+  flex: 0 0 var(--bb-card);
+  width: var(--bb-card);
+  max-width: var(--bb-card);
+  margin: 0;
+  padding: 0;
+  scroll-snap-align: var(--bb-snap);
+}
+
+/* Wysokość kafla robi aspect-ratio na <a>, nie na obrazku: przy 767 px samo
+   mobilne 9/16 dałoby 1363 px wysokości, więc jest sufit na wysokości ekranu.
+   Dwie deklaracje celowo: svh nie skacze przy chowaniu paska adresu,
+   starsze przeglądarki zostają przy vh. */
+#bonbanners ul.row > li > a {
+  display: block;
+  aspect-ratio: var(--bb-ratio);
+  max-height: 80vh;
+  max-height: 80svh;
+  border-radius: var(--bb-radius);
+}
+
+/* Absolutnie, nie height:100% — wtedy wysokość zdjęcia nie zależy od tego,
+   czy przeglądarka uznaje wysokość z aspect-ratio za „definite" (stare Safari
+   się z tym potykały), a <a> bierze wysokość wyłącznie z proporcji. */
+#bonbanners a picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+#bonbanners a img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Powiększenie z modułu (scale 1.07) zostaje na desktopie, ale na dotyku
+   :hover przykleja się po tapnięciu i zdjęcie zastyga powiększone. */
+@media (hover: none) {
+  #bonbanners a:hover img {
+    transform: none;
+  }
+}
+
+#bonbanners a::after {
+  content: "";
+  position: absolute;
+  inset: 55% 0 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.2) 55%,
+    rgba(0, 0, 0, 0)
+  );
+  z-index: 1;
+}
+
+/* Podpis z połowy wysokości po lewej schodzi na dół kafla, na gradient. */
+#bonbanners a .banner-inner {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: none;
+  padding: 0 1.125rem 1.125rem;
+  transform: none;
+  z-index: 2;
+}
+
+/* Wyrównanie do środka siedzi w stylu inline z konfiguracji banera, stąd
+   !important. `display:block` odkręca modułowe `#bonbanners a .banner-inner p
+   { display: none }` z zakresów 576–768 px i 769–991 px — moduł ukrywał tam
+   podpisy, bo w jego układzie tekst leżał obok zdjęcia i się nie mieścił.
+   U nas podpis jest NA zdjęciu, więc mieści się na każdej szerokości. */
+#bonbanners a .banner-inner p {
+  display: block;
+  margin: 0;
+  text-align: left !important;
+}
+
+/* Turkusowy kafelek CTA ustępuje miejsca białemu napisowi na zdjęciu.
+   Powrót: przywrócić background/box-shadow/padding z modułowego front.css. */
+#bonbanners a .banner-inner span {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  font-size: var(--bb-label);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* -------- strzałki i kropki (wstrzykuje custom.js) -------- */
+
+/* Strzałki siedzą przy krawędziach, środek kafla zostaje dla linku. */
+#bonbanners .bb-nav {
+  position: absolute;
+  /* Połowa samych zdjęć, bez pasa na kropki. */
+  top: calc((100% - var(--bb-below)) / 2);
+  z-index: 3;
+  width: var(--bb-nav);
+  height: var(--bb-nav);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.18);
+  transform: translateY(-50%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Wyszarzenie (opacity .35) przychodzi z .hbe-carousel-nav__btn:disabled. */
+#bonbanners .bb-nav[disabled] {
+  pointer-events: none;
+}
+
+#bonbanners .bb-nav--prev {
+  left: 0.75rem;
+}
+
+#bonbanners .bb-nav--next {
+  right: 0.75rem;
+}
+
+#bonbanners .bb-dots {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  height: var(--bb-below);
+}
+
+/* Kropka to 6 px, ale przycisk 20 px — inaczej nie da się w nią trafić. */
+#bonbanners .bb-dot {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#bonbanners .bb-dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(36, 36, 36, 0.24);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+#bonbanners .bb-dot.bb-dot--active::before {
+  background: #242424;
+  transform: scale(1.4);
+}
+
+/* -------- tablet: dwa kafle na ekran -------- */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  #bonbanners {
+    --bb-card: 46%;
+  }
+}
+
+/* -------- telefon: jeden kafel na ekran, „rolka" -------- */
+@media (max-width: 767.98px) {
+  #bonbanners {
+    --bb-ratio: 9 / 16;
+    /* 100 % pasa POMNIEJSZONEGO o --bb-edge z obu stron, czyli kafel ma
+       24 px marginesu na boki — tyle, żeby było widać zaokrąglone rogi,
+       a sąsiednie kafle podglądały po ~16 px z każdej strony. */
+    --bb-card: 100%;
+    --bb-edge: 1.5rem;
+    --bb-gap: 0.5rem;
+    /* Jeden kafel na ekran → dociągamy do środka, nie do lewej krawędzi. */
+    --bb-snap: center;
+    --bb-radius: 1rem;
+    --bb-label: 1.375rem;
+    --bb-nav: 2.25rem;
+    --bb-below: 1.75rem;
+
+    /* Pełna szerokość ekranu mimo że sekcja siedzi w .container > .row >
+       #center-column > #content: ujemne marginesy rozpychają ją dokładnie
+       do 100vw, niezależnie od paddingów przodków. */
+    margin: 0 calc(50% - 50vw) 2rem;
+    width: auto;
+  }
+
+  /* Jeden kafel na jeden gest — mocniejszy swipe nie przelatuje przez trzy
+     banery, dokładnie jak w rolkach. Na desktopie by przeszkadzało: kółkiem
+     myszy chce się przejechać kilka kafli naraz. */
+  #bonbanners ul.row > li[class*="col-"] {
+    scroll-snap-stop: always;
+  }
+
+  #bonbanners .bb-nav--prev {
+    left: 0.5rem;
+  }
+
+  #bonbanners .bb-nav--next {
+    right: 0.5rem;
+  }
+
+  /* Podpis wjeżdża tylko na kaflu, na którym stoi snap — to całe „przejście
+     jak w rolkach". Tylko na telefonie, bo tam widać dokładnie jeden kafel;
+     na desktopie ukryłoby podpisy na pozostałych. Pod .bb-ready, żeby bez
+     JS-a podpisy były po prostu widoczne. */
+  #bonbanners.bb-ready ul.row > li .banner-inner {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  #bonbanners.bb-ready ul.row > li.bb-current .banner-inner {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #bonbanners.bb-ready ul.row > li .banner-inner {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}

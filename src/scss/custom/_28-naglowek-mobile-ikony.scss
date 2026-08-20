@@ -1,0 +1,51 @@
+/* --------------------------------------------------------------------------
+   22. NAGŁÓWEK NA TELEFONIE — WIĘKSZE IKONY, I STRZAŁKI W MENU BEZ OBROTU
+
+   Ikony: hamburger miał 34×34 px pola dotyku, serce i koszyk 32×32 przy
+   rysunku 20×20 — poniżej zalecanych 44×44 i wizualnie drobne obok logo.
+   Rosną same ikony (20 → 24 px) i pole wokół nich. Tylko poniżej xl:
+   na desktopie nagłówek jest wyważony inaczej i nikt się nie skarżył.
+
+   Strzałki: motyw obraca chevron o `-90deg`
+   (`.menu__toggle-child .material-icons`), przez co glif „›" pokazuje w GÓRĘ.
+   To ma sens w menu-akordeonie, które rozwija się w dół — ale to menu jest
+   przewijane w bok: kliknięcie wchodzi na kolejny ekran. Strzałka w prawo
+   mówi więc prawdę o tym, co się stanie, i zgadza się ze znacznikiem
+   w kaskadzie na desktopie. Przy okazji znika krzywizna: obrócony glif nie
+   siedział w osi kółka, bo chevron nie jest wyśrodkowany w swoim polu em.
+   -------------------------------------------------------------------------- */
+
+.ps-mainmenu--mobile .menu__toggle-child .material-icons {
+  transform: none;
+}
+
+@media (max-width: 1199.98px) {
+  .header-bottom__burger-btn {
+    padding: 0.55rem;
+  }
+
+  .header-bottom__burger-btn .material-icons {
+    font-size: 1.75rem;
+  }
+
+  .header-bottom__icons .header-block__action-btn,
+  .header-bottom__row .header-block__action-btn {
+    padding: 0.5rem;
+  }
+
+  .header-bottom__row .header-block__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  /* Licznik trzyma się rogu WIĘKSZEJ ikony — bez przesunięcia wjeżdżałby
+     na jej środek, bo motyw pozycjonuje go sztywno od lewej i góry. */
+  .header-bottom__row .header-block__badge {
+    left: 16px;
+    top: 8px;
+    height: 15px;
+    min-width: 15px;
+    font-size: 10px;
+  }
+}

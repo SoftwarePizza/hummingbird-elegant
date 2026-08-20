@@ -1,0 +1,103 @@
+/* --------------------------------------------------------------------------
+   9. STOPKA — newsletter jako piąta kolumna
+   Motyw MA gotowy wariant `.ps-emailsubscription--column` (białe pole na
+   ciemnym tle, intro w gray-300, dopiski w gray-500) i szablon w motywie już
+   go wypisywał — tyle że moduł wisiał na `displayFooterBefore`, czyli
+   w białym pasku NAD ciemną stopką. Style liczone na ciemne tło lądowały na
+   białym i cały blok wyglądał na wyblakły. Moduł przepięty na `displayFooter`
+   (pozycja 6, zaraz za ps_contactinfo), tak jak na rosenthal.pl i karenski.pl.
+   Razem z nim poszły ikony społecznościowe: ps_socialfollow odpięty od
+   `displayFooterBefore`, a adresy profili przepisane do HBE_SOCIAL_FACEBOOK
+   i HBE_SOCIAL_INSTAGRAM, bo szablon `ps_contactinfo.tpl` w motywie sam
+   renderuje je w kolumnie „Kontakt”. `displayFooterBefore` jest teraz pusty,
+   więc `footer.tpl` w ogóle nie wypisuje białego paska.
+   -------------------------------------------------------------------------- */
+
+/* Piąta kolumna. Newsletter dostaje szerszy track, bo mieści pole e-mail,
+   zgodę RODO i dopisek — a sąsiednie listy linków mają krótkie etykiety.
+   Przy 1140 px daje to ~170 px na kolumnę linków i ~245 px na newsletter. */
+@media (min-width: 992px) {
+  .footer__main-top {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.4fr);
+  }
+}
+
+/* blockwishlist montuje w `displayFooter` pięć pustych kontenerów na modale
+   i toasty (`.wishlist-add-to`, `-delete`, `-create`, `-login`, `-toast`).
+   Każdy zajmował własną komórkę siatki — przy czterech kolumnach robiły dwa
+   dodatkowe wiersze o zerowej wysokości, ale z pełnym `row-gap`, czyli kilka
+   centymetrów martwej przestrzeni pod stopką (na telefonie, gdzie kolumna
+   jest jedna, jeszcze więcej). `display: contents` znosi ich własne pudełko;
+   nic nie psuje, bo w środku są wyłącznie modale Bootstrapa (`display:none`
+   do czasu otwarcia) i backdropy na `position: fixed`.
+   Świadomie NIE dotykam tu `.ws_modal` z advansedwishlist ani
+   `#bonwhatsappchat`: pierwszy jest `position: fixed` (nie tworzy komórki,
+   a `display: contents` wypuściłoby jego okno w środek stopki), drugi ma
+   `d-lg-none`, więc na desktopie i tak go nie ma. */
+.footer__main-top > [class^="wishlist-"] {
+  display: contents;
+}
+
+/* Kolumna „Kontakt”: blok sklepu stacjonarnego (adres z konfiguracji sklepu,
+   godziny otwarcia i link do Google Maps) stoi NAD telefonem i e-mailem.
+   Szablon: themes/hummingbird/modules/ps_contactinfo/ps_contactinfo.tpl.
+   Etykieta „Nasz sklep stacjonarny” jest biała (jak nagłówki stopki), reszta
+   dziedziczy gray-300 z `.footer__main`; godziny to dwie linie na siatce,
+   żeby zakresy czasu były wyrównane w pionie niezależnie od języka. */
+.ps-contactinfo__store {
+  margin-block-end: 1rem;
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.ps-contactinfo__store-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-block-end: 0.35rem;
+  color: var(--bs-white);
+  font-weight: 500;
+}
+
+.ps-contactinfo__store-label svg {
+  flex-shrink: 0;
+}
+
+.ps-contactinfo__address {
+  margin-block-end: 0.5rem;
+  font-style: normal;
+}
+
+.ps-contactinfo__hours {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.6rem;
+  margin-block-end: 0.5rem;
+}
+
+.ps-contactinfo__hours-row {
+  display: contents;
+}
+
+.ps-contactinfo__hours-day {
+  color: var(--bs-gray-500);
+}
+
+.ps-contactinfo__map {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--bs-white);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ps-contactinfo__map:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* „Zadzwoń do nas: +48 453 322 941” jest dłuższe niż dawne „Telefon: …” i w kolumnie
+   ~170 px numer łamał się w środku („+48 453 / 322 941”). Numer ma schodzić cały. */
+.ps-contactinfo__line a[href^="tel:"] {
+  white-space: nowrap;
+}

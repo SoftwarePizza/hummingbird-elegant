@@ -1,0 +1,123 @@
+/* --------------------------------------------------------------------------
+   23. STAN MAGAZYNOWY PRZY PRZYCISKU KOSZYKA
+
+   Blok .product__stock-hint z catalog/_partials/product-add-to-cart.tpl,
+   sterowany z assets/js/custom.js (sekcja 4). Ma dwa życia:
+
+   1. Spoczynkowe — jedna dyskretna linijka pod przyciskiem („Na stanie 6,2 m
+      — tyle maksymalnie możesz dodać”). Wygląda jak termin wysyłki nad nią
+      (sekcja 13.3): ikona 1.25rem trzymająca się pierwszej linijki, tekst
+      w --fs-body-s. Stan magazynowy jest też w specyfikacji pod opisem, ale
+      tam klient trafia po decyzji, a nie w jej trakcie.
+   2. Zaczepne (--rest, --over) — kafel na --c-grey-1 z przyciskiem, ten sam
+      język wizualny co karta próbki (sekcja 10). Tło włącza się dopiero, gdy
+      jest o czym mówić: przy końcówce krótszej niż 3 m i przy ilości większej
+      niż stan. Dzięki temu zmiana wariantu jest widoczna sama z siebie, bez
+      animacji i bez skoku układu (padding rośnie tylko o 0.75rem).
+
+   Kolorów przybywa oszczędnie: --rest zostaje czarny (to zachęta, nie alarm),
+   --over dostaje --c-sale, bo to jedyny wariant, w którym klient ma zły stan
+   formularza. Zieleń z terminu wysyłki celowo się tu nie powtarza — dwa
+   akcenty pod jednym przyciskiem zaczęłyby ze sobą konkurować.
+   -------------------------------------------------------------------------- */
+.product__stock-hint {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 0.75rem 0;
+  color: var(--c-black);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-s);
+  line-height: 1.45;
+}
+
+.product__stock-hint-icon {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--c-grey-5);
+}
+
+/* Tekst musi zostać w jednym wierszu z ikoną, a przycisk zejść pod spód, gdy
+   zabraknie miejsca — stąd baza 12rem i możliwość rośnięcia. */
+.product__stock-hint-text {
+  flex: 1 1 12rem;
+}
+
+.product__stock-hint--rest,
+.product__stock-hint--over {
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--c-grey-1);
+}
+
+.product__stock-hint--rest .product__stock-hint-text,
+.product__stock-hint--over .product__stock-hint-text {
+  font-weight: 600;
+}
+
+.product__stock-hint--rest .product__stock-hint-icon {
+  color: var(--c-black);
+}
+
+.product__stock-hint--over {
+  color: var(--c-sale);
+}
+
+.product__stock-hint--over .product__stock-hint-icon {
+  color: var(--c-sale);
+}
+
+/* Wariant „bierzesz cały nasz zapas” to potwierdzenie decyzji, więc zostaje
+   linijką — ale czarna ikona odróżnia go od zwykłej informacji o stanie. */
+.product__stock-hint--all .product__stock-hint-icon {
+  color: var(--c-black);
+}
+
+/* CTA drugiego planu, jak „Zamów próbkę”: sam obrys, wypełnienie dopiero pod
+   kursorem. Przycisk jest niższy od tamtego, bo siedzi w linijce tekstu,
+   a nie w osobnym kaflu. Bez wersalików, choć reszta CTA w motywie je ma —
+   napis kończy się jednostką i „6,2 m” wychodziło z nich jako „6,2 M”. */
+.product__stock-hint-button {
+  flex: 0 0 auto;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--c-black);
+  background: transparent;
+  color: var(--c-black);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-xs);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.product__stock-hint-button:hover,
+.product__stock-hint-button:focus-visible {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.product__stock-hint--over .product__stock-hint-button {
+  border-color: var(--c-sale);
+  color: var(--c-sale);
+}
+
+.product__stock-hint--over .product__stock-hint-button:hover,
+.product__stock-hint--over .product__stock-hint-button:focus-visible {
+  background: var(--c-sale);
+  border-color: var(--c-sale);
+  color: var(--c-white);
+}
+
+/* Na wąskim ekranie przycisk idzie w całej szerokości pod tekst — obok niego
+   zostawałby pasek na 2-3 znaki i napis łamałby się w środku. */
+@media (max-width: 575.98px) {
+  .product__stock-hint-button {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
