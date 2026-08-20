@@ -31,9 +31,13 @@ Dwa dodatkowe wejścia webpacka (`webpack/webpack.vars.js`, wpis `custom`):
   sam sprawdza, czy na stronie ma co robić. Wejście ma własne
   `library: ThemeCustom`, bo domyślne `window.Theme` nadpisałoby eksporty motywu.
 
-Oba pliki rejestruje rdzeń sklepu (`classes/controller/FrontController.php`,
-`setMedia()`, id `theme-custom`, priorytet 1000) — to jedyna modyfikacja poza
-motywem, o której trzeba pamiętać przy aktualizacji PrestaShopa.
+Oba pliki rejestruje sam motyw: sekcja `assets` w `config/theme.yml`
+(id `theme-custom`, priorytet 1000). PrestaShop czyta `theme.yml` tylko raz
+i zapisuje wynik do `config/themes/hummingbird/shop<ID>.json` — zmiany
+w yml trzeba nanieść także tam (usunięcie JSON-a resetuje layouty zapisane
+z BO, więc lepiej edytować). Do 2026-08-21 robił to ręcznie dopisany kod
+w `classes/controller/FrontController.php`; usunięty, kopia w
+`/home/izpol/backup/FrontController.php.z-hackiem-theme-custom-20260821`.
 
 ## Łatki, które muszą przeżyć przebudowę
 
@@ -58,3 +62,19 @@ Build jest odtwarzalny (ten sam commit → ten sam `theme.js`). Na sklep idą:
 Na izpol.pl działa CCC, więc po wdrożeniu trzeba podbić `PS_CCCCSS_VERSION`
 i `PS_CCCJS_VERSION` w `ps_configuration` i wyczyścić
 `var/cache/prod/{smarty,translations}`.
+
+## Scalanie zmian z `elegant`
+
+`git merge elegant` na gałęzi `izpol` — ale przed tym sprawdzić, czego nowe
+szablony wymagają od modułów. Stan 2026-08-21: `origin/elegant` ma stopkę
+z paskiem prawnym z `hummingbird_editor` (`$hbe_footer_links`,
+commit 0460a32), a izpol.pl ma hummingbird_editor 1.15.0 bez tej zmiennej —
+po merge'u linki prawne w stopce by zniknęły. Najpierw aktualizacja modułu,
+potem merge, build, test, wdrożenie.
+
+## Wdrażanie a równoległa praca na produkcji
+
+rsync nadpisuje pliki w sklepie stanem gałęzi. Przed wdrożeniem zrobić kopię
+(`tar`) i porównać mtime plików w sklepie z datą ostatniej synchronizacji —
+zmiany zrobione „na żywo" po tej dacie trzeba najpierw wciągnąć do gałęzi
+(tak zgubiono i odzyskano `qty-input.tpl` 2026-08-21).
