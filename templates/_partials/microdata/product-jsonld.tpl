@@ -24,6 +24,26 @@
 
 {assign var=hasOffers value=$product.show_price}
 
+{**
+ * Daty obowiazywania ceny (Google Merchant listings: validFrom + priceValidUntil
+ * na wezle Offer, gdy `price` to aktualna cena sprzedazy).
+ * Cena promocyjna z okreslonym terminem podaje swoje wlasne daty; przy promocji
+ * bezterminowej i cenie zwyklej `validFrom` to data dodania produktu, a
+ * `priceValidUntil` zostaje krotkim, ruchomym terminem jak dotad.
+ *}
+{assign var=offerValidFrom value=''}
+{assign var=offerValidUntil value=($smarty.now + (int) (60*60*24*15))|date_format:"%Y-%m-%d"}
+
+{if !empty($product.specific_prices.from) && $product.specific_prices.from|substr:0:4 != '0000'}
+  {assign var=offerValidFrom value=$product.specific_prices.from|date_format:"%Y-%m-%d"}
+{elseif !empty($product.date_add) && $product.date_add|substr:0:4 != '0000'}
+  {assign var=offerValidFrom value=$product.date_add|date_format:"%Y-%m-%d"}
+{/if}
+
+{if !empty($product.specific_prices.to) && $product.specific_prices.to|substr:0:4 != '0000'}
+  {assign var=offerValidUntil value=$product.specific_prices.to|date_format:"%Y-%m-%d"}
+{/if}
+
 <script type="application/ld+json">
   {
     "@context": "https://schema.org/",
@@ -42,8 +62,10 @@
       "name": "{$product_manufacturer->name|escape:'html':'UTF-8'}"
     }
     {elseif $shop.name},
+    {* Google oczekuje w `brand` typu Brand — Organization jest raportowane
+       w Search Console jako nieprawidlowy typ obiektu. *}
     "brand": {
-      "@type": "Organization",
+      "@type": "Brand",
       "name": "{$shop.name}"
     }
     {/if}
@@ -68,7 +90,8 @@
       "priceCurrency": "{$currency.iso_code}",
       "price": "{$product.price_amount}",
       "url": "{$product.url}",
-      "priceValidUntil": "{($smarty.now + (int) (60*60*24*15))|date_format:"%Y-%m-%d"}",
+      {if $offerValidFrom}"validFrom": "{$offerValidFrom}",{/if}
+      "priceValidUntil": "{$offerValidUntil}",
       {if $product.images|count > 0}
         "image": {strip}[
           {foreach from=$product.images item=p_img name="p_img_list"}
