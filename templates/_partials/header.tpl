@@ -47,11 +47,13 @@
       <div class="{$headerBottom}__row gx-2 gx-md-3 align-items-center d-flex flex-wrap">
 
         {block name='header_burger'}
-          {* Kolejność rzędów na telefonie: logo (0), potem hamburger (1)
-             i ikony (2). Od md wraca układ jednorzędowy motywu.
+          {* Telefon jak na rosenthal.pl: jeden wiersz — hamburger i lupa po lewej,
+             logo wyśrodkowane absolutnie (reguła motywu), ikony po prawej
+             (ms-auto). Lupa rozwija wiersz wyszukiwarki pod nagłówkiem
+             (custom.css sekcja 30, custom.js header-search-toggle).
              Klasami Bootstrapa, bo `order` z @layer utilities jest !important
              i z custom.css (poza warstwami) się tego nie przebije. *}
-          <div class="{$headerBottom}__burger col-auto order-1 order-md-0 d-xl-none">
+          <div class="{$headerBottom}__burger col-auto order-1 order-md-0 d-xl-none d-flex align-items-center">
             <button
               class="header-block__action-btn {$headerBottom}__burger-btn"
               type="button"
@@ -62,6 +64,21 @@
             >
               <span class="material-icons" aria-hidden="true">&#xE5D2;</span>
             </button>
+
+            {* Lupa rozwijająca wiersz wyszukiwarki — na telefonie pole zjeżdża
+               pod ikonę zamiast zajmować własny rząd na stałe.
+               Obsługa: assets/js/custom.js, sekcja 7. *}
+            <div class="{$headerBottom}__search">
+              <button
+                class="header-block__action-btn {$headerBottom}__search-toggle js-header-search-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ps_searchbar"
+                aria-label="{l s='Search' d='Shop.Theme.Catalog'}"
+              >
+                <svg class="header-block__icon" width="20" height="20" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5974 12.5976L16.4998 16.5M7.57984 0.5C9.53504 0.5 11.3054 1.292 12.5862 2.5736C13.7445 3.73182 14.4653 5.25581 14.6259 6.88591C14.7865 8.51602 14.3769 10.1514 13.4669 11.5133C12.5569 12.8753 11.2028 13.8796 9.63536 14.3551C8.0679 14.8306 6.38407 14.7479 4.87074 14.1211C3.35742 13.4943 2.10825 12.3622 1.33608 10.9176C0.563904 9.47306 0.3165 7.80544 0.636021 6.19891C0.955542 4.59239 1.82222 3.14635 3.08838 2.10719C4.35454 1.06803 5.94185 0.500039 7.57984 0.5Z"/></svg>
+              </button>
+            </div>
           </div>
         {/block}
 
@@ -105,22 +122,7 @@
         </div>
 
         {block name='header_mobile_icons'}
-          <div class="{$headerBottom}__icons {$headerBottom}__icons--mobile order-2 d-flex align-items-center d-md-none">
-            {* Lupa rozwijająca wiersz wyszukiwarki — na telefonie pole zjeżdża
-               pod ikonę zamiast zajmować własny rząd na stałe.
-               Obsługa: assets/js/custom.js, sekcja 7. *}
-            <div class="{$headerBottom}__search">
-              <button
-                class="header-block__action-btn {$headerBottom}__search-toggle js-header-search-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="ps_searchbar"
-                aria-label="{l s='Search' d='Shop.Theme.Catalog'}"
-              >
-                <svg class="header-block__icon" width="20" height="20" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5974 12.5976L16.4998 16.5M7.57984 0.5C9.53504 0.5 11.3054 1.292 12.5862 2.5736C13.7445 3.73182 14.4653 5.25581 14.6259 6.88591C14.7865 8.51602 14.3769 10.1514 13.4669 11.5133C12.5569 12.8753 11.2028 13.8796 9.63536 14.3551C8.0679 14.8306 6.38407 14.7479 4.87074 14.1211C3.35742 13.4943 2.10825 12.3622 1.33608 10.9176C0.563904 9.47306 0.3165 7.80544 0.636021 6.19891C0.955542 4.59239 1.82222 3.14635 3.08838 2.10719C4.35454 1.06803 5.94185 0.500039 7.57984 0.5Z"/></svg>
-              </button>
-            </div>
-
+          <div class="{$headerBottom}__icons {$headerBottom}__icons--mobile order-2 d-flex align-items-center d-md-none ms-auto">
             <div id="_mobile_ps_customersignin">
               <div class="header-block">
                 <a href="{$urls.pages.my_account}" class="header-block__action-btn" rel="nofollow" aria-label="{l s='Log in to your customer account' d='Shop.Theme.Customeraccount'}">

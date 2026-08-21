@@ -1,48 +1,12 @@
 /* --------------------------------------------------------------------------
-   4. MOBILE — pole wyszukiwania w osobnym wierszu, logo z powrotem na środku
-   Motyw wyjmuje logo z przepływu (`.header-bottom__logo{position:absolute;
-   left:50%;transform:translateX(-50%)}` w @media max-width:767.98px) i liczy
-   na JEDEN wiersz wysokości 3rem: burger po lewej, logo na środku, ikony po
-   prawej. Odkąd wyszukiwarka zjeżdża do własnego wiersza, ten wiersz jest
-   dwa razy wyższy — a logo, będąc poza przepływem z `top:auto`, ląduje w
-   pionie na środku CAŁEGO bloku, czyli między wierszami. Dodatkowo nic nie
-   dopycha już ikon do prawej (marginesu `me-auto` z logo nie ma w przepływie),
-   więc burger i ikony robiły ciasną grupkę w lewym górnym rogu.
-   Naprawa: logo wraca do przepływu, a burger i ikony dostają równe „szalki"
-   (flex: 1 1 0), więc logo siedzi dokładnie na środku ekranu — nie na środku
-   wolnego miejsca, które przy szerszej grupie ikon wypada 40 px w lewo.
+   4. MOBILE — pole wyszukiwania w osobnym wierszu
+
+   Układ wiersza nagłówka na telefonie (logo absolutnie na środku, hamburger
+   i lupa po lewej, ikony po prawej) to reguły motywu + sekcja 30. Tu zostają
+   tylko rzeczy dotyczące samego pola wyszukiwania, które na telefonie zjeżdża
+   do własnego, pełnego wiersza pod nagłówkiem.
    -------------------------------------------------------------------------- */
 @media (max-width: 767.98px) {
-  .header-bottom__row {
-    min-height: 0;
-    padding-bottom: 0.5rem;
-  }
-
-  .header-bottom__logo {
-    position: static;
-    left: auto;
-    transform: none;
-  }
-
-  /* Logo ma z szablonu `me-auto`, czyli `margin-right: auto !important`
-     z @layer utilities. Z custom.css (poza warstwami) NIE DA SIĘ tego przebić:
-     dla deklaracji !important kolejność warstw jest odwrócona i brak warstwy
-     jest najsłabszy — trzeba by dopisać własne `@layer utilities { ... }`.
-     Na szczęście nie trzeba: marginesy auto dostają tylko wolne miejsce, które
-     ZOSTAŁO po rozdaniu flex-grow, a poniższe flex: 1 1 0 zabierają je co do
-     piksela. `margin-right: auto` wychodzi więc zero i logo siedzi na środku. */
-
-  /* col-auto z szablonu to flex: 0 0 auto — tutaj obie strony mają rosnąć. */
-  .header-bottom__burger,
-  .header-bottom__icons--mobile {
-    flex: 1 1 0;
-    min-width: 0;
-  }
-
-  .header-bottom__icons--mobile {
-    justify-content: flex-end;
-  }
-
   .ps-searchbar-slot {
     flex: 0 0 100%;
     max-width: 100%;

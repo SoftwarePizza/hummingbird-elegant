@@ -1,26 +1,29 @@
 /* --------------------------------------------------------------------------
-   23. NAGŁÓWEK NA TELEFONIE — LOGO NA CAŁĄ SZEROKOŚĆ, WYSZUKIWARKA POD LUPĄ
+   23. NAGŁÓWEK NA TELEFONIE — JEDEN WIERSZ JAK NA ROSENTHAL.PL, WYSZUKIWARKA POD LUPĄ
 
-   Układ z sekcji 4 upychał w jeden rząd hamburger, logo i ikony, a pole
-   wyszukiwania szło rzędem niżej. Logo miało wtedy 150×32 px, bo dzieliło
-   szerokość z ikonami po obu stronach.
+   Od 2026-08-21 telefon wygląda jak w motywie (i na rosenthal.pl):
 
-   Teraz są dwa rzędy i inny podział ról:
-     rząd 1 — samo logo, na całą szerokość, wyśrodkowane i wyraźnie większe;
-     rząd 2 — hamburger z lewej, po prawej lupa, konto, ulubione, koszyk.
-   Pole wyszukiwania nie zajmuje już stałego miejsca: siedzi w trzecim rzędzie
-   i wyjeżdża dopiero po dotknięciu lupy (klasa `is-search-open` na
-   `.header-bottom`, patrz custom.js sekcja 7).
+     [ ≡ ][ ⌕ ]          LOGO           [ ♡ ][ 🛍 ]
 
-   To nie jest overlay taki jak na rosenthal.pl. Tam wyszukiwarka jest overlayem
-   TAKŻE na desktopie, a izpol ma na desktopie szerokie pole w rzędzie z logo
-   (układ „katalogowy", sekcja 2) — i tego nie ruszam. Do tego
-   `search-overlay.js` z edytora przy starcie PRZENOSI overlay na bezpośrednie
-   dziecko `#header`, co rozbiłoby ten rząd. Stąd własne, lżejsze rozwiązanie
-   po stronie mobile: ten sam, żywy widget `#ps_searchbar` tylko się odsłania,
-   więc podpowiedzi AmbJoliSearch działają bez żadnego przenoszenia węzłów.
+   Jeden wiersz o wysokości 3rem; logo stoi poza przepływem, wyśrodkowane
+   absolutnie regułą motywu (`.header-bottom__logo{position:absolute;left:50%;
+   transform:translateX(-50%)}`), hamburger i lupa po lewej (oba w
+   .header-bottom__burger), ikony po prawej (ms-auto w szablonie).
+   Wcześniejszy układ z logo na całą szerokość w osobnym wierszu — wycofany.
+
+   Pole wyszukiwania nie zajmuje stałego miejsca: siedzi w drugim wierszu
+   (.ps-searchbar-slot, order 3, pełna szerokość) i wyjeżdża po dotknięciu
+   lupy (klasa `is-search-open` na `.header-bottom`, custom.js
+   header-search-toggle). To nie jest overlay jak na rosenthal.pl: tam
+   wyszukiwarka jest overlayem także na desktopie, a izpol ma na desktopie
+   szerokie pole w rzędzie z logo (układ „katalogowy", sekcja 2) — i tego nie
+   ruszam. Ten sam, żywy widget #ps_searchbar tylko się odsłania, więc
+   podpowiedzi AmbJoliSearch działają bez przenoszenia węzłów.
+
+   Logo ma `top: 0` i wysokość pierwszego wiersza: bez tego, jako element
+   absolutny z `top: auto`, centrowałoby się w pionie względem CAŁEGO bloku
+   i po rozwinięciu wyszukiwarki zjeżdżałoby między wiersze.
    -------------------------------------------------------------------------- */
-
 /* Lupa istnieje tylko tam, gdzie pole jest schowane. */
 .header-bottom__search {
   display: none;
@@ -36,54 +39,43 @@
 }
 
 @media (max-width: 767.98px) {
+  /* Sekcja 2 daje wierszowi min-height 78px pod układ desktopowy — na telefonie
+     obowiązuje 3rem z motywu. */
+  .header-bottom__row {
+    min-height: 3rem;
+    row-gap: 0;
+  }
+
   .header-bottom__search {
     display: block;
   }
 
-  /* Rząd 1: logo bierze pełną szerokość i staje na środku. */
   .header-bottom__logo {
-    flex: 0 0 100%;
-    max-width: 100%;
-    order: 0;
-    justify-content: center;
-    padding-block: 0.25rem 0.5rem;
+    top: 0;
+    height: 3rem;
+    display: flex;
+    align-items: center;
   }
 
-  /* Motyw ogranicza logo regułą `.header-bottom .navbar-brand .logo`
-     (max-height 2rem, max-width 10rem) — trzy klasy, więc selektor musi mieć
-     tyle samo, inaczej przegrywa mimo późniejszej pozycji w pliku. */
+  /* Rozmiar jak w motywie (max-width 8rem), ale podany wprost: miejsce ma być
+     zarezerwowane zanim plik się pobierze (ten sam powód, co stała wysokość
+     na desktopie w sekcji 2). Selektor o tej samej sile, co reguła motywu. */
   .header-bottom__logo .navbar-brand .logo {
-    max-height: none;
+    width: 8rem;
     height: auto;
-    /* Stała szerokość z tego samego powodu, co stała wysokość na desktopie
-       (sekcja 2): miejsce ma być zarezerwowane zanim plik się pobierze. */
-    width: min(70vw, 17rem);
+    max-height: none;
     max-width: none;
   }
 
-  /* Rząd 2: hamburger i ikony na przeciwległych końcach. */
-  .header-bottom__burger {
-    order: 1;
-    flex: 0 0 auto;
-  }
-
-  .header-bottom__icons--mobile {
-    order: 2;
-    flex: 1 1 auto;
-    justify-content: flex-end;
-    gap: 0.15rem;
-  }
-
-  /* Rząd 3: pole wyszukiwania, domyślnie zwinięte. */
+  /* Drugi wiersz: pole wyszukiwania, domyślnie zwinięte. */
   .ps-searchbar-slot {
     order: 3;
-    flex: 0 0 100%;
-    max-width: 100%;
     display: none;
   }
 
   .header-bottom.is-search-open .ps-searchbar-slot {
     display: block;
     padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
