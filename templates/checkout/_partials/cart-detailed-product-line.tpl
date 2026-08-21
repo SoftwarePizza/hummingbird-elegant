@@ -141,6 +141,18 @@
               -{$product.discount_to_display nofilter}
             </span>
           {/if}
+        {elseif !empty($product.hbe_allstock_price_before)}
+          {* Rabat za całość na produkcie BEZ przeceny: przekreślona cena sprzed
+             rabatu (hummingbird_editor, actionPresentCart). Na przecenionym
+             przekreślona zostaje cena katalogowa, a cena pośrednia idzie do
+             bloku rabatu niżej — razem trzy ceny. *}
+          <span class="product-line__item-regular-price">{$product.hbe_allstock_price_before}</span>
+        {/if}
+
+        {if !empty($product.hbe_allstock_discount)}
+          <span class="product-line__item-discount product-line__item-discount--allstock badge">
+            -{$product.hbe_allstock_discount}
+          </span>
         {/if}
 
         {capture name='product_price_block'}{hook h='displayProductPriceBlock' product=$product type="unit_price"}{/capture}
@@ -157,7 +169,25 @@
       {if !empty($product.hbe_allstock_discount)}
         <div class="product-line__item product-line__allstock">
           <i class="product-line__allstock-icon material-icons rtl-no-flip" aria-hidden="true">&#xE54E;</i>
-          <span>{l s='%discount% off for taking the whole stock' d='Shop.Theme.Checkout' sprintf=['%discount%' => $product.hbe_allstock_discount]}</span>
+          <span class="product-line__allstock-text">
+            <span class="product-line__allstock-label">{l s='%discount% off for taking the whole stock' d='Shop.Theme.Checkout' sprintf=['%discount%' => $product.hbe_allstock_discount]}</span>
+            {if !empty($product.hbe_allstock_savings) || ($product.has_discount && !empty($product.hbe_allstock_price_before))}
+              <span class="product-line__allstock-details">
+                {if $product.has_discount && !empty($product.hbe_allstock_price_before)}
+                  {* Cena pośrednia (po przecenie, przed rabatem za całość) — w wierszu
+                     cen jest już zajęte przez cenę katalogową i plakietkę przeceny. *}
+                  <span class="product-line__allstock-steps">
+                    <span class="product-line__allstock-step-before">{$product.hbe_allstock_price_before}</span>
+                    <span class="product-line__allstock-arrow" aria-hidden="true">→</span>
+                    <span class="product-line__allstock-step-after">{$product.price}</span>
+                  </span>
+                {/if}
+                {if !empty($product.hbe_allstock_savings)}
+                  <span class="product-line__allstock-savings">{l s='You save %amount% in total' d='Shop.Theme.Checkout' sprintf=['%amount%' => $product.hbe_allstock_savings]}</span>
+                {/if}
+              </span>
+            {/if}
+          </span>
         </div>
       {/if}
     </div>

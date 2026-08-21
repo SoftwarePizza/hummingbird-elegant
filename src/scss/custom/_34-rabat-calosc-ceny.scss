@@ -1,0 +1,70 @@
+/* --------------------------------------------------------------------------
+   34. RABAT ZA CAŁOŚĆ — CENA SPRZED RABATU I ŁĄCZNA OSZCZĘDNOŚĆ
+
+   Uzupełnienie plakietki z sekcji 23.1 (w _32-lora-w-sklepie.scss). Moduł
+   hummingbird_editor dokłada pozycji koszyka, na której naliczył rabat za
+   wzięcie całego zapasu, trzy pola: `hbe_allstock_discount` („5%"),
+   `hbe_allstock_price_before` (cena jednostkowa sprzed rabatu) i
+   `hbe_allstock_savings` (ile klient oszczędza na całej pozycji). Szablon
+   cart-detailed-product-line.tpl rozkłada to tak:
+
+   Produkt bez przeceny — dwie ceny w wierszu cen, jak przy zwykłej promocji:
+
+     29,21 zł  ~~30,75 zł~~  [−5%]
+     🏷 Rabat 5% za wzięcie całego zapasu
+        Oszczędzasz łącznie 86,10 zł
+
+   Produkt już przeceniony — trzy ceny: katalogowa przekreślona zostaje przy
+   plakietce przeceny, a cena pośrednia (po przecenie, przed rabatem) idzie
+   do bloku rabatu jako „34,44 zł → 33,75 zł":
+
+     33,75 zł  ~~43,05 zł~~  [−20%] [−2%]
+     🏷 Rabat 2% za wzięcie całego zapasu
+        34,44 zł → 33,75 zł   Oszczędzasz łącznie 24,80 zł
+
+   Etykieta ma własną linię, a szczegóły pod nią są wierszem flex bez
+   separatorów — kolumna z nazwą produktu bywa wąska (na desktopie ok. 230 px)
+   i przy zawijaniu kropka-separator lądowała na początku linii.
+   Plakietka „−5%" jest w tej samej zieleni co blok pod spodem, żeby było
+   widać, że należy do rabatu za całość, a nie do przeceny (czerwień motywu).
+   -------------------------------------------------------------------------- */
+.product-line__item-discount--allstock {
+  background: #2f7d55;
+  color: #fff;
+}
+
+.product-line__allstock-text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.125rem;
+  min-width: 0;
+}
+
+.product-line__allstock-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  row-gap: 0.125rem;
+  font-weight: 500;
+}
+
+.product-line__allstock-steps,
+.product-line__allstock-savings {
+  white-space: nowrap;
+}
+
+.product-line__allstock-savings {
+  font-weight: 600;
+}
+
+.product-line__allstock-step-before {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.product-line__allstock-arrow {
+  margin-inline: 0.125rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
