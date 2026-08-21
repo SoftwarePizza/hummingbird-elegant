@@ -98,6 +98,7 @@
       </div>
     {/block}
 
-    {hook h='displayProductPriceBlock' product=$product type="weight" hook_origin='product_sheet'}
+    {* Dynamiczna kwota (cena × ilość) przeniesiona do product-add-to-cart.tpl,
+       tuż nad stepper i przycisk koszyka — patrz blok product__dynamic-price. *}
   </div>
 {/if}

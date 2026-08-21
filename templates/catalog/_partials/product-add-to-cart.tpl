@@ -82,6 +82,17 @@
           "data-max-message" => "{l s='We only have %quantity% in stock' d='Shop.Theme.Catalog' sprintf=['%quantity%' => $qty_max_text]}"
         ]}
       {/if}
+      {* Dynamiczna kwota (cena × ilość) — przeniesiona z product-prices.tpl,
+         żeby stała tuż nad stepperem i przyciskiem koszyka. Renderuje pproperties
+         (displayProductPriceBlock type="weight", hook/front/product.tpl); ten sam
+         selektor .pp_price.product-price aktualizuje pproperties-hummingbird.js
+         przy każdej zmianie ilości, niezależnie od miejsca w DOM. Wrapper tylko
+         gdy hook coś zwrócił (produkty bez pproperties nie dostają pustego diva). *}
+      {capture name='pp_dynamic_price'}{hook h='displayProductPriceBlock' product=$product type="weight" hook_origin='product_sheet'}{/capture}
+      {if trim($smarty.capture.pp_dynamic_price)}
+        <div class="product__dynamic-price js-product-dynamic-price">{$smarty.capture.pp_dynamic_price nofilter}</div>
+      {/if}
+
       <div class="product__actions-qty-add product-quantity">
         <div class="product-actions__quantity product__quantity quantity-button js-quantity-button">
           {include file='components/qty-input.tpl' attributes=$qty_attrs}
@@ -145,7 +156,16 @@
            jest wyłączony, data-discount zostaje puste i JS bierze warianty bez
            obietnicy zniżki. *}
         {assign var=stock_hint_discount value=''}
-        {if Configuration::get('HBE_ALLSTOCK_DISCOUNT_ENABLED')}
+        {* Rabat za całość obiecujemy tylko na tkaninach na CENTYMETRY (ilość
+           ułamkowa) — moduł hummingbird_editor liczy go tak samo
+           (isAllStockFractionalProduct), więc obietnica na karcie nie może się
+           rozjechać z faktyczną ceną. Sztuki/kupony i produkty bez szablonu
+           pproperties nie dostają ani obietnicy, ani rabatu. *}
+        {assign var=product_is_percm value=false}
+        {if (isset($product.pp_qty_step) && $product.pp_qty_step > 0 && $product.pp_qty_step != $product.pp_qty_step|intval) || (isset($product.pp_qty_decimals) && $product.pp_qty_decimals > 0)}
+          {assign var=product_is_percm value=true}
+        {/if}
+        {if Configuration::get('HBE_ALLSTOCK_DISCOUNT_ENABLED') && $product_is_percm}
           {* Produkt już przeceniony ma własną, mniejszą stawkę — ten sam podział
              robi moduł przy liczeniu ceny pozycji koszyka, tyle że po swojej
              stronie rozpoznaje przecenę po specific price. *}
