@@ -58,3 +58,37 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* -------- cena z jednostką nie może rozpychać kafla -------- */
+/* pproperties trzyma całą frazę „346,37 zł za szt/kupon" w jednym
+   `white-space: nowrap` (views/css/pproperties.css: .pp_price_with_text i
+   spółka). Na karcie produktu to bez znaczenia, ale w kaflu listingu taki
+   ciąg ma min-content 195 px przy kolumnie 171 px — jeden produkt na
+   szt/kupon wypychał wtedy CAŁĄ stronę poza kontener i telefon dostawał
+   poziomy suwak (widać to było po przesuniętej siatce, nie po samej cenie).
+   Łamiemy więc frazę w miniaturze, ale zostawiamy nierozdzielną samą liczbę
+   z walutą — „346,37" i „zł" mają zostać w jednej linii. */
+.product-miniature .pp_price_with_text,
+.product-miniature .pp_unit_price_with_text,
+.product-miniature .pp_price_text,
+.product-miniature .pp_unity_text {
+  white-space: normal;
+}
+
+.product-miniature .pp_price,
+.product-miniature .pp_price_wt,
+.product-miniature .pp_price_tax_excl {
+  white-space: nowrap;
+}
+
+/* Kolumna siatki to minmax(0, 1fr), ale wnętrze kafla ma własne flexy —
+   bez min-width: 0 pojedyncze długie słowo (nazwa bez spacji, długi kod)
+   znowu rozepchnęłoby kafel ponad przydzieloną szerokość. */
+.product-miniature__infos,
+.product-miniature__informations {
+  min-width: 0;
+}
+
+.product-miniature__title {
+  overflow-wrap: anywhere;
+}
