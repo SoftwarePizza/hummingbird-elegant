@@ -21,6 +21,7 @@
  *  wishlist-sort         lista życzeń (blockwishlist) — sortowanie jak na listingu
  *  header-search-toggle  wyszukiwarka pod lupą w nagłówku mobilnym
  *  quantity-max          ilość nie większa niż stan (atrybut max) — karta i koszyk
+ *  product-reference-sync  „Nr produktu" nadąża za kolorem multiproduktu
  *  menu-tap-feedback     menu mobilne — pozycja podświetlona do czasu zmiany strony
  *  i18n                  napisy wspólne dla powyższych
  */
@@ -36,6 +37,7 @@ import { initBackToTop } from './custom/back-to-top';
 import { initWishlistSort } from './custom/wishlist-sort';
 import { initHeaderSearchToggle } from './custom/header-search-toggle';
 import { initQuantityMax } from './custom/quantity-max';
+import { initProductReferenceSync } from './custom/product-reference-sync';
 import { initMenuTapFeedback } from './custom/menu-tap-feedback';
 
 function boot() {
@@ -52,6 +54,7 @@ function boot() {
   initHeaderSearchToggle();
   initQuantityMax();
   initMenuTapFeedback();
+  initProductReferenceSync();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są

@@ -125,7 +125,7 @@
         {if !empty($product.reference_to_display)}
           <li class="product-specs__row">
             <span class="product-specs__label">{l s='Reference' d='Shop.Theme.Catalog'}</span>
-            <span class="product-specs__value">{$product.reference_to_display}</span>
+            <span class="product-specs__value js-product-reference-src">{$product.reference_to_display}</span>
           </li>
         {/if}
       {/block}

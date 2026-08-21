@@ -69,11 +69,14 @@
          `Reference` ma w ps_translation komplet 17 języków (pl: „Nr produktu”),
          więc nie wpisujemy tu polskiego tekstu na sztywno. *}
       {block name='product_reference_code'}
-        {if !empty($product.reference_to_display)}
-          <p class="product__reference product__reference--top">
-            {l s='Reference' d='Shop.Theme.Catalog'} <span>{$product.reference_to_display}</span>
-          </p>
-        {/if}
+        {* Renderowany ZAWSZE (hidden gdy brak numeru), bo przy multiproduktach
+           (zintegrowanych produktach) zmiana koloru odświeża kartę ajaxem, a ten
+           blok jest w product.tpl — poza fragmentami refreshu. custom.js
+           (product-reference-sync) bierze nowy numer z product_details i wpisuje
+           go tutaj, żeby „Nr produktu" pasował do wybranego koloru. *}
+        <p class="product__reference product__reference--top js-product-reference-block"{if empty($product.reference_to_display)} hidden{/if}>
+          {l s='Reference' d='Shop.Theme.Catalog'} <span class="js-product-reference-top">{$product.reference_to_display}</span>
+        </p>
       {/block}
 
       {block name='product_prices'}
