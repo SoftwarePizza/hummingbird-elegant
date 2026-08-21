@@ -66,11 +66,14 @@ i `PS_CCCJS_VERSION` w `ps_configuration` i wyczyścić
 ## Scalanie zmian z `elegant`
 
 `git merge elegant` na gałęzi `izpol` — ale przed tym sprawdzić, czego nowe
-szablony wymagają od modułów. Stan 2026-08-21: `origin/elegant` ma stopkę
-z paskiem prawnym z `hummingbird_editor` (`$hbe_footer_links`,
-commit 0460a32), a izpol.pl ma hummingbird_editor 1.15.0 bez tej zmiennej —
-po merge'u linki prawne w stopce by zniknęły. Najpierw aktualizacja modułu,
-potem merge, build, test, wdrożenie.
+szablony wymagają od modułów. Przykład z 2026-08-21: stopka z `elegant`
+renderuje pasek prawny z `$hbe_footer_links`, czego hummingbird_editor 1.17.0
+nie dawał — najpierw poszła aktualizacja modułu do 1.18.0 (gałąź
+`merge-stopka` w repo edytora), sloty paska ustawione na strony CMS izpola
+(Regulamin / Polityka cookies / RODO / Odstąpienie od umowy, per język),
+dopiero potem merge (3fd7a5d). Konflikty zwykle tylko w `translations/pl-PL`
+(obie gałęzie dopisują jednostki) — rozwiązywać sumą, sprawdzać unikalność
+`id` i poprawność XML.
 
 ## Wdrażanie a równoległa praca na produkcji
 
