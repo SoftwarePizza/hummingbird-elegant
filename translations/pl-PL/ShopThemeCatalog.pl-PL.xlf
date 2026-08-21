@@ -1,7 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="templates/catalog/_partials/products-top.tpl" source-language="en" target-language="pl" datatype="plaintext">
+  <file original="Shop.Theme.Catalog.xlf" source-language="en" target-language="pl" datatype="plaintext">
     <body>
+      <trans-unit id="9ae7041cc2d967d00a6c820b4b7ef239" approved="yes">
+        <source>Available quantity to return:</source>
+        <target state="final">Dostępna ilość do zwrotu:</target>
+      </trans-unit>
+      <trans-unit id="89738fc42cc75be2173c5afc49e7f7b8" approved="yes">
+        <source>Carrier: %carrier_name%</source>
+        <target state="final">Przewoźnik: %carrier_name%</target>
+      </trans-unit>
+      <trans-unit id="489ef62b62d7146babc052a5fc3ec9b5" approved="yes">
+        <source>If this is a recurring problem, please [1]contact us[/1].</source>
+        <target state="final">Jeśli problem się powtarza, prosimy o [1]kontakt[/1].</target>
+      </trans-unit>
+      <trans-unit id="6235304701da57331e00bba0867eead2" approved="yes">
+        <source>No products available at the moment</source>
+        <target state="final">Obecnie brak produktów</target>
+      </trans-unit>
+      <trans-unit id="99f0c07c3b8b3bc78f5f9733019ec3d5" approved="yes">
+        <source>Order totals</source>
+        <target state="final">Podsumowanie zamówienia</target>
+      </trans-unit>
+      <trans-unit id="2ebe388cb82225492a45c9043c271585" approved="yes">
+        <source>Payment method: %payment_method%</source>
+        <target state="final">Metoda płatności: %payment_method%</target>
+      </trans-unit>
+      <trans-unit id="75edf643d9f66f0f905722da73da0a94" approved="yes">
+        <source>Price: </source>
+        <target state="final">Cena: </target>
+      </trans-unit>
+      <trans-unit id="682084614bc1e7dabd510796a1536631" approved="yes">
+        <source>Price: %price%.</source>
+        <target state="final">Cena: %price%.</target>
+      </trans-unit>
+      <trans-unit id="04c06765e76fdf5efd32d865bb1e9210" approved="yes">
+        <source>Product brand: %brand_name%</source>
+        <target state="final">Marka produktu: %brand_name%</target>
+      </trans-unit>
+      <trans-unit id="e91e64282a4f412a9d813c097cbf9fb4" approved="yes">
+        <source>Products details</source>
+        <target state="final">Szczegóły produktów</target>
+      </trans-unit>
+      <trans-unit id="c874fc2a4f2ea4c93c8b66532a27bd3c" approved="yes">
+        <source>Quantity inside the pack: %quantity%.</source>
+        <target state="final">Ilość w zestawie: %quantity%.</target>
+      </trans-unit>
+      <trans-unit id="15876a65ebf38e9cac21039e04bee5be" approved="yes">
+        <source>Reference: %reference%</source>
+        <target state="final">Kod produktu: %reference%</target>
+      </trans-unit>
+      <trans-unit id="9bbd21b823a4dcab93bfec753e48b418" approved="yes">
+        <source>Regular price: </source>
+        <target state="final">Cena regularna: </target>
+      </trans-unit>
+      <trans-unit id="d96b4c25c8c6ebd7f078684a28b3cb2d" approved="yes">
+        <source>Select all products</source>
+        <target state="final">Zaznacz wszystkie produkty</target>
+      </trans-unit>
+      <trans-unit id="1b43324e279c08e5972631cebeb792b7" approved="yes">
+        <source>Select product to return</source>
+        <target state="final">Wybierz produkt do zwrotu</target>
+      </trans-unit>
+      <trans-unit id="a1ab8a6719008b1b5b146dc898c8e9f0" approved="yes">
+        <source>Select quantity to return</source>
+        <target state="final">Wybierz ilość do zwrotu</target>
+      </trans-unit>
+      <trans-unit id="b162661813f69374aa211cc29c4f2b5b" approved="yes">
+        <source>Slide to product image %number%</source>
+        <target state="final">Przejdź do zdjęcia produktu %number%</target>
+      </trans-unit>
+      <trans-unit id="d9d697694800fc1320e90fd0d6a7d92d" approved="yes">
+        <source>View product %product_name%</source>
+        <target state="final">Zobacz produkt %product_name%</target>
+      </trans-unit>
+      <trans-unit id="27c58e5a84e08e2f404d31c258946c90" approved="yes">
+        <source>View product %product_name%, part of the pack.</source>
+        <target state="final">Zobacz produkt %product_name%, element zestawu.</target>
+      </trans-unit>
+      <trans-unit id="f286999e8dee46f02dbd9f8f523220f5" approved="yes">
+        <source>quick view</source>
+        <target state="final">szybki podgląd</target>
+      </trans-unit>
       <trans-unit id="f3f43e30c8c7d78c6ac0173515e57a00" approved="yes">
         <source>Filters</source>
         <target state="final">Filtry</target>
