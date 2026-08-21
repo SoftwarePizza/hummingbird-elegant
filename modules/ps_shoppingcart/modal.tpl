@@ -111,6 +111,7 @@
               </div>
             {/if}
             <div class="blockcart-modal__extra">
+              {hook h='displayHbeTiers' ctx='preview'}
               {hook h='displayCartModalContent' product=$product}
             </div>
           </div>

@@ -41,6 +41,10 @@
     </div>
   {/if}
 
+  {* Progi rabatowe z kodami (hummingbird_editor) — podgląd renderuje się na
+     serwerze przy każdej zmianie (cartpreview.php), więc pasek nadąża sam. *}
+  {hook h='displayHbeTiers' ctx='preview'}
+
   {if $cart.products_count > 0}
     <ul class="cart-preview__products">
       {foreach from=$cart.products item=product}

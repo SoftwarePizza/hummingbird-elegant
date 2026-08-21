@@ -6,6 +6,12 @@
   {* Wrapper is the ajax refresh target (core replaceWith on .js-cart-detailed-totals).
      The voucher stays nested here so a single refresh never duplicates the promo card. *}
   <div class="cart-summary__totals js-cart-detailed-totals">
+    {* Progi rabatowe z kodami (hummingbird_editor): „dołóż X, a dostaniesz Y%”
+       + aktywacja kodu jednym kliknięciem. Siedzi w tym wrapperze celowo —
+       rdzeń podmienia go ajaxem po każdej zmianie ilości, więc pasek jest
+       zawsze świeży bez własnego JS. Bez modułu hook renderuje pustkę. *}
+    {hook h='displayHbeTiers' ctx='cart'}
+
     {* Promo code — own card on top, matching the Figma layout. *}
     {block name='cart_voucher'}
       {include file='checkout/_partials/cart-voucher.tpl'}
