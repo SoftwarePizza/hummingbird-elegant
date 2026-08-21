@@ -78,4 +78,13 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
+
+  /* Lupa to SVG 20x20, a menu/serce/koszyk to glify material-icons 23px — te
+     mają wewnętrzny margines w polu em, więc realnie „tuszu" jest mniej i lupa
+     wychodziła odrobinę większa. 18px zrównuje ją wizualnie z resztą ikon
+     nagłówka. (Atrybuty width/height SVG-a przebija każda reguła CSS.) */
+  .header-bottom__search-toggle .header-block__icon {
+    width: 18px;
+    height: 18px;
+  }
 }
