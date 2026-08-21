@@ -150,7 +150,22 @@ function clampQtyToMax(input, opts) {
   syncQtyMaxState(input);
 
   if (opts.silent !== true) {
-    showQtyBubble(input, input.getAttribute('data-max-message'), QTY_BUBBLE_MS);
+    var message = input.getAttribute('data-max-message');
+    showQtyBubble(input, message, QTY_BUBBLE_MS);
+
+    /* Koszyk: zmiana ilości wyzwala pełne przerenderowanie pozycji przez rdzeń
+       (core.js podmienia .cart-overview), które kasuje ten węzeł dymka. Zapisujemy
+       go więc jako serverClamp — handler `updatedCart` odtworzy go na świeżej
+       pozycji po jej wstawieniu, tą samą drogą, co komunikat z serwera. */
+    if (input.hasAttribute('data-update-url')) {
+      var line = input.closest('[data-icp]');
+      serverClamp = {
+        id_cart_product: line ? line.getAttribute('data-icp') : null,
+        id_product: input.getAttribute('data-product-id'),
+        message: message,
+        until: Date.now() + 15000
+      };
+    }
   }
   if (opts.notify !== false) {
     ['input', 'change'].forEach(function (nazwa) {
