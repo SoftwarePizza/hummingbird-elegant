@@ -1,0 +1,91 @@
+/* --------------------------------------------------------------------------
+   36. KOSZYK NA TELEFONIE — WIERSZ POZYCJI BEZ ŚCISKU
+
+   Wiersz pozycji urósł: cena jednostkowa, cena sprzed przeceny, dwie plakietki
+   (−20 %, −2 %), trzywierszowy blok rabatu „za całość", sześcioklockowa
+   kontrolka ilości (−1, −0,1, pole, „m", +0,1, +1) i kwota pozycji. Na
+   telefonie kontrolka miała 256 px w kolumnie 262 px, czyli dotykała krawędzi,
+   a kwota spadała pod nią i lądowała przy samym brzegu — przy większej czcionce
+   systemowej (Android potrafi skalować o 10–30 %) to już wychodziło poza ekran.
+
+   Zamiast chować informacje — zwężamy klocki i oddajemy miejsce:
+   zdjęcie 4rem zamiast 5.5rem, mniejsze przyciski kontrolki i pole ilości,
+   drobniejsze plakietki i blok rabatu. Kontrolka schodzi do ~196 px, więc
+   kwota mieści się OBOK niej z zapasem ~26 px na typowym telefonie (390 px).
+
+   `flex-wrap` na `.product-line__content-right` (sekcja 8) zostaje jako
+   bezpiecznik: na wąskim ekranie (360 px) albo przy powiększonej czcionce kwota
+   sama zjeżdża do drugiej linii, wyrównana do prawej — nigdy poza kontener.
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .product-line {
+    gap: 0.75rem;
+  }
+
+  .product-line__img {
+    width: 4rem;
+  }
+
+  /* Bez tego długa nazwa albo szeroka kontrolka rozpychają kolumnę treści
+     ponad przydzieloną szerokość (min-width flexa to domyślnie auto). */
+  .product-line__content-left,
+  .product-line__content-right {
+    min-width: 0;
+  }
+
+  .product-line__title {
+    font-size: var(--fs-body-s);
+  }
+
+  .product-line__item--prices {
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    row-gap: 0.25rem;
+  }
+
+  .product-line__item-discount.badge {
+    font-size: 0.6875rem;
+    padding: 0.15rem 0.35rem;
+  }
+
+  .product-line__allstock {
+    font-size: var(--fs-body-xs);
+    line-height: 1.35;
+  }
+
+  .product-line__allstock-icon {
+    font-size: 1rem;
+  }
+
+  /* -------- kontrolka ilości: te same sześć klocków, węższe -------- */
+  .quantity-button__group.has-big-step > .qty-step--big {
+    min-width: 2.25rem;
+  }
+
+  .quantity-button__group.has-big-step > .qty-step--small {
+    min-width: 2rem;
+    padding-inline: 0.25rem;
+  }
+
+  .product-line .quantity-button__group > .form-control {
+    width: 2.5rem;
+    min-width: 2.25rem;
+  }
+
+  .product-line .quantity-button__group .pp_qty_text {
+    padding-inline: 0.125rem;
+    font-size: var(--fs-body-xs);
+  }
+
+  .product-line__content-right {
+    column-gap: 0.375rem;
+  }
+
+  /* min-width z sekcji 8 (6rem) wyrównywał kwoty w kolumnie na desktopie —
+     tutaj tylko zabierał miejsce kontrolce. */
+  .product-line__price {
+    min-width: 0;
+    white-space: nowrap;
+    font-size: var(--fs-body-s);
+  }
+}
