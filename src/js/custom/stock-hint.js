@@ -222,7 +222,7 @@ export function initStockHint() {
   }
   stockHintBound = true;
 
-  ['input', 'change', 'keyup', 'blur'].forEach(function (nazwa) {
+  ['input', 'change', 'keyup', 'blur', 'pp:qtychange'].forEach(function (nazwa) {
     document.addEventListener(nazwa, function (e) {
       if (e.target && e.target.id === 'quantity_wanted') {
         window.setTimeout(refreshStockHint, 0);

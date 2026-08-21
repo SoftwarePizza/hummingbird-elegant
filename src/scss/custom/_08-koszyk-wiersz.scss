@@ -3,21 +3,19 @@
    Największy grzech: kontrolka ilości się zawijała. `.input-group` Bootstrapa
    ma `flex-wrap: wrap`, a motyw daje `.product-line__quantity-button`
    `max-width: 9rem` (144 px). Przy tkaninach dochodzi jeszcze dodatek
-   z jednostką („m"), który dokłada pproperties
-   (`modules/pproperties/views/js/pproperties-hummingbird.js` → `dodajJednostke`,
-   `<span class="input-group-text pp_qty_text">`), i cztery elementy przestają
-   się mieścić: minus z polem lądowały w pierwszym rzędzie, a plus z jednostką
-   spadały pod spód. Stąd te dwa „piętra" przy każdej pozycji.
+   z jednostką („m") i — od 2026-08-21 — druga para przycisków ±1 (sekcja 33),
+   czyli sześć elementów w jednym pasie.
 
-   Dodatek z jednostką jest dopisywany na KOŃCU grupy, czyli za plusem —
-   kolejność wizualną porządkuje tu `order`, bez ruszania modułu. Uwaga przy
-   zmianach: `:first-child`/`:last-child` Bootstrapa nadal patrzą na kolejność
-   w DOM-ie, więc zaokrąglenia rogów trzeba ustawić ręcznie — inaczej rogi
-   dostaje jednostka w środku pasa, a nie plus na jego końcu.
+   Od 2026-08-21 jednostka jest wstawiana ZARAZ ZA POLEM
+   (`pproperties-hummingbird.js` → `insertAdjacentElement('afterend')`), więc
+   kolejność w DOM-ie jest już właściwa i nie prostujemy jej przez `order`
+   (to psułoby przyciski ±1, które nie mają klas `.js-*-button`). Zaokrąglenia
+   rogów Bootstrapa (:first-child/:last-child) trafiają same na skrajne
+   przyciski. Szerokość kontrolki wyznacza jej zawartość.
    -------------------------------------------------------------------------- */
 .product-line__quantity-button {
   max-width: none;
-  width: 11.5rem;
+  width: auto;
 }
 
 .product-line .quantity-button__group {
@@ -28,38 +26,29 @@
   flex: 0 0 auto;
 }
 
-.product-line .quantity-button__group > .js-decrement-button {
-  order: 0;
-}
-
 /* Motyw trzyma pole na `max-width: 4rem`, ale szablon daje mu klasę `mw-100`
    (`max-width: 100% !important` z @layer utilities), która i tak to zdejmuje —
    i której z custom.css nie da się przebić, bo dla !important warstwy mają
    odwróconą kolejność (patrz komentarz przy logu w sekcji 4). Zostaje samo
    rozciąganie flexem. */
 .product-line .quantity-button__group > .form-control {
-  order: 1;
   flex: 1 1 auto;
+  width: 3.75rem;
   min-width: 2.5rem;
-  border-radius: 0;
-  border-right-width: 0;
 }
 
-/* Jednostka ma czytać się jak część pola („1 m"), a nie jak osobny klocek —
-   stąd brak obramowań po bokach i przezroczyste tło. */
-.product-line .quantity-button__group > .pp_qty_text {
-  order: 2;
-  flex: 0 0 auto;
-  border-radius: 0;
-  border-inline-width: 0;
-  background: transparent;
-  color: var(--bs-secondary-color, #6c757d);
-  padding-inline: 0.5rem;
-}
+/* Telefon: sześć klocków kontrolki nie zostawia miejsca na kwotę pozycji —
+   kwota schodzi do własnego wiersza, dosunięta do prawej. Przy dwóch
+   przyciskach (sztuki) oba mieszczą się obok siebie i nic się nie zmienia. */
+@media (max-width: 767.98px) {
+  .product-line__content-right {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
 
-.product-line .quantity-button__group > .js-increment-button {
-  order: 3;
-  border-radius: 0 4px 4px 0;
+  .product-line__price {
+    margin-inline-start: auto;
+  }
 }
 
 /* -------- reszta wiersza -------- */
