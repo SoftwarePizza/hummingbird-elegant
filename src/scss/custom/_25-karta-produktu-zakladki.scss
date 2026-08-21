@@ -22,9 +22,28 @@
   --bs-nav-link-hover-color: var(--c-black);
   border-bottom: 1px solid color-mix(in srgb, var(--c-black) 14%, transparent);
   margin-block-end: 2rem;
+  /* Na wąskim ekranie zakładki NIE zawijają się do drugiego rzędu — jadą
+     w jednym pasie przewijanym palcem w bok. Na desktopie mieszczą się bez
+     reszty, więc pasek przewijania się nie pojawia. */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ukryty pasek przewijania — sam gest w bok wystarcza, a widoczny suwak psułby
+   linię pod zakładkami. */
+.product__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Każda zakładka trzyma swoją szerokość i nie kurczy się poniżej tekstu. */
+.product__tabs .nav-item {
+  flex: 0 0 auto;
 }
 
 .product__tabs .nav-link {
+  white-space: nowrap;
   color: var(--bs-nav-link-color);
   font-family: var(--font-heading);
   font-size: clamp(1rem, 2.2vw, 1.375rem);
