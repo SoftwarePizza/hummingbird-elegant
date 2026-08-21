@@ -1,0 +1,25 @@
+/* --------------------------------------------------------------------------
+   37. KARTA PRODUKTU — GALERIA MIEŚCI SIĘ NA EKRANIE
+
+   Kolumna zdjęcia to grid 48% (lg) / 55% (xl), a tkaniny są portretowe (2:3),
+   więc na niższych monitorach (laptopy 768–900 px wysokości) główne zdjęcie
+   nie mieści się na raz — trzeba było przewijać, żeby zobaczyć całość.
+
+   Ograniczamy wysokość okładki do dostępnej wysokości okna: `max-height`
+   liczone od `vh`, `object-fit: contain` żeby zdjęcie nie było przycięte ani
+   zniekształcone (zostaje pełne, wyśrodkowane). Rozwiązanie ADAPTACYJNE:
+   na niskim ekranie zdjęcie się zmniejsza (mieści się z miniaturami i blokiem
+   zakupu), na wysokim monitorze limit jest większy niż naturalna wysokość
+   zdjęcia, więc nic się nie zmienia — dokładnie jak prosił klient.
+
+   Tylko od `lg` w górę (układ dwukolumnowy). Na telefonie/tablecie zdjęcie
+   jest na całą szerokość i przewijanie pionowe jest naturalne — nie ruszamy.
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  .product__images .carousel-item img {
+    /* 14rem to zapas na nagłówek + okruszki nad galerią i miniatury pod nią. */
+    max-height: calc(100vh - 14rem);
+    object-fit: contain;
+    object-position: top center;
+  }
+}

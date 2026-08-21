@@ -12,6 +12,11 @@
       {include file='catalog/_partials/product-flags.tpl'}
 
       <div class="carousel-inner">
+        {* Deskryptory srcset to RZECZYWISTE szerokości plików (tkaniny izpola są
+           portretowe 2:3, więc typ 400/720/1440 daje pliki ~267/480/960 px), a nie
+           szerokości ramki typu — inaczej przeglądarka przy slocie ~700 px brała
+           „720w" (plik 480 px) i główne zdjęcie było miękkie. Teraz na desktopie
+           wybiera product_main_2x (~960 px). *}
         {block name='product_cover'}
           {foreach from=$product.images item=image key=key name=productImages}
             <div class="carousel-item{if $image.id_image == $product.default_image.id_image} active{/if}">
@@ -19,8 +24,9 @@
                 {if isset($image.bySize.default_xl.sources.avif)}
                   <source 
                     srcset="
-                      {$image.bySize.default_xl.sources.avif} 400w,
-                      {$image.bySize.product_main.sources.avif} 720w"
+                      {$image.bySize.default_xl.sources.avif} 267w,
+                      {$image.bySize.product_main.sources.avif} 480w{if isset($image.bySize.product_main_2x.sources.avif)},
+                      {$image.bySize.product_main_2x.sources.avif} 960w{/if}"
                     sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
                     type="image/avif"
                   >
@@ -29,8 +35,9 @@
                 {if isset($image.bySize.default_xl.sources.webp)}
                   <source 
                     srcset="
-                      {$image.bySize.default_xl.sources.webp} 400w,
-                      {$image.bySize.product_main.sources.webp} 720w"
+                      {$image.bySize.default_xl.sources.webp} 267w,
+                      {$image.bySize.product_main.sources.webp} 480w{if isset($image.bySize.product_main_2x.sources.webp)},
+                      {$image.bySize.product_main_2x.sources.webp} 960w{/if}"
                     sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
                     type="image/webp"
                   >
@@ -39,8 +46,9 @@
                 <img
                   class="img-fluid w-100"
                   srcset="
-                    {$image.bySize.default_xl.url} 400w,
-                    {$image.bySize.product_main.url} 720w"
+                    {$image.bySize.default_xl.url} 267w,
+                    {$image.bySize.product_main.url} 480w{if isset($image.bySize.product_main_2x.url)},
+                    {$image.bySize.product_main_2x.url} 960w{/if}"
                   sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
                   src="{$image.bySize.product_main.url}" 
                   width="{$image.bySize.product_main.width}"
@@ -138,8 +146,8 @@
         {if isset($urls.no_picture_image.bySize.default_xl.sources.avif)}
           <source 
             srcset="
-              {$urls.no_picture_image.bySize.default_xl.sources.avif} 400w,
-              {$urls.no_picture_image.bySize.product_main.sources.avif} 720w"
+              {$urls.no_picture_image.bySize.default_xl.sources.avif} 267w,
+              {$urls.no_picture_image.bySize.product_main.sources.avif} 480w"
             sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
             type="image/avif"
           >
@@ -148,8 +156,8 @@
         {if isset($urls.no_picture_image.bySize.default_xl.sources.webp)}
           <source 
             srcset="
-              {$urls.no_picture_image.bySize.default_xl.sources.webp} 400w,
-              {$urls.no_picture_image.bySize.product_main.sources.webp} 720w"
+              {$urls.no_picture_image.bySize.default_xl.sources.webp} 267w,
+              {$urls.no_picture_image.bySize.product_main.sources.webp} 480w"
             sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
             type="image/webp"
           >
@@ -158,8 +166,8 @@
         <img
           class="img-fluid"
           srcset="
-            {$urls.no_picture_image.bySize.default_xl.url} 400w,
-            {$urls.no_picture_image.bySize.product_main.url} 720w"
+            {$urls.no_picture_image.bySize.default_xl.url} 267w,
+            {$urls.no_picture_image.bySize.product_main.url} 480w"
           sizes="(min-width: 992px) 50vw, (min-width: 360px) 33vw, 100vw"
           width="{$urls.no_picture_image.bySize.product_main.width}"
           height="{$urls.no_picture_image.bySize.product_main.height}"
