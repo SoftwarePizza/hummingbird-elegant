@@ -84,6 +84,41 @@
   transition-duration: 0s;
 }
 
+/* Pozycja rozwijana ma osobno etykietę (.menu__link) i przycisk strzałki
+   (.menu__toggle-child) z własną ramką. Gdy podświetlamy etykietę (tap/ładowanie),
+   strzałka obok zostawała białym pudełkiem z ramką na szarym tle — „niedokładność"
+   przy strzałkach rozwijania. Zlewamy ją z podświetleniem: to samo szare tło,
+   ramka i zaokrąglenia znikają, więc cały wiersz czyta się jak jedno pole.
+   Działa w obie strony: tapnięcie etykiety podświetla też strzałkę i odwrotnie. */
+/* Szare tło CAŁEGO wiersza kładziemy na <li>, nie na strzałce: strzałka to
+   przycisk .btn, którego tła nie da się przebić z custom.css (Bootstrap trzyma
+   je w @layer z !important, a ważne reguły z warstwy wygrywają z ważnymi spoza
+   warstw — pułapka kaskady). <li> nie jest przyciskiem, więc tu tło wchodzi;
+   przezroczysta strzałka pokazuje je pod sobą, bez białego wcinka przy krawędzi. */
+#mobileMenu .menu--childrens:has(> .menu__link[data-ps-state="loading"]),
+#mobileMenu .menu--childrens:has(> .menu__link:active),
+#mobileMenu .menu--childrens:has(> .menu__toggle-child:active) {
+  background-color: var(--c-grey-1);
+  border-radius: 0.375rem;
+}
+
+/* Strzałce zdejmujemy jej własną ramkę i zaokrąglenia, żeby zlała się z tłem
+   wiersza (a nie stała jako pudełko). Tła jej nie ruszamy — bierze je z <li>. */
+#mobileMenu .menu--childrens:has(> .menu__link[data-ps-state="loading"]) .menu__toggle-child,
+#mobileMenu .menu--childrens:has(> .menu__link:active) .menu__toggle-child,
+#mobileMenu .menu__toggle-child:active {
+  border-color: transparent;
+  border-radius: 0;
+}
+
+/* Etykieta na tle <li> gubi własne zaokrąglenie i ujemny margines, żeby jej
+   pigułka nie odcinała się od tła wiersza. */
+#mobileMenu .menu--childrens:has(> .menu__link[data-ps-state="loading"]) .menu__link,
+#mobileMenu .menu--childrens:has(> .menu__link:active) .menu__link {
+  background-color: transparent;
+  border-radius: 0;
+}
+
 /* Kółko przy etykiecie pozycji, na którą klient właśnie czeka. Rysowane
    ramką, więc nie potrzebuje pliku ani dodatkowego elementu w szablonie. */
 #mobileMenu .menu__link[data-ps-state="loading"]::after,
