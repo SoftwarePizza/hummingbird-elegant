@@ -160,6 +160,14 @@
         {/block}
       </div>
 
+      {* Progi rabatowe z kodami (hummingbird_editor): drabinka „−5% od 500 zł”,
+         a przy niepustym koszyku — ile brakuje do następnego progu. Po dodaniu
+         do koszyka odświeża go tiers.js modułu (strona się nie przeładowuje).
+         Produkt idzie w parametrze: na przecenionym moduł paska nie pokazuje. *}
+      {block name='product_discount_tiers'}
+        {hook h='displayHbeTiers' ctx='product' product=$product}
+      {/block}
+
       {* Figma: shipping perk + product enquiry under the buy box.
          The amount comes from hummingbird_editor (BO → Hummingbird → Koszyk), the
          same source as the cart's free-shipping bar — never hardcode it here. *}
