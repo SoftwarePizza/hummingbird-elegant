@@ -1,0 +1,136 @@
+/* --------------------------------------------------------------------------
+   35. MENU MOBILNE — SEKCJA KONTA PRZY DOLE I REAKCJA NA DOTKNIĘCIE
+
+   Dwie rzeczy, obie widoczne dopiero na telefonie.
+
+   1. KRÓTKA LISTA ZOSTAWIAŁA SEKCJĘ KONTA W POWIETRZU. Sekcja 20 zrobiła
+      z szuflady jeden obszar przewijania (`.ps-mainmenu__scroll`), żeby długie
+      „Tkaniny" dały się dojechać do końca. Skutek uboczny: przy krótkiej liście
+      („Pasmanteria" — trzy pozycje) „Moje konto", kontakt i wybór waluty jadą
+      tuż pod nią, a pod nimi zostaje pół ekranu pustki. Teraz obszar
+      przewijania jest kolumną flex, a sekcja konta ma `margin-block-start:
+      auto` — przy krótkiej liście ląduje przy dolnej krawędzi, przy długiej
+      wraca tam, gdzie kończy się lista, i przewija się razem z nią. Jeden
+      zapis obsługuje oba przypadki, bez mierzenia czegokolwiek w JS.
+
+      `flex-shrink: 0` na obu dzieciach jest tu warunkiem działania przewijania:
+      w kolumnie flex domyślne kurczenie ścisnęłoby listę do wysokości ramki,
+      zamiast wypuścić ją poza kontener (a więc pod pasek przewijania).
+
+   2. TAPNIĘCIE NIE DAWAŁO ŻADNEGO ZNAKU. Motyw ma tylko
+      `.menu__link:active{color}` — zmiana szarości na szarość, na dodatek
+      znikająca w chwili puszczenia palca. Klient tapał, przez sekundę nic się
+      nie działo (żądanie do serwera), więc tapał drugi raz.
+
+      Reakcja jest dwuczęściowa i to celowe:
+      - `:active` — natychmiastowe tło pod palcem, bez opóźnienia i bez
+        udziału JS-u (dochodzi też dla przycisku rozwijania i kafli);
+      - `[data-ps-state="loading"]` — to samo tło ZOSTAJE po puszczeniu palca,
+        a przy etykiecie kręci się kółko, dopóki przeglądarka nie zacznie
+        rysować nowej strony. Stan wstawia moduł menu-tap-feedback z custom.js.
+
+      Podświetlenie jest szare (`--c-grey-1`), nie markowe: pozycji menu jest
+      kilkanaście, a kolor marki niesie w tym sklepie znaczenie „promocja".
+      -------------------------------------------------------------------------- */
+
+/* -------- 35.1 sekcja konta przy dolnej krawędzi -------- */
+
+#mobileMenu .ps-mainmenu__scroll {
+  display: flex;
+  flex-direction: column;
+}
+
+#mobileMenu .ps-mainmenu__mobile {
+  flex: 0 0 auto;
+}
+
+#mobileMenu .ps-mainmenu__additionnals {
+  /* Wypycha sekcję na dół tylko wtedy, gdy jest co wypychać — przy liście
+     dłuższej niż ekran wolnego miejsca nie ma i margines wychodzi zerowy.
+     Odstęp od listy przenosimy więc na padding, żeby nie zniknął razem
+     z marginesem motywu (`margin-top: .5rem`), który tu nadpisujemy. */
+  margin-block-start: auto;
+  padding-block-start: 0.75rem;
+}
+
+/* -------- 35.2 reakcja na dotknięcie -------- */
+
+/* Wspólny wygląd dla pozycji listy, przycisku rozwijania, kafli układu
+   płaskiego i linków sekcji konta. Tło wchodzi natychmiast (bez przejścia na
+   wejściu), a gaśnie łagodnie — przejście działa wtedy tylko „w tył". */
+#mobileMenu .menu__link,
+#mobileMenu .menu__toggle-child,
+#mobileMenu .menu__flat-tile,
+#mobileMenu .ps-mainmenu__foot-link {
+  border-radius: 0.375rem;
+  transition: background-color 0.25s ease-out;
+}
+
+#mobileMenu .menu__link,
+#mobileMenu .ps-mainmenu__foot-link {
+  /* Pozycje są w liście bez własnych wcięć — tło musi mieć od czego odstać,
+     inaczej prostokąt kleiłby się do tekstu. Ujemny margines trzyma tekst
+     dokładnie tam, gdzie stał do tej pory. */
+  margin-inline: -0.5rem;
+  padding-inline: 0.5rem;
+}
+
+#mobileMenu .menu__link:active,
+#mobileMenu .menu__toggle-child:active,
+#mobileMenu .menu__flat-tile:active,
+#mobileMenu .ps-mainmenu__foot-link:active,
+#mobileMenu [data-ps-state="loading"] {
+  background-color: var(--c-grey-1);
+  transition-duration: 0s;
+}
+
+/* Kółko przy etykiecie pozycji, na którą klient właśnie czeka. Rysowane
+   ramką, więc nie potrzebuje pliku ani dodatkowego elementu w szablonie. */
+#mobileMenu .menu__link[data-ps-state="loading"]::after,
+#mobileMenu .ps-mainmenu__foot-link[data-ps-state="loading"]::after,
+#mobileMenu .menu__flat-tile[data-ps-state="loading"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  margin-inline-start: 0.5rem;
+  vertical-align: -0.075em;
+  border: 2px solid var(--c-grey-2);
+  border-block-start-color: var(--c-grey-5);
+  border-radius: 50%;
+  animation: menu-tap-spin 0.6s linear infinite;
+}
+
+/* Kafel układu płaskiego jest kolumną (obrazek nad podpisem) — kółko doklejone
+   na końcu wylądowałoby pod obrazkiem jako trzeci wiersz. */
+#mobileMenu .menu__flat-tile {
+  position: relative;
+}
+
+#mobileMenu .menu__flat-tile[data-ps-state="loading"]::after {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+  margin-inline-start: 0;
+}
+
+@keyframes menu-tap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Klient, który wyłączył animacje w systemie, dostaje samo tło — bez kółka
+   nie traci informacji, bo tło i tak trzyma się do zmiany strony. */
+@media (prefers-reduced-motion: reduce) {
+  #mobileMenu .menu__link,
+  #mobileMenu .menu__toggle-child,
+  #mobileMenu .menu__flat-tile,
+  #mobileMenu .ps-mainmenu__foot-link {
+    transition: none;
+  }
+
+  #mobileMenu [data-ps-state="loading"]::after {
+    animation: none;
+  }
+}

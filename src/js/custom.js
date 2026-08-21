@@ -21,6 +21,7 @@
  *  wishlist-sort         lista życzeń (blockwishlist) — sortowanie jak na listingu
  *  header-search-toggle  wyszukiwarka pod lupą w nagłówku mobilnym
  *  quantity-max          ilość nie większa niż stan (atrybut max) — karta i koszyk
+ *  menu-tap-feedback     menu mobilne — pozycja podświetlona do czasu zmiany strony
  *  i18n                  napisy wspólne dla powyższych
  */
 import { initBannerReel } from './custom/banner-reel';
@@ -35,6 +36,7 @@ import { initBackToTop } from './custom/back-to-top';
 import { initWishlistSort } from './custom/wishlist-sort';
 import { initHeaderSearchToggle } from './custom/header-search-toggle';
 import { initQuantityMax } from './custom/quantity-max';
+import { initMenuTapFeedback } from './custom/menu-tap-feedback';
 
 function boot() {
   initBannerReel();
@@ -49,6 +51,7 @@ function boot() {
   initWishlistSort();
   initHeaderSearchToggle();
   initQuantityMax();
+  initMenuTapFeedback();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są
