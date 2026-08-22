@@ -22,18 +22,27 @@
       <div class="cart-summary__subtotals">
         {foreach from=$cart.subtotals item="subtotal"}
           {if $subtotal && $subtotal.value|count_characters> 0 && $subtotal.type !== 'tax'}
-            <div class="cart-summary__line" id="cart-subtotal-{$subtotal.type}">
+            {* Rabat za wzięcie całości (hummingbird_editor) siedzi już w cenach
+               pozycji, więc — inaczej niż kupon — niczego nie odejmuje od sumy
+               poniżej. Stąd własna klasa i nota pod etykietą: bez nich wiersz
+               wyglądałby jak błąd w rachunku. *}
+            <div class="cart-summary__line{if $subtotal.type === 'hbe_allstock'} cart-summary__line--allstock{/if}" id="cart-subtotal-{$subtotal.type}">
               <span class="cart-summary__label{if $subtotal.type === 'products'} js-subtotal{/if}">
                 {if $subtotal.type === 'products'}
                   {$cart.summary_string}
                 {else}
                   {$subtotal.label}
                 {/if}
+                {if $subtotal.type === 'hbe_allstock' && !empty($subtotal.hbe_note)}
+                  <small class="cart-summary__note">{$subtotal.hbe_note}</small>
+                {/if}
               </span>
 
               <span class="cart-summary__value">
                 {if $subtotal.type === 'discount'}
                   -{$subtotal.value}
+                {elseif $subtotal.type === 'hbe_allstock'}
+                  &minus;{$subtotal.value}
                 {elseif $subtotal.type === 'shipping'}
                   {$subtotal.value}
                   <small class="cart-summary__value-inner">{hook h='displayCheckoutSubtotalDetails' subtotal=$subtotal}</small>

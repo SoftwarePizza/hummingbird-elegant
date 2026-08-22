@@ -68,3 +68,34 @@
   font-weight: 400;
   opacity: 0.7;
 }
+
+/* --------------------------------------------------------------------------
+   34.1. RABAT ZA CAŁOŚĆ W PODSUMOWANIU KOSZYKA
+
+   Wiersz „Rabat za wzięcie całości (−5%)” dokłada hummingbird_editor do
+   `subtotals` presentera (typ `hbe_allstock`), więc wypisuje go ta sama pętla
+   co „Produkty” i „Wysyłka” — w koszyku i w prawej kolumnie kasy. Jest
+   informacyjny: kwota siedzi już w cenach pozycji i NIE odejmuje się od
+   „Razem”. Dlatego zieleń rabatu (ta sama co plakietka przy pozycji) i nota
+   mniejszym drukiem pod etykietą — bez niej wiersz czytałoby się jako błąd
+   w rachunku.
+   -------------------------------------------------------------------------- */
+.cart-summary__line--allstock {
+  align-items: flex-start;
+  color: #2f7d55;
+}
+
+.cart-summary__line--allstock .cart-summary__label,
+.cart-summary__line--allstock .cart-summary__value {
+  color: inherit;
+  font-weight: 600;
+}
+
+.cart-summary__note {
+  display: block;
+  margin-block-start: 0.125rem;
+  color: var(--bs-secondary-color, #6b6b6b);
+  font-size: var(--fs-body-xs);
+  font-weight: 400;
+  line-height: 1.35;
+}
