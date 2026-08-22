@@ -34,6 +34,15 @@
     <div class="cart-preview-product__attr">{$attribute}: {$value}</div>
   {/foreach}
 
+  {* Probka (wksampleproduct) wyglada w podgladzie jak zwykla pozycja za 0 zl —
+     dopisek mowi, czym jest. Flage dokłada hummingbird_editor. *}
+  {if !empty($product.hbe_is_sample)}
+    <div class="cart-preview-product__sample">
+      <i class="material-icons rtl-no-flip" aria-hidden="true">&#xE14E;</i>
+      {l s='Sample' d='Shop.Theme.Checkout'}
+    </div>
+  {/if}
+
   {* Ilosc pokazywana przy pozycji — tekst od pproperties: „1,5" dla tkanin na
      metry, „2 x 0,8 m" przy kilku kuponach, zwykla liczba dla sztuk. *}
   {capture name='qty_display'}{if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{elseif isset($product.pp_product_quantity)}{$product.pp_product_quantity}{else}{$product.quantity}{/if}{/capture}

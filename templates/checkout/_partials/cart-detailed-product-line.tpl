@@ -80,6 +80,24 @@
         {$product.name}
       </a>
 
+      {* Software Pizza: pozycja-próbka to ta sama tkanina co zwykła, tylko
+         z ceną 0 na czas koszyka — bez dopisku klient nie odróżnia jej od
+         zamówionego metrażu (widzi tylko „0,00 zł" i liczbę bez jednostki).
+         Flagę `hbe_is_sample` dokłada hummingbird_editor w actionPresentCart. *}
+      {if !empty($product.hbe_is_sample)}
+        <div class="product-line__item product-line__sample">
+          <span class="product-line__sample-badge">
+            <i class="product-line__sample-icon material-icons rtl-no-flip" aria-hidden="true">&#xE14E;</i>
+            {l s='Sample' d='Shop.Theme.Checkout'}
+          </span>
+          {* Cena próbki jest podkładana koszykowi jako 0 (wksampleproduct),
+             ale gdyby kiedyś była płatna, dopisek o bezpłatności ma zniknąć. *}
+          {if isset($product.price_amount) && $product.price_amount == 0}
+            <span class="product-line__sample-note">{l s='free fabric swatch' d='Shop.Theme.Checkout'}</span>
+          {/if}
+        </div>
+      {/if}
+
       {hook h="displayProductPproperties" product=$product type="product-name-addional-info"}
     {if is_array($product.customizations) && $product.customizations|count}
         {include file='catalog/_partials/product-customization-modal.tpl' product=$product}

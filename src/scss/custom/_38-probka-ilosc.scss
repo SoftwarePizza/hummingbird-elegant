@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   38. PRÓBKA W KOSZYKU — ILOŚĆ BEZ STEPPERA
+   38. PRÓBKA W KOSZYKU — OZNACZENIE POZYCJI I ILOŚĆ BEZ STEPPERA
 
    Próbka (wksampleproduct) to ta sama tkanina co zwykła pozycja, tylko z ceną 0
    podłożoną na czas koszyka — a ta cena obowiązuje przy KAŻDEJ ilości. Stepper
@@ -20,4 +20,63 @@
 
 .product-line__quantity-fixed-unit {
   color: var(--bs-secondary-color, #6b6b6b);
+}
+
+/* --------------------------------------------------------------------------
+   38.1. DOPISEK „PRÓBKA" PRZY POZYCJI
+
+   Bez podpisu pozycja-próbka jest w koszyku nie do odróżnienia od zamówionej
+   tkaniny: ta sama nazwa, to samo zdjęcie, tylko cena 0,00 zł i liczba bez
+   jednostki. Plakietka (obrys 1px, wersaliki — jak CTA na karcie próbki
+   w sekcji 10) plus, gdy próbka rzeczywiście nic nie kosztuje, dopisek
+   wyjaśniający. Ten sam znacznik w koszyku i w podsumowaniu zamówienia,
+   w podglądzie koszyka odpowiednik jest w module (views/css/cart-preview.css).
+   -------------------------------------------------------------------------- */
+.product-line__sample,
+.cart-summary-product__sample {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  margin-block-start: 0.25rem;
+  font-size: var(--fs-body-xs);
+  line-height: 1.4;
+}
+
+.product-line__sample-badge,
+.cart-summary-product__sample {
+  color: var(--c-black);
+}
+
+.product-line__sample-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid currentcolor;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.product-line__sample .material-icons,
+.cart-summary-product__sample .material-icons {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+/* Wyjaśnienie zwykłym tekstem — plakietka niesie nazwę, a to tylko dopowiada,
+   dlaczego pozycja jest za 0 zł. */
+.product-line__sample-note {
+  color: var(--bs-secondary-color, #6b6b6b);
+}
+
+/* Moduł próbek sam dokłada w podsumowaniu kasy etykietę „Próbka"
+   (`.wk_sp_sample_action`, alert-info z inline `display:inline-block`) przez
+   hook displayProductPriceBlock — ląduje w kolumnie z ceną, w cudzym stylu.
+   Odkąd pozycję podpisuje motyw, to duplikat; chowamy go tylko tam, gdzie
+   nasz dopisek już jest (w koszyku moduł i tak trzyma go ukrytego). */
+.cart-summary-product .wk_sp_sample_action {
+  display: none !important;
 }

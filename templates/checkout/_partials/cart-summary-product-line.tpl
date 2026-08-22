@@ -109,6 +109,16 @@
           <span class="value">{if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{else}x{$product.quantity}{/if}</span>
         </div>
 
+        {* Software Pizza: przy podsumowaniu zamowienia klient ostatni raz widzi,
+           co kupuje — probka (wksampleproduct) musi byc podpisana tak samo jak
+           w koszyku. Flage `hbe_is_sample` dokłada hummingbird_editor. *}
+        {if !empty($product.hbe_is_sample)}
+          <div class="{$componentName}__sample">
+            <i class="material-icons rtl-no-flip" aria-hidden="true">&#xE14E;</i>
+            {l s='Sample' d='Shop.Theme.Checkout'}
+          </div>
+        {/if}
+
         <div class="{$componentName}__gift">
           {if !empty($product.is_gift)}
             <i class="{$componentName}__gift-icon material-icons" aria-hidden="true">&#xE8B1;</i> {l s='Gift(s)' d='Shop.Theme.Checkout'}
