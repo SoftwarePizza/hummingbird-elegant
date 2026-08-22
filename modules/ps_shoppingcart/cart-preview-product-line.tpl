@@ -58,15 +58,28 @@
       <span class="cart-preview-product__qty-value">{$smarty.capture.qty_display nofilter}</span>
     </div>
   {else}
-    {* Jeden krok = jedna jednostka (1 m albo 1 szt.): w podgladzie miesci sie
-       tylko jedna para przyciskow, a drobne 0,1 m klient ustawi w koszyku.
-       Atrybuty ponizej pozwalaja JS-owi pokazac nowa ilosc od razu po
-       kliknieciu, jeszcze zanim wroci odpowiedz serwera (cart-preview.js).
-       Ilosci wyswietlanej jako „2 x 0,8 m" (kilka kuponow) nie da sie policzyc
-       w przegladarce — takie pozycje zostaja bez data-ps-qty i czekaja na
-       serwer. *}
+    {* Zanim klient cokolwiek kliknie, JS musi wiedziec, CZYM jest ta pozycja —
+       stad komplet data-ps-* ponizej (cart-preview.js):
+        - tkanina na metry (pproperties, qty_policy = 2) — ilosc z przecinkiem,
+          drobny krok 0,1 m osiagalny z klawiatury;
+        - towar na sztuki — tylko liczby calkowite;
+        - pozycja, ktorej przegladarka nie policzy („2 x 0,8 m", czyli kilka
+          kuponow jednej tkaniny, oraz produkty z wymiarami) — zostaje bez
+          data-ps-qty i czeka na serwer.
+       Klikniecie zmienia ilosc o jedna cala jednostke (1 m albo 1 szt.), bo
+       w podgladzie miesci sie tylko jedna para przyciskow. Nowa ilosc pokazuje
+       sie od razu, a zadanie do serwera idzie dopiero, gdy klient przestanie
+       ja zmieniac. *}
     {assign var=qty_now value=$product.quantity}
     {if isset($product.pp_product_quantity)}{assign var=qty_now value=$product.pp_product_quantity}{/if}
+    {assign var=qty_kind value='units'}
+    {if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy == 2}
+      {assign var=qty_kind value='decimal'}
+    {/if}
+    {assign var=qty_step value=1}
+    {if isset($product.pp_settings.qty_step) && $product.pp_settings.qty_step > 0}
+      {assign var=qty_step value=$product.pp_settings.qty_step|floatval}
+    {/if}
     {assign var=qty_predictable value=true}
     {if isset($product.pp_settings.qty_policy) && $product.pp_settings.qty_policy != 0 && $product.quantity > 1}
       {assign var=qty_predictable value=false}
@@ -79,8 +92,11 @@
       role="group"
       aria-label="{l s='Change quantity' d='Shop.Theme.Actions'}"
       data-ps-ref="cart-preview-qty"
+      data-ps-kind="{$qty_kind}"
       {if $qty_predictable}
         data-ps-qty="{$qty_now|floatval}"
+        data-ps-step="{$qty_step}"
+        data-ps-click-step="1"
         data-ps-min="{if isset($product.pp_settings.minimum_quantity) && $product.pp_settings.minimum_quantity > 0}{$product.pp_settings.minimum_quantity|floatval}{else}{$product.minimal_quantity|floatval}{/if}"
         data-ps-decimals="{if isset($product.pp_settings.qty_decimals) && $product.pp_settings.qty_decimals > 0}{$product.pp_settings.qty_decimals|intval}{else}0{/if}"
         {if empty($product.allow_oosp) && isset($product.stock_quantity) && $product.stock_quantity > 0}data-ps-max="{$product.stock_quantity|floatval}"{/if}
@@ -98,7 +114,9 @@
         data-link-action="update-quantity-in-cart"
         aria-label="{l s='Decrease quantity' d='Shop.Theme.Actions'}"
       >&minus;</a>
-      <span class="cart-preview-product__qty-value" data-ps-target="cart-preview-qty-value" aria-live="polite">{$smarty.capture.qty_display nofilter}</span>
+      {* Tapniecie w liczbe otwiera pole do wpisania ilosci — z 35 m na 12 m
+         bez klikania 23 razy (cart-preview.js). *}
+      <span class="cart-preview-product__qty-value" data-ps-target="cart-preview-qty-value" role="button" tabindex="0" aria-live="polite">{$smarty.capture.qty_display nofilter}</span>
       <a
         class="cart-preview-product__qty-btn"
         href="{$product.up_quantity_url}&amp;qty=1"
