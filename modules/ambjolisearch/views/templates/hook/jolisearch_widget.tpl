@@ -23,10 +23,14 @@
  *   modules/ambjolisearch/views/css/themes/hummingbird-1.7.css
  *}
 
+{* Moduł spimagesearch (wyszukiwarka tekst+zdjęcie) przejmuje wysyłkę formularza;
+   bez niego pole działa jak dawniej (kontroler search). Autocomplete AmbJoliSearch
+   nadal liczy podpowiedzi z pola `s`. *}
+{assign var=spis_on value=Module::isEnabled('spimagesearch')}
 <div id="_desktop_jolisearch" class="ps-searchbar-slot col-12 col-md order-3 order-md-2">
   <div id="ps_searchbar" class="ps-searchbar w-100" data-search-controller-url="{$search_controller_url}">
-    <form class="ps-searchbar__form" method="get" action="{$search_controller_url}" role="search">
-      <input type="hidden" name="controller" value="search">
+    <form class="ps-searchbar__form" method="get" action="{if $spis_on}{$link->getModuleLink('spimagesearch', 'search', [], true)}{else}{$search_controller_url}{/if}" role="search">
+      {if !$spis_on}<input type="hidden" name="controller" value="search">{/if}
 
       <label for="ps_searchbar_input" class="visually-hidden">{l s='Search' d='Shop.Theme.Catalog'}</label>
 
@@ -45,6 +49,8 @@
         autocomplete="off"
         data-position='{literal}{"my":"left top","at":"left bottom","collision":"none"}{/literal}'
       >
+
+      {if $spis_on}{hook h='displayImageSearchButton'}{/if}
 
       <button type="submit" class="ps-searchbar__submit">
         <span class="ps-searchbar__submit-label">{l s='Search' d='Shop.Theme.Catalog'}</span>
