@@ -1,0 +1,23 @@
+/* --------------------------------------------------------------------------
+   38. PRÓBKA W KOSZYKU — ILOŚĆ BEZ STEPPERA
+
+   Próbka (wksampleproduct) to ta sama tkanina co zwykła pozycja, tylko z ceną 0
+   podłożoną na czas koszyka — a ta cena obowiązuje przy KAŻDEJ ilości. Stepper
+   przy takiej linii rozdawał metry za darmo, więc pozycja próbki pokazuje samą
+   liczbę. Ma zajmować w wierszu tyle samo miejsca co stepper, żeby kolumna
+   z ceną nie skakała między wierszami.
+   -------------------------------------------------------------------------- */
+.product-line__quantity-fixed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding-inline: 12px;
+  font-size: var(--fs-body-m);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.product-line__quantity-fixed-unit {
+  color: var(--bs-secondary-color, #6b6b6b);
+}

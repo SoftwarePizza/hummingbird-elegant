@@ -198,6 +198,18 @@
           <span class="product-line__gift">
             <i class="product-line__gift-icon material-icons" aria-hidden="true">&#xE8B1;</i>{$product.quantity} {l s='Gift(s)' d='Shop.Theme.Checkout'}
           </span>
+        {elseif !empty($product.hbe_is_sample)}
+          {* Software Pizza: probka (wksampleproduct) ma w koszyku cene 0
+             obowiazujaca dla KAZDEJ ilosci — stepper przy takiej pozycji
+             rozdawalby tkanine za darmo. Ilosc probek ustawia sie tam, gdzie
+             sie je zamawia: przy przycisku „Zamow probke" na karcie produktu.
+             Flage `hbe_is_sample` dokłada hummingbird_editor
+             (actionPresentCart), a serwer i tak nie przyjmie tu zmiany ilosci
+             (override CartController). *}
+          {* Bez jednostki: próbka to wycinek tkaniny, a nie metr — „1 m" przy
+             pozycji za 0 zł tylko myli. Liczba jest ta sama, którą pokazuje
+             podgląd koszyka (cart_quantity_to_display od pproperties). *}
+          <span class="product-line__quantity-fixed">{if isset($product.cart_quantity_to_display)}{$product.cart_quantity_to_display nofilter}{elseif isset($product.pp_product_quantity)}{$product.pp_product_quantity|formatQty}{else}{$product.quantity}{/if}</span>
         {else}
           {* Software Pizza: `max` = stan magazynowy (z pproperties ułamkowy,
              np. 6,2), gdy produkt nie może iść ponad stan. custom.js (sekcja 6)
