@@ -58,3 +58,7 @@
     </form>
   </div>
 </div>
+{* Lista podpowiedzi AmbJoliSearch doczepiana do formularza pola (position:relative),
+   pozycja stała z CSS (modules/ambjolisearch/views/css/themes/hummingbird-1.7.css) –
+   bez tego jQuery UI wiesza ją na <body> i przy `left:auto` ląduje przy lewym brzegu. *}
+<script>window.jolisearch = window.jolisearch || {}; window.jolisearch.autocomplete_target = '#ps_searchbar .ps-searchbar__form';</script>

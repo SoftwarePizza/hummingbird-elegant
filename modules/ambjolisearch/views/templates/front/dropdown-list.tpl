@@ -67,6 +67,9 @@
   {/if}
 
   {if isset($more_results) && count($more_results) > 0}
-    <a class="ps-jolisearch__more" href="{$more_results.0.link}" title="{$settings.l_more_results}">{$settings.l_more_results}</a>
+    {* „Więcej wyników” → nowa wyszukiwarka (spimagesearch): ta sama ścieżka, inny slug;
+       kontroler spimagesearch przyjmuje `s` jak jolisearch. Bez wywołań PHP w szablonie –
+       Module::isEnabled()/$link w tym kontekście ajax dawały 500. *}
+    <a class="ps-jolisearch__more" href="{$more_results.0.link|replace:'/jolisearch':'/wyszukiwarka'}" title="{$settings.l_more_results}">{$settings.l_more_results}</a>
   {/if}
 </div>
