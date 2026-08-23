@@ -1,0 +1,288 @@
+/* --------------------------------------------------------------------------
+   42. TYPOGRAFIA PRAWEJ KOLUMNY KARTY PRODUKTU
+
+   Kolumnę składa pięć niezależnych źródeł (motyw, pproperties,
+   wksampleproduct, hummingbird_editor, moduł stanu magazynowego) i każde
+   przynosiło własną skalę: 32/24/18/16/14/12 px w losowych parach z
+   interlinią od 1,0 do 1,6, cztery wagi (400–700) i dwa różne „czarne"
+   (#242424 z motywu i #212529 z Bootstrapa) obok dwóch szarości.
+
+   Tutaj wszystko wraca do skali motywu z `prestashop/base/_design-tokens`:
+
+     tytuł        --fs-h2   32/26 px   (bez zmian, tylko interlinia)
+     cena         --fs-h4   24/20 px   waga 600
+     nagłówki bloków --fs-body-l  18 px   waga 600
+     treść        --fs-body-m  16 px   interlinia 1,6 (opisy)
+     interfejs    --fs-body-s  14 px   interlinia 1,5
+     przypisy     --fs-body-xs 12 px   interlinia 1,5
+
+   Kolory tylko dwa: `--c-black` dla treści, `--c-grey-5` dla wszystkiego,
+   co towarzyszy (jednostki, etykiety, noty). Wagi tylko dwie: 400 i 600.
+   Zielony akcent terminu wysyłki zostaje — niesie znaczenie.
+
+   Uwaga: opisy przychodzą z bazy z inline `font-size` wklejonym z edytora
+   BO — atrybut style bije każdą regułę, stąd `font-size: inherit !important`
+   (ta sama sztuczka co przy fontach w sekcji 32).
+   -------------------------------------------------------------------------- */
+
+.product__right {
+  color: var(--c-black);
+}
+
+.product__right .product__description-short [style*="font-size"],
+.product__right .sample-offer__desc [style*="font-size"] {
+  font-size: inherit !important;
+}
+
+/* 1. tytuł i numer */
+.product__right .product__name {
+  line-height: 1.2;
+}
+
+.product__right .product__reference {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .product__reference span {
+  color: var(--c-grey-5);
+  font-weight: 600;
+}
+
+/* 2. cena */
+.product__right .pp_price_with_text {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.product__right .pp_price_with_text .pp_price {
+  color: var(--c-black);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.product__right .product__tax-label {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right div.pp_price.product-price,
+.product__right div.pp_price_wt.product-price,
+.product__right div.pp_price_tax_excl.product-price {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* 3. opis skrócony — jedyna „treść" w kolumnie */
+.product__right .product__summary {
+  margin-top: 0.75rem;
+}
+
+.product__right .product__description-short,
+.product__right .product__description-short p,
+.product__right .product__description-short li {
+  color: var(--c-black);
+  font-size: var(--fs-body-m);
+  line-height: 1.6;
+}
+
+.product__right .product__description-short p {
+  margin-bottom: 0.5rem;
+}
+
+.product__right .product__see-full-label {
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+/* 4. wariant */
+.product__right .product-variant__legend,
+.product__right .product-variant__selected-value,
+.product__right .selected-value {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .product-variant__legend {
+  font-weight: 600;
+}
+
+/* 5. ilość i zakup */
+.product__right .quantity-button__group.has-big-step > .qty-step--big {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+}
+
+.product__right .quantity-button__group.has-big-step > .qty-step--small,
+.product__right .qty-step__label {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  font-weight: 400;
+}
+
+.product__right .pp_qty_text {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+}
+
+.product__right #quantity_wanted {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+}
+
+.product__right .product__add-to-cart-button {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* 6. stan magazynowy */
+.product__right .product__stock-hint-text {
+  color: var(--c-black);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .product__stock-hint-button {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* 7. próbka */
+.product__right .sample-offer__title {
+  font-size: var(--fs-body-l);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product__right .sample-offer__price {
+  font-size: var(--fs-body-xs);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.product__right .sample-offer__desc,
+.product__right .sample-offer__desc p {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .sample-offer__btn {
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.product__right .sample-offer__note {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  line-height: 1.5;
+}
+
+/* 8. progi rabatowe */
+.product__right .hbe-tiers__message {
+  font-size: var(--fs-body-l);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product__right .hbe-tiers__sub {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .hbe-tiers__pct {
+  color: var(--c-black);
+  font-size: var(--fs-body-m);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product__right .hbe-tiers__from,
+.product__right .hbe-tiers__note {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  line-height: 1.5;
+}
+
+/* nagłówek bloku „Inni kupili również" */
+.product__right .hbe-related__title {
+  line-height: 1.3;
+}
+
+/* cena promocyjna: stara cena, plakietka i nota o najniższej cenie */
+.product__right .product__regular-price {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-m);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.product__right .product__discount-badge {
+  font-size: var(--fs-body-xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product__right .product__lowest-price {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  line-height: 1.5;
+}
+
+.product__right .product__lowest-price-value {
+  color: var(--c-grey-5);
+  font-weight: 600;
+}
+
+/* tabela progów ilościowych (pproperties) */
+.product__right .discounts-table {
+  color: var(--c-black);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .discounts-table th {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* dostępność i czas dostawy */
+.product__right .product__availability-status,
+.product__right .product__delivery-infos {
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+/* „Inni kupili również" — nazwa i cena kafla */
+.product__right .hbe-related__price,
+.product__right .hbe-related__tax {
+  line-height: 1.4;
+}
+
+/* 9. wysyłka, dostawa, pytanie */
+.product__right .product__delivery-text,
+.product__right .product__shipping-label,
+.product__right .product__ask,
+.product__right .product__ask span {
+  color: var(--c-black);
+  font-size: var(--fs-body-s);
+  line-height: 1.5;
+}
+
+.product__right .product__delivery-accent {
+  font-weight: 600;
+}
