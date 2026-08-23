@@ -104,6 +104,130 @@ export function initFractionalQuantity() {
       }
     }, true);
   });
+
+  if (window.prestashop && typeof window.prestashop.on === 'function') {
+    window.prestashop.on('updateProduct', function () {
+      var input = document.getElementById('quantity_wanted');
+      iloscPrzedOdswiezeniem = input ? input.value : null;
+    });
+
+    window.prestashop.on('updatedProduct', function (dane) {
+      setTimeout(function () {
+        przywrocIloscPoZmianieWariantu(dane);
+      }, 0);
+    });
+  }
+}
+
+/* ------------------------------------------------------------------
+   Zmiana wariantu nie może zerować ilości
+
+   themes/core.js po ajaxowym odświeżeniu karty robi:
+
+     const i = parseInt(e.product_minimal_quantity, 10);
+     isNaN(i) || 'updatedProductQuantity' === n || (s.attr('min', i), s.val(i));
+
+   Na tkaninach `product_minimal_quantity` wynosi 0,1 — parseInt ucina je do
+   zera, więc po każdej zmianie koloru w polu ilości zostawało „0” (razem
+   z min="0"), a klient klikał „Dodaj do koszyka” na zerowej ilości. To ten
+   sam parseInt, co w sekcji 5 wyżej, tylko w innym miejscu rdzenia.
+
+   Ilość ma przeżyć zmianę kombinacji: zostaje ta, którą klient miał wpisaną,
+   przycięta do minimum i do stanu nowego wariantu. Korekta leci przez
+   setTimeout 0, czyli po wszystkich synchronicznych handlerach
+   `updatedProduct` — w tym po przepisaniu `max` z odpowiedzi (sekcja 6) —
+   więc przycinamy już do stanu nowej kombinacji, nie poprzedniej.
+   ------------------------------------------------------------------ */
+
+var iloscPrzedOdswiezeniem = null;
+
+/* Separator dziesiętny sklepu — pole czyta się „0,5”, nie „0.5”. */
+function separatorDziesietny() {
+  var probka;
+  try {
+    probka = (1.1).toLocaleString(document.documentElement.lang || 'en');
+  } catch (e) {
+    probka = '1.1';
+  }
+  return probka.replace(/\d/g, '') || '.';
+}
+
+/* pproperties niesie w data-pp-settings ilość, z jaką karta się otwiera. */
+function domyslnaIlosc() {
+  var nosnik = document.querySelector('[data-pp-settings]');
+  if (!nosnik) {
+    return NaN;
+  }
+  var tekst = nosnik.getAttribute('data-pp-settings');
+  if (!tekst) {
+    return NaN;
+  }
+  try {
+    var pole = document.createElement('textarea');
+    pole.innerHTML = tekst;
+    var ustawienia = JSON.parse(pole.value);
+    return parseQty(ustawienia.default_quantity);
+  } catch (e) {
+    return NaN;
+  }
+}
+
+function przywrocIloscPoZmianieWariantu(dane) {
+  var input = document.getElementById('quantity_wanted');
+  if (!input) {
+    return;
+  }
+
+  /* Pola całkowite (sztuki, kupony) rdzeń obsługuje poprawnie — parseInt
+     nie ma tam czego uciąć. */
+  var krok = parseQty(input.getAttribute('step'));
+  if (!isFinite(krok) || krok >= 1) {
+    return;
+  }
+
+  var min = parseQty(dane && dane.product_minimal_quantity);
+  if (isFinite(min) && min > 0) {
+    input.setAttribute('min', String(min));
+  } else {
+    min = parseQty(input.getAttribute('min'));
+  }
+
+  /* Wchodzimy TYLKO wtedy, gdy rdzeń faktycznie zepsuł wartość. Odświeżenie
+     leci również po każdej zmianie ilości (`updatedProductQuantity`) i tam
+     w polu stoi to, co klient wpisał — nadpisanie zapamiętaną wartością
+     cofałoby mu „2,5” do „2”. */
+  var wPolu = parseQty(input.value);
+  if (isFinite(wPolu) && wPolu > 0 && (!isFinite(min) || min <= 0 || wPolu >= min)) {
+    return;
+  }
+
+  var chciana = parseQty(iloscPrzedOdswiezeniem);
+  if (!isFinite(chciana) || chciana <= 0) {
+    chciana = domyslnaIlosc();
+  }
+  if (!isFinite(chciana) || chciana <= 0) {
+    chciana = isFinite(min) && min > 0 ? min : 1;
+  }
+
+  if (isFinite(min) && min > 0 && chciana < min) {
+    chciana = min;
+  }
+
+  var max = parseQty(input.getAttribute('max'));
+  if (isFinite(max) && max > 0 && chciana > max) {
+    chciana = max;
+  }
+
+  if (parseQty(input.value) === chciana) {
+    return;
+  }
+
+  input.value = String(parseFloat(chciana.toFixed(3))).replace('.', separatorDziesietny());
+
+  /* Ten sam sygnał, co klik w „+1” — podgląd kwoty (pproperties) i blok stanu
+     przeliczają się na nowej ilości bez pytania serwera. */
+  input.dispatchEvent(new CustomEvent('pp:qtychange', {bubbles: true}));
+  refreshStockHint();
 }
 
 /* Osobno, bo pyta o to i listener „input”, i sprzątanie na wyjściu z pola. */

@@ -80,6 +80,13 @@
   line-height: 1.5;
 }
 
+/* Kwota za wpisaną ilość („cena za 1,7 m: 41,82 zł") należy do pola ilości,
+   nie do bloku cen — klasa `h5` z modułu dokładała pod nią 1 rem i odrywała
+   ją od steppera. */
+.product__right .product__dynamic-price .product-price {
+  margin-bottom: 0.35rem;
+}
+
 /* 3. opis skrócony — jedyna „treść" w kolumnie */
 .product__right .product__summary {
   margin-top: 0.75rem;
