@@ -31,7 +31,10 @@
         <div class="{$componentName}__bottom">
           <div class="{$componentName}__infos">
             {block name='product_name'}
-              <a class="{$componentName}__title" href="{$product.url}" aria-label="{l s='View product %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Catalog'}">{$product.name}</a>
+              {* `title` daje pelna nazwe w dymku: CSS (custom, sekcja 39) ucina
+                 podpis do dwoch linii z wielokropkiem, wiec dluzsza nazwa jest
+                 na ekranie niepelna, choc w HTML-u siedzi w calosci. *}
+              <a class="{$componentName}__title" href="{$product.url}" title="{$product.name}" aria-label="{l s='View product %product_name%' sprintf=['%product_name%' => $product.name] d='Shop.Theme.Catalog'}">{$product.name}</a>
             {/block}
 
             {block name='product_variants'}
@@ -54,7 +57,11 @@
                     {else}
                       {if isset($product.price_to_display)}{$product.price_to_display nofilter}{else}{$product.price}{/if}
                     {/if}
-                    <span class="{$componentName}__price-tax">({l s='brutto' d='Shop.Theme.Catalog'})</span>
+                    {* Dopisek „(brutto)" celowo zdjety: w kaflu kazda cena jest
+                       brutto, a przy cenie z jednostka („123,00 zl za m.b.")
+                       nawias lamal sie do drugiej linii i zabieral miejsce
+                       nazwie produktu. Informacja o podatku zostaje na karcie
+                       produktu (_partials/product-prices.tpl, .product__tax-label). *}
                   </div>
 
                   {hook h='displayProductPriceBlock' product=$product type='unit_price'}

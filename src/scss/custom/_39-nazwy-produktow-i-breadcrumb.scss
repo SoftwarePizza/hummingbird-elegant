@@ -1,0 +1,71 @@
+/* --------------------------------------------------------------------------
+   39. NAZWY PRODUKTÓW W KAFLACH I ŚCIEŻKA NAWIGACJI — czytelniejszy druk
+
+   Kafel produktu wypisywał nazwę drobiazgiem 12 px (dziedziczonym po
+   `body`, bo `.product-miniature__title` nie ma własnego `font-size`),
+   a pod nią rezerwował miejsce na TRZY linie — więc przy zwykłej
+   jednolinijkowej nazwie zostawała pusta przerwa nad ceną, a sama nazwa
+   ginęła. Stary motyw sklepu (fashion, do dziś na dev.izpol.pl) miał tu
+   18 px i twarde `height: 2.6em; overflow: hidden`, czyli dwie linie
+   i ucięcie reszty — i to jest wzorzec, do którego wracamy.
+
+   Różnice wobec dev-a:
+   - ucinamy przez `-webkit-line-clamp: 2`, więc obcięta nazwa kończy się
+     wielokropkiem zamiast urywać się w połowie litery; pełna nazwa zostaje
+     w HTML-u (SEO, czytniki ekranu) i w `title` linku,
+   - wysokość jest STAŁA (`min-height` = dokładnie dwie linie), żeby ceny
+     i przyciski „Dodaj do koszyka" stały w jednym rzędzie w całej siatce —
+     bez tego kafel z jednolinijkową nazwą podnosi cenę o linię wyżej niż
+     sąsiad.
+
+   Miejsce na te dwie linie bierze się z wyrzuconego dopisku „(brutto)"
+   przy cenie (`templates/catalog/_partials/miniatures/product.tpl`) —
+   w kaflu i tak każda cena jest brutto, a przy cenie z jednostką
+   („123,00 zł za m.b. (brutto)") ten nawias zjadał całą drugą linię.
+
+   Reguły dotyczą każdej miniatury: listingu kategorii, wyników
+   wyszukiwania, karuzel motywu (Nowości, Bestsellery, Polecane, Już
+   obejrzane) i karuzel hummingbird_editora — wszystkie renderują ten sam
+   szablon `catalog/_partials/miniatures/product.tpl`.
+
+   Ścieżka nawigacji miała 11 px (`$breadcrumb-font-size` z
+   bootstrap/overrides/variables/components/_breadcrumb.scss) w szarości
+   #9a9a9a — na tle 12-px reszty sklepu czytało się to jak drobny druk.
+   Podnosimy do 14 px. Sam rozmiar zmieniamy tutaj, a nie w zmiennej
+   motywu, żeby przy kolejnym scaleniu z upstreamem nie było konfliktu
+   w pliku, którego reszta ma zostać oryginalna.
+   -------------------------------------------------------------------------- */
+
+/* -------- nazwa produktu w kaflu -------- */
+.product-miniature__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 0.9375rem; /* 15 px — mobile i wąskie kolumny */
+  line-height: 1.35;
+  /* Dwie linie zawsze, nawet dla krótkiej nazwy: cena i przycisk mają stać
+     równo w całym rzędzie siatki. `min-height`, a nie `height`, bo przy
+     powiększonej czcionce w przeglądarce tekst ma się zmieścić, a nie zniknąć. */
+  min-height: calc(1.35em * 2);
+}
+
+@media (min-width: 768px) {
+  .product-miniature__title {
+    font-size: 1rem; /* 16 px */
+  }
+}
+
+/* Nazwa zajmuje teraz dwie linie zamiast trzech zarezerwowanych, więc cena
+   podjechała pod sam podpis. Odstęp z sekcji 6 (0,3 rem) był liczony przy
+   drobniejszym druku — przy 16 px nazwa i cena zlewały się w jeden blok. */
+.product-miniature__infos {
+  gap: 0.5rem;
+}
+
+/* -------- ścieżka nawigacji -------- */
+.breadcrumb,
+.breadcrumb-item,
+.breadcrumb-link {
+  font-size: 0.875rem; /* 11 px → 14 px */
+}
