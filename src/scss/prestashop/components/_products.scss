@@ -115,6 +115,11 @@ $component-name: products;
 
   &__pagination {
     margin-block: 1.5rem;
+
+    // Above the list the sort bar already provides the top spacing.
+    &--top {
+      margin-block-start: 0;
+    }
   }
 
   @include media-breakpoint-up(md) {
