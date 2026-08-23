@@ -1,0 +1,234 @@
+/* --------------------------------------------------------------------------
+   43. STRONA 404
+
+   Do 23.08.2026 strona „nie znaleziono" miała dwa elementy: wielką liczbę 404
+   i przycisk „Wróć na stronę główną". Google raportował wtedy 683 takie
+   trafienia dziennie, a każde z nich kończyło wizytę.
+
+   Nowy układ daje trzy wyjścia, w kolejności od najbardziej prawdopodobnego:
+   wyszukiwarkę (tę samą, co w nagłówku — z ikoną aparatu, gdy spimagesearch
+   jest włączony), kafle kategorii i pasek skrótów. Kafle i skróty renderuje
+   hummingbird_editor na hooku `displayNotFound`, więc nazwy przychodzą
+   z bazy w bieżącym języku.
+
+   Skala i kolory z tokenów motywu — jak w sekcji 42, dwa kolory
+   (`--c-black`, `--c-grey-5`) i dwie wagi (400, 600).
+   -------------------------------------------------------------------------- */
+
+.hbe-404 {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(3rem, 8vw, 5rem);
+  text-align: center;
+}
+
+.hbe-404__head {
+  margin-block-end: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* Liczba jest znakiem stanu, nie nagłówkiem — stąd szarość i mały rozmiar:
+   pierwsze, co ma przeczytać klient, to zdanie „czego tu nie ma", nie „404". */
+.hbe-404__code {
+  margin: 0 0 0.75rem;
+  font-size: var(--fs-body-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--c-grey-5);
+}
+
+.hbe-404__title {
+  margin: 0 0 0.75rem;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--c-black);
+  text-wrap: balance;
+}
+
+.hbe-404__lead {
+  max-width: 46rem;
+  margin-inline: auto;
+  margin-block: 0;
+  font-size: var(--fs-body-m);
+  line-height: 1.6;
+  color: var(--c-grey-5);
+}
+
+/* ---- wyszukiwarka ------------------------------------------------------- */
+
+.hbe-404__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: 0.375rem 0.375rem 0.375rem 0.875rem;
+  border: 1px solid var(--c-grey-2);
+  border-radius: 999px;
+  background: var(--c-white);
+  transition: border-color 0.15s ease-in-out;
+}
+
+.hbe-404__search:focus-within {
+  border-color: var(--c-black);
+}
+
+.hbe-404__search-icon {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--c-grey-5);
+}
+
+.hbe-404__search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.625rem 0.25rem;
+  border: 0;
+  background: none;
+  font-size: var(--fs-body-m);
+  color: var(--c-black);
+}
+
+.hbe-404__search-input:focus {
+  outline: none;
+}
+
+.hbe-404__search-input::placeholder {
+  color: var(--c-grey-5);
+}
+
+/* Ikona aparatu przychodzi z spimagesearch (views/css/button.css) ustawiona na
+   `position: absolute; right: 4.6rem` — tak siedzi w polu nagłówka, które ma
+   pozycjonowanie. Tutaj układ robi flex, więc przycisk wraca do przepływu;
+   bez tego ląduje obok formularza (desktop) albo pod nim (telefon). */
+.hbe-404__search-photo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.hbe-404__search-photo .spis-search-button {
+  position: static;
+  inset: auto;
+  transform: none;
+  height: 2.25rem;
+}
+
+.hbe-404__search-photo .spis-search-button::before {
+  display: none;
+}
+
+.hbe-404__search-submit {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding-inline: 1.5rem;
+}
+
+/* ---- kafle kategorii ---------------------------------------------------- */
+
+.hbe-404-cats,
+.hbe-404-links {
+  margin-block-start: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.hbe-404-cats__title,
+.hbe-404-links__title {
+  margin: 0 0 1rem;
+  font-size: var(--fs-body-s);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-grey-5);
+}
+
+/* Cztery kolumny na desktopie: przy dwunastu kaflach dają trzy pełne rzędy,
+   pięć zostawiałoby dziurę w ostatnim. */
+.hbe-404-cats__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hbe-404-cats__item {
+  display: flex;
+}
+
+.hbe-404-cats__link {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--c-grey-2);
+  border-radius: 0.25rem;
+  background: var(--c-white);
+  font-size: var(--fs-body-m);
+  line-height: 1.35;
+  color: var(--c-black);
+  text-decoration: none;
+  text-align: center;
+  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.hbe-404-cats__link:hover,
+.hbe-404-cats__link:focus-visible {
+  border-color: var(--c-black);
+  background: var(--c-beige);
+  color: var(--c-black);
+  text-decoration: none;
+}
+
+/* ---- pasek skrótów ------------------------------------------------------ */
+
+.hbe-404-links__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hbe-404-links__link {
+  font-size: var(--fs-body-m);
+  color: var(--c-black);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+.hbe-404-links__link:hover,
+.hbe-404-links__link:focus-visible {
+  color: var(--c-grey-5);
+}
+
+.hbe-404__contact {
+  margin-block: clamp(2.5rem, 6vw, 3.5rem) 0;
+  font-size: var(--fs-body-s);
+  color: var(--c-grey-5);
+}
+
+@media (max-width: 575.98px) {
+  /* Na telefonie przycisk „Szukaj” zjada pole — zostaje sama lupa
+     (submit dalej działa z klawiatury i przez Enter). */
+  .hbe-404__search-submit {
+    display: none;
+  }
+
+  .hbe-404__search {
+    padding-inline-end: 0.875rem;
+  }
+
+  .hbe-404-cats__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .hbe-404-cats__link {
+    min-height: 3rem;
+    font-size: var(--fs-body-s);
+  }
+}
