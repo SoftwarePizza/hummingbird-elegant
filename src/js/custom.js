@@ -24,6 +24,7 @@
  *  product-reference-sync  „Nr produktu" nadąża za kolorem multiproduktu
  *  menu-tap-feedback     menu mobilne — pozycja podświetlona do czasu zmiany strony
  *  product-tab-jump      karta produktu — wysyłka prowadzi do zakładki „Wysyłka…”
+ *  sticky-header-offset  rezerwa pod nagłówek liczona z rzeczywistości (kotwice)
  *  i18n                  napisy wspólne dla powyższych
  */
 import { initBannerReel } from './custom/banner-reel';
@@ -41,6 +42,7 @@ import { initQuantityMax } from './custom/quantity-max';
 import { initProductReferenceSync } from './custom/product-reference-sync';
 import { initMenuTapFeedback } from './custom/menu-tap-feedback';
 import { initProductTabJump } from './custom/product-tab-jump';
+import { initScrollPaddingFix } from './custom/sticky-header-offset';
 
 function boot() {
   initBannerReel();
@@ -58,6 +60,7 @@ function boot() {
   initMenuTapFeedback();
   initProductReferenceSync();
   initProductTabJump();
+  initScrollPaddingFix();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są

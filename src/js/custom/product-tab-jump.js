@@ -1,4 +1,5 @@
 import { behavior } from './i18n';
+import { stickyHeaderHeight } from './sticky-header-offset';
 
 /* ------------------------------------------------------------------
    15. Karta produktu — linijki o wysyłce prowadzą do zakładki
@@ -44,18 +45,12 @@ export function initProductTabJump() {
     /* Przewijamy do PASKA zakładek, nie do panelu: pasek jest tuż nad treścią,
        więc po zatrzymaniu widać i wybraną zakładkę, i początek tekstu.
 
-       Cel liczymy sami, zamiast wołać scrollIntoView. Motyw ustawia
-       `scroll-padding-top` na wysokość nagłówka (helpers/scrollPadding.ts),
-       a nagłówek izpola nie jest przyklejony (`.js-sticky-header` ma
-       `position: relative`) — pasek lądowałby wtedy 175 px od góry, za
-       ścianą pustego miejsca. Rezerwę bierzemy z rzeczywistego stanu
-       nagłówka: 0, dopóki nie jest sticky/fixed. */
+       Cel liczymy sami, zamiast wołać scrollIntoView: chcemy trafić w to samo
+       miejsce niezależnie od tego, czy `scroll-padding-top` zdążył się już
+       poprawić (moduł sticky-header-offset). Rezerwa stąd samego pomiaru. */
     function jump() {
       var nav = tab.closest('.nav') || tab;
-      var header = document.querySelector('.js-sticky-header');
-      var position = header ? window.getComputedStyle(header).position : '';
-      var reserved = position === 'sticky' || position === 'fixed' ? header.offsetHeight : 0;
-      var top = nav.getBoundingClientRect().top + window.scrollY - reserved - 16;
+      var top = nav.getBoundingClientRect().top + window.scrollY - stickyHeaderHeight() - 16;
 
       window.scrollTo({ top: Math.max(top, 0), behavior: behavior() });
 
