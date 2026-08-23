@@ -26,3 +26,95 @@
     right: auto;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Kafle wpisów — stopka z datą i odsłonami (główna i listing /blog)
+
+   Szablon modułu daje stopce `card-footer py-0`, więc data siedziała
+   dosłownie przy dolnej krawędzi karty, a jej wiersz (`.row` z ujemnymi
+   marginesami) wysuwał ikonę poza padding treści. Do tego zajawka dziedziczy
+   po `body` 12px/12px i linie się zlepiały.
+
+   `py-0` to utility Bootstrapa z `!important` w warstwie kaskady, więc
+   custom.css (poza warstwą) tego pojedynku nie wygrywa — odstęp pionowy
+   idzie na wewnętrzny `.row`, nie na samą stopkę.
+   -------------------------------------------------------------------------- */
+
+/* równa wysokość kafli w wierszu — stopki lądują w jednej linii */
+#phblogrecentposts .simpleblog__listing__post,
+.simpleblog__listing .simpleblog__listing__post {
+  display: flex;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper,
+.simpleblog__listing .simpleblog__listing__post__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper__content,
+.simpleblog__listing .simpleblog__listing__post__wrapper__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+/* zajawka: czytelna interlinia zamiast dziedziczonych 12px/12px */
+#phblogrecentposts .simpleblog__listing__post__wrapper__content p,
+.simpleblog__listing .simpleblog__listing__post__wrapper__content p {
+  margin-bottom: 1.25rem;
+  color: #565656;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* „Czytaj dalej" + kategoria zawsze tuż nad stopką */
+#phblogrecentposts .simpleblog__listing__post__wrapper__content__footer,
+.simpleblog__listing .simpleblog__listing__post__wrapper__content__footer {
+  margin-top: auto;
+}
+
+/* stopka: linia oddzielająca, data po lewej, odsłony po prawej */
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-inline: 1.25rem;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer .row,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer .row {
+  margin: 0;
+  padding-block: 0.85rem;
+  gap: 0.25rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer__block,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer__block {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer__block i,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer__block i {
+  color: #9a9a9a;
+  font-size: 17px;
+}
+
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer__block span,
+#phblogrecentposts .simpleblog__listing__post__wrapper__footer__block time,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer__block span,
+.simpleblog__listing .simpleblog__listing__post__wrapper__footer__block time {
+  position: static;
+  top: auto;
+  margin-left: 0;
+  color: #6b6b6b;
+  font-size: 0.8125rem;
+}
