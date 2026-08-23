@@ -43,9 +43,16 @@
   {/if}
 
   {block name='head_hreflang'}
-    {foreach from=$urls.alternative_langs item=pageUrl key=code}
-      <link rel="alternate" href="{$pageUrl}" hreflang="{$code}">
-    {/foreach}
+    {* Na stronach bloga znaczniki wystawia hummingbird_editor (hook wyzej):
+       rdzen nie umie zbudowac alternative_langs dla kontrolerow modulow —
+       dla kategorii bloga sklada adresy z polskim slugiem na obcej domenie,
+       a dla wpisu nie oddaje nic. Flaga niesie informacje, ze komplet juz
+       poszedl; bez modulu nie istnieje i blok dziala jak dotad. *}
+    {if !isset($hbe_blog_hreflang)}
+      {foreach from=$urls.alternative_langs item=pageUrl key=code}
+        <link rel="alternate" href="{$pageUrl}" hreflang="{$code}">
+      {/foreach}
+    {/if}
   {/block}
 
   {block name='head_microdata'}
