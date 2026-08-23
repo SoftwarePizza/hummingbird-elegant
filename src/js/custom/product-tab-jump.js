@@ -41,23 +41,59 @@ export function initProductTabJump() {
 
     link.dataset.hbTabBound = '1';
 
+    /* Przewijamy do PASKA zakładek, nie do panelu: pasek jest tuż nad treścią,
+       więc po zatrzymaniu widać i wybraną zakładkę, i początek tekstu.
+
+       Cel liczymy sami, zamiast wołać scrollIntoView. Motyw ustawia
+       `scroll-padding-top` na wysokość nagłówka (helpers/scrollPadding.ts),
+       a nagłówek izpola nie jest przyklejony (`.js-sticky-header` ma
+       `position: relative`) — pasek lądowałby wtedy 175 px od góry, za
+       ścianą pustego miejsca. Rezerwę bierzemy z rzeczywistego stanu
+       nagłówka: 0, dopóki nie jest sticky/fixed. */
+    function jump() {
+      var nav = tab.closest('.nav') || tab;
+      var header = document.querySelector('.js-sticky-header');
+      var position = header ? window.getComputedStyle(header).position : '';
+      var reserved = position === 'sticky' || position === 'fixed' ? header.offsetHeight : 0;
+      var top = nav.getBoundingClientRect().top + window.scrollY - reserved - 16;
+
+      window.scrollTo({ top: Math.max(top, 0), behavior: behavior() });
+
+      /* Fokus na przycisku zakładki — klawiatura i czytnik ekranu lądują tam,
+         gdzie treść, a nie zostają przy bloku zakupowym. preventScroll, żeby
+         nie przerwać płynnego przewijania powyżej. */
+      tab.focus({ preventScroll: true });
+    }
+
     link.addEventListener('click', function (event) {
       event.preventDefault();
 
-      if (!tab.classList.contains('active')) {
-        tab.click();
+      if (tab.classList.contains('active')) {
+        jump();
+
+        return;
       }
 
-      /* Przewijamy do PASKA zakładek, nie do panelu: pasek jest tuż nad
-         treścią, więc po zatrzymaniu widać i wybraną zakładkę, i początek
-         tekstu. Odstęp od górnej krawędzi daje scroll-margin w custom.css. */
-      var nav = tab.closest('.nav') || tab;
-      nav.scrollIntoView({ behavior: behavior(), block: 'start' });
+      /* Przewijanie MUSI poczekać na `shown.bs.tab`. Bootstrap przełącza panele
+         przez 150 ms przenikania i w połowie tej animacji żaden nie jest
+         `active` — dokument kurczy się wtedy o całą wysokość opisu, przeglądarka
+         przycina płynne przewijanie do nowego maksimum i już go nie wznawia.
+         Bez tego pasek zatrzymywał się 175 px od góry zamiast 16 px.
+         Zapasowy timer na wypadek, gdyby zdarzenie nie doszło (inna wersja
+         Bootstrapa, wyłączone przejścia). */
+      var done = false;
 
-      /* Fokus na przycisku zakładki — klawiatura i czytnik ekranu lądują
-         tam, gdzie treść, a nie zostają przy bloku zakupowym. preventScroll,
-         żeby nie przerwać płynnego przewijania powyżej. */
-      tab.focus({ preventScroll: true });
+      function once() {
+        if (done) {
+          return;
+        }
+        done = true;
+        jump();
+      }
+
+      tab.addEventListener('shown.bs.tab', once, { once: true });
+      window.setTimeout(once, 400);
+      tab.click();
     });
   });
 }

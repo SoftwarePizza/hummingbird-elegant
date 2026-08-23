@@ -58,7 +58,6 @@
   outline: none;
 }
 
-/* Pasek zakładek nie może przykleić się do górnej krawędzi okna po skoku. */
-#product-tabs {
-  scroll-margin-block-start: 1rem;
-}
+/* Odstęp paska zakładek od górnej krawędzi po skoku liczy JS (moduł
+   product-tab-jump), a nie scroll-margin: motyw trzyma `scroll-padding-top`
+   równy wysokości nagłówka, którego na izpolu nikt nie przykleja. */

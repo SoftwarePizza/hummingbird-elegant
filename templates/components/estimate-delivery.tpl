@@ -8,7 +8,10 @@
  * spacji odcina tłumaczenie i na froncie zostaje angielski oryginał.
  *
  * Różnice wobec starego szablonu:
- *  - ikona to material icon `local_shipping` z motywu, a nie PNG z /themes/fashion,
+ *  - ikona to material icon `schedule` z motywu, a nie ciężarówka z PNG-a
+ *    z /themes/fashion: linijka stoi teraz nad „Darmowa dostawa od…”, która ma
+ *    ciężarówkę, a dwie takie same ikony jedna pod drugą czytały się jak błąd.
+ *    Ta mówi o CZASIE, tamta o przewoźniku — zielony akcent zostaje,
  *  - obliczenia bez `{math}` (zwykłe wyrażenia Smarty czytają się lepiej),
  *  - klasy w konwencji motywu (`product__delivery*`), style w custom.css sekcja 13.
  *
@@ -31,7 +34,7 @@
 {/if}
 
 <p class="product__delivery">
-  <i class="material-icons" aria-hidden="true">&#xE558;</i>
+  <i class="material-icons" aria-hidden="true">&#xE8B5;</i>
   <span class="product__delivery-text">
     {if $hbeDay == 6 || $hbeDay == 7}
       {* weekend — najbliższa wysyłka w poniedziałek *}
