@@ -145,3 +145,19 @@
   border-radius: 50%;
   background: #d3155b;
 }
+
+/* --------------------------------------------------------------------------
+   Lista kategorii (ps_categorytree) w szufladzie filtrów
+
+   Komponent motywu nie ustawia własnego `font-size`, więc linki dziedziczyły
+   po `body` 12px z interlinią 12px — obok 24px nagłówków kryteriów AS4
+   wyglądało to jak przypis. Trochę większy tekst i oddech między pozycjami.
+   -------------------------------------------------------------------------- */
+.filters-drawer .category-tree__item-link {
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.filters-drawer .category-tree__list {
+  row-gap: 0.35rem;
+}
