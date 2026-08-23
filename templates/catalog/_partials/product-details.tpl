@@ -115,7 +115,12 @@
           <li class="product-specs__row">
             <span class="product-specs__label">{l s='Brand' d='Shop.Theme.Catalog'}</span>
             <span class="product-specs__value">
-              <a href="{$product_manufacturer->url}">{$product_manufacturer->name}</a>
+              {* 2026-08-23: bylo {$product_manufacturer->url} - obiekt Manufacturer nie ma
+                 takiej wlasciwosci, wiec link do marki renderowal sie jako href="". Adres
+                 podaje kontroler w osobnej zmiennej product_brand_url (ProductController.php),
+                 i tak samo robi motyw classic. Pod PHP 7.4 bylo to ciche Notice, PHP 8 zglasza
+                 Warning - dlatego wyszlo dopiero po przejsciu na 8.1. *}
+              <a href="{$product_brand_url}">{$product_manufacturer->name}</a>
             </span>
           </li>
         {/if}
