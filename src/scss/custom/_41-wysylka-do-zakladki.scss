@@ -1,0 +1,64 @@
+/* --------------------------------------------------------------------------
+   41. KARTA PRODUKTU — OBIE INFORMACJE O WYSYŁCE W JEDNYM BLOKU
+
+   Termin wysyłki („Zamów dzisiaj — wyślemy jutro!”) stał wcześniej tuż pod
+   przyciskiem koszyka, a „Darmowa dostawa od…” kilka bloków niżej, pod
+   progami rabatowymi. Rozdzielała je próbka i drabinka rabatów, przez co
+   dwa zdania o tej samej rzeczy czytało się jak dwie różne obietnice.
+   Teraz obie są pozycjami tej samej listy `.product__shipping-info`
+   (szablon: catalog/product.tpl, blok product_shipping_info).
+
+   Każda z nich prowadzi do zakładki „Wysyłka i sposoby płatności” z dołu
+   karty — przez rozciągnięty odnośnik (components/shipping-tab-link.tpl),
+   więc klikalna jest cała linijka z ikoną, a nie sam tekst. Przełączenie
+   zakładki i przewinięcie robi custom.js, moduł product-tab-jump.
+   -------------------------------------------------------------------------- */
+
+/* Kotwica dla `.stretched-link` — bez tego jego ::after rozlałby się na
+   najbliższego pozycjonowanego przodka, czyli na pół kolumny zakupowej. */
+.product__shipping-item {
+  position: relative;
+}
+
+/* Termin wysyłki wnosi własny `<p class="product__delivery">`, który sam jest
+   flexem (ikona + tekst). Jako element flexowej pozycji listy kurczyłby się
+   do zawartości, więc pozycja z nim przestaje być flexem — układ robi
+   wewnętrzny akapit. */
+.product__shipping-item--delivery {
+  display: block;
+}
+
+/* Odstępy trzyma teraz `gap` listy (0.625rem); własny margines akapitu
+   dokładałby do niego 1rem. */
+.product__shipping-info .product__delivery {
+  margin-block: 0;
+}
+
+/* Klikalne linijki: podkreślenie dopiero pod kursorem, żeby blok nie wyglądał
+   jak zbiór odnośników — to wciąż informacja, tylko z dojściem do szczegółów. */
+.product__shipping-item--linked {
+  cursor: pointer;
+}
+
+.product__shipping-item--linked:hover .product__delivery-text,
+.product__shipping-item--linked:hover .product__shipping-label {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Sam odnośnik jest pusty (etykieta w .visually-hidden), więc obrys rysujemy
+   na całej pozycji listy — inaczej fokus z klawiatury byłby niewidoczny. */
+.product__shipping-item--linked:focus-within {
+  outline: 2px solid var(--c-black);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.product__tab-jump:focus-visible {
+  outline: none;
+}
+
+/* Pasek zakładek nie może przykleić się do górnej krawędzi okna po skoku. */
+#product-tabs {
+  scroll-margin-block-start: 1rem;
+}

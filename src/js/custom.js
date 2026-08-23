@@ -23,6 +23,7 @@
  *  quantity-max          ilość nie większa niż stan (atrybut max) — karta i koszyk
  *  product-reference-sync  „Nr produktu" nadąża za kolorem multiproduktu
  *  menu-tap-feedback     menu mobilne — pozycja podświetlona do czasu zmiany strony
+ *  product-tab-jump      karta produktu — wysyłka prowadzi do zakładki „Wysyłka…”
  *  i18n                  napisy wspólne dla powyższych
  */
 import { initBannerReel } from './custom/banner-reel';
@@ -39,6 +40,7 @@ import { initHeaderSearchToggle } from './custom/header-search-toggle';
 import { initQuantityMax } from './custom/quantity-max';
 import { initProductReferenceSync } from './custom/product-reference-sync';
 import { initMenuTapFeedback } from './custom/menu-tap-feedback';
+import { initProductTabJump } from './custom/product-tab-jump';
 
 function boot() {
   initBannerReel();
@@ -55,6 +57,7 @@ function boot() {
   initQuantityMax();
   initMenuTapFeedback();
   initProductReferenceSync();
+  initProductTabJump();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są

@@ -143,11 +143,9 @@
               {include file='catalog/_partials/product-add-to-cart.tpl'}
             {/block}
 
-            {* Termin wysyłki („Zamów dzisiaj — wyślemy jutro!”). Miejsce jak
-               w starym szablonie: pod przyciskiem koszyka, nad kaflem próbki. *}
-            {block name='product_delivery_estimate'}
-              {include file='components/estimate-delivery.tpl'}
-            {/block}
+            {* Termin wysyłki („Zamów dzisiaj — wyślemy jutro!”) stał tutaj, pod
+               przyciskiem koszyka. Zjechał niżej, do bloku product_shipping_info,
+               żeby obie informacje o wysyłce były w jednym miejscu. *}
 
             {block name='product_additional_info'}
               {include file='catalog/_partials/product-additional-info.tpl'}
@@ -171,15 +169,37 @@
         {hook h='displayHbeTiers' ctx='product' product=$product}
       {/block}
 
+      {* Zakładki z dołu karty renderuje niżej blok product_tabs, ale kolumna
+         zakupowa musi już TUTAJ wiedzieć, czy zakładka „Wysyłka i sposoby
+         płatności” w ogóle powstanie — obie linijki o wysyłce do niej linkują.
+         Stąd przypisania stoją tu, a nie przy zakładkach: CMS::getCMSContent
+         to zapytanie do bazy i ma pójść raz na stronę. *}
+      {assign var='hbShippingCms' value=CMS::getCMSContent(1, $language.id, $shop.id)}
+      {assign var='hbReturnsCms' value=CMS::getCMSContent(3, $language.id, $shop.id)}
+      {assign var='hbHasShippingTab' value=($hbShippingCms && $hbShippingCms.content)}
+
       {* Figma: shipping perk + product enquiry under the buy box.
          The amount comes from hummingbird_editor (BO → Hummingbird → Koszyk), the
-         same source as the cart's free-shipping bar — never hardcode it here. *}
+         same source as the cart's free-shipping bar — never hardcode it here.
+
+         Termin wysyłki („Zamów dzisiaj — wyślemy jutro!”) siedział wcześniej pod
+         przyciskiem koszyka. Teraz otwiera tę listę: obie linijki mówią o tym
+         samym i obie prowadzą do zakładki „Wysyłka i sposoby płatności”
+         (components/shipping-tab-link.tpl + moduł product-tab-jump z custom.js). *}
       {block name='product_shipping_info'}
         <ul class="product__shipping-info">
+          {block name='product_delivery_estimate'}
+            <li class="product__shipping-item product__shipping-item--delivery{if $hbHasShippingTab} product__shipping-item--linked{/if}">
+              {include file='components/estimate-delivery.tpl'}
+              {if $hbHasShippingTab}{include file='components/shipping-tab-link.tpl'}{/if}
+            </li>
+          {/block}
+
           {if !empty($hbe_free_shipping_threshold)}
-            <li class="product__shipping-item">
+            <li class="product__shipping-item{if $hbHasShippingTab} product__shipping-item--linked{/if}">
               <i class="material-icons" aria-hidden="true">&#xE558;</i>
-              <span>{l s='Darmowa dostawa od %amount%' sprintf=['%amount%' => $hbe_free_shipping_threshold] d='Shop.Theme.Catalog'}</span>
+              <span class="product__shipping-label">{l s='Darmowa dostawa od %amount%' sprintf=['%amount%' => $hbe_free_shipping_threshold] d='Shop.Theme.Catalog'}</span>
+              {if $hbHasShippingTab}{include file='components/shipping-tab-link.tpl'}{/if}
             </li>
           {/if}
           <li class="product__shipping-item">
@@ -231,8 +251,8 @@
          `l s='Opis produktu'`, którego nie ma w ps_translation, więc na wszystkich
          domenach obcojęzycznych wyświetlał się po polsku; pierwsza zakładka stoi na
          kluczu 'Description' z kompletem 16 tłumaczeń. *}
-      {assign var='hbShippingCms' value=CMS::getCMSContent(1, $language.id, $shop.id)}
-      {assign var='hbReturnsCms' value=CMS::getCMSContent(3, $language.id, $shop.id)}
+      {* $hbShippingCms i $hbReturnsCms są przypisane wyżej, przy bloku
+         product_shipping_info — tamten musi znać odpowiedź wcześniej. *}
 
       <ul class="nav nav-underline product__tabs" id="product-tabs" role="tablist">
         <li class="nav-item" role="presentation">
