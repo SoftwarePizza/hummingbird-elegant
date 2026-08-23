@@ -1,0 +1,46 @@
+/* --------------------------------------------------------------------------
+   40. ZNACZEK reCAPTCHA — schowany, z notką w stopce zamiast niego
+
+   Moduł googlerecaptcha ładuje `recaptcha/api.js?render=<klucz>` w
+   displayHeader, czyli na KAŻDEJ stronie sklepu, a Google dokleja wtedy
+   pływający znaczek w prawym dolnym rogu. Na telefonie lądował dokładnie
+   na kaflach produktów i na przycisku „Dodaj do koszyka".
+
+   To reCAPTCHA v3 (wynik punktowy, `action`), więc znaczek jest wyłącznie
+   informacją — ukrycie go NIE psuje ochrony: token nadal wystawia
+   `grecaptcha.execute()`, a sprawdza go `verifyRecaptcha()` w spimagesearch
+   i moduł googlerecaptcha przy logowaniu/newsletterze.
+
+   Warunek Google (FAQ reCAPTCHA, „How to hide the badge"): kto chowa
+   znaczek, musi wpisać w interfejs widoczną informację o reCAPTCHA
+   z odnośnikami do polityki prywatności i regulaminu Google. Stąd notka
+   w stopce — `templates/_partials/copyright.tpl`, klasa `.footer__recaptcha`.
+   Bez niej ukrywanie znaczka łamie warunki korzystania z usługi.
+
+   `visibility: hidden`, a nie `display: none`: znaczek jest `position: fixed`,
+   więc nie zajmuje miejsca w układzie, a Google w swojej instrukcji podaje
+   właśnie tę własność — przy `display: none` niektóre wersje skryptu
+   potrafią przerwać wystawianie tokenu.
+   -------------------------------------------------------------------------- */
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+/* -------- notka zastępująca znaczek -------- */
+/* Kolor bierzemy z otoczenia (`inherit` + przygaszenie), a NIE z tokenu
+   `--bs-tertiary-color`: stopka izpola jest ciemna, a ten token to szarość
+   pod jasne tło — notka stawała się niewidoczna na czarnym. */
+.footer__recaptcha {
+  margin: 0.75rem 0;
+  font-size: var(--fs-body-xs);
+  line-height: 1.5;
+  color: inherit;
+  text-align: center;
+  opacity: 0.65;
+}
+
+.footer__recaptcha a {
+  color: inherit;
+  text-decoration: underline;
+}

@@ -30,6 +30,18 @@
         <source>Call us</source>
         <target state="final">Chiamaci</target>
       </trans-unit>
+      <trans-unit id="183be6191ef58ebce1fb913618cc5f07" approved="yes">
+        <source>This site is protected by reCAPTCHA and the Google %privacy_policy% and %terms_of_service% apply.</source>
+        <target state="final">Questo sito è protetto da reCAPTCHA e si applicano l’%privacy_policy% e i %terms_of_service% di Google.</target>
+      </trans-unit>
+      <trans-unit id="fa2ead697d9998cbc65c81384e6533d5" approved="yes">
+        <source>Privacy Policy</source>
+        <target state="final">Informativa sulla privacy</target>
+      </trans-unit>
+      <trans-unit id="3b6c2b4caaf4f14f8d7feeddc4ac3f4d" approved="yes">
+        <source>Terms of Service</source>
+        <target state="final">Termini di servizio</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

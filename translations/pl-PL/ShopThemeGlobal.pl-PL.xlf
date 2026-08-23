@@ -78,6 +78,18 @@
         <source>© %year% %shop_name%. All rights reserved.</source>
         <target state="final">© %year% %shop_name%. Wszelkie prawa zastrzeżone.</target>
       </trans-unit>
+      <trans-unit id="183be6191ef58ebce1fb913618cc5f07" approved="yes">
+        <source>This site is protected by reCAPTCHA and the Google %privacy_policy% and %terms_of_service% apply.</source>
+        <target state="final">Ta strona jest chroniona przez reCAPTCHA. Obowiązują %privacy_policy% i %terms_of_service% Google.</target>
+      </trans-unit>
+      <trans-unit id="fa2ead697d9998cbc65c81384e6533d5" approved="yes">
+        <source>Privacy Policy</source>
+        <target state="final">Polityka prywatności</target>
+      </trans-unit>
+      <trans-unit id="3b6c2b4caaf4f14f8d7feeddc4ac3f4d" approved="yes">
+        <source>Terms of Service</source>
+        <target state="final">Warunki korzystania z usługi</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
