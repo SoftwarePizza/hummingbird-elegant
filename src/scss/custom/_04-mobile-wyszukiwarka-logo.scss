@@ -12,9 +12,19 @@
     max-width: 100%;
   }
 
+  /* Wyższe pole i 16 px tekstu: wygodniejszy cel dla palca, a iOS nie przybliża
+     strony po wejściu w pole (robi to przy foncie mniejszym niż 16 px).
+     Z prawej strony musi zostać miejsce na pastylkę „Zdjęcie" — przycisk
+     wyszukiwania zdjęciem z modułu spimagesearch (views/css/button.css). */
   .ps-searchbar__input.form-control {
-    height: 38px;
-    padding-right: 1rem;
+    height: 46px;
+    padding-right: 7.2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  .ps-searchbar__icon {
+    left: 1rem;
   }
 
   /* Przy wąskim polu przycisk zjada miejsce na tekst — zostaje sama lupa. */

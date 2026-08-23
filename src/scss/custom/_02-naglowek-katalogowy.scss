@@ -99,7 +99,8 @@
 .ps-searchbar__input.form-control {
   height: 42px;
   padding-left: 2.375rem;
-  padding-right: 6.25rem;
+  /* miejsce na przycisk „Szukaj" i ikonę wyszukiwania zdjęciem (spimagesearch) */
+  padding-right: 7.5rem;
   border-color: #d4ced2;
   border-radius: 6px;
   font-size: 0.875rem;
