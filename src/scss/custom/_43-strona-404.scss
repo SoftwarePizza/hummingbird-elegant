@@ -98,7 +98,14 @@
 /* Ikona aparatu przychodzi z spimagesearch (views/css/button.css) ustawiona na
    `position: absolute; right: 4.6rem` — tak siedzi w polu nagłówka, które ma
    pozycjonowanie. Tutaj układ robi flex, więc przycisk wraca do przepływu;
-   bez tego ląduje obok formularza (desktop) albo pod nim (telefon). */
+   bez tego ląduje obok formularza (desktop) albo pod nim (telefon).
+
+   Musi to być `relative`, nie `static`: wewnątrz etykiety siedzi
+   `input[type=file]` rozciągnięty na `inset: 0`. Przy `static` etykieta
+   przestaje być blokiem zawierającym i niewidzialne pole wyboru pliku ucieka
+   do najbliższego pozycjonowanego przodka — 24.08.2026 przykrywało cały
+   ekran (1280×757), więc klik w pole tekstowe albo w kafel kategorii
+   otwierał przeglądarkę plików zamiast pisać/przechodzić dalej. */
 .hbe-404__search-photo {
   display: flex;
   flex: 0 0 auto;
@@ -106,7 +113,7 @@
 }
 
 .hbe-404__search-photo .spis-search-button {
-  position: static;
+  position: relative;
   inset: auto;
   transform: none;
   height: 2.25rem;
