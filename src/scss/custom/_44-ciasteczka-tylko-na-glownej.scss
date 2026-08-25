@@ -1,0 +1,50 @@
+/* --------------------------------------------------------------------------
+   44. PRZYCISK CIASTECZEK — tylko na stronie głównej i tylko u samej góry
+
+   Moduł seigicookie wstrzykuje JS-em `#cookie-change-button` (ikona ciastka)
+   i przykleja ją na stałe do lewego dolnego rogu KAŻDEJ podstrony
+   (modules/seigicookie/views/css/cookieconsent.css: `position: fixed;
+   left: 10px; bottom: 10px; z-index: 30`). Na listingu wchodziła na kafle
+   produktów i zasłaniała nazwę tkaniny przy przewijaniu.
+
+   Zachowanie po zmianie — takie jak plakietka Trusted Shops: widoczna na
+   stronie głównej, dopóki stoimy u samej góry, znika miękko po pierwszym
+   przewinięciu, a na pozostałych stronach nie pojawia się wcale.
+
+   Klasę `.hbe-scrolled` na <body> nakłada i zdejmuje custom.js (moduł
+   cookie-badge), więc CSS sam z siebie nic nie chowa po przewinięciu —
+   bez JS-a przycisk po prostu zostaje widoczny na głównej.
+
+   SPECYFICZNOŚĆ: arkusz modułu ładuje się PO połączonym bundlu motywu
+   (CCC), więc przy równej specyficzności wygrałby moduł. Stąd `[id]`
+   przy selektorze — ten sam chwyt, co przy odznace Trusted Shops
+   w sekcji 32.
+   -------------------------------------------------------------------------- */
+
+#cookie-change-button[id] {
+  display: none;
+}
+
+body#index #cookie-change-button[id] {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.2s ease,
+    visibility 0s linear 0s;
+}
+
+body#index.hbe-scrolled #cookie-change-button[id] {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body#index #cookie-change-button[id],
+  body#index.hbe-scrolled #cookie-change-button[id] {
+    transition: none;
+  }
+}

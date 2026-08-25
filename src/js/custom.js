@@ -25,6 +25,7 @@
  *  menu-tap-feedback     menu mobilne — pozycja podświetlona do czasu zmiany strony
  *  product-tab-jump      karta produktu — wysyłka prowadzi do zakładki „Wysyłka…”
  *  sticky-header-offset  rezerwa pod nagłówek liczona z rzeczywistości (kotwice)
+ *  cookie-badge          ikona ciasteczek tylko u samej góry strony głównej
  *  i18n                  napisy wspólne dla powyższych
  */
 import { initBannerReel } from './custom/banner-reel';
@@ -43,6 +44,7 @@ import { initProductReferenceSync } from './custom/product-reference-sync';
 import { initMenuTapFeedback } from './custom/menu-tap-feedback';
 import { initProductTabJump } from './custom/product-tab-jump';
 import { initScrollPaddingFix } from './custom/sticky-header-offset';
+import { initCookieBadge } from './custom/cookie-badge';
 
 function boot() {
   initBannerReel();
@@ -61,6 +63,7 @@ function boot() {
   initProductReferenceSync();
   initProductTabJump();
   initScrollPaddingFix();
+  initCookieBadge();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są
