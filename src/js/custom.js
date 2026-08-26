@@ -26,6 +26,7 @@
  *  product-tab-jump      karta produktu — wysyłka prowadzi do zakładki „Wysyłka…”
  *  sticky-header-offset  rezerwa pod nagłówek liczona z rzeczywistości (kotwice)
  *  cookie-badge          ikona ciasteczek tylko u samej góry strony głównej
+ *  variant-picker        zwijany wybór koloru multiproduktu (wzór chanel.com)
  *  i18n                  napisy wspólne dla powyższych
  */
 import { initBannerReel } from './custom/banner-reel';
@@ -45,6 +46,7 @@ import { initMenuTapFeedback } from './custom/menu-tap-feedback';
 import { initProductTabJump } from './custom/product-tab-jump';
 import { initScrollPaddingFix } from './custom/sticky-header-offset';
 import { initCookieBadge } from './custom/cookie-badge';
+import { initVariantPicker } from './custom/variant-picker';
 
 function boot() {
   initBannerReel();
@@ -64,6 +66,7 @@ function boot() {
   initProductTabJump();
   initScrollPaddingFix();
   initCookieBadge();
+  initVariantPicker();
 }
 
 /* Plik siedzi na końcu <body>, więc listing i lewa kolumna zwykle już są

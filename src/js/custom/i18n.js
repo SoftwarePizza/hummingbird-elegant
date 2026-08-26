@@ -9,22 +9,26 @@ var LABELS = {
     /* showProducts to tylko zapas: napis na stopce szuflady bierzemy
        z przycisku „Szukaj" modułu filtrów, gdy ten w ogóle istnieje. */
     filters: 'Filtry', close: 'Zamknij', showProducts: 'Pokaż produkty',
-    backToTop: 'Wróć na górę'
+    backToTop: 'Wróć na górę',
+    viewList: 'Widok listy', viewGrid: 'Widok siatki'
   },
   da: {
     prev: 'Forrige banner', next: 'Næste banner', dot: 'Banner ',
     filters: 'Filtre', close: 'Luk', showProducts: 'Vis produkter',
-    backToTop: 'Tilbage til toppen'
+    backToTop: 'Tilbage til toppen',
+    viewList: 'Listevisning', viewGrid: 'Gittervisning'
   },
   de: {
     prev: 'Vorheriges Banner', next: 'Nächstes Banner', dot: 'Banner ',
     filters: 'Filter', close: 'Schließen', showProducts: 'Produkte anzeigen',
-    backToTop: 'Nach oben'
+    backToTop: 'Nach oben',
+    viewList: 'Listenansicht', viewGrid: 'Rasteransicht'
   },
   en: {
     prev: 'Previous banner', next: 'Next banner', dot: 'Banner ',
     filters: 'Filters', close: 'Close', showProducts: 'Show products',
-    backToTop: 'Back to top'
+    backToTop: 'Back to top',
+    viewList: 'List view', viewGrid: 'Grid view'
   }
 };
 
