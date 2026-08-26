@@ -40,7 +40,19 @@
             {if !empty($hbe_footer_links)}
               <ul class="footer__bottom-links">
                 {foreach from=$hbe_footer_links item='hbe_footer_link'}
-                  <li><a href="{$hbe_footer_link.url|escape:'html':'UTF-8'}">{$hbe_footer_link.label|escape:'html':'UTF-8'}</a></li>
+                  {if $hbe_footer_link.url == '#cookies'}
+                    {* Umowny adres '#cookies' zamienia pozycje paska w przycisk
+                       otwierajacy okno zgod modulu seigicookie: `data-cc="c-settings"`
+                       to jego wlasny selektor (modul sam robi preventDefault i
+                       dokłada aria-haspopup). Etykieta zostaje w konfiguracji
+                       edytora, wiec kazdy jezyk ma swoja.
+                       Potrzebne, odkad ikona ciastka chowa sie poza strona glowna
+                       (sekcja 44 custom.css) - to jedyne stale wejscie do zmiany
+                       albo wycofania zgody. *}
+                    <li><a href="#" data-cc="c-settings">{$hbe_footer_link.label|escape:'html':'UTF-8'}</a></li>
+                  {else}
+                    <li><a href="{$hbe_footer_link.url|escape:'html':'UTF-8'}">{$hbe_footer_link.label|escape:'html':'UTF-8'}</a></li>
+                  {/if}
                 {/foreach}
               </ul>
             {/if}
