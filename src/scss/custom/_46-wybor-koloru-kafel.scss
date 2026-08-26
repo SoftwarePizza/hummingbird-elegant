@@ -1,0 +1,240 @@
+/* --------------------------------------------------------------------------
+   46. WYBÓR KOLORU NA KAFLU LISTINGU + DOLNY ARKUSZ NA MOBILE
+
+   Kontynuacja sekcji 45 (zwijany wybór koloru na karcie produktu, wzór
+   chanel.com) — tu wersja kaflowa i zachowanie mobilne obu pickerów.
+
+   KAFEL (.variant-mini, templates/catalog/_partials/miniatures/product.tpl):
+   zamiast płaskiej siatki nawet 30 próbek pod nazwą produktu jest jeden
+   wiersz — stosik pierwszych pięciu nachodzących na siebie kółek, licznik
+   „+N” i strzałka. Rozwinięcie pokazuje listę kolorów z nazwami; każdy
+   wiersz to link do wariantu (main_variants nie niesie referencji, więc
+   numerów kombinacji tu nie ma). Na desktopie panel wisi ABSOLUTNIE pod
+   wierszem, nad kaflami niżej — rozwinięcie w miejscu przepychałoby całą
+   siatkę listingu. Kafle karuzel hummingbird_editora mają własny szablon,
+   więc ich to nie dotyczy (i nic nie przycina panelu przez overflow).
+
+   MOBILE (<768 px): rozwinięcie obu pickerów — kaflowego i z karty
+   produktu — staje się dolnym arkuszem na całą szerokość z przyciemnionym
+   tłem, jak na chanel.com. Przyciemnienie to ::before samego <details>
+   (fixed na cały ekran); klik w nie trafia w element details i JS
+   (variant-picker.js) to domyka. Przewijanie strony pod arkuszem blokuje
+   klasa body.vp-lock, nakładana i zdejmowana przez JS.
+
+   Z-index: arkusz 4001 / tło 4000 — nad lepkim nagłówkiem, pływającym
+   paskiem listingu i plakietką Trusted Shops; modale Bootstrapa (1055)
+   nie występują równocześnie z otwartym pickerem.
+   -------------------------------------------------------------------------- */
+
+/* ---- Kafel: wiersz zwinięty ---- */
+
+.variant-mini {
+  position: relative;
+}
+
+.variant-mini__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: fit-content;
+  padding: 0.125rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.variant-mini__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.variant-mini__stack {
+  display: flex;
+  align-items: center;
+}
+
+.variant-mini .color {
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 50%;
+  outline: 0;
+}
+
+/* Stosik: kółka nachodzą na siebie, biały ring je rozdziela. */
+.variant-mini__swatch {
+  box-shadow: 0 0 0 2px var(--c-white);
+}
+
+.variant-mini__swatch:not(:first-child) {
+  margin-inline-start: -0.4375rem;
+}
+
+.variant-mini__count {
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.variant-mini__chevron {
+  font-size: 1.125rem;
+  color: var(--c-grey-5);
+  transition: transform 0.2s ease;
+}
+
+.variant-mini[open] .variant-mini__chevron {
+  transform: rotate(180deg);
+}
+
+.variant-mini__toggle:hover .variant-mini__count,
+.variant-mini__toggle:hover .variant-mini__chevron {
+  color: var(--c-black);
+}
+
+/* ---- Kafel: panel rozwinięty (desktop: dymek pod wierszem) ---- */
+
+.variant-mini__panel {
+  position: absolute;
+  z-index: 30;
+  inset-inline: 0;
+  inset-block-start: calc(100% + 0.25rem);
+  min-width: 12rem;
+  overflow: hidden;
+  background: var(--c-white);
+  border: 1px solid var(--c-grey-2);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
+}
+
+.variant-mini__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.375rem 0.375rem 0.75rem;
+  border-block-end: 1px solid var(--c-grey-1);
+}
+
+.variant-mini__title {
+  overflow: hidden;
+  color: var(--c-grey-5);
+  font-size: var(--fs-body-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.variant-mini__close {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  margin-inline-start: auto;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c-grey-5);
+  cursor: pointer;
+}
+
+.variant-mini__close:hover {
+  background: var(--c-grey-1);
+  color: var(--c-black);
+}
+
+.variant-mini__close .material-icons {
+  font-size: 1.125rem;
+}
+
+.variant-mini__list {
+  max-height: 16rem;
+  padding: 0.25rem 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.variant-mini__row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4375rem 0.75rem;
+  color: var(--c-black);
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+.variant-mini__row:hover {
+  background: var(--c-grey-1);
+  color: var(--c-black);
+}
+
+.variant-mini__row .color {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.variant-mini__row:hover .color {
+  box-shadow: 0 0 0 2px var(--c-white), 0 0 0 3.5px var(--c-black);
+}
+
+.variant-mini__name {
+  overflow: hidden;
+  font-size: var(--fs-body-s);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Mobile: oba pickery rozwijają się w dolny arkusz ---- */
+
+@media (max-width: 767.98px) {
+  body.vp-lock {
+    overflow: hidden;
+  }
+
+  .variant-mini[open]::before,
+  .variant-picker[open]::before {
+    content: '';
+    position: fixed;
+    z-index: 4000;
+    inset: 0;
+    background: rgb(0 0 0 / 40%);
+  }
+
+  .variant-mini[open] .variant-mini__panel,
+  .variant-picker[open] .variant-picker__panel {
+    position: fixed;
+    z-index: 4001;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow: hidden;
+    background: var(--c-white);
+    border: 0;
+    border-radius: 0.75rem 0.75rem 0 0;
+    box-shadow: 0 -0.5rem 2rem rgb(0 0 0 / 20%);
+  }
+
+  .variant-mini[open] .variant-mini__head,
+  .variant-picker[open] .variant-picker__head {
+    flex: 0 0 auto;
+    padding-block: 0.625rem;
+  }
+
+  .variant-mini[open] .variant-mini__list,
+  .variant-picker[open] .variant-picker__options {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    padding-block-end: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  /* Wiersze arkusza dostają oddech pod palec. */
+  .variant-mini[open] .variant-mini__row,
+  .variant-picker[open] .variant-picker__row {
+    padding-block: 0.625rem;
+  }
+}

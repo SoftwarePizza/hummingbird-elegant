@@ -18,6 +18,14 @@
 
    Wszystko na delegacji z document — blok wymienia się przy każdej
    zmianie kombinacji, więc nasłuchy na samych elementach by przepadały.
+
+   Ten sam plik obsługuje picker kaflowy na listingu (.variant-mini,
+   miniatures/product.tpl) — tam nie ma radiów ani przełącznika widoku,
+   wiersze to linki; wspólna jest klasa .js-variant-picker. Na mobile
+   (<768 px) oba pickery rozwijają się w dolny arkusz (sekcja 46
+   custom.css): przyciemnione tło to ::before samego <details>, więc klik
+   w tło ma target = element details i tu go domykamy; body.vp-lock
+   blokuje przewijanie strony pod arkuszem.
    ------------------------------------------------------------------ */
 import { labels } from './i18n';
 
@@ -57,6 +65,14 @@ function labelViewButtons(picker) {
   });
 }
 
+const MOBILE_SHEET = '(max-width: 767.98px)';
+
+function syncBodyLock() {
+  var anyOpen = document.querySelector('.js-variant-picker[open]');
+  var mobile = window.matchMedia(MOBILE_SHEET).matches;
+  document.body.classList.toggle('vp-lock', !!anyOpen && mobile);
+}
+
 export function initVariantPicker() {
   if (document.__izpVariantPicker) {
     return;
@@ -67,11 +83,26 @@ export function initVariantPicker() {
      zaznaczonego. `toggle` nie bąbelkuje — łapiemy w fazie capture. */
   document.addEventListener('toggle', function (event) {
     var picker = event.target;
-    if (!picker.classList || !picker.classList.contains('js-variant-picker') || !picker.open) {
+    if (!picker.classList || !picker.classList.contains('js-variant-picker')) {
       return;
     }
-    applyView(picker, storedView());
-    labelViewButtons(picker);
+    syncBodyLock();
+    if (!picker.open) {
+      return;
+    }
+
+    /* Naraz otwarty jest jeden picker — na listingu jest ich kilkadziesiąt. */
+    document.querySelectorAll('.js-variant-picker[open]').forEach(function (other) {
+      if (other !== picker) {
+        other.open = false;
+      }
+    });
+
+    /* Przełącznik widoku ma tylko picker z karty produktu. */
+    if (picker.querySelector('.js-variant-view')) {
+      applyView(picker, storedView());
+      labelViewButtons(picker);
+    }
 
     var active = picker.querySelector('.variant-picker__row--active');
     if (active && typeof active.scrollIntoView === 'function') {
@@ -103,9 +134,10 @@ export function initVariantPicker() {
       return;
     }
 
-    /* Klik poza otwartym panelem zamyka. */
+    /* Klik poza otwartym panelem zamyka; klik w przyciemnione tło arkusza
+       (::before na <details>) ma target = sam element details. */
     document.querySelectorAll('.js-variant-picker[open]').forEach(function (open) {
-      if (!open.contains(target)) {
+      if (target === open || !open.contains(target)) {
         open.open = false;
       }
     });
@@ -122,13 +154,18 @@ export function initVariantPicker() {
     }
   });
 
+  if (window.prestashop && typeof window.prestashop.on === 'function') {
+    var ev = (window.Theme && window.Theme.events) || {};
+    window.prestashop.on(ev.updatedProduct || 'updatedProduct', syncBodyLock);
+  }
+
   document.addEventListener('keydown', function (event) {
     if (event.key !== 'Escape') {
       return;
     }
     document.querySelectorAll('.js-variant-picker[open]').forEach(function (open) {
       open.open = false;
-      var toggle = open.querySelector('.variant-picker__toggle');
+      var toggle = open.querySelector('summary');
       if (toggle) {
         toggle.focus();
       }

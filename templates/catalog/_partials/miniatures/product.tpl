@@ -38,10 +38,52 @@
             {/block}
 
             {block name='product_variants'}
+              {* Zwijany wybor koloru na kaflu (wzor: chanel.com, jak na karcie
+                 produktu): zwiniete = stosik pierwszych probek + licznik +N
+                 + strzalka; rozwiniecie to lista kolorow z nazwami — kazdy
+                 wiersz linkuje do wariantu. Na desktopie panel wisi absolutnie
+                 nad kaflami ponizej, na mobile custom.css robi z niego dolny
+                 arkusz (sekcja 46). main_variants nie niesie referencji,
+                 wiec numeru kombinacji tu nie ma — jest na karcie produktu. *}
               {if $product.main_variants}
-                <div class="{$componentName}__variants">
-                  {include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}
-                </div>
+                {assign var=vminiCount value=$product.main_variants|count}
+                <details class="variant-mini js-variant-picker {$componentName}__variants">
+                  <summary class="variant-mini__toggle">
+                    <span class="visually-hidden">{$product.name}</span>
+                    <span class="variant-mini__stack" aria-hidden="true">
+                      {foreach from=$product.main_variants item=variant name=vmini}
+                        {if $smarty.foreach.vmini.index < 5}
+                          <span class="color variant-mini__swatch{if $variant.texture} texture{/if}"
+                            {if $variant.texture}style="background-image: url({$variant.texture})"
+                            {elseif $variant.html_color_code}style="background-color: {$variant.html_color_code}"{/if}></span>
+                        {/if}
+                      {/foreach}
+                    </span>
+                    {if $vminiCount > 5}
+                      <span class="variant-mini__count" aria-hidden="true">+{$vminiCount-5}</span>
+                    {/if}
+                    <i class="material-icons variant-mini__chevron" aria-hidden="true">&#xE5CF;</i>
+                  </summary>
+                  <div class="variant-mini__panel">
+                    <div class="variant-mini__head">
+                      <span class="variant-mini__title">{$product.name} &middot; {$vminiCount}</span>
+                      <button type="button" class="variant-mini__close js-variant-close" aria-label="{l s='Close' d='Shop.Theme.Global'}">
+                        <i class="material-icons" aria-hidden="true">&#xE5CD;</i>
+                      </button>
+                    </div>
+                    <div class="variant-mini__list">
+                      {foreach from=$product.main_variants item=variant}
+                        <a href="{$variant.url}" class="variant-mini__row" title="{$variant.name}">
+                          <span class="color{if $variant.texture} texture{/if}"
+                            {if $variant.texture}style="background-image: url({$variant.texture})"
+                            {elseif $variant.html_color_code}style="background-color: {$variant.html_color_code}"{/if}
+                            aria-hidden="true"></span>
+                          <span class="variant-mini__name">{$variant.name}</span>
+                        </a>
+                      {/foreach}
+                    </div>
+                  </div>
+                </details>
               {/if}
             {/block}
 
