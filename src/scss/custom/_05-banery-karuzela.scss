@@ -133,12 +133,16 @@
   }
 }
 
+/* Gradient pod podpisem u GÓRY kafla (2026-09-02, prośba klientki): przy
+   podpisie na dole napisy ginęły pod pływającym znaczkiem Trusted Shops
+   i dymkiem asystenta — na telefonie kafel zajmuje prawie cały ekran, więc
+   jego dół zawsze leży dokładnie tam, gdzie te nakładki. */
 #bonbanners a::after {
   content: "";
   position: absolute;
-  inset: 55% 0 0;
+  inset: 0 0 55%;
   background: linear-gradient(
-    to top,
+    to bottom,
     rgba(0, 0, 0, 0.75),
     rgba(0, 0, 0, 0.2) 55%,
     rgba(0, 0, 0, 0)
@@ -146,14 +150,14 @@
   z-index: 1;
 }
 
-/* Podpis z połowy wysokości po lewej schodzi na dół kafla, na gradient. */
+/* Podpis z połowy wysokości po lewej idzie na górę kafla, na gradient. */
 #bonbanners a .banner-inner {
-  top: auto;
+  top: 0;
   right: 0;
-  bottom: 0;
+  bottom: auto;
   left: 0;
   max-width: none;
-  padding: 0 1.125rem 1.125rem;
+  padding: 1.125rem 1.125rem 0;
   transform: none;
   z-index: 2;
 }
@@ -303,7 +307,8 @@
      JS-a podpisy były po prostu widoczne. */
   #bonbanners.bb-ready ul.row > li .banner-inner {
     opacity: 0;
-    transform: translateY(0.75rem);
+    /* Podpis jest u góry, więc wjeżdża z góry, nie z dołu. */
+    transform: translateY(-0.75rem);
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
