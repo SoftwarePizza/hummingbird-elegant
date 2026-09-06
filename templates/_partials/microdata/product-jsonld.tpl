@@ -71,7 +71,7 @@
     "name": "{$product.name}",
     "description": "{$jsonDescription}",
     "category": "{$product.category_name}",
-    {if !empty($product.cover)}"image" :"{$product.cover.bySize.home_default.url}",{/if}
+    {if !empty($product.cover)}"image": {$product.cover.bySize.home_default.url|jsonld_url nofilter},{/if}
     "sku": "{$jsonSku}",
     "mpn": "{$jsonMpn}"
     {if $product.ean13},"gtin": "{$product.ean13}"{/if}
@@ -109,13 +109,13 @@
       "@type": "Offer",
       "priceCurrency": "{$currency.iso_code}",
       "price": "{$product.price_amount}",
-      "url": "{$product.url}",
+      "url": {$product.url|jsonld_url nofilter},
       {if $offerValidFrom}"validFrom": "{$offerValidFrom}",{/if}
       "priceValidUntil": "{$offerValidUntil}",
       {if $product.images|count > 0}
         "image": {strip}[
           {foreach from=$product.images item=p_img name="p_img_list"}
-            "{$p_img.large.url}"{if not $smarty.foreach.p_img_list.last},{/if}
+            {$p_img.large.url|jsonld_url nofilter}{if not $smarty.foreach.p_img_list.last},{/if}
           {/foreach}
         ]{/strip},
       {/if}

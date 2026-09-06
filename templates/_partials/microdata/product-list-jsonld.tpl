@@ -39,9 +39,9 @@
           "item": {
             "@type": "Product",
             "name": {$item.name|json_encode nofilter},
-            "url": {$item.url|json_encode nofilter}
+            "url": {$item.url|jsonld_url nofilter}
             {if !empty($item.cover) && isset($item.cover.bySize.default_md.url)},
-            "image": {$item.cover.bySize.default_md.url|json_encode nofilter}
+            "image": {$item.cover.bySize.default_md.url|jsonld_url nofilter}
             {/if}
             {if !empty($item.description_short)},
             "description": {$item.description_short|strip_tags|strip|trim|json_encode nofilter}
@@ -54,7 +54,7 @@
             {/if},
             "offers": {
               "@type": "Offer",
-              "url": {$item.url|json_encode nofilter},
+              "url": {$item.url|jsonld_url nofilter},
               "priceCurrency": "{$currency.iso_code}",
               "price": "{$item.price_amount}",
               "availability": "{$item.seo_availability}"
