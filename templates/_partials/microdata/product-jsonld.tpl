@@ -44,16 +44,36 @@
   {assign var=offerValidUntil value=$product.specific_prices.to|date_format:"%Y-%m-%d"}
 {/if}
 
+{**
+ * Opis: meta description, a gdy pusta (rdzen buduje ja z krotkiego opisu, wiec produkt
+ * bez krotkiego opisu nie ma zadnej) — pelny opis, na koncu nazwa. Google zglasza
+ * pusty `description` jako brakujace pole. `sku`/`mpn` nigdy puste (pusta referencja -> id).
+ *}
+{assign var=jsonDescription value=$page.meta.description|regex_replace:"/[\r\n]+/":" "|trim}
+{if $jsonDescription == '' && !empty($product.description_short)}
+  {assign var=jsonDescription value=$product.description_short|replace:'&nbsp;':' '|strip_tags:' '|regex_replace:"/\s+/":" "|trim}
+{/if}
+{if $jsonDescription == '' && !empty($product.description)}
+  {assign var=jsonDescription value=$product.description|replace:'&nbsp;':' '|strip_tags:' '|regex_replace:"/\s+/":" "|trim|truncate:1000:"…"}
+{/if}
+{if $jsonDescription == ''}
+  {assign var=jsonDescription value=$product.name}
+{/if}
+{assign var=jsonSku value=$product.reference|default:''|trim}
+{if $jsonSku == ''}{assign var=jsonSku value=$product.id}{/if}
+{assign var=jsonMpn value=$product.mpn|default:''|trim}
+{if $jsonMpn == ''}{assign var=jsonMpn value=$jsonSku}{/if}
+
 <script type="application/ld+json">
   {
     "@context": "https://schema.org/",
     "@type": "Product",
     "name": "{$product.name}",
-    "description": "{$page.meta.description|regex_replace:"/[\r\n]/" : " "}",
+    "description": "{$jsonDescription}",
     "category": "{$product.category_name}",
     {if !empty($product.cover)}"image" :"{$product.cover.bySize.home_default.url}",{/if}
-    "sku": "{if $product.reference}{$product.reference}{else}{$product.id}{/if}",
-    "mpn": "{if $product.mpn}{$product.mpn}{elseif $product.reference}{$product.reference}{else}{$product.id}{/if}"
+    "sku": "{$jsonSku}",
+    "mpn": "{$jsonMpn}"
     {if $product.ean13},"gtin": "{$product.ean13}"{/if}
     {if $product.upc},"gtin12": "{$product.upc}"{/if}
     {if isset($product_manufacturer) && $product_manufacturer->name},
@@ -105,6 +125,15 @@
         "@type": "Organization",
         "name": "{$shop.name}"
       }
+      {* Google Merchant listings: koszt/czas dostawy i polityka zwrotow. Gotowy JSON
+         przekazuje modul sp_merchantdata (liczy z konfiguracji przewoznikow) — bez niego
+         obu pol po prostu nie ma, jak dotad. *}
+      {if isset($sp_merchant_shipping_json) && $sp_merchant_shipping_json},
+      "shippingDetails": {$sp_merchant_shipping_json nofilter}
+      {/if}
+      {if isset($sp_merchant_return_json) && $sp_merchant_return_json},
+      "hasMerchantReturnPolicy": {$sp_merchant_return_json nofilter}
+      {/if}
     }
     {/if}
   }
