@@ -1,0 +1,17 @@
+ 
+
+{shop_url}
+
+Hi {firstname} {lastname},
+Thank you for shopping at {shop_name}!
+
+Order number {order_name} - Ready for pickup
+
+Your order {order_name} has been completed and is ready for pickup.
+You are welcome to collect it at the Rosenthal Outlet store during opening hours.
+
+Simply provide your order number at pickup.
+If you have any questions, e-mail us quoting your order number in the subject line.
+sklep@rosenthal.pl
+
+{shop_name} - {shop_url}

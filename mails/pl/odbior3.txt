@@ -1,0 +1,17 @@
+ 
+
+{shop_url}
+
+Witaj {firstname} {lastname},
+Dziękujemy za zakupy na stronie {shop_name}!
+
+Numer zamówienia {order_name} - Gotowe do odbioru
+
+Twoje zamówienie o numerze {order_name} zostało skompletowane i czeka na odbiór.
+Zapraszamy do salonu Rosenthal Outlet w godzinach otwarcia.
+
+Przy odbiorze wystarczy podać numer zamówienia.
+W razie pytań napisz do nas, podając numer zamówienia w temacie wiadomości.
+sklep@rosenthal.pl
+
+{shop_name} - {shop_url}
