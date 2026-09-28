@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="pl" target-language="cs" datatype="plaintext">
+    <body>
+      <trans-unit id="8d2999267251287792b552729fec6c14" approved="yes">
+        <source>Dodaj</source>
+        <target state="final">Přidat</target>
+      </trans-unit>
+      <trans-unit id="58c512e5af784bac7733f29eabe26009" approved="yes">
+        <source>Zobacz koszyk</source>
+        <target state="final">Zobrazit košík</target>
+      </trans-unit>
+      <trans-unit id="d8afac7b06dc96cfde1085411a041002" approved="yes">
+        <source>usuń</source>
+        <target state="final">odebrat</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

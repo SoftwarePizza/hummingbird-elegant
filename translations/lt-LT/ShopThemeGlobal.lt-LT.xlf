@@ -42,6 +42,10 @@
         <source>Terms of Service</source>
         <target state="final">paslaugų teikimo sąlygos</target>
       </trans-unit>
+      <trans-unit id="66549c702c99f36b05e6d71437450cde" approved="yes">
+        <source>Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</source>
+        <target state="final">Gaukite informaciją apie naujausias prekes, akcijas ir renginius.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

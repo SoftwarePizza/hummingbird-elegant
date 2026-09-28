@@ -6,6 +6,54 @@
         <source>Filters</source>
         <target state="final">Filtrai</target>
       </trans-unit>
+      <trans-unit id="3cb9a3808e6cf54231b4347e39b16793" approved="yes">
+        <source>Darmowa dostawa od %amount%</source>
+        <target state="final">Nemokamas pristatymas nuo %amount%</target>
+      </trans-unit>
+      <trans-unit id="4eb30227b5e1c9d7910bc50cb136a712" approved="yes">
+        <source>Długość</source>
+        <target state="final">Ilgis</target>
+      </trans-unit>
+      <trans-unit id="6daa57cbb53bf7eec06d7f63d324ee98" approved="yes">
+        <source>Kod produktu:</source>
+        <target state="final">Prekės kodas:</target>
+      </trans-unit>
+      <trans-unit id="0b09f814c14a914948571eb6be66fc31" approved="yes">
+        <source>Najniższa cena z ostatnich 30 dni:</source>
+        <target state="final">Mažiausia kaina per pastarąsias 30 dienų:</target>
+      </trans-unit>
+      <trans-unit id="5e1835161911bfe7f97c02371ae49bae" approved="yes">
+        <source>Ogólne parametry</source>
+        <target state="final">Bendrieji parametrai</target>
+      </trans-unit>
+      <trans-unit id="07222928c84b4b9beb365c44cbd03091" approved="yes">
+        <source>Opis produktu</source>
+        <target state="final">Prekės aprašymas</target>
+      </trans-unit>
+      <trans-unit id="be5655b46b523e409bf1cb8bad6441d5" approved="yes">
+        <source>Szczegóły produktu</source>
+        <target state="final">Prekės informacija</target>
+      </trans-unit>
+      <trans-unit id="24cd0bde159a35db3c90cf8b9d60c821" approved="yes">
+        <source>Szerokość</source>
+        <target state="final">Plotis</target>
+      </trans-unit>
+      <trans-unit id="40809789603dd70ea2d184e7a989fb08" approved="yes">
+        <source>Wysokość</source>
+        <target state="final">Aukštis</target>
+      </trans-unit>
+      <trans-unit id="e2498903a776c3363a5252a27e48bf6b" approved="yes">
+        <source>Zapytaj o produkt</source>
+        <target state="final">Klausti apie prekę</target>
+      </trans-unit>
+      <trans-unit id="dcb6c2acc9c23e2cb47f78d3da5f4530" approved="yes">
+        <source>zobacz pełny opis</source>
+        <target state="final">rodyti visą aprašymą</target>
+      </trans-unit>
+      <trans-unit id="2eee268ee9023570d0a274c46f792e60" approved="yes">
+        <source>zwiń opis</source>
+        <target state="final">suskleisti aprašymą</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
