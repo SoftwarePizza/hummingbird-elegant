@@ -11,6 +11,8 @@ T = {  # domena: {źródło: (de, cs, lt)}
   'usuń': ('entfernen','odebrat','pašalinti'),
  },
  'ShopThemeCatalog': {
+  'Dane techniczne': ('Technische Daten','Technické údaje','Techniniai duomenys'),
+  'Waga': ('Gewicht','Hmotnost','Svoris'),
   'Darmowa dostawa od %amount%': ('Kostenloser Versand ab %amount%','Doprava zdarma od %amount%','Nemokamas pristatymas nuo %amount%'),
   'Długość': ('Länge','Délka','Ilgis'),
   'Kod produktu:': ('Artikelnummer:','Kód produktu:','Prekės kodas:'),
@@ -25,6 +27,8 @@ T = {  # domena: {źródło: (de, cs, lt)}
   'zwiń opis': ('Beschreibung einklappen','sbalit popis','suskleisti aprašymą'),
  },
  'ShopThemeCheckout': {
+  'Koszyk': ('Warenkorb','Košík','Krepšelis'),
+  'Razem': ('Gesamt','Celkem','Iš viso'),
   'Do darmowej dostawy brakuje Ci %amount%': ('Noch %amount% bis zum kostenlosen Versand','Do dopravy zdarma vám chybí %amount%','Iki nemokamo pristatymo trūksta %amount%'),
   'Masz darmową dostawę!': ('Ihre Lieferung ist kostenlos!','Máte dopravu zdarma!','Jums pristatymas nemokamas!'),
   'Twój koszyk': ('Ihr Warenkorb','Váš košík','Jūsų krepšelis'),
@@ -32,6 +36,8 @@ T = {  # domena: {źródło: (de, cs, lt)}
   'Wysyłka': ('Versand','Doprava','Pristatymas'),
  },
  'ShopThemeGlobal': {
+  'Kontakt': ('Kontakt','Kontakt','Kontaktai'),
+  'Telefon': ('Telefon','Telefon','Telefonas'),
   'Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.': ('Erhalten Sie Informationen zu neuen Produkten, Aktionen und Events.','Dostávejte informace o novinkách, akcích a událostech.','Gaukite informaciją apie naujausias prekes, akcijas ir renginius.'),
  },
 }

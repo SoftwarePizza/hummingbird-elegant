@@ -46,6 +46,14 @@
         <source>Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</source>
         <target state="final">Erhalten Sie Informationen zu neuen Produkten, Aktionen und Events.</target>
       </trans-unit>
+      <trans-unit id="92316d41c56daf9140fc04509aecaaca" approved="yes">
+        <source>Kontakt</source>
+        <target state="final">Kontakt</target>
+      </trans-unit>
+      <trans-unit id="0975cf6baccb3862c31522c2b5b8fabc" approved="yes">
+        <source>Telefon</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

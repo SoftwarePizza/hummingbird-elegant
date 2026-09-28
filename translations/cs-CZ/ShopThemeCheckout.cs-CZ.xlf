@@ -22,6 +22,14 @@
         <source>Wysyłka</source>
         <target state="final">Doprava</target>
       </trans-unit>
+      <trans-unit id="994a3af5db7fc997a068da61c2c01d80" approved="yes">
+        <source>Koszyk</source>
+        <target state="final">Košík</target>
+      </trans-unit>
+      <trans-unit id="4ee91c3d46d17714df2fee50a716bbdd" approved="yes">
+        <source>Razem</source>
+        <target state="final">Celkem</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
