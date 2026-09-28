@@ -160,12 +160,12 @@
   {$children = []}
   {if $nodes|count}
     <nav
-      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}{if $parent.flat_mobile} menu--flat{/if}"
+      class="menu menu--mobile{if $depth === 0} menu--current js-menu-current{else} menu--child js-menu-child{/if}{if $parent && $parent.flat_mobile} menu--flat{/if}"
       {if $depth === 0}id="menu-mobile"{else}data-parent-title="{$parent.label}"{/if}
       {if $depth > 1}data-back-title="{$backTitle}" data-id="{$expandId}"{/if}
       data-depth="{$depth}"
     >
-      {if $parent.flat_mobile}
+      {if $parent && $parent.flat_mobile}
         {* Flat mobile: show this item's sub-categories directly as image tiles, no deeper drill-down. *}
         {if $depth >= 1}
           <ul class="menu__list">

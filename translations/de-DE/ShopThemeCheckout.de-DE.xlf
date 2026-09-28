@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="pl" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="efaae8d5557ab15aa2b5b63951d8f072" approved="yes">
+        <source>Do darmowej dostawy brakuje Ci %amount%</source>
+        <target state="final">Noch %amount% bis zum kostenlosen Versand</target>
+      </trans-unit>
+      <trans-unit id="7f8661fccb9f8a51976ef0b0eb22e80b" approved="yes">
+        <source>Masz darmową dostawę!</source>
+        <target state="final">Ihre Lieferung ist kostenlos!</target>
+      </trans-unit>
+      <trans-unit id="7401b013e14ceaefb35d26e597fffab3" approved="yes">
+        <source>Twój koszyk</source>
+        <target state="final">Ihr Warenkorb</target>
+      </trans-unit>
+      <trans-unit id="f607fcb144147fdc08ae3f281f102269" approved="yes">
+        <source>Twój koszyk jest pusty.</source>
+        <target state="final">Ihr Warenkorb ist leer.</target>
+      </trans-unit>
+      <trans-unit id="1e009256a05ff228114a80dc5e2a736f" approved="yes">
+        <source>Wysyłka</source>
+        <target state="final">Versand</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
