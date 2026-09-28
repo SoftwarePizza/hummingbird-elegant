@@ -50,6 +50,14 @@
         <source>zwiń opis</source>
         <target state="final">suskleisti aprašymą</target>
       </trans-unit>
+      <trans-unit id="0221beca197c77787203ad7c1b0e605a" approved="yes">
+        <source>Dane techniczne</source>
+        <target state="final">Techniniai duomenys</target>
+      </trans-unit>
+      <trans-unit id="98e2eac44e8db19beede76f08158687f" approved="yes">
+        <source>Waga</source>
+        <target state="final">Svoris</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
