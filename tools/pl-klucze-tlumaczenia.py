@@ -11,6 +11,7 @@ T = {  # domena: {źródło: (de, cs, lt)}
   'usuń': ('entfernen','odebrat','pašalinti'),
  },
  'ShopThemeCatalog': {
+  'Pokaż produkty': ('Produkte anzeigen','Zobrazit produkty','Rodyti prekes'),
   'Dane techniczne': ('Technische Daten','Technické údaje','Techniniai duomenys'),
   'Waga': ('Gewicht','Hmotnost','Svoris'),
   'Darmowa dostawa od %amount%': ('Kostenloser Versand ab %amount%','Doprava zdarma od %amount%','Nemokamas pristatymas nuo %amount%'),

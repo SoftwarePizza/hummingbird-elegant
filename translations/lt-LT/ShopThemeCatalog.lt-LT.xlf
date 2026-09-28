@@ -58,6 +58,10 @@
         <source>Waga</source>
         <target state="final">Svoris</target>
       </trans-unit>
+      <trans-unit id="7e9f44883702e6c05bb50b7226d5fc6f" approved="yes">
+        <source>Pokaż produkty</source>
+        <target state="final">Rodyti prekes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
