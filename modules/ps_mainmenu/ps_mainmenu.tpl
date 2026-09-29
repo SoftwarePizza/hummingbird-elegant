@@ -49,7 +49,7 @@
           <div class="submenu__row row gx-5">
     {/if}
 
-    {if $depth === 1 && !$parent.flat_desktop}
+    {if $depth === 1 && !$parent.flat_desktop && !$parent.menu_columns}
       <div class="submenu__left col-sm-3" role="tablist" aria-label="{l s='%s submenu tabs' sprintf=[$parent.label] d='Shop.Theme.Menu'}" data-ps-ref="desktop-submenu-left">
         {foreach from=$nodes item=node}
           <a
@@ -74,7 +74,50 @@
       </div>
     {/if}
 
-    {if $depth === 1 && $parent.flat_desktop}
+    {if $depth === 1 && $parent.menu_columns}
+      {* Układ kolumnowy (HBE_MENU_COLUMNS_ITEMS, jak na izpolu): gałąź szeroka i płytka, np. marki → modele.
+         Zakładki pokazywały modele dopiero po najechaniu na markę i zostawiały pusty panel;
+         tu wszystkie gałęzie stoją naraz jako kolumny, liście — pod wspólnym nagłówkiem na końcu. *}
+      <div class="submenu__right submenu__right--columns col-12" data-ps-ref="desktop-submenu-right">
+        <div class="submenu__right-items active" data-ps-ref="desktop-submenu-right-items">
+          <div class="submenu__columns">
+            {foreach from=$nodes item=node}
+              {if $node.children|count}
+                <div class="submenu__column-group">
+                  <a class="submenu__column-title" href="{$node.url}" data-depth="{$node.depth}"{if $node.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{$node.label}</a>
+                  <ul class="submenu__column-list">
+                    {foreach from=$node.children item=child}
+                      <li>
+                        {* Pod nagłówkiem marki bez powtarzania marki: „BYD Seal U” → „Seal U”. *}
+                        <a class="submenu__column-link" href="{$child.url}" data-depth="{$child.depth}"{if $child.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{if $child.label|strpos:"`$node.label` " === 0}{$child.label|substr:($node.label|strlen + 1)}{else}{$child.label}{/if}</a>
+                      </li>
+                    {/foreach}
+                  </ul>
+                </div>
+              {/if}
+            {/foreach}
+            {$leafNodes = []}
+            {foreach from=$nodes item=node}
+              {if !$node.children|count}{$leafNodes[] = $node}{/if}
+            {/foreach}
+            {if $leafNodes|count}
+              <div class="submenu__column-group submenu__column-group--rest">
+                {if $leafNodes|count < $nodes|count}
+                  <span class="submenu__column-title submenu__column-title--plain">{$parent.rest_label}</span>
+                {/if}
+                <ul class="submenu__column-list">
+                  {foreach from=$leafNodes item=leaf}
+                    <li>
+                      <a class="submenu__column-link" href="{$leaf.url}" data-depth="{$leaf.depth}"{if $leaf.open_in_new_window} target="_blank" rel="noopener noreferrer"{/if}>{$leaf.label}</a>
+                    </li>
+                  {/foreach}
+                </ul>
+              </div>
+            {/if}
+          </div>
+        </div>
+      </div>
+    {elseif $depth === 1 && $parent.flat_desktop}
       {* Flat layout: no left tabs — render this item's sub-categories directly as image tiles. *}
       <div class="submenu__right submenu__right--flat col-12" data-ps-ref="desktop-submenu-right">
         <div class="submenu__right-items active" role="tabpanel" data-ps-ref="desktop-submenu-right-items">
@@ -99,11 +142,14 @@
       </div>
     {/if}
 
-    {foreach from=$nodes item=node}
-      {if $node.children|count}
-        {desktopSubMenu nodes=$node.children depth=$node.depth parent=$node}
-      {/if}
-    {/foreach}
+    {* Układ kolumnowy rysuje podkategorie u siebie — bez schodzenia głębiej (inaczej zostają niewidoczne .js-sub-menu). *}
+    {if !($depth === 1 && $parent.menu_columns)}
+      {foreach from=$nodes item=node}
+        {if $node.children|count}
+          {desktopSubMenu nodes=$node.children depth=$node.depth parent=$node}
+        {/if}
+      {/foreach}
+    {/if}
 
     {if $depth === 1}
           </div>
