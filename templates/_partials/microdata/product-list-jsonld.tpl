@@ -20,6 +20,12 @@
  * modyfikatora. Smarty 4 to akceptuje (z ostrzezeniem E_DEPRECATED), Smarty 5
  * juz nie - przy aktualizacji PrestaShopa trzeba to zamienic na wlasny
  * modyfikator rejestrowany przez modul.
+ *
+ * 2026-09-29 (Novehi): lista wypisuje tylko adresy produktow (ListItem: position + url),
+ * bez zagniezdzonego Product/Offer. Google traktowal kazdy kafel listingu jak osobna
+ * oferte do „Informacji o sprzedawcy” i zglaszal na kategoriach brak marki, opisu,
+ * shippingDetails i hasMerchantReturnPolicy — pelne dane oferty sa na karcie produktu
+ * (product-jsonld.tpl), a kategorie i tak nie dostaja wynikow produktowych.
  *}
 <script type="application/ld+json">
   {
@@ -29,39 +35,14 @@
     {$needsComma = false}
     {$position = 0}
     {foreach from=$listing.products item=item name=productsForJsonLd}
-      {if $item.show_price}
-        {$position = $position + 1}
-        {if $needsComma},{/if}
-        {$needsComma = true}
-        {
-          "@type": "ListItem",
-          "position": {$position},
-          "item": {
-            "@type": "Product",
-            "name": {$item.name|json_encode nofilter},
-            "url": {$item.url|jsonld_url nofilter}
-            {if !empty($item.cover) && isset($item.cover.bySize.default_md.url)},
-            "image": {$item.cover.bySize.default_md.url|jsonld_url nofilter}
-            {/if}
-            {if !empty($item.description_short)},
-            "description": {$item.description_short|strip_tags|strip|trim|json_encode nofilter}
-            {/if}
-            {if !empty($item.manufacturer_name)},
-            "brand": {
-              "@type": "Brand",
-              "name": {$item.manufacturer_name|json_encode nofilter}
-            }
-            {/if},
-            "offers": {
-              "@type": "Offer",
-              "url": {$item.url|jsonld_url nofilter},
-              "priceCurrency": "{$currency.iso_code}",
-              "price": "{$item.price_amount}",
-              "availability": "{$item.seo_availability}"
-            }
-          }
-        }
-      {/if}
+      {$position = $position + 1}
+      {if $needsComma},{/if}
+      {$needsComma = true}
+      {
+        "@type": "ListItem",
+        "position": {$position},
+        "url": {$item.url|jsonld_url nofilter}
+      }
     {/foreach}
     ]
   }
