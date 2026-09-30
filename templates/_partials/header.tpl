@@ -25,9 +25,8 @@
       <div class="{$headerBottom}__row  gx-2 gx-md-4 align-items-center d-flex">
         <div class="{$headerBottom}__logo d-flex align-items-center col-auto me-auto me-md-0">
           {if $shop.logo_details}
-            {if $page.page_name == 'index'}<h1 class="{$headerBottom}__h1 mb-0">{/if}
-              {renderLogo}
-            {if $page.page_name == 'index'}</h1>{/if}
+            {* Novehi: logo bez <h1> — jedynym H1 strony głównej jest tytuł sekcji treści (SEO: dwa H1 na głównej) *}
+            {renderLogo}
           {/if}
         </div>
 
