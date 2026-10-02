@@ -82,6 +82,46 @@
         <source>quick view</source>
         <target state="final">szybki podgląd</target>
       </trans-unit>
+      <trans-unit id="9adbebf3910ec9fff654f23b904c2f31" approved="yes">
+        <source>show full description</source>
+        <target state="final">zobacz pełny opis</target>
+      </trans-unit>
+      <trans-unit id="815f735539bc87a2a7621e1ac3311729" approved="yes">
+        <source>collapse description</source>
+        <target state="final">zwiń opis</target>
+      </trans-unit>
+      <trans-unit id="6315e76afaf6bf406b79f4840a9250f0" approved="yes">
+        <source>Ask about this product</source>
+        <target state="final">Zapytaj o produkt</target>
+      </trans-unit>
+      <trans-unit id="f4d0808b0c1f6159ecf759fe796d4956" approved="yes">
+        <source>Lowest price in the last 30 days:</source>
+        <target state="final">Najniższa cena z ostatnich 30 dni:</target>
+      </trans-unit>
+      <trans-unit id="78e454064a7d3a7755a011a3b79f31a7" approved="yes">
+        <source>Product details</source>
+        <target state="final">Szczegóły produktu</target>
+      </trans-unit>
+      <trans-unit id="a1698a88d7ced0170d9758871d04dc4b" approved="yes">
+        <source>General specifications</source>
+        <target state="final">Ogólne parametry</target>
+      </trans-unit>
+      <trans-unit id="32954654ac8fe66a1d09be19001de2d4" approved="yes">
+        <source>Width</source>
+        <target state="final">Szerokość</target>
+      </trans-unit>
+      <trans-unit id="eec6c4bdbd339edf8cbea68becb85244" approved="yes">
+        <source>Height</source>
+        <target state="final">Wysokość</target>
+      </trans-unit>
+      <trans-unit id="ba2a9c6c8c77e03f83ef8bf543612275" approved="yes">
+        <source>Length</source>
+        <target state="final">Długość</target>
+      </trans-unit>
+      <trans-unit id="0de9d09a36e820f9da7e87ab3678dd12" approved="yes">
+        <source>Show products</source>
+        <target state="final">Pokaż produkty</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -6,48 +6,48 @@
         <source>Darmowa dostawa od %amount%</source>
         <target state="final">Nemokamas pristatymas nuo %amount%</target>
       </trans-unit>
-      <trans-unit id="4eb30227b5e1c9d7910bc50cb136a712" approved="yes">
-        <source>Długość</source>
+      <trans-unit id="ba2a9c6c8c77e03f83ef8bf543612275" approved="yes">
+        <source>Length</source>
         <target state="final">Ilgis</target>
       </trans-unit>
       <trans-unit id="6daa57cbb53bf7eec06d7f63d324ee98" approved="yes">
         <source>Kod produktu:</source>
         <target state="final">Prekės kodas:</target>
       </trans-unit>
-      <trans-unit id="0b09f814c14a914948571eb6be66fc31" approved="yes">
-        <source>Najniższa cena z ostatnich 30 dni:</source>
+      <trans-unit id="f4d0808b0c1f6159ecf759fe796d4956" approved="yes">
+        <source>Lowest price in the last 30 days:</source>
         <target state="final">Mažiausia kaina per pastarąsias 30 dienų:</target>
       </trans-unit>
-      <trans-unit id="5e1835161911bfe7f97c02371ae49bae" approved="yes">
-        <source>Ogólne parametry</source>
+      <trans-unit id="a1698a88d7ced0170d9758871d04dc4b" approved="yes">
+        <source>General specifications</source>
         <target state="final">Bendrieji parametrai</target>
       </trans-unit>
       <trans-unit id="07222928c84b4b9beb365c44cbd03091" approved="yes">
         <source>Opis produktu</source>
         <target state="final">Prekės aprašymas</target>
       </trans-unit>
-      <trans-unit id="be5655b46b523e409bf1cb8bad6441d5" approved="yes">
-        <source>Szczegóły produktu</source>
+      <trans-unit id="78e454064a7d3a7755a011a3b79f31a7" approved="yes">
+        <source>Product details</source>
         <target state="final">Prekės informacija</target>
       </trans-unit>
-      <trans-unit id="24cd0bde159a35db3c90cf8b9d60c821" approved="yes">
-        <source>Szerokość</source>
+      <trans-unit id="32954654ac8fe66a1d09be19001de2d4" approved="yes">
+        <source>Width</source>
         <target state="final">Plotis</target>
       </trans-unit>
-      <trans-unit id="40809789603dd70ea2d184e7a989fb08" approved="yes">
-        <source>Wysokość</source>
+      <trans-unit id="eec6c4bdbd339edf8cbea68becb85244" approved="yes">
+        <source>Height</source>
         <target state="final">Aukštis</target>
       </trans-unit>
-      <trans-unit id="e2498903a776c3363a5252a27e48bf6b" approved="yes">
-        <source>Zapytaj o produkt</source>
+      <trans-unit id="6315e76afaf6bf406b79f4840a9250f0" approved="yes">
+        <source>Ask about this product</source>
         <target state="final">Klausti apie prekę</target>
       </trans-unit>
-      <trans-unit id="dcb6c2acc9c23e2cb47f78d3da5f4530" approved="yes">
-        <source>zobacz pełny opis</source>
+      <trans-unit id="9adbebf3910ec9fff654f23b904c2f31" approved="yes">
+        <source>show full description</source>
         <target state="final">rodyti visą aprašymą</target>
       </trans-unit>
-      <trans-unit id="2eee268ee9023570d0a274c46f792e60" approved="yes">
-        <source>zwiń opis</source>
+      <trans-unit id="815f735539bc87a2a7621e1ac3311729" approved="yes">
+        <source>collapse description</source>
         <target state="final">suskleisti aprašymą</target>
       </trans-unit>
       <trans-unit id="0221beca197c77787203ad7c1b0e605a" approved="yes">
@@ -58,8 +58,8 @@
         <source>Waga</source>
         <target state="final">Svoris</target>
       </trans-unit>
-      <trans-unit id="7e9f44883702e6c05bb50b7226d5fc6f" approved="yes">
-        <source>Pokaż produkty</source>
+      <trans-unit id="0de9d09a36e820f9da7e87ab3678dd12" approved="yes">
+        <source>Show products</source>
         <target state="final">Rodyti prekes</target>
       </trans-unit>
     </body>

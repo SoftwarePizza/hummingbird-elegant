@@ -80,6 +80,6 @@
       data-id-customization="{$product.id_customization|escape:'javascript'}"
       data-link-action="delete-from-cart"
       aria-label="{l s='Remove %productName% from cart' sprintf=['%productName%' => $product.name] d='Shop.Theme.Checkout'}"
-    >{l s='usuń' d='Shop.Theme.Actions'}</a>
+    >{l s='remove' d='Shop.Theme.Actions'}</a>
   {/if}
 </div>

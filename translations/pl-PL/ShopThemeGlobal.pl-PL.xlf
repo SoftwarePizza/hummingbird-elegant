@@ -58,6 +58,14 @@
         <source>© %year% %shop_name%. All rights reserved.</source>
         <target state="final">© %year% %shop_name%. Wszelkie prawa zastrzeżone.</target>
       </trans-unit>
+      <trans-unit id="bbaff12800505b22a853e8b7f4eb6a22" approved="yes">
+        <source>Contact</source>
+        <target state="final">Kontakt</target>
+      </trans-unit>
+      <trans-unit id="fe8701699a428bcb2ffe6fd06bad30d6" approved="yes">
+        <source>Get news about new products, promotions and events.</source>
+        <target state="final">Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

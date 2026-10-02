@@ -18,7 +18,7 @@
         <div class="cart__shipping">
           {if $hbe_cart_free_shipping.reached}
             <p class="cart__shipping-label">
-              {l s='Masz darmową dostawę!' d='Shop.Theme.Checkout'}
+              {l s='You get free shipping!' d='Shop.Theme.Checkout'}
             </p>
           {else}
             <p class="cart__shipping-label">

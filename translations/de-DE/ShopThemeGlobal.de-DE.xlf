@@ -10,12 +10,12 @@
         <source>Store by</source>
         <target state="final">Shop erstellt von</target>
       </trans-unit>
-      <trans-unit id="66549c702c99f36b05e6d71437450cde" approved="yes">
-        <source>Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</source>
+      <trans-unit id="fe8701699a428bcb2ffe6fd06bad30d6" approved="yes">
+        <source>Get news about new products, promotions and events.</source>
         <target state="final">Erhalten Sie Informationen zu neuen Produkten, Aktionen und Events.</target>
       </trans-unit>
-      <trans-unit id="92316d41c56daf9140fc04509aecaaca" approved="yes">
-        <source>Kontakt</source>
+      <trans-unit id="bbaff12800505b22a853e8b7f4eb6a22" approved="yes">
+        <source>Contact</source>
         <target state="final">Kontakt</target>
       </trans-unit>
       <trans-unit id="0975cf6baccb3862c31522c2b5b8fabc" approved="yes">

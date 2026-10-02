@@ -2,16 +2,16 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="themes/hummingbird" source-language="pl" target-language="cs" datatype="plaintext">
     <body>
-      <trans-unit id="8d2999267251287792b552729fec6c14" approved="yes">
-        <source>Dodaj</source>
+      <trans-unit id="ec211f7c20af43e742bf2570c3cb84f9" approved="yes">
+        <source>Add</source>
         <target state="final">Přidat</target>
       </trans-unit>
-      <trans-unit id="58c512e5af784bac7733f29eabe26009" approved="yes">
-        <source>Zobacz koszyk</source>
+      <trans-unit id="57c1fee9db05c07a96c99d9260d38d6d" approved="yes">
+        <source>View cart</source>
         <target state="final">Zobrazit košík</target>
       </trans-unit>
-      <trans-unit id="d8afac7b06dc96cfde1085411a041002" approved="yes">
-        <source>usuń</source>
+      <trans-unit id="0f6969d7052da9261e31ddb6e88c136e" approved="yes">
+        <source>remove</source>
         <target state="final">odebrat</target>
       </trans-unit>
     </body>

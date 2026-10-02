@@ -60,7 +60,7 @@
            displayProductPriceBlock, which will render inside this block. *}
         {if $product.has_discount}
           <div class="product__lowest-price">
-            {l s='Najniższa cena z ostatnich 30 dni:' d='Shop.Theme.Catalog'} {$product.regular_price}
+            {l s='Lowest price in the last 30 days:' d='Shop.Theme.Catalog'} {$product.regular_price}
           </div>
         {/if}
 

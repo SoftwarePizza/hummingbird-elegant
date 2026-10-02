@@ -7,7 +7,7 @@
 
   <div class="footer-block__content">
     <p class="ps-emailsubscription__intro">
-      {l s='Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.' d='Shop.Theme.Global'}
+      {l s='Get news about new products, promotions and events.' d='Shop.Theme.Global'}
     </p>
 
     <form class="ps-emailsubscription__form" action="{$urls.current_url}#emailsubscription_anchor_{$hookName}" method="post">

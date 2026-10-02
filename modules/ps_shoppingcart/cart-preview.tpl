@@ -15,14 +15,14 @@
   {if isset($hbe_cart_preview_url)}data-ps-data='{ldelim}"refreshUrl":"{$hbe_cart_preview_url|escape:'javascript':'UTF-8'}"{rdelim}'{/if}
 >
   <p class="cart-preview__title">
-    {l s='Twój koszyk' d='Shop.Theme.Checkout'} ({$cart.products_count})
+    {l s='Your cart' d='Shop.Theme.Checkout'} ({$cart.products_count})
   </p>
 
   {if isset($hbe_cart_free_shipping) && $hbe_cart_free_shipping.enabled}
     <div class="cart-preview__shipping">
       {if $hbe_cart_free_shipping.reached}
         <p class="cart-preview__shipping-label">
-          {l s='Masz darmową dostawę!' d='Shop.Theme.Checkout'}
+          {l s='You get free shipping!' d='Shop.Theme.Checkout'}
         </p>
       {else}
         <p class="cart-preview__shipping-label">
@@ -57,7 +57,7 @@
     <div class="cart-preview__footer">
       {if isset($cart.subtotals.shipping) && $cart.subtotals.shipping.amount}
         <div class="cart-preview__row">
-          <span class="cart-preview__row-label">{l s='Wysyłka' d='Shop.Theme.Checkout'}</span>
+          <span class="cart-preview__row-label">{l s='Shipping' d='Shop.Theme.Checkout'}</span>
           <span class="cart-preview__row-value">{$cart.subtotals.shipping.value}</span>
         </div>
       {/if}
@@ -67,10 +67,10 @@
       </div>
 
       <a class="cart-preview__cta" href="{$cart_url|escape:'htmlall':'UTF-8'}">
-        {l s='Zobacz koszyk' d='Shop.Theme.Actions'}
+        {l s='View cart' d='Shop.Theme.Actions'}
       </a>
     </div>
   {else}
-    <p class="cart-preview__empty">{l s='Twój koszyk jest pusty.' d='Shop.Theme.Checkout'}</p>
+    <p class="cart-preview__empty">{l s='Your cart is empty.' d='Shop.Theme.Checkout'}</p>
   {/if}
 </div>

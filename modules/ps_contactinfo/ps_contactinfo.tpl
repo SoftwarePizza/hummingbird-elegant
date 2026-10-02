@@ -15,7 +15,7 @@
     id="footer_contactinfo_title"
     class="footer-block__title footer-block__title--toggle"
   >
-    {l s='Kontakt' d='Shop.Theme.Global'}
+    {l s='Contact' d='Shop.Theme.Global'}
     <button
       class="stretched-link collapsed d-md-none"
       type="button"

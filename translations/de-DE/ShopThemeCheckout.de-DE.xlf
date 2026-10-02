@@ -6,20 +6,20 @@
         <source>Do darmowej dostawy brakuje Ci %amount%</source>
         <target state="final">Noch %amount% bis zum kostenlosen Versand</target>
       </trans-unit>
-      <trans-unit id="7f8661fccb9f8a51976ef0b0eb22e80b" approved="yes">
-        <source>Masz darmową dostawę!</source>
+      <trans-unit id="77f0d463f06bdbb23760f903a568260c" approved="yes">
+        <source>You get free shipping!</source>
         <target state="final">Ihre Lieferung ist kostenlos!</target>
       </trans-unit>
-      <trans-unit id="7401b013e14ceaefb35d26e597fffab3" approved="yes">
-        <source>Twój koszyk</source>
+      <trans-unit id="9254cd9a15c6cc29d90cf5e585628e0f" approved="yes">
+        <source>Your cart</source>
         <target state="final">Ihr Warenkorb</target>
       </trans-unit>
-      <trans-unit id="f607fcb144147fdc08ae3f281f102269" approved="yes">
-        <source>Twój koszyk jest pusty.</source>
+      <trans-unit id="572da7ef1411f2a12409e752f3eb2f7a" approved="yes">
+        <source>Your cart is empty.</source>
         <target state="final">Ihr Warenkorb ist leer.</target>
       </trans-unit>
-      <trans-unit id="1e009256a05ff228114a80dc5e2a736f" approved="yes">
-        <source>Wysyłka</source>
+      <trans-unit id="ea9cf7e47ff33b2be14e6dd07cbcefc6" approved="yes">
+        <source>Shipping</source>
         <target state="final">Versand</target>
       </trans-unit>
       <trans-unit id="994a3af5db7fc997a068da61c2c01d80" approved="yes">

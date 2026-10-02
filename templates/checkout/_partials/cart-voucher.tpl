@@ -18,7 +18,7 @@
                   <input type="hidden" name="token" value="{$static_token}">
                   <input type="hidden" name="addDiscount" value="1">
                   <input class="form-control js-voucher-input" type="text" name="discount_name" placeholder="{l s='Kod promocyjny' d='Shop.Theme.Checkout'}" required>
-                  <button type="submit" class="btn btn-outline-primary" aria-label="{l s='Apply voucher' d='Shop.Theme.Actions'}">{l s='Dodaj' d='Shop.Theme.Actions'}</button>
+                  <button type="submit" class="btn btn-outline-primary" aria-label="{l s='Apply voucher' d='Shop.Theme.Actions'}">{l s='Add' d='Shop.Theme.Actions'}</button>
                 </form>
               {/block}
 

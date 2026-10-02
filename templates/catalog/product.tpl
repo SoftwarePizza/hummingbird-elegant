@@ -91,8 +91,8 @@
               aria-expanded="false"
               hidden
             >
-              <span class="product__see-full-label" data-summary-more>{l s='zobacz pełny opis' d='Shop.Theme.Catalog'}</span>
-              <span class="product__see-full-label" data-summary-less>{l s='zwiń opis' d='Shop.Theme.Catalog'}</span>
+              <span class="product__see-full-label" data-summary-more>{l s='show full description' d='Shop.Theme.Catalog'}</span>
+              <span class="product__see-full-label" data-summary-less>{l s='collapse description' d='Shop.Theme.Catalog'}</span>
             </button>
           </div>
         {/if}
@@ -163,7 +163,7 @@
           <li class="product__shipping-item">
             <a class="product__ask" href="{if isset($urls.pages.contact)}{$urls.pages.contact}{else}#{/if}">
               <i class="material-icons" aria-hidden="true">&#xE8FD;</i>
-              <span>{l s='Zapytaj o produkt' d='Shop.Theme.Catalog'}</span>
+              <span>{l s='Ask about this product' d='Shop.Theme.Catalog'}</span>
             </a>
           </li>
         </ul>

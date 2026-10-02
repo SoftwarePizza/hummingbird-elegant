@@ -66,6 +66,22 @@
         <source>View my customization</source>
         <target state="final">Zobacz moją personalizację</target>
       </trans-unit>
+      <trans-unit id="77f0d463f06bdbb23760f903a568260c" approved="yes">
+        <source>You get free shipping!</source>
+        <target state="final">Masz darmową dostawę!</target>
+      </trans-unit>
+      <trans-unit id="9254cd9a15c6cc29d90cf5e585628e0f" approved="yes">
+        <source>Your cart</source>
+        <target state="final">Twój koszyk</target>
+      </trans-unit>
+      <trans-unit id="ea9cf7e47ff33b2be14e6dd07cbcefc6" approved="yes">
+        <source>Shipping</source>
+        <target state="final">Wysyłka</target>
+      </trans-unit>
+      <trans-unit id="572da7ef1411f2a12409e752f3eb2f7a" approved="yes">
+        <source>Your cart is empty.</source>
+        <target state="final">Twój koszyk jest pusty.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
