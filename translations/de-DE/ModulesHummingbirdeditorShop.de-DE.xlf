@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Modules.Hummingbirdeditor.Shop.xlf" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="5973a38a2ba6c38024039c7c3cf646ef" approved="yes">
+        <source>Choose your car brand</source>
+        <target state="final">Wählen Sie Ihre Automarke</target>
+      </trans-unit>
+      <trans-unit id="3163b3d4dc92f42d04ad4c79906dcdc3" approved="yes">
+        <source>Where to go next</source>
+        <target state="final">Wohin als Nächstes</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

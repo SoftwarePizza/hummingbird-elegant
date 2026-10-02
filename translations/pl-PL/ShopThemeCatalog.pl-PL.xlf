@@ -122,6 +122,14 @@
         <source>Show products</source>
         <target state="final">Pokaż produkty</target>
       </trans-unit>
+      <trans-unit id="167ccf6b58359887070e35d7938e45e5" approved="yes">
+        <source>The page you are looking for is no longer available</source>
+        <target state="final">Nie znaleźliśmy tej strony</target>
+      </trans-unit>
+      <trans-unit id="887cc0399b6d6ba46a7ed7348e36bd4e" approved="yes">
+        <source>The address may have changed or the product is no longer available. Search for it below or choose your car brand.</source>
+        <target state="final">Adres mógł się zmienić albo produktu nie ma już w ofercie. Wyszukaj go poniżej lub wybierz markę swojego auta.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
