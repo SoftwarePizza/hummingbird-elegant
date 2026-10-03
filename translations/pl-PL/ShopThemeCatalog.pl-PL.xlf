@@ -130,6 +130,10 @@
         <source>The address may have changed or the product is no longer available. Search for it below or choose your car brand.</source>
         <target state="final">Adres mógł się zmienić albo produktu nie ma już w ofercie. Wyszukaj go poniżej lub wybierz markę swojego auta.</target>
       </trans-unit>
+      <trans-unit id="291dc07ca08e32b8f78aec7dd64558e6" approved="yes">
+        <source>The address may have changed or the product is no longer available. Search for it below or choose a category.</source>
+        <target state="final">Adres mógł się zmienić albo produktu nie ma już w ofercie. Wyszukaj go poniżej lub wybierz kategorię.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

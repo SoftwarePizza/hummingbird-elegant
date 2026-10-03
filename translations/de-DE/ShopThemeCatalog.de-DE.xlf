@@ -74,6 +74,10 @@
         <source>If this is a recurring problem, please [1]contact us[/1].</source>
         <target state="final">Wenn das Problem weiterhin besteht, [1]kontaktieren Sie uns[/1].</target>
       </trans-unit>
+      <trans-unit id="291dc07ca08e32b8f78aec7dd64558e6" approved="yes">
+        <source>The address may have changed or the product is no longer available. Search for it below or choose a category.</source>
+        <target state="final">Die Adresse hat sich möglicherweise geändert oder das Produkt ist nicht mehr erhältlich. Suchen Sie es unten oder wählen Sie eine Kategorie.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
