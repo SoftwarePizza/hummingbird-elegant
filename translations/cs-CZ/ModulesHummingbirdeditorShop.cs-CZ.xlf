@@ -10,6 +10,10 @@
         <source>Where to go next</source>
         <target state="final">Kam dál</target>
       </trans-unit>
+      <trans-unit id="3e480dfc32f25db062e28fa513003957" approved="yes">
+        <source>Popular categories</source>
+        <target state="final">Oblíbené kategorie</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
