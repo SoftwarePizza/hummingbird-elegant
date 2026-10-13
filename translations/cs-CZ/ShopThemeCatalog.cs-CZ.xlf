@@ -78,6 +78,18 @@
         <source>The address may have changed or the product is no longer available. Search for it below or choose a category.</source>
         <target state="final">Adresa se mohla změnit nebo produkt už nenabízíme. Vyhledejte ho níže nebo vyberte kategorii.</target>
       </trans-unit>
+      <trans-unit id="11735e1e14db3f61c60f93503504fb2b" approved="yes">
+        <source>brutto</source>
+        <target state="final">vč. DPH</target>
+      </trans-unit>
+      <trans-unit id="a462ef1c04901e8b0f276c76c1b683c8" approved="yes">
+        <source>Close search</source>
+        <target state="final">Zavřít vyhledávání</target>
+      </trans-unit>
+      <trans-unit id="13143db144627e8d8ed27d64c1fd3e19" approved="yes">
+        <source>Open search</source>
+        <target state="final">Otevřít vyhledávání</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

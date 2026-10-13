@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="5d4aaa83eb6ecc7b45ad7f83934d236f" approved="yes">
+        <source>Attributes: %attributes%</source>
+        <target state="final">Variante: %attributes%</target>
+      </trans-unit>
+      <trans-unit id="2e5639fea0a422897c27caa2c1dba1b6" approved="yes">
+        <source>Delete %productName% mail alert</source>
+        <target state="final">E-Mail-Benachrichtigung für %productName% löschen</target>
+      </trans-unit>
+      <trans-unit id="fac1a67fd950c5714ba830a4b1fb04e6" approved="yes">
+        <source>Interested in this product? Click below and we will let you know when it's available for order.</source>
+        <target state="final">Interesse an diesem Produkt? Klicken Sie unten und wir benachrichtigen Sie, sobald es wieder bestellbar ist.</target>
+      </trans-unit>
+      <trans-unit id="439d1a21c4b17f02f379d129211b2a66" approved="yes">
+        <source>Interested in this product? Drop us an email and we will let you know when it's available for order.</source>
+        <target state="final">Interesse an diesem Produkt? Hinterlassen Sie Ihre E-Mail-Adresse und wir benachrichtigen Sie, sobald es wieder bestellbar ist.</target>
+      </trans-unit>
+      <trans-unit id="e38be0301f0fbc8ae72a1c26be626d62" approved="yes">
+        <source>Manage your mail alerts to stay informed about product availability and updates.</source>
+        <target state="final">Verwalten Sie Ihre E-Mail-Benachrichtigungen, um über die Verfügbarkeit von Produkten informiert zu bleiben.</target>
+      </trans-unit>
+      <trans-unit id="475a62948b5dcb0a96149fd6ad1b814f" approved="yes">
+        <source>You do not have any mail alerts.</source>
+        <target state="final">Sie haben keine E-Mail-Benachrichtigungen.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

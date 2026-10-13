@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="11735e1e14db3f61c60f93503504fb2b" approved="yes">
+        <source>brutto</source>
+        <target state="final">incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="0221beca197c77787203ad7c1b0e605a" approved="yes">
+        <source>Dane techniczne</source>
+        <target state="final">Technical data</target>
+      </trans-unit>
+      <trans-unit id="3cb9a3808e6cf54231b4347e39b16793" approved="yes">
+        <source>Darmowa dostawa od %amount%</source>
+        <target state="final">Free delivery from %amount%</target>
+      </trans-unit>
+      <trans-unit id="6daa57cbb53bf7eec06d7f63d324ee98" approved="yes">
+        <source>Kod produktu:</source>
+        <target state="final">Product code:</target>
+      </trans-unit>
+      <trans-unit id="07222928c84b4b9beb365c44cbd03091" approved="yes">
+        <source>Opis produktu</source>
+        <target state="final">Product description</target>
+      </trans-unit>
+      <trans-unit id="98e2eac44e8db19beede76f08158687f" approved="yes">
+        <source>Waga</source>
+        <target state="final">Weight</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

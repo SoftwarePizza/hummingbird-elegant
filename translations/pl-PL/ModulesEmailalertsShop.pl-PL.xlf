@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="pl" datatype="plaintext">
+    <body>
+      <trans-unit id="5d4aaa83eb6ecc7b45ad7f83934d236f" approved="yes">
+        <source>Attributes: %attributes%</source>
+        <target state="final">Wariant: %attributes%</target>
+      </trans-unit>
+      <trans-unit id="2e5639fea0a422897c27caa2c1dba1b6" approved="yes">
+        <source>Delete %productName% mail alert</source>
+        <target state="final">Usuń powiadomienie o produkcie %productName%</target>
+      </trans-unit>
+      <trans-unit id="e38be0301f0fbc8ae72a1c26be626d62" approved="yes">
+        <source>Manage your mail alerts to stay informed about product availability and updates.</source>
+        <target state="final">Zarządzaj powiadomieniami e-mail o dostępności produktów.</target>
+      </trans-unit>
+      <trans-unit id="475a62948b5dcb0a96149fd6ad1b814f" approved="yes">
+        <source>You do not have any mail alerts.</source>
+        <target state="final">Nie masz żadnych powiadomień e-mail.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

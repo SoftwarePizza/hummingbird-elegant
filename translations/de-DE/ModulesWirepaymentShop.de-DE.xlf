@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="c6dd03b181b72e670f55b77d9b0e85cd" approved="yes">
+        <source>Please send us a bank transfer with following details:</source>
+        <target state="final">Bitte überweisen Sie den Betrag mit folgenden Angaben:</target>
+      </trans-unit>
+      <trans-unit id="bed00e78df913b269d3307a44215aa8e" approved="yes">
+        <source>You have chosen payment by bank transfer.</source>
+        <target state="final">Sie haben die Zahlung per Banküberweisung gewählt.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

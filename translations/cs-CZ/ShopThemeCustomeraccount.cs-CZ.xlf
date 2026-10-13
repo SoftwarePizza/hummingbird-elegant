@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="cs" datatype="plaintext">
+    <body>
+      <trans-unit id="7ec9cceb94985909c6994e95c31c1aa8" approved="yes">
+        <source>My wishlists</source>
+        <target state="final">Moje seznamy přání</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

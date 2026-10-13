@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="9b3911a6705bcd3a70c80e00fe1bde68" approved="yes">
+        <source>Subscribe to our newsletter</source>
+        <target state="final">Abonnieren Sie unseren Newsletter</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

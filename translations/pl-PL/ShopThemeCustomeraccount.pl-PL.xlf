@@ -82,6 +82,14 @@
         <source>Your password length is invalid</source>
         <target state="final">Nieprawidłowa długość hasła</target>
       </trans-unit>
+      <trans-unit id="31d01d88284078b770b76117e306bbdf" approved="yes">
+        <source>Toggle your account links</source>
+        <target state="final">Pokaż/ukryj linki konta</target>
+      </trans-unit>
+      <trans-unit id="1a6787b6720de5c8f0222e301f55ea56" approved="yes">
+        <source>View my account (%customerName%)</source>
+        <target state="final">Moje konto (%customerName%)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

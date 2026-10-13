@@ -66,6 +66,62 @@
         <source>Get news about new products, promotions and events.</source>
         <target state="final">Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</target>
       </trans-unit>
+      <trans-unit id="2859504d8a2d6dc9f6505dc2fd8e5371" approved="yes">
+        <source>Call us at: %phone%</source>
+        <target state="final">Zadzwoń: %phone%</target>
+      </trans-unit>
+      <trans-unit id="268c1f3299f2b6f35755dea96dddf6af" approved="yes">
+        <source>Call us: %phone%</source>
+        <target state="final">Zadzwoń: %phone%</target>
+      </trans-unit>
+      <trans-unit id="91d656fbb78e3322a596f4d8ed753c05" approved="yes">
+        <source>Change language</source>
+        <target state="final">Zmień język</target>
+      </trans-unit>
+      <trans-unit id="a462ef1c04901e8b0f276c76c1b683c8" approved="yes">
+        <source>Close search</source>
+        <target state="final">Zamknij wyszukiwanie</target>
+      </trans-unit>
+      <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="c6c5ff1c42ce992d3f449ef55819943b" approved="yes">
+        <source>Go to slide %slide_index%</source>
+        <target state="final">Przejdź do slajdu %slide_index%</target>
+      </trans-unit>
+      <trans-unit id="942f0386fba4d2d5c0496f020be920d5" approved="yes">
+        <source>(No option selected)</source>
+        <target state="final">(Nie wybrano)</target>
+      </trans-unit>
+      <trans-unit id="9d4eaa9c941d7d5bbdb0547255e7fd0b" approved="yes">
+        <source>Product filters</source>
+        <target state="final">Filtry produktów</target>
+      </trans-unit>
+      <trans-unit id="b4a88417b3d0170d754c647c30b7216a" approved="yes">
+        <source>result</source>
+        <target state="final">wynik</target>
+      </trans-unit>
+      <trans-unit id="53e61336bb49ec978968786b07dea50b" approved="yes">
+        <source>results</source>
+        <target state="final">wyniki</target>
+      </trans-unit>
+      <trans-unit id="46daba3c618d21ffd4f564527bd9b118" approved="yes">
+        <source>Send us a fax to: %fax%</source>
+        <target state="final">Faks: %fax%</target>
+      </trans-unit>
+      <trans-unit id="cc95d7b6b3d464728dc6bf0a0c5c9e0d" approved="yes">
+        <source>Send us an email to: %email%</source>
+        <target state="final">Napisz do nas: %email%</target>
+      </trans-unit>
+      <trans-unit id="d6de867263fad4dfbe86855a7eb5f14a" approved="yes">
+        <source>Toggle contact information</source>
+        <target state="final">Pokaż/ukryj dane kontaktowe</target>
+      </trans-unit>
+      <trans-unit id="3224ef79c5274fe89e9960d7b17ff1c1" approved="yes">
+        <source>Toggle %s links</source>
+        <target state="final">Pokaż/ukryj linki: %s</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

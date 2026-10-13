@@ -22,6 +22,14 @@
         <source>Telefon</source>
         <target state="final">Telefon</target>
       </trans-unit>
+      <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="d6de867263fad4dfbe86855a7eb5f14a" approved="yes">
+        <source>Toggle contact information</source>
+        <target state="final">Zobrazit/skrýt kontaktní údaje</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

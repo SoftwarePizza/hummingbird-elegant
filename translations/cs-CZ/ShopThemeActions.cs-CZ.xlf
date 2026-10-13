@@ -14,6 +14,18 @@
         <source>remove</source>
         <target state="final">odebrat</target>
       </trans-unit>
+      <trans-unit id="735df1995d765159968109ecb2a26b6b" approved="yes">
+        <source>Change quantity</source>
+        <target state="final">Změnit množství</target>
+      </trans-unit>
+      <trans-unit id="ae5ff2e5665c7a8b00b3cf45eb33dd90" approved="yes">
+        <source>Decrease quantity</source>
+        <target state="final">Snížit množství</target>
+      </trans-unit>
+      <trans-unit id="20979edc44dd470012f64c77bd6adddf" approved="yes">
+        <source>Increase quantity</source>
+        <target state="final">Zvýšit množství</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

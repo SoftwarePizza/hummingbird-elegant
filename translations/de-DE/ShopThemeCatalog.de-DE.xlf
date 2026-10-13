@@ -78,6 +78,162 @@
         <source>The address may have changed or the product is no longer available. Search for it below or choose a category.</source>
         <target state="final">Die Adresse hat sich möglicherweise geändert oder das Produkt ist nicht mehr erhältlich. Suchen Sie es unten oder wählen Sie eine Kategorie.</target>
       </trans-unit>
+      <trans-unit id="436e5818c60e2ce6c98a7a25f8f2934f" approved="yes">
+        <source>All details</source>
+        <target state="final">Alle Details</target>
+      </trans-unit>
+      <trans-unit id="9ae7041cc2d967d00a6c820b4b7ef239" approved="yes">
+        <source>Available quantity to return:</source>
+        <target state="final">Für die Rücksendung verfügbare Menge:</target>
+      </trans-unit>
+      <trans-unit id="ae72a3080c4fbfedb628ead607dbbcdc" approved="yes">
+        <source>Back to Home page</source>
+        <target state="final">Zurück zur Startseite</target>
+      </trans-unit>
+      <trans-unit id="11735e1e14db3f61c60f93503504fb2b" approved="yes">
+        <source>brutto</source>
+        <target state="final">inkl. MwSt.</target>
+      </trans-unit>
+      <trans-unit id="89738fc42cc75be2173c5afc49e7f7b8" approved="yes">
+        <source>Carrier: %carrier_name%</source>
+        <target state="final">Versandart: %carrier_name%</target>
+      </trans-unit>
+      <trans-unit id="7e6d74813b683ce791f301a3c0ed2073" approved="yes">
+        <source>Clients also bought</source>
+        <target state="final">Kunden kauften auch</target>
+      </trans-unit>
+      <trans-unit id="a462ef1c04901e8b0f276c76c1b683c8" approved="yes">
+        <source>Close search</source>
+        <target state="final">Suche schließen</target>
+      </trans-unit>
+      <trans-unit id="4f68a56d1c6a7bdba1050f2795e364cb" approved="yes">
+        <source>Go shopping</source>
+        <target state="final">Weiter einkaufen</target>
+      </trans-unit>
+      <trans-unit id="2255840841b8b6bb2da9255263230592" approved="yes">
+        <source>It can not be reached anymore. Can we still attract you into our shop?</source>
+        <target state="final">Sie ist nicht mehr erreichbar. Vielleicht finden Sie in unserem Shop trotzdem etwas Passendes?</target>
+      </trans-unit>
+      <trans-unit id="19d441fd29238fbbfdb91ac275216db2" approved="yes">
+        <source>Latest arrivals</source>
+        <target state="final">Neuheiten</target>
+      </trans-unit>
+      <trans-unit id="71a28612832b5e99ca3870af9ac8009c" approved="yes">
+        <source>No image available</source>
+        <target state="final">Kein Bild verfügbar</target>
+      </trans-unit>
+      <trans-unit id="6235304701da57331e00bba0867eead2" approved="yes">
+        <source>No products available at the moment</source>
+        <target state="final">Derzeit sind keine Produkte verfügbar</target>
+      </trans-unit>
+      <trans-unit id="a4b05152a33a0c0b30e535471132c8d3" approved="yes">
+        <source>No search results for "%search_term%"</source>
+        <target state="final">Keine Suchergebnisse für „%search_term%“</target>
+      </trans-unit>
+      <trans-unit id="39c08f79d381c6292bb9323232680fb7" approved="yes">
+        <source>Nothing to search for</source>
+        <target state="final">Kein Suchbegriff eingegeben</target>
+      </trans-unit>
+      <trans-unit id="13143db144627e8d8ed27d64c1fd3e19" approved="yes">
+        <source>Open search</source>
+        <target state="final">Suche öffnen</target>
+      </trans-unit>
+      <trans-unit id="99f0c07c3b8b3bc78f5f9733019ec3d5" approved="yes">
+        <source>Order totals</source>
+        <target state="final">Bestellsummen</target>
+      </trans-unit>
+      <trans-unit id="2ebe388cb82225492a45c9043c271585" approved="yes">
+        <source>Payment method: %payment_method%</source>
+        <target state="final">Zahlungsart: %payment_method%</target>
+      </trans-unit>
+      <trans-unit id="75edf643d9f66f0f905722da73da0a94" approved="yes">
+        <source>Price: </source>
+        <target state="final">Preis: </target>
+      </trans-unit>
+      <trans-unit id="682084614bc1e7dabd510796a1536631" approved="yes">
+        <source>Price: %price%.</source>
+        <target state="final">Preis: %price%.</target>
+      </trans-unit>
+      <trans-unit id="04c06765e76fdf5efd32d865bb1e9210" approved="yes">
+        <source>Product brand: %brand_name%</source>
+        <target state="final">Marke: %brand_name%</target>
+      </trans-unit>
+      <trans-unit id="e91e64282a4f412a9d813c097cbf9fb4" approved="yes">
+        <source>Products details</source>
+        <target state="final">Produktdetails</target>
+      </trans-unit>
+      <trans-unit id="159b91142e472e9ee8809313458aabde" approved="yes">
+        <source>Products pagination</source>
+        <target state="final">Seitennavigation der Produkte</target>
+      </trans-unit>
+      <trans-unit id="c874fc2a4f2ea4c93c8b66532a27bd3c" approved="yes">
+        <source>Quantity inside the pack: %quantity%.</source>
+        <target state="final">Menge im Set: %quantity%.</target>
+      </trans-unit>
+      <trans-unit id="f286999e8dee46f02dbd9f8f523220f5" approved="yes">
+        <source>quick view</source>
+        <target state="final">Schnellansicht</target>
+      </trans-unit>
+      <trans-unit id="15876a65ebf38e9cac21039e04bee5be" approved="yes">
+        <source>Reference: %reference%</source>
+        <target state="final">Artikelnummer: %reference%</target>
+      </trans-unit>
+      <trans-unit id="9bbd21b823a4dcab93bfec753e48b418" approved="yes">
+        <source>Regular price: </source>
+        <target state="final">Regulärer Preis: </target>
+      </trans-unit>
+      <trans-unit id="662cf2be14207e2b0bcbbef6d2f24fb7" approved="yes">
+        <source>Remove %1$s filter: %2$s</source>
+        <target state="final">Filter %1$s entfernen: %2$s</target>
+      </trans-unit>
+      <trans-unit id="84d9573d77435d23507ba3809cfc6efc" approved="yes">
+        <source>Search again what you are looking for.</source>
+        <target state="final">Versuchen Sie es mit einem anderen Suchbegriff.</target>
+      </trans-unit>
+      <trans-unit id="ab369684c980b2a9f39bd63885ec885a" approved="yes">
+        <source>Search results for "%search_term%"</source>
+        <target state="final">Suchergebnisse für „%search_term%“</target>
+      </trans-unit>
+      <trans-unit id="d96b4c25c8c6ebd7f078684a28b3cb2d" approved="yes">
+        <source>Select all products</source>
+        <target state="final">Alle Produkte auswählen</target>
+      </trans-unit>
+      <trans-unit id="1b43324e279c08e5972631cebeb792b7" approved="yes">
+        <source>Select product to return</source>
+        <target state="final">Produkt für die Rücksendung auswählen</target>
+      </trans-unit>
+      <trans-unit id="a1ab8a6719008b1b5b146dc898c8e9f0" approved="yes">
+        <source>Select quantity to return</source>
+        <target state="final">Rücksendemenge auswählen</target>
+      </trans-unit>
+      <trans-unit id="b162661813f69374aa211cc29c4f2b5b" approved="yes">
+        <source>Slide to product image %number%</source>
+        <target state="final">Zu Produktbild %number%</target>
+      </trans-unit>
+      <trans-unit id="4513210fc1941181edb2973294f21c67" approved="yes">
+        <source>%s other product in the same category</source>
+        <target state="final">%s weiteres Produkt in derselben Kategorie</target>
+      </trans-unit>
+      <trans-unit id="50a3a6c369c432f07a59a76f718f92e7" approved="yes">
+        <source>%s other products in the same category</source>
+        <target state="final">%s weitere Produkte in derselben Kategorie</target>
+      </trans-unit>
+      <trans-unit id="5919aef8e646ef4512137c70e3a264f3" approved="yes">
+        <source>Special deals</source>
+        <target state="final">Angebote</target>
+      </trans-unit>
+      <trans-unit id="79d8da3f44da799b07993211c1b205cd" approved="yes">
+        <source>Subcategories for %s</source>
+        <target state="final">Unterkategorien von %s</target>
+      </trans-unit>
+      <trans-unit id="d9d697694800fc1320e90fd0d6a7d92d" approved="yes">
+        <source>View product %product_name%</source>
+        <target state="final">Produkt ansehen: %product_name%</target>
+      </trans-unit>
+      <trans-unit id="27c58e5a84e08e2f404d31c258946c90" approved="yes">
+        <source>View product %product_name%, part of the pack.</source>
+        <target state="final">Produkt ansehen: %product_name% (Teil des Sets).</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

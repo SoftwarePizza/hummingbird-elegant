@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="ad240e8d6f09afb64a5bc01675c9082c" approved="yes">
+        <source>Payment amount</source>
+        <target state="final">Zahlungsbetrag</target>
+      </trans-unit>
+      <trans-unit id="932599530b855976540b05aba2ad0db7" approved="yes">
+        <source>You have chosen payment by check.</source>
+        <target state="final">Sie haben die Zahlung per Scheck gewählt.</target>
+      </trans-unit>
+      <trans-unit id="ea1f15e2225d0c90a527048b6d15213b" approved="yes">
+        <source>Your check must include following details:</source>
+        <target state="final">Ihr Scheck muss folgende Angaben enthalten:</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

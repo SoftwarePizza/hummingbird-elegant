@@ -22,6 +22,118 @@
         <source>Telefon</source>
         <target state="final">Telefon</target>
       </trans-unit>
+      <trans-unit id="2859504d8a2d6dc9f6505dc2fd8e5371" approved="yes">
+        <source>Call us at: %phone%</source>
+        <target state="final">Rufen Sie uns an: %phone%</target>
+      </trans-unit>
+      <trans-unit id="268c1f3299f2b6f35755dea96dddf6af" approved="yes">
+        <source>Call us: %phone%</source>
+        <target state="final">Rufen Sie uns an: %phone%</target>
+      </trans-unit>
+      <trans-unit id="91d656fbb78e3322a596f4d8ed753c05" approved="yes">
+        <source>Change language</source>
+        <target state="final">Sprache ändern</target>
+      </trans-unit>
+      <trans-unit id="9c97ef2b1f51cc9900c2aa020bcf29d7" approved="yes">
+        <source>Change sort order</source>
+        <target state="final">Sortierung ändern</target>
+      </trans-unit>
+      <trans-unit id="a462ef1c04901e8b0f276c76c1b683c8" approved="yes">
+        <source>Close search</source>
+        <target state="final">Suche schließen</target>
+      </trans-unit>
+      <trans-unit id="d54d0d430d4b7a5ee44490337c932138" approved="yes">
+        <source>Delivery option: %carrier_name%</source>
+        <target state="final">Versandart: %carrier_name%</target>
+      </trans-unit>
+      <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="c6c5ff1c42ce992d3f449ef55819943b" approved="yes">
+        <source>Go to slide %slide_index%</source>
+        <target state="final">Zu Folie %slide_index%</target>
+      </trans-unit>
+      <trans-unit id="558ed0bec0befaf5f5f31cc79a3b9a36" approved="yes">
+        <source>Next image</source>
+        <target state="final">Nächstes Bild</target>
+      </trans-unit>
+      <trans-unit id="0ec8d0a0ae4663ca13cfe54bff0a271d" approved="yes">
+        <source>No delivery service</source>
+        <target state="final">Kein Versand</target>
+      </trans-unit>
+      <trans-unit id="942f0386fba4d2d5c0496f020be920d5" approved="yes">
+        <source>(No option selected)</source>
+        <target state="final">(Keine Option ausgewählt)</target>
+      </trans-unit>
+      <trans-unit id="ea4b4d72aad3912d7ccbb175fd77c77c" approved="yes">
+        <source>Open zoomed product image gallery</source>
+        <target state="final">Vergrößerte Produktbilder öffnen</target>
+      </trans-unit>
+      <trans-unit id="ee34f6ba47ba8c232e7ef7fc9d4855a2" approved="yes">
+        <source>Previous image</source>
+        <target state="final">Vorheriges Bild</target>
+      </trans-unit>
+      <trans-unit id="ea379dd90c33c1345f40aa0afa6688d8" approved="yes">
+        <source>Product availability:</source>
+        <target state="final">Verfügbarkeit:</target>
+      </trans-unit>
+      <trans-unit id="9d4eaa9c941d7d5bbdb0547255e7fd0b" approved="yes">
+        <source>Product filters</source>
+        <target state="final">Produktfilter</target>
+      </trans-unit>
+      <trans-unit id="53e61336bb49ec978968786b07dea50b" approved="yes">
+        <source>results</source>
+        <target state="final">Ergebnisse</target>
+      </trans-unit>
+      <trans-unit id="b4a88417b3d0170d754c647c30b7216a" approved="yes">
+        <source>result</source>
+        <target state="final">Ergebnis</target>
+      </trans-unit>
+      <trans-unit id="46daba3c618d21ffd4f564527bd9b118" approved="yes">
+        <source>Send us a fax to: %fax%</source>
+        <target state="final">Fax: %fax%</target>
+      </trans-unit>
+      <trans-unit id="cc95d7b6b3d464728dc6bf0a0c5c9e0d" approved="yes">
+        <source>Send us an email to: %email%</source>
+        <target state="final">Schreiben Sie uns: %email%</target>
+      </trans-unit>
+      <trans-unit id="f1006d542b60752f0f72107f84d7069a" approved="yes">
+        <source>Show search bar</source>
+        <target state="final">Suchleiste anzeigen</target>
+      </trans-unit>
+      <trans-unit id="cc367b544fab23df0ddaf982fb1445b5" approved="yes">
+        <source>Skip to main content</source>
+        <target state="final">Zum Hauptinhalt springen</target>
+      </trans-unit>
+      <trans-unit id="fc1411d65b5a53ff3edca2efb08d4e4c" approved="yes">
+        <source>Sort products by: %sort_order%</source>
+        <target state="final">Produkte sortieren nach: %sort_order%</target>
+      </trans-unit>
+      <trans-unit id="d6de867263fad4dfbe86855a7eb5f14a" approved="yes">
+        <source>Toggle contact information</source>
+        <target state="final">Kontaktdaten ein-/ausblenden</target>
+      </trans-unit>
+      <trans-unit id="3224ef79c5274fe89e9960d7b17ff1c1" approved="yes">
+        <source>Toggle %s links</source>
+        <target state="final">Links zu %s ein-/ausblenden</target>
+      </trans-unit>
+      <trans-unit id="dab3588a7c1e865353964d504eae5d3e" approved="yes">
+        <source>View schedules</source>
+        <target state="final">Öffnungszeiten anzeigen</target>
+      </trans-unit>
+      <trans-unit id="712451d946548eed9b7145b6270fdb91" approved="yes">
+        <source>View schedules for %store_name%</source>
+        <target state="final">Öffnungszeiten von %store_name% anzeigen</target>
+      </trans-unit>
+      <trans-unit id="c9b70fb5570b33cc835a0057b7a184c1" approved="yes">
+        <source>Virtual product(s)</source>
+        <target state="final">Digitale Produkte</target>
+      </trans-unit>
+      <trans-unit id="a55071978a2065773874af402627f86b" approved="yes">
+        <source>Virtual product(s): No delivery service</source>
+        <target state="final">Digitale Produkte: kein Versand</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -82,6 +82,14 @@
         <source>Your cart is empty.</source>
         <target state="final">Twój koszyk jest pusty.</target>
       </trans-unit>
+      <trans-unit id="c76d2d60b05d8699841bde3d088d91ce" approved="yes">
+        <source>Added to your cart</source>
+        <target state="final">Dodano do koszyka</target>
+      </trans-unit>
+      <trans-unit id="f6250369904838dbfc6729e8003f4ef9" approved="yes">
+        <source>%product_name% has been added to your cart.</source>
+        <target state="final">Dodano do koszyka: %product_name%.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

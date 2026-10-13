@@ -14,6 +14,158 @@
         <source>remove</source>
         <target state="final">entfernen</target>
       </trans-unit>
+      <trans-unit id="1412f7dcbcbe951b817f3f65b77b8e57" approved="yes">
+        <source>Address details:</source>
+        <target state="final">Adressdaten:</target>
+      </trans-unit>
+      <trans-unit id="8c53e9fa4e0e1e815c90f48657d17f05" approved="yes">
+        <source>Add to cart %product_name%</source>
+        <target state="final">%product_name% in den Warenkorb legen</target>
+      </trans-unit>
+      <trans-unit id="450c8f4757cfedf5a3b1ca28a6d0e084" approved="yes">
+        <source>Apply voucher</source>
+        <target state="final">Gutschein einlösen</target>
+      </trans-unit>
+      <trans-unit id="759b8dedba55e334c23095b18ac87810" approved="yes">
+        <source>Back to %step_title%</source>
+        <target state="final">Zurück zu %step_title%</target>
+      </trans-unit>
+      <trans-unit id="b6e218dc266ed41cc0861a02ed1b0173" approved="yes">
+        <source>Change quantity of %product_name%</source>
+        <target state="final">Menge von %product_name% ändern</target>
+      </trans-unit>
+      <trans-unit id="735df1995d765159968109ecb2a26b6b" approved="yes">
+        <source>Change quantity</source>
+        <target state="final">Menge ändern</target>
+      </trans-unit>
+      <trans-unit id="400424605605bde572bf8e517998b492" approved="yes">
+        <source>Continue to %step_title%</source>
+        <target state="final">Weiter zu %step_title%</target>
+      </trans-unit>
+      <trans-unit id="08a57e276ae2ae589d0aa95b3d0798c6" approved="yes">
+        <source>Decrease quantity of %product_name%</source>
+        <target state="final">Menge von %product_name% verringern</target>
+      </trans-unit>
+      <trans-unit id="ae5ff2e5665c7a8b00b3cf45eb33dd90" approved="yes">
+        <source>Decrease quantity</source>
+        <target state="final">Menge verringern</target>
+      </trans-unit>
+      <trans-unit id="f5ec9a23195334bf6219affce0bae1b8" approved="yes">
+        <source>Delete address: %addressAlias%</source>
+        <target state="final">Adresse löschen: %addressAlias%</target>
+      </trans-unit>
+      <trans-unit id="f7f6580f2cda555078e931f979bd0d17" approved="yes">
+        <source>Delete your delivery address</source>
+        <target state="final">Lieferadresse löschen</target>
+      </trans-unit>
+      <trans-unit id="f449bf4f6e9d65ebe1113d2307d88f0b" approved="yes">
+        <source>Delete your invoice address</source>
+        <target state="final">Rechnungsadresse löschen</target>
+      </trans-unit>
+      <trans-unit id="24158999b6aefcf0a745bbcda7b9a062" approved="yes">
+        <source>Download %attachment_name%</source>
+        <target state="final">%attachment_name% herunterladen</target>
+      </trans-unit>
+      <trans-unit id="801ab24683a4a8c433c6eb40c48bcd9d" approved="yes">
+        <source>Download</source>
+        <target state="final">Herunterladen</target>
+      </trans-unit>
+      <trans-unit id="014b596eea14a2db8fd8ba5706950fbf" approved="yes">
+        <source>Edit address: %addressAlias%</source>
+        <target state="final">Adresse bearbeiten: %addressAlias%</target>
+      </trans-unit>
+      <trans-unit id="62f0d8b25f9f2fb39804f08ec42f6bf9" approved="yes">
+        <source>Edit addresses</source>
+        <target state="final">Adressen bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="1d180af757ea01d8aef777e1463b83db" approved="yes">
+        <source>Edit your cart</source>
+        <target state="final">Warenkorb bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="586b0491dd126298130525e61666743f" approved="yes">
+        <source>Edit your delivery address</source>
+        <target state="final">Lieferadresse bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="7eeb08f11956ce41f90025c3fa39665e" approved="yes">
+        <source>Edit your invoice address</source>
+        <target state="final">Rechnungsadresse bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="425c2334d6444694d5ef8ca1781c77ff" approved="yes">
+        <source>Edit your shipping method</source>
+        <target state="final">Versandart ändern</target>
+      </trans-unit>
+      <trans-unit id="406b6936d95a8acd48be844ec706e22c" approved="yes">
+        <source>Go to next page</source>
+        <target state="final">Zur nächsten Seite</target>
+      </trans-unit>
+      <trans-unit id="25f077e61f4d2e258ca1206b564db767" approved="yes">
+        <source>Go to page %page%</source>
+        <target state="final">Zu Seite %page%</target>
+      </trans-unit>
+      <trans-unit id="bbaeea4b59d37bd6e0927044f9a00047" approved="yes">
+        <source>Go to previous page</source>
+        <target state="final">Zur vorherigen Seite</target>
+      </trans-unit>
+      <trans-unit id="16e40bb742babecad2f87554b3c29a7c" approved="yes">
+        <source>has been removed from the cart.</source>
+        <target state="final">wurde aus dem Warenkorb entfernt.</target>
+      </trans-unit>
+      <trans-unit id="941ed970342a3a14cd20351d15f054bd" approved="yes">
+        <source>Hide Password</source>
+        <target state="final">Passwort verbergen</target>
+      </trans-unit>
+      <trans-unit id="3f5b7abc4738f2132264c2510f9dc39f" approved="yes">
+        <source>Hide password</source>
+        <target state="final">Passwort verbergen</target>
+      </trans-unit>
+      <trans-unit id="22ed8430f63617cd786209dc98df780a" approved="yes">
+        <source>Increase quantity of %product_name%</source>
+        <target state="final">Menge von %product_name% erhöhen</target>
+      </trans-unit>
+      <trans-unit id="20979edc44dd470012f64c77bd6adddf" approved="yes">
+        <source>Increase quantity</source>
+        <target state="final">Menge erhöhen</target>
+      </trans-unit>
+      <trans-unit id="3459a024e77408cebe1f0cec4177cf5f" approved="yes">
+        <source>Quick view %product_name%</source>
+        <target state="final">Schnellansicht: %product_name%</target>
+      </trans-unit>
+      <trans-unit id="f4701af4852c350444ecdca3fe3ecfc5" approved="yes">
+        <source>Remove image</source>
+        <target state="final">Bild entfernen</target>
+      </trans-unit>
+      <trans-unit id="0af5ebd5f6aa6ab6046f14d08236e61a" approved="yes">
+        <source>Save customization</source>
+        <target state="final">Personalisierung speichern</target>
+      </trans-unit>
+      <trans-unit id="a5e6d898ad3fae1dba64143c1848ba54" approved="yes">
+        <source>Select address: %addressAlias%</source>
+        <target state="final">Adresse auswählen: %addressAlias%</target>
+      </trans-unit>
+      <trans-unit id="4bc44bc0d6506c52dbcec8958466528a" approved="yes">
+        <source>Send your message</source>
+        <target state="final">Nachricht senden</target>
+      </trans-unit>
+      <trans-unit id="af8672125788bdee0cd7a5f4e75ec307" approved="yes">
+        <source>Share on %social_share_link_label%</source>
+        <target state="final">Auf %social_share_link_label% teilen</target>
+      </trans-unit>
+      <trans-unit id="e5b64119ff1eb538f059c653eb8d2dc6" approved="yes">
+        <source>Show cart details</source>
+        <target state="final">Warenkorbdetails anzeigen</target>
+      </trans-unit>
+      <trans-unit id="d53907d724bf05eff15a2e80205f2d1e" approved="yes">
+        <source>Show details</source>
+        <target state="final">Details anzeigen</target>
+      </trans-unit>
+      <trans-unit id="6dfc77a11e4ea848d807b5365dd43d74" approved="yes">
+        <source>Show Password</source>
+        <target state="final">Passwort anzeigen</target>
+      </trans-unit>
+      <trans-unit id="a1cc7ba89ca3016cf59d7c31506a9681" approved="yes">
+        <source>Show password</source>
+        <target state="final">Passwort anzeigen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

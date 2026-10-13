@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="themes/hummingbird" source-language="en" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="87846aeba8b4f661c801981af37c765c" approved="yes">
+        <source>Kod promocyjny</source>
+        <target state="final">Promo code</target>
+      </trans-unit>
+      <trans-unit id="994a3af5db7fc997a068da61c2c01d80" approved="yes">
+        <source>Koszyk</source>
+        <target state="final">Cart</target>
+      </trans-unit>
+      <trans-unit id="123ae5305dfe5971ddb07886be8f582a" approved="yes">
+        <source>Masz kod promocyjny?</source>
+        <target state="final">Have a promo code?</target>
+      </trans-unit>
+      <trans-unit id="4ee91c3d46d17714df2fee50a716bbdd" approved="yes">
+        <source>Razem</source>
+        <target state="final">Total</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

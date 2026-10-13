@@ -30,6 +30,14 @@
         <source>Razem</source>
         <target state="final">Celkem</target>
       </trans-unit>
+      <trans-unit id="87846aeba8b4f661c801981af37c765c" approved="yes">
+        <source>Kod promocyjny</source>
+        <target state="final">Slevový kód</target>
+      </trans-unit>
+      <trans-unit id="123ae5305dfe5971ddb07886be8f582a" approved="yes">
+        <source>Masz kod promocyjny?</source>
+        <target state="final">Máte slevový kód?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

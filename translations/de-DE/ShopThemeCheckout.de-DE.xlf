@@ -30,6 +30,118 @@
         <source>Razem</source>
         <target state="final">Gesamt</target>
       </trans-unit>
+      <trans-unit id="c76d2d60b05d8699841bde3d088d91ce" approved="yes">
+        <source>Added to your cart</source>
+        <target state="final">Zum Warenkorb hinzugefügt</target>
+      </trans-unit>
+      <trans-unit id="be2624ee0707257c14aed8452f443e85" approved="yes">
+        <source>Added vouchers</source>
+        <target state="final">Eingelöste Gutscheine</target>
+      </trans-unit>
+      <trans-unit id="0be0e4234878f25304eb845f4fb47135" approved="yes">
+        <source>Delivery address: %alias%</source>
+        <target state="final">Lieferadresse: %alias%</target>
+      </trans-unit>
+      <trans-unit id="1b67f24ea45fdf2e11ad8f6e777e8c8b" approved="yes">
+        <source>Delivery Information</source>
+        <target state="final">Lieferinformationen</target>
+      </trans-unit>
+      <trans-unit id="808009eaf02a0fd7444c2ac7646e9981" approved="yes">
+        <source>Delivery Option</source>
+        <target state="final">Versandart</target>
+      </trans-unit>
+      <trans-unit id="2e176a7afa371c3446da38e102af7553" approved="yes">
+        <source>Fill %voucherCode% code into the voucher field</source>
+        <target state="final">Code %voucherCode% in das Gutscheinfeld übernehmen</target>
+      </trans-unit>
+      <trans-unit id="8e702a8aa0c6b063894e3347e0352e0b" approved="yes">
+        <source>Gift(s)</source>
+        <target state="final">Geschenk(e)</target>
+      </trans-unit>
+      <trans-unit id="65e19edc54c7984234fc1a43dba1bcba" approved="yes">
+        <source>Invoice address: %alias%</source>
+        <target state="final">Rechnungsadresse: %alias%</target>
+      </trans-unit>
+      <trans-unit id="87846aeba8b4f661c801981af37c765c" approved="yes">
+        <source>Kod promocyjny</source>
+        <target state="final">Gutscheincode</target>
+      </trans-unit>
+      <trans-unit id="123ae5305dfe5971ddb07886be8f582a" approved="yes">
+        <source>Masz kod promocyjny?</source>
+        <target state="final">Haben Sie einen Gutscheincode?</target>
+      </trans-unit>
+      <trans-unit id="d8165ec099ad89c083692dae84567e87" approved="yes">
+        <source>New customer</source>
+        <target state="final">Neukunde</target>
+      </trans-unit>
+      <trans-unit id="09f2a4f30a36a31991bc2926e1e8d561" approved="yes">
+        <source>Next: %step_name%</source>
+        <target state="final">Weiter: %step_name%</target>
+      </trans-unit>
+      <trans-unit id="1ab1dfd9dc24ea4729d6c032f7f0342d" approved="yes">
+        <source>Payment information</source>
+        <target state="final">Zahlungsinformationen</target>
+      </trans-unit>
+      <trans-unit id="a128f329c5aeea633ced6bb9d7c56c74" approved="yes">
+        <source>Place Order</source>
+        <target state="final">Zahlungspflichtig bestellen</target>
+      </trans-unit>
+      <trans-unit id="0ed87ff7fd033d1121932b52dd2910a6" approved="yes">
+        <source>Please make sure you've chosen a [1]payment method[/1] and accepted the required condition(s).</source>
+        <target state="final">Bitte wählen Sie eine [1]Zahlungsart[/1] und akzeptieren Sie die erforderlichen Bedingungen.</target>
+      </trans-unit>
+      <trans-unit id="6cca837b5d9d6181309ab24ac1e008a7" approved="yes">
+        <source>Please make sure you've chosen a [1]payment method[/1].</source>
+        <target state="final">Bitte wählen Sie eine [1]Zahlungsart[/1].</target>
+      </trans-unit>
+      <trans-unit id="5c0842430b003844dc9dd4cfee7148d3" approved="yes">
+        <source>%product_count% order items</source>
+        <target state="final">%product_count% Artikel</target>
+      </trans-unit>
+      <trans-unit id="f6250369904838dbfc6729e8003f4ef9" approved="yes">
+        <source>%product_name% has been added to your cart.</source>
+        <target state="final">%product_name% wurde in den Warenkorb gelegt.</target>
+      </trans-unit>
+      <trans-unit id="bc485a3f1c114bcc21e5c207d50b4cb3" approved="yes">
+        <source>%product_name% quick view.</source>
+        <target state="final">Schnellansicht: %product_name%.</target>
+      </trans-unit>
+      <trans-unit id="827f841b53cd7847c66891e252165e6d" approved="yes">
+        <source>Products in cart</source>
+        <target state="final">Produkte im Warenkorb</target>
+      </trans-unit>
+      <trans-unit id="d4da09d07e0911986f8a742aeeb6f6d3" approved="yes">
+        <source>Remove %productName% from cart</source>
+        <target state="final">%productName% aus dem Warenkorb entfernen</target>
+      </trans-unit>
+      <trans-unit id="fc1ff8b6c1b51932e1fdd04959ce2cd2" approved="yes">
+        <source>Remove voucher: %voucherName%</source>
+        <target state="final">Gutschein entfernen: %voucherName%</target>
+      </trans-unit>
+      <trans-unit id="829f96defc7c51f96edf84b190ab864a" approved="yes">
+        <source>Terms and conditions</source>
+        <target state="final">Allgemeine Geschäftsbedingungen</target>
+      </trans-unit>
+      <trans-unit id="5008fd5ca4448929abbd083f86e0847b" approved="yes">
+        <source>View cart (%d products)</source>
+        <target state="final">Warenkorb ansehen (%d Produkte)</target>
+      </trans-unit>
+      <trans-unit id="921cc6412ce8194872efd44dbf232119" approved="yes">
+        <source>View my customization</source>
+        <target state="final">Meine Personalisierung ansehen</target>
+      </trans-unit>
+      <trans-unit id="51cb70bea00ccdb79e8458d4a683e369" approved="yes">
+        <source>Write a comment about this order</source>
+        <target state="final">Anmerkungen zu Ihrer Bestellung</target>
+      </trans-unit>
+      <trans-unit id="77a65c29dba3f45446aa813d7c48ad93" approved="yes">
+        <source>Write your comment...</source>
+        <target state="final">Ihre Anmerkung …</target>
+      </trans-unit>
+      <trans-unit id="a5a23dc02da738c39a2e68548381826b" approved="yes">
+        <source>You can also [1]download your invoice[/1].</source>
+        <target state="final">Sie können auch Ihre [1]Rechnung herunterladen[/1].</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

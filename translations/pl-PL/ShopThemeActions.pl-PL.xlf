@@ -130,6 +130,22 @@
         <source>remove</source>
         <target state="final">usuń</target>
       </trans-unit>
+      <trans-unit id="735df1995d765159968109ecb2a26b6b" approved="yes">
+        <source>Change quantity</source>
+        <target state="final">Zmień ilość</target>
+      </trans-unit>
+      <trans-unit id="ae5ff2e5665c7a8b00b3cf45eb33dd90" approved="yes">
+        <source>Decrease quantity</source>
+        <target state="final">Zmniejsz ilość</target>
+      </trans-unit>
+      <trans-unit id="20979edc44dd470012f64c77bd6adddf" approved="yes">
+        <source>Increase quantity</source>
+        <target state="final">Zwiększ ilość</target>
+      </trans-unit>
+      <trans-unit id="af8672125788bdee0cd7a5f4e75ec307" approved="yes">
+        <source>Share on %social_share_link_label%</source>
+        <target state="final">Udostępnij: %social_share_link_label%</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
