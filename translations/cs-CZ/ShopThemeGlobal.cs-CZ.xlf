@@ -22,6 +22,10 @@
         <source>Telefon</source>
         <target state="final">Telefon</target>
       </trans-unit>
+      <trans-unit id="8d07586c97cd3f295490da42ed8a3847" approved="yes">
+        <source>Cookie settings</source>
+        <target state="final">Nastavení cookies</target>
+      </trans-unit>
       <trans-unit id="ce8ae9da5b7cd6c3df2929543a9af92d" approved="yes">
         <source>Email</source>
         <target state="final">E-mail</target>

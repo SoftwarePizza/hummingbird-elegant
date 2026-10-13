@@ -42,6 +42,11 @@
                 {foreach from=$hbe_footer_links item='hbe_footer_link'}
                   <li><a href="{$hbe_footer_link.url|escape:'html':'UTF-8'}">{$hbe_footer_link.label|escape:'html':'UTF-8'}</a></li>
                 {/foreach}
+                {* Novehi: ponowne otwarcie okna zgód — przycisk, bo otwiera dialog (spnovehi ustawia nvh_zgody; atrybut data-cc
+                   to kontrakt biblioteki vanilla-cookieconsent, nie data-ps-*) *}
+                {if !empty($nvh_zgody)}
+                  <li><button type="button" class="footer__bottom-link-button" data-cc="show-preferencesModal" aria-haspopup="dialog">{l s='Cookie settings' d='Shop.Theme.Global'}</button></li>
+                {/if}
               </ul>
             {/if}
           {/block}

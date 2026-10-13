@@ -22,6 +22,10 @@
         <source>Telefon</source>
         <target state="final">Telefon</target>
       </trans-unit>
+      <trans-unit id="8d07586c97cd3f295490da42ed8a3847" approved="yes">
+        <source>Cookie settings</source>
+        <target state="final">Cookie-Einstellungen</target>
+      </trans-unit>
       <trans-unit id="2859504d8a2d6dc9f6505dc2fd8e5371" approved="yes">
         <source>Call us at: %phone%</source>
         <target state="final">Rufen Sie uns an: %phone%</target>

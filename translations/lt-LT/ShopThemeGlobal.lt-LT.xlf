@@ -22,6 +22,10 @@
         <source>Telefon</source>
         <target state="final">Telefonas</target>
       </trans-unit>
+      <trans-unit id="8d07586c97cd3f295490da42ed8a3847" approved="yes">
+        <source>Cookie settings</source>
+        <target state="final">Slapukų nustatymai</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

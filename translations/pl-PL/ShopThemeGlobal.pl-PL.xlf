@@ -66,6 +66,10 @@
         <source>Get news about new products, promotions and events.</source>
         <target state="final">Otrzymuj informacje o najnowszych produktach, promocjach i wydarzeniach.</target>
       </trans-unit>
+      <trans-unit id="8d07586c97cd3f295490da42ed8a3847" approved="yes">
+        <source>Cookie settings</source>
+        <target state="final">Ustawienia cookies</target>
+      </trans-unit>
       <trans-unit id="2859504d8a2d6dc9f6505dc2fd8e5371" approved="yes">
         <source>Call us at: %phone%</source>
         <target state="final">Zadzwoń: %phone%</target>
