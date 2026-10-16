@@ -7,15 +7,3 @@
 
     }
 }
-
-/* Wariant bez stanu (product-add-to-cart.tpl): komunikat zamiast przycisku, bez pola ilosci */
-.product__actions-qty-add:has(.product__add-to-cart--unavailable) .product-actions__quantity
-{
-    display: none;
-}
-
-.product__unavailable
-{
-    margin: 0;
-    font-weight: 600;
-}

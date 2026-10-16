@@ -65,23 +65,11 @@
           }
         </div>
 
-        {* Wariant bez stanu przy "nie pozwalaj zamawiac": zamiast przycisku komunikat,
-           a formularz powiadomienia (ps_emailalerts) renderuje sie ponizej.
-           Ten div podmienia core.js przy zmianie wariantu (selector .add). *}
-        {$isOutOfStock = $product.availability == 'unavailable' && $product.quantity <= 0}
-        <div class="product__add-to-cart add{if $isOutOfStock} product__add-to-cart--unavailable{/if}">
-          {if $isOutOfStock}
-            <p class="product__unavailable" role="status">
-              {l s='Tego wariantu nie ma obecnie na stanie, więc nie można go zamówić. Zapisz się poniżej, a damy znać, gdy wróci.' d='Shop.Theme.Catalog'}
-            </p>
-          {/if}
+        <div class="product__add-to-cart add">
           <button
             class="product__add-to-cart-button btn btn-primary"
             data-button-action="add-to-cart"
             type="submit"
-            {if $isOutOfStock}
-              hidden
-            {/if}
             {if !$product.add_to_cart_url}
               aria-disabled="true"
               disabled
