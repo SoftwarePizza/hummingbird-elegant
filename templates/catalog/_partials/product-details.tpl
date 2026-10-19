@@ -2,9 +2,11 @@
  * For the full copyright and license information, please view the
  * LICENSE.md file that was distributed with this source code.
  *}
-{* Figma: two tabs — "Ogólne parametry" (productinformation module) and the
-   default PrestaShop data sheet. The module tab only appears when the module
-   matched at least one feature of the current product. *}
+{* One "Dane techniczne" list: product features, dimensions, then the
+   productinformation module rows (dishwasher/microwave with enriched content,
+   rendered as bare <li> by the theme override of the module view), then the
+   remaining data sheet entries. Repeated feature values are collapsed — BO
+   data carries the same value attached twice (e.g. "Tak\nTak"). *}
 {capture name='productInformationHook'}{hook h='displayProductInformation'}{/capture}
 {$productInformationHtml = $smarty.capture.productInformationHook}
 {$hasProductInformation = ($productInformationHtml|strip_tags|trim) !== ''}
@@ -15,64 +17,30 @@
   data-product="{$product.embedded_attributes|json_encode}"
   data-ps-ref="product-specs"
 >
-  {if $hasProductInformation}
-    <div class="product-specs__tabs" role="tablist" aria-label="{l s='Szczegóły produktu' d='Shop.Theme.Catalog'}">
-      <button
-        type="button"
-        class="product-specs__tab product-specs__tab--active"
-        id="product-specs-tab-information"
-        role="tab"
-        aria-selected="true"
-        aria-controls="product-specs-panel-information"
-        data-ps-action="switch-product-specs-tab"
-      >{l s='Ogólne parametry' d='Shop.Theme.Catalog'}</button>
-      <button
-        type="button"
-        class="product-specs__tab"
-        id="product-specs-tab-datasheet"
-        role="tab"
-        aria-selected="false"
-        aria-controls="product-specs-panel-datasheet"
-        tabindex="-1"
-        data-ps-action="switch-product-specs-tab"
-      >{l s='Dane techniczne' d='Shop.Theme.Catalog'}</button>
-    </div>
+  <div class="product-specs__tabs">
+    <span class="product-specs__tab product-specs__tab--active">{l s='Dane techniczne' d='Shop.Theme.Catalog'}</span>
+  </div>
 
-    <div
-      class="product-specs__panel"
-      id="product-specs-panel-information"
-      role="tabpanel"
-      aria-labelledby="product-specs-tab-information"
-    >
-      {$productInformationHtml nofilter}
-    </div>
-  {else}
-    <div class="product-specs__tabs">
-      <span class="product-specs__tab product-specs__tab--active">{l s='Ogólne parametry' d='Shop.Theme.Catalog'}</span>
-    </div>
-  {/if}
-
-  <div
-    class="product-specs__panel"
-    {if $hasProductInformation}
-      id="product-specs-panel-datasheet"
-      role="tabpanel"
-      aria-labelledby="product-specs-tab-datasheet"
-      hidden
-    {/if}
-  >
+  <div class="product-specs__panel">
     <ul class="product-specs__list">
       {block name='product_features'}
         {if $product.grouped_features}
           {foreach from=$product.grouped_features item=feature}
-            {* Features claimed by the module tab (data-general-parameter
+            {* Features rendered by the module hook (data-general-parameter
                markers in the captured hook output) are skipped here so the
-               same row never shows in both tabs. *}
+               same row never shows twice. *}
             {$generalParameterMarker = 'data-general-parameter="'|cat:($feature.name|trim|escape:'html')|cat:'"'}
             {if !$hasProductInformation || strpos($productInformationHtml, $generalParameterMarker) === false}
+              {$featureValues = []}
+              {foreach from="\n"|explode:$feature.value item=rawValue}
+                {$value = $rawValue|trim}
+                {if $value !== '' && !($value|in_array:$featureValues)}
+                  {$featureValues[] = $value}
+                {/if}
+              {/foreach}
               <li class="product-specs__row">
                 <span class="product-specs__label">{$feature.name}</span>
-                <span class="product-specs__value">{$feature.value|escape:'htmlall'|nl2br nofilter}</span>
+                <span class="product-specs__value">{foreach from=$featureValues item=featureValue name=featureValues}{if !$smarty.foreach.featureValues.first}<br>{/if}{$featureValue|escape:'html':'UTF-8'}{/foreach}</span>
               </li>
             {/if}
           {/foreach}
@@ -107,6 +75,12 @@
             <span class="product-specs__label">{l s='Waga' d='Shop.Theme.Catalog'}</span>
             <span class="product-specs__value">{$product.weight|string_format:"%g"|replace:'.':','|escape:'html':'UTF-8'} {$product.weight_unit|escape:'html':'UTF-8'}</span>
           </li>
+        {/if}
+      {/block}
+
+      {block name='product_information'}
+        {if $hasProductInformation}
+          {$productInformationHtml nofilter}
         {/if}
       {/block}
 
