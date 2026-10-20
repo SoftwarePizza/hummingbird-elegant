@@ -46,7 +46,12 @@
                z $combinations. Tylko kombinacje jednoatrybutowe — na izpol
                każdy kolor multiproduktu to osobna kombinacja z własną
                referencją; przy kombinacjach wielogrupowych numer byłby
-               niejednoznaczny, więc go wtedy nie pokazujemy. *}
+               niejednoznaczny, więc go wtedy nie pokazujemy.
+
+               Kolejność: alfabetycznie po nazwie koloru w języku klienta
+               (modyfikator sort_by_name z plugins/), nie po pozycji
+               atrybutu z bazy. *}
+            {assign var=pickerAttributes value=$group.attributes|sort_by_name}
             {assign var=pickerRefs value=[]}
             {if isset($combinations) && $combinations}
               {foreach from=$combinations item=pickerCombo}
@@ -56,17 +61,17 @@
               {/foreach}
             {/if}
 
-            {assign var=pickerCount value=$group.attributes|count}
+            {assign var=pickerCount value=$pickerAttributes|count}
             {assign var=pickerSelected value=null}
             {assign var=pickerSelectedId value=0}
-            {foreach from=$group.attributes key=id_attribute item=group_attribute}
+            {foreach from=$pickerAttributes key=id_attribute item=group_attribute}
               {if $group_attribute.selected && !$pickerSelected}
                 {assign var=pickerSelected value=$group_attribute}
                 {assign var=pickerSelectedId value=$id_attribute}
               {/if}
             {/foreach}
             {if !$pickerSelected}
-              {foreach from=$group.attributes key=id_attribute item=group_attribute}
+              {foreach from=$pickerAttributes key=id_attribute item=group_attribute}
                 {assign var=pickerSelected value=$group_attribute}
                 {assign var=pickerSelectedId value=$id_attribute}
                 {break}
@@ -112,7 +117,7 @@
                 </div>
 
                 <div id="{$groupId}" class="product-variant__colors variant-picker__options" role="radiogroup" aria-labelledby="{$legendId}">
-                  {foreach from=$group.attributes key=id_attribute item=group_attribute}
+                  {foreach from=$pickerAttributes key=id_attribute item=group_attribute}
                     {assign var=inputId value="input_{$id_attribute_group}_{$id_attribute}_{$product.id}"}
                     {assign var=labelId value="label_{$id_attribute_group}_{$id_attribute}_{$product.id}"}
 

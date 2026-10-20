@@ -44,14 +44,17 @@
                  wiersz linkuje do wariantu. Na desktopie panel wisi absolutnie
                  nad kaflami ponizej, na mobile custom.css robi z niego dolny
                  arkusz (sekcja 46). main_variants nie niesie referencji,
-                 wiec numeru kombinacji tu nie ma — jest na karcie produktu. *}
+                 wiec numeru kombinacji tu nie ma — jest na karcie produktu.
+                 Kolory alfabetycznie w jezyku klienta, jak na karcie
+                 (modyfikator sort_by_name z plugins/). *}
               {if $product.main_variants}
-                {assign var=vminiCount value=$product.main_variants|count}
+                {assign var=vminiVariants value=$product.main_variants|sort_by_name}
+                {assign var=vminiCount value=$vminiVariants|count}
                 <details class="variant-mini js-variant-picker {$componentName}__variants">
                   <summary class="variant-mini__toggle">
                     <span class="visually-hidden">{$product.name}</span>
                     <span class="variant-mini__stack" aria-hidden="true">
-                      {foreach from=$product.main_variants item=variant name=vmini}
+                      {foreach from=$vminiVariants item=variant name=vmini}
                         {if $smarty.foreach.vmini.index < 5}
                           <span class="color variant-mini__swatch{if $variant.texture} texture{/if}"
                             {if $variant.texture}style="background-image: url({$variant.texture})"
@@ -72,7 +75,7 @@
                       </button>
                     </div>
                     <div class="variant-mini__list">
-                      {foreach from=$product.main_variants item=variant}
+                      {foreach from=$vminiVariants item=variant}
                         <a href="{$variant.url}" class="variant-mini__row" title="{$variant.name}">
                           <span class="color{if $variant.texture} texture{/if}"
                             {if $variant.texture}style="background-image: url({$variant.texture})"
