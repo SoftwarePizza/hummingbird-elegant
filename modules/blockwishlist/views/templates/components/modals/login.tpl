@@ -40,6 +40,7 @@
 
           <a
             class="btn btn-primary"
+            href="{$urls.pages.authentication}"
             :href="prestashop.urls.pages.authentication"
           >((loginText))</a>
         </div>
