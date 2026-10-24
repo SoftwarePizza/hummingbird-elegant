@@ -1,0 +1,41 @@
+<?php
+/* Generator plikow tlumaczen motywu dla wksampleproduct (klucze legacy <{modul}motyw>plik_md5). */
+$out = $argv[1];
+$T = [
+ // jezyk => [Buy sample, Free, Tax included, Tax excluded, Out-of-stock, Sample price, limit]
+ 'pl' => ['Zamów próbkę', 'Bezpłatnie', 'brutto', 'netto', 'Brak na stanie', 'Cena próbki', 'Maksymalna liczba próbek w zamówieniu: %d'],
+ 'en' => ['Order a sample', 'Free', 'incl. VAT', 'excl. VAT', 'Out of stock', 'Sample price', 'Maximum number of samples per order: %d'],
+ 'de' => ['Muster bestellen', 'Kostenlos', 'inkl. MwSt.', 'zzgl. MwSt.', 'Nicht auf Lager', 'Musterpreis', 'Maximale Anzahl Muster pro Bestellung: %d'],
+ 'es' => ['Pedir una muestra', 'Gratis', 'IVA incluido', 'IVA no incluido', 'Agotado', 'Precio de la muestra', 'Número máximo de muestras por pedido: %d'],
+ 'fr' => ['Commander un échantillon', 'Gratuit', 'TTC', 'HT', 'Rupture de stock', 'Prix de l’échantillon', 'Nombre maximal d’échantillons par commande : %d'],
+ 'it' => ['Ordina un campione', 'Gratis', 'IVA inclusa', 'IVA esclusa', 'Esaurito', 'Prezzo del campione', 'Numero massimo di campioni per ordine: %d'],
+ 'nl' => ['Staal bestellen', 'Gratis', 'incl. btw', 'excl. btw', 'Niet op voorraad', 'Prijs van het staal', 'Maximaal aantal stalen per bestelling: %d'],
+ 'cs' => ['Objednat vzorek', 'Zdarma', 'vč. DPH', 'bez DPH', 'Není skladem', 'Cena vzorku', 'Maximální počet vzorků na objednávku: %d'],
+ 'da' => ['Bestil en prøve', 'Gratis', 'inkl. moms', 'ekskl. moms', 'Ikke på lager', 'Pris for prøve', 'Maks. antal prøver pr. ordre: %d'],
+ 'hu' => ['Minta rendelése', 'Ingyenes', 'áfával', 'áfa nélkül', 'Nincs készleten', 'Minta ára', 'Minták maximális száma rendelésenként: %d'],
+ 'lt' => ['Užsakyti pavyzdį', 'Nemokamai', 'su PVM', 'be PVM', 'Nėra sandėlyje', 'Pavyzdžio kaina', 'Didžiausias pavyzdžių skaičius užsakyme: %d'],
+ 'ro' => ['Comandă o mostră', 'Gratuit', 'TVA inclus', 'fără TVA', 'Stoc epuizat', 'Prețul mostrei', 'Numărul maxim de mostre per comandă: %d'],
+ 'sv' => ['Beställ ett prov', 'Gratis', 'inkl. moms', 'exkl. moms', 'Slut i lager', 'Pris för prov', 'Max antal prover per beställning: %d'],
+ 'uk' => ['Замовити зразок', 'Безкоштовно', 'з ПДВ', 'без ПДВ', 'Немає в наявності', 'Ціна зразка', 'Максимальна кількість зразків у замовленні: %d'],
+ 'lv' => ['Pasūtīt paraugu', 'Bez maksas', 'ar PVN', 'bez PVN', 'Nav noliktavā', 'Parauga cena', 'Maksimālais paraugu skaits pasūtījumā: %d'],
+ 'et' => ['Telli näidis', 'Tasuta', 'koos käibemaksuga', 'ilma käibemaksuta', 'Laost otsas', 'Näidise hind', 'Maksimaalne näidiste arv tellimuse kohta: %d'],
+];
+$src = ['Buy sample', 'Free', 'Tax included', 'Tax excluded', 'Out-of-stock', 'Sample price', 'Maximum number of samples per order: %d'];
+foreach ($T as $iso => $vals) {
+    $lines = ["<?php", "/* Tlumaczenia kafla probki (themes/hummingbird/modules/wksampleproduct/views/templates/hook/productadditionalinfo.tpl).",
+              "   Plik w motywie nadpisuje modules/wksampleproduct/translations/$iso.php (Translate::getModuleTranslation",
+              "   scala oba, motyw pozniej). Klucz: <{modul}motyw|prestashop>nazwa_pliku_tpl_md5(fraza). Generator:",
+              "   scratchpad gen-wk-translations.php — edytowac tablice, nie ten plik. */",
+              "global \$_MODULE;", "\$_MODULE = [];"];
+    foreach ($src as $i => $s) {
+        $h = md5($s);
+        foreach (['hummingbird', 'prestashop'] as $theme) {
+            $lines[] = "\$_MODULE['<{wksampleproduct}$theme>productadditionalinfo_$h'] = " . var_export($vals[$i], true) . ';';
+        }
+    }
+    file_put_contents("$out/$iso.php", implode("\n", $lines) . "\n");
+}
+file_put_contents("$out/index.php", "<?php\nheader('Expires: Mon, 26 Jul 1997 05:00:00 GMT');\nheader('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');\nheader('Cache-Control: no-store, no-cache, must-revalidate');\nheader('Pragma: no-cache');\nheader('Location: ../');\nexit;\n");
+echo count($T), " plików\n";
+// etykiety do bazy (button_label globalny per jezyk)
+$labels = []; foreach ($T as $iso => $v) $labels[$iso] = $v[0]; file_put_contents($out . '/../.labels.json', json_encode($labels, JSON_UNESCAPED_UNICODE));

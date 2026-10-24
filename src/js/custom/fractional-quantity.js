@@ -58,19 +58,30 @@ export function initFractionalQuantity() {
       return;
     }
 
-    /* Wchodzimy tylko w jeden, rozpoznawalny przypadek: wpisana wartość była
-       ułamkiem, a w polu została dokładnie jej część całkowita. Wszystko inne
-       (dociągnięcie do minimum, pusty wpis, zmiana przez strzałki) to
-       działanie motywu albo pproperties i nie ruszamy go. */
+    /* Wchodzimy tylko w dwa rozpoznawalne przypadki, oba to skutek parseInt
+       w motywie na wpisanym ułamku:
+       - w polu została dokładnie część całkowita („4,5” → 4),
+       - część całkowita była poniżej minimum i motyw dociągnął pole do min
+         („0,5” przy min 0,1 → parseInt daje 0 → w polu ląduje 0,1; przed
+         12.09.2026 min było błędnie równe 1 i ten przypadek się nie zdarzał).
+       Wszystko inne (pusty wpis, „abc”, zmiana przez strzałki) to działanie
+       motywu albo pproperties i nie ruszamy go. */
     if (!isFinite(chciana) || !isFinite(teraz) || chciana === teraz) {
       return;
     }
-    if (chciana === Math.floor(chciana) || Math.floor(chciana) !== teraz) {
+    if (chciana === Math.floor(chciana)) {
       return;
     }
 
     var min = parseQty(input.getAttribute('min'));
     if (isFinite(min) && chciana < min) {
+      return;
+    }
+
+    var calkowita = Math.floor(chciana);
+    var uciete = teraz === calkowita;
+    var dociagniete = isFinite(min) && calkowita < min && teraz === min;
+    if (!uciete && !dociagniete) {
       return;
     }
 

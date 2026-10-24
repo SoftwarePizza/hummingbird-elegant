@@ -59,7 +59,12 @@
          tekst jest tym samym kluczem, co wariant „over" bloku stanu niżej.
          Warunek show_quantities — jak przy bloku stanu — żeby nie zdradzać
          stanu tam, gdzie sklep go ukrywa. Jednostkę (data-qty-unit) komponent
-         wstawia do etykiet przycisków i tooltipów („+1 m", „−0,1 m"). *}
+         wstawia do etykiet przycisków i tooltipów („+1 m", „−0,1 m").
+         `min` bierze się z pproperties (pp_settings.minimum_quantity, czyli
+         minimum produktu albo domyślne z szablonu ilości, np. 0,1 m).
+         $product.quantity_required nie istnieje w PS 8, a LazyArray zwraca
+         dla nieznanego klucza pustą tablicę — dawne is_array() dawało przez
+         to min="1" na każdej tkaninie i nie dało się zamówić 0,5 m. *}
       {assign var=qty_attrs value=[
         "id" => "quantity_wanted",
         "class" => "form-control js-quantity-wanted",
@@ -68,7 +73,7 @@
         "step" => "{if isset($product.pp_qty_step) && $product.pp_qty_step > 0}{$product.pp_qty_step}{else}1{/if}",
         "inputmode" => "{if (isset($product.pp_qty_step) && $product.pp_qty_step > 0 && $product.pp_qty_step != $product.pp_qty_step|intval) || (isset($product.pp_qty_decimals) && $product.pp_qty_decimals > 0)}decimal{else}numeric{/if}",
         "pattern" => "{if (isset($product.pp_qty_step) && $product.pp_qty_step > 0 && $product.pp_qty_step != $product.pp_qty_step|intval) || (isset($product.pp_qty_decimals) && $product.pp_qty_decimals > 0)}[0-9]*[.,]?[0-9]*{else}[0-9]+{/if}",
-        "min" => "{if is_array($product.quantity_required)}1{else}{$product.quantity_required}{/if}",
+        "min" => "{if isset($product.pp_settings.minimum_quantity) && $product.pp_settings.minimum_quantity > 0}{$product.pp_settings.minimum_quantity}{else}{$product.minimal_quantity|default:1}{/if}",
         "data-qty-unit" => "{if isset($product.pp_qty_text)}{$product.pp_qty_text|strip_tags}{/if}"
       ]}
       {if !empty($product.show_quantities) && empty($product.allow_oosp) && $product.quantity > 0}

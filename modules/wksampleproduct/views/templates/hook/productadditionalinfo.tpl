@@ -83,8 +83,16 @@
             <span id="wksampleproductqty_spinerror" class="sample-offer__note wksampleproduct-lineerror" {if !$sampleQtyWarning}style="display:none;"{/if}>
                 <i class="material-icons wkproduct-unavailable" aria-hidden="true">&#xE88F;</i>
                 {* Limit bywa podmieniany stanem magazynowym, a ten na tkaninach jest
-                   ułamkowy („maksymalnie 16.4 próbkę”) — próbki liczą się w sztukach. *}
-                {l s='You can buy maximum ' mod='wksampleproduct'}{if $sample.max_cart_qty >= 1}{$sample.max_cart_qty|intval}{else}1{/if} {l s='samples.' mod='wksampleproduct'}
+                   ułamkowy („maksymalnie 16.4 próbkę”) — próbki liczą się w sztukach.
+                   Jedna fraza z %d zamiast sklejki „fragment + liczba + fragment”: tłumaczenia
+                   modułu gubiły spację i liczbę mnogą („Sie können bis zu1 Probe”). Tłumaczenia
+                   16 języków leżą w translations/ obok (plik motywu nadpisuje plik modułu). *}
+                {if $sample.max_cart_qty >= 1}
+                    {assign var=sampleMaxQty value=$sample.max_cart_qty|intval}
+                {else}
+                    {assign var=sampleMaxQty value=1}
+                {/if}
+                {l s='Maximum number of samples per order: %d' sprintf=[$sampleMaxQty] mod='wksampleproduct'}
             </span>
 
             {if !$addToCartEnabled || $sampleFullInCart}
