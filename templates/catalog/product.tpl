@@ -249,7 +249,7 @@
   {/block}
 
   {block name='product_footer'}
-    {hook h='displayFooterProduct' product=$product category=$category}
+    {if isset($category)}{hook h='displayFooterProduct' product=$product category=$category}{else}{hook h='displayFooterProduct' product=$product}{/if}
   {/block}
 
   {block name='page_footer_container'}

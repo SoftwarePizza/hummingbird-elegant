@@ -5,6 +5,7 @@
 {block name='brand_miniature_item'}
   <li class="brand">
     <div class="brand__image">
+      {if !empty($brand.image.bySize.small_default.url)}
       <picture>
         {if !empty($brand.image.bySize.small_default.sources.avif)}<source srcset="{$brand.image.bySize.small_default.sources.avif}" type="image/avif">{/if}
         {if !empty($brand.image.bySize.small_default.sources.webp)}<source srcset="{$brand.image.bySize.small_default.sources.webp}" type="image/webp">{/if}
@@ -17,6 +18,7 @@
           loading="lazy"
         >
       </picture>
+      {/if}
     </div>
 
     <div class="brand__infos">
