@@ -36,7 +36,7 @@
               <span class="order-product__infos">
                 <span class="order-product__image">
                   <a href="{$link->getProductLink($product.id_product)}">
-                    {if $product.cover}
+                    {if !empty($product.cover)}
                       <picture>
                         {if isset($product.cover.bySize.default_xs.sources.avif)}
                           <source
